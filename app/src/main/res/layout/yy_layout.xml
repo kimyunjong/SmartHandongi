@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffa4e7ff"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+    <Button
+        android:id="@+id/nongroup_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개인"/>
+    <Button
+        android:id="@+id/group_btn"
+        android:layout_toRightOf="@+id/nongroup_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단체"/>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

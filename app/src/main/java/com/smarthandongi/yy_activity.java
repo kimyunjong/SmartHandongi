@@ -16,5 +16,5 @@ public class yy_activity extends Activity {
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.yy_layout);
-    }
+        }
 }
