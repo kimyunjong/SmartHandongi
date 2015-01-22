@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+	
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical"
+    	>
+        
+    	<RelativeLayout 
+        	android:layout_width="match_parent"
+	        android:layout_height="0dp"
+    	    android:layout_weight="1"
+        	>
+        	<ImageView 
+        	    android:layout_centerInParent="true"
+        	    android:layout_width="240dp"
+        	    android:layout_height="75dp"
+        	    android:src="@drawable/intro__title"
+        	    />
+	    </RelativeLayout>
+    	<ImageView 
+        	android:layout_width="match_parent"
+	        android:layout_height="0dp"
+    	    android:layout_weight="1"
+        	android:src="@drawable/intro__city"
+	        />
+    	<RelativeLayout 
+        	android:layout_width="match_parent"
+	        android:layout_height="0dp"
+    	    android:layout_weight="1"
+        	>
+        
+    </RelativeLayout>
+    
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        >
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            >
+            <ImageView 
+                android:layout_width="280dp"
+                android:layout_height="265dp"
+                android:src="@drawable/intro__handongi"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            >
+            <TextView 
+	            android:id="@+id/blink"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="#555555"
+                android:text="화면 아무 곳이나 터치하세요."
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </RelativeLayout>
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            >
+            <ImageView 
+                android:layout_width="70.5dp"
+                android:layout_height="18dp"
+                android:src="@drawable/akadev"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/touch1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        >
+    </RelativeLayout>
+</RelativeLayout>

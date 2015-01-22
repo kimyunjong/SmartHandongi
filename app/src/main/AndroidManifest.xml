@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smarthandongi" >
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Intro"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".kakao_api.KakaoTalkLoginActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".kakao_api.KakaoTalkSignupActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        >
+
+        <activity
+            android:name="yj_activity"
+            android:label="smart_handongi">
+        </activity>
+        <activity
+            android:name="yy_activity"
+            android:label="smart_handongi">
+        </activity>
+        <activity
+            android:name="ds_activity"
+            android:label="smart_handongi">
+        </activity>
+        <activity
+            android:name="com.kakao.LoginActivity"
+            android:configChanges="orientation|screenSize"/>
+
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="ccf3d87c23445fbfeabc963845531fe9"/>
+    </application>
+
+</manifest>
