@@ -3,6 +3,7 @@ package com.smarthandongi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -36,23 +37,144 @@ public class yj_activity extends Activity implements View.OnTouchListener {
         menu_btn = (Button) findViewById(R.id.menu_btn);
         write_btn = (Button) findViewById(R.id.write_btn);
 
-        img = (ImageView) findViewById(R.id.settingimg);
-        mainimg = (ImageView) findViewById(R.id.mainimg);
-        twelveimg = (ImageView) findViewById(R.id.twelveimg);
-        momsimg = (ImageView) findViewById(R.id.momsimg);
-        ddorangimg = (ImageView) findViewById(R.id.ddorangimg);
-        cafeimg = (ImageView) findViewById(R.id.cafeimg);
-        deliveryimg = (ImageView) findViewById(R.id.deliveryimg);
+        all_img = (ImageView) findViewById(R.id.all_img);
+        notice_img = (ImageView) findViewById(R.id.notice_img);
+        outer_img = (ImageView) findViewById(R.id.outer_img);
+        seminar_img = (ImageView) findViewById(R.id.seminar_img);
+        recruit_img = (ImageView) findViewById(R.id.recruit_img);
+        agora_img = (ImageView) findViewById(R.id.agora_img);
+        board_img = (ImageView) findViewById(R.id.board_img);
+        timeline_img = (ImageView) findViewById(R.id.timeline_img);
+        search_img = (ImageView) findViewById(R.id.search_img);
+        menu_img = (ImageView) findViewById(R.id.menu_img);
+        write_img = (ImageView) findViewById(R.id.write_img);
 
-        bogibtn.setOnTouchListener(this);
-        bustimetablebtn.setOnTouchListener(this);
-        settingbtn.setOnTouchListener(this);
-        mainbtn.setOnTouchListener(this);
-        twelvebtn.setOnTouchListener(this);
-        momsbtn.setOnTouchListener(this);
-        ddorangbtn.setOnTouchListener(this);
-        cafebtn.setOnTouchListener(this);
-        deliverybtn.setOnTouchListener(this);
+        all_btn.setOnTouchListener(this);
+        notice_btn.setOnTouchListener(this);
+        outer_btn.setOnTouchListener(this);
+        seminar_btn.setOnTouchListener(this);
+        recruit_btn.setOnTouchListener(this);
+        agora_btn.setOnTouchListener(this);
+        board_btn.setOnTouchListener(this);
+        timeline_btn.setOnTouchListener(this);
+        search_btn.setOnTouchListener(this);
+        menu_btn.setOnTouchListener(this);
+        write_btn.setOnTouchListener(this);
 
+    }
+    @Override
+    public boolean onTouch(View v,
+                           MotionEvent event) {
+        switch (v.getId()) {
+            case R.id.all_btn: {
+                if (event.getAction() == 0) {
+                    all_img.setImageResource(R.drawable.to_outer_rstrnts_over);
+                }
+                else if(event.getAction()==1){
+                    all_img.setImageResource(R.drawable.to_outer_rstrnts);
+                }
+
+                break;
+            }
+
+            case R.id.notice_btn: {
+                if (event.getAction() == 0) {
+                    notice_img.setImageResource(R.drawable.to_bus_over);
+                }
+                else if (event.getAction() == 0) {
+                    notice_img.setImageResource(R.drawable.to_bus);
+                }
+
+                break;
+            }
+            case R.id.outer_btn: {
+                if (event.getAction() == 0) {
+                    outer_img.setImageResource(R.drawable.menu_button_over);
+                }
+
+                else if (event.getAction() == 0) {
+                    outer_img.setImageResource(R.drawable.menu_button);
+                }
+                break;
+            }
+
+            case R.id.seminar_btn: {
+                if (event.getAction() == 0) {
+                    seminar_img.setImageResource(R.drawable.cftr_btmn__review_on);
+                }
+                else if (event.getAction() == 0) {
+                    seminar_img.setImageResource(R.drawable.cftr_btmn__review);
+                }
+                break;
+            }
+            case R.id.recruit_btn: {
+                if (event.getAction() == 0) {
+                    recruit_img.setImageResource(R.drawable.cftr_btmn__twelve_basket_on);
+                }
+                else if (event.getAction() == 0) {
+                    recruit_img.setImageResource(R.drawable.cftr_btmn__twelve_basket);
+                }
+                break;
+            }
+            case R.id.agora_btn: {
+                if (event.getAction() == 0) {
+                    agora_img.setImageResource(R.drawable.cftr_btmn__moms_on);
+                }
+
+                else if (event.getAction() == 0) {
+                    agora_img.setImageResource(R.drawable.cftr_btmn__moms);
+                }
+                break;
+            }
+            case R.id.board_btn: {
+                if (event.getAction() == 0) {
+                    board_img.setImageResource(R.drawable.cftr_btmn__hyoam_on);
+                }
+                else if (event.getAction() == 0) {
+                    board_img.setImageResource(R.drawable.cftr_btmn__hyoam);
+                }
+                break;
+            }
+
+            case R.id.timeline_btn: {
+                if (event.getAction() == 0) {
+                    timeline_img.setImageResource(R.drawable.cftr_btmn__cafe_on);
+                }
+                else if (event.getAction() == 0) {
+                    timeline_img.setImageResource(R.drawable.cftr_btmn__cafe);
+                }
+                break;
+            }
+            case R.id.search_btn: {
+                if (event.getAction() == 0) {
+                    search_img.setImageResource(R.drawable.cftr_btmn__delivery_on);
+                }
+                else if (event.getAction() == 0) {
+                    search_img.setImageResource(R.drawable.cftr_btmn__delivery);
+                }
+                break;
+            }
+
+        case R.id.menu_btn: {
+            if (event.getAction() == 0) {
+                menu_img.setImageResource(R.drawable.cftr_btmn__delivery_on);
+            }
+            else if (event.getAction() == 0) {
+                menu_img.setImageResource(R.drawable.cftr_btmn__delivery);
+            }
+            break;
+        }
+            case R.id.write_btn: {
+                if (event.getAction() == 0) {
+                    write_img.setImageResource(R.drawable.cftr_btmn__delivery_on);
+                }
+                else if (event.getAction() == 0) {
+                    write_img.setImageResource(R.drawable.cftr_btmn__delivery);
+                }
+                break;
+            }
+    }
+
+        return false;
     }
 }
