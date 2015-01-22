@@ -4,86 +4,86 @@
     android:background="#fffaff5e">
 
     <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_alignParentTop="true"
+    android:background="#fffefafc"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:background="#fffefafc"
-        android:orientation="vertical">
-        <LinearLayout
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="60"
-            >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <Button
-                    android:id="@+id/board_btn"
-                    android:layout_width="140dp"
-                    android:layout_height="60dp"
-                    android:background="#fffefafc"
-                    />
-                <ImageView
-                    android:id="@+id/board_img"
-                    android:layout_height="60dp"
-                    android:layout_width="140dp"
-                    android:src="@drawable/to_outer_rstrnts"/>
-                <Button
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/board_btn"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:background="#fffefafc"
+                />
+            <ImageView
+                android:id="@+id/board_img"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
+                android:src="@drawable/to_outer_rstrnts"/>
+            <Button
 
-                    android:id="@+id/timeline_btn"
-                    android:layout_toRightOf="@+id/board_btn"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:background="#fffefafc"
+                android:id="@+id/timeline_btn"
+                android:layout_toRightOf="@+id/board_btn"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:background="#fffefafc"
 
-                    />
-                <ImageView
-                    android:id="@+id/timeline_img"
-                    android:layout_height="60dp"
-                    android:layout_width="40dp"
-                    android:layout_toRightOf="@+id/board_img"
-                    android:src="@drawable/to_bus"/>
-                <Button
-                    android:id="@+id/search_btn"
-                    android:layout_width="45dp"
-                    android:layout_height="60dp"
-                    android:layout_alignLeft="@+id/menu_img"
-                    android:background="#fffefafc"/>
-                <ImageView
-                    android:id="@+id/search_img"
-                    android:layout_width="45dp"
-                    android:layout_height="60dp"
-                    android:layout_alignLeft="@+id/menu_img"
-                    android:src="@drawable/menu_button"/>
-                
-                <Button
-                    android:id="@+id/menu_btn"
-                    android:layout_width="45dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentRight="true"
-                    android:background="#fffefafc"/>
-                <ImageView
-                    android:id="@+id/menu_img"
-                    android:layout_width="45dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/menu_button"/>
+                />
+            <ImageView
+                android:id="@+id/timeline_img"
+                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_toRightOf="@+id/board_img"
+                android:src="@drawable/to_bus"/>
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:layout_alignLeft="@+id/menu_img"
+                android:background="#fffefafc"/>
+            <ImageView
+                android:id="@+id/search_img"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:layout_alignLeft="@+id/menu_img"
+                android:src="@drawable/menu_button"/>
 
-            </RelativeLayout>
+            <Button
+                android:id="@+id/menu_btn"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:background="#fffefafc"/>
+            <ImageView
+                android:id="@+id/menu_img"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/menu_button"/>
+
+        </RelativeLayout>
 
 
-        </LinearLayout>
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:background="#ffcececf"
-            ></LinearLayout>
-        
-
-        
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="#ffcececf"
+        ></LinearLayout>
+
+
+
+</LinearLayout>
     //write버튼
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -102,8 +102,8 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="15dp"/>
 
-        </RelativeLayout>
-//아래하단
+    </RelativeLayout>
+    //아래하단
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -187,10 +187,10 @@
                 android:layout_weight="16.6"
                 >
                 <Button
-                android:id="@+id/seminar_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#fff"/>
+                    android:id="@+id/seminar_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"/>
                 <ImageView
                     android:id="@+id/seminar_img"
                     android:layout_width="40dp"
@@ -245,5 +245,6 @@
 
 
     </LinearLayout>
+
 
 </RelativeLayout>
