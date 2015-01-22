@@ -27,7 +27,7 @@
                 android:id="@+id/board_img"
                 android:layout_height="60dp"
                 android:layout_width="140dp"
-                android:src="@drawable/to_outer_rstrnts"/>
+                android:src="@drawable/board_btn"/>
             <Button
 
                 android:id="@+id/timeline_btn"
@@ -42,7 +42,7 @@
                 android:layout_height="60dp"
                 android:layout_width="40dp"
                 android:layout_toRightOf="@+id/board_img"
-                android:src="@drawable/to_bus"/>
+                android:src="@drawable/board_btn"/>
             <Button
                 android:id="@+id/search_btn"
                 android:layout_width="45dp"
@@ -54,7 +54,7 @@
                 android:layout_width="45dp"
                 android:layout_height="60dp"
                 android:layout_alignLeft="@+id/menu_img"
-                android:src="@drawable/menu_button"/>
+                android:src="@drawable/"/>
 
             <Button
                 android:id="@+id/menu_btn"
