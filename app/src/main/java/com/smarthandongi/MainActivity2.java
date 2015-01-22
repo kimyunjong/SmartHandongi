@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.kakao.APIErrorResult;
 import com.kakao.LogoutResponseCallback;
 import com.kakao.UserManagement;
-import com.smart_handongi.kakao_api.KakaoTalkLoginActivity;
+import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
 
 public class MainActivity2 extends ActionBarActivity implements View.OnClickListener {
 

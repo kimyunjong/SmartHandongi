@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.smart_handongi.kakao_api.KakaoTalkLoginActivity;
+import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
 
 public class MainActivity extends ActionBarActivity {
 

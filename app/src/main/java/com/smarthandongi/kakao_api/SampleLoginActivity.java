@@ -28,7 +28,7 @@ import com.kakao.Session;
 import com.kakao.SessionCallback;
 import com.kakao.exception.KakaoException;
 import com.kakao.widget.LoginButton;
-import com.smart_handongi.R;
+import com.smarthandongi.R;
 
 /**
  * 샘플에서 사용하게 될 로그인 페이지

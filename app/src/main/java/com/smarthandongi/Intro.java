@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.smart_handongi.kakao_api.KakaoTalkLoginActivity;
+import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
 
 /**
  * Created by Joel on 2015-01-20.

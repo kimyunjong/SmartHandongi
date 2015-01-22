@@ -21,8 +21,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.kakao.UserProfile;
-import com.smart_handongi.Carrier;
-import com.smart_handongi.MainActivity2;
+import com.smarthandongi.Carrier;
+import com.smarthandongi.MainActivity2;
 
 /**
  * 유효한 세션이 있다는 검증 후

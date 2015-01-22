@@ -26,9 +26,9 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.kakao.UserProfile;
-import com.smart_handongi.Carrier;
-import com.smart_handongi.MainActivity2;
-import com.smart_handongi.R;
+import com.smarthandongi.Carrier;
+import com.smarthandongi.MainActivity2;
+import com.smarthandongi.R;
 
 import java.security.MessageDigest;
 
