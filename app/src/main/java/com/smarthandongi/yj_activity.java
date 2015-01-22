@@ -68,10 +68,10 @@ public class yj_activity extends Activity implements View.OnTouchListener {
         switch (v.getId()) {
             case R.id.all_btn: {
                 if (event.getAction() == 0) {
-                    all_img.setImageResource(R.drawable.to_outer_rstrnts_over);
+                    all_img.setImageResource(R.drawable.all_btn_on);
                 }
                 else if(event.getAction()==1){
-                    all_img.setImageResource(R.drawable.to_outer_rstrnts);
+                    all_img.setImageResource(R.drawable.all_btn);
                 }
 
                 break;
@@ -79,97 +79,97 @@ public class yj_activity extends Activity implements View.OnTouchListener {
 
             case R.id.notice_btn: {
                 if (event.getAction() == 0) {
-                    notice_img.setImageResource(R.drawable.to_bus_over);
+                    notice_img.setImageResource(R.drawable.notice_btn_on);
                 }
-                else if (event.getAction() == 0) {
-                    notice_img.setImageResource(R.drawable.to_bus);
+                else if (event.getAction() == 1) {
+                    notice_img.setImageResource(R.drawable.notice_btn);
                 }
 
                 break;
             }
             case R.id.outer_btn: {
                 if (event.getAction() == 0) {
-                    outer_img.setImageResource(R.drawable.menu_button_over);
+                    outer_img.setImageResource(R.drawable.outer_btn_on);
                 }
 
-                else if (event.getAction() == 0) {
-                    outer_img.setImageResource(R.drawable.menu_button);
+                else if (event.getAction() == 1) {
+                    outer_img.setImageResource(R.drawable.outer_btn);
                 }
                 break;
             }
 
             case R.id.seminar_btn: {
                 if (event.getAction() == 0) {
-                    seminar_img.setImageResource(R.drawable.cftr_btmn__review_on);
+                    seminar_img.setImageResource(R.drawable.seminar_btn_on);
                 }
-                else if (event.getAction() == 0) {
-                    seminar_img.setImageResource(R.drawable.cftr_btmn__review);
+                else if (event.getAction() == 1) {
+                    seminar_img.setImageResource(R.drawable.seminar_btn);
                 }
                 break;
             }
             case R.id.recruit_btn: {
                 if (event.getAction() == 0) {
-                    recruit_img.setImageResource(R.drawable.cftr_btmn__twelve_basket_on);
+                    recruit_img.setImageResource(R.drawable.recruit_btn_on);
                 }
-                else if (event.getAction() == 0) {
-                    recruit_img.setImageResource(R.drawable.cftr_btmn__twelve_basket);
+                else if (event.getAction() == 1) {
+                    recruit_img.setImageResource(R.drawable.recruit_btn);
                 }
                 break;
             }
             case R.id.agora_btn: {
                 if (event.getAction() == 0) {
-                    agora_img.setImageResource(R.drawable.cftr_btmn__moms_on);
+                    agora_img.setImageResource(R.drawable.agora_btn_on);
                 }
 
-                else if (event.getAction() == 0) {
-                    agora_img.setImageResource(R.drawable.cftr_btmn__moms);
+                else if (event.getAction() == 1) {
+                    agora_img.setImageResource(R.drawable.agora_btn);
                 }
                 break;
             }
             case R.id.board_btn: {
                 if (event.getAction() == 0) {
-                    board_img.setImageResource(R.drawable.cftr_btmn__hyoam_on);
+                    board_img.setImageResource(R.drawable.board_btn_on);
                 }
-                else if (event.getAction() == 0) {
-                    board_img.setImageResource(R.drawable.cftr_btmn__hyoam);
+                else if (event.getAction() == 1) {
+                    board_img.setImageResource(R.drawable.board_btn);
                 }
                 break;
             }
 
             case R.id.timeline_btn: {
                 if (event.getAction() == 0) {
-                    timeline_img.setImageResource(R.drawable.cftr_btmn__cafe_on);
+                    timeline_img.setImageResource(R.drawable.timeline_btn_on);
                 }
-                else if (event.getAction() == 0) {
-                    timeline_img.setImageResource(R.drawable.cftr_btmn__cafe);
+                else if (event.getAction() == 1) {
+                    timeline_img.setImageResource(R.drawable.timeline_btn);
                 }
                 break;
             }
             case R.id.search_btn: {
                 if (event.getAction() == 0) {
-                    search_img.setImageResource(R.drawable.cftr_btmn__delivery_on);
+                    search_img.setImageResource(R.drawable.search_btn);
                 }
-                else if (event.getAction() == 0) {
-                    search_img.setImageResource(R.drawable.cftr_btmn__delivery);
+                else if (event.getAction() == 1) {
+                    search_img.setImageResource(R.drawable.search_btn);
                 }
                 break;
             }
 
         case R.id.menu_btn: {
             if (event.getAction() == 0) {
-                menu_img.setImageResource(R.drawable.cftr_btmn__delivery_on);
+                menu_img.setImageResource(R.drawable.menu_btn);
             }
-            else if (event.getAction() == 0) {
-                menu_img.setImageResource(R.drawable.cftr_btmn__delivery);
+            else if (event.getAction() == 1) {
+                menu_img.setImageResource(R.drawable.menu_btn);
             }
             break;
         }
             case R.id.write_btn: {
                 if (event.getAction() == 0) {
-                    write_img.setImageResource(R.drawable.cftr_btmn__delivery_on);
+                    write_img.setImageResource(R.drawable.write_btn);
                 }
-                else if (event.getAction() == 0) {
-                    write_img.setImageResource(R.drawable.cftr_btmn__delivery);
+                else if (event.getAction() == 1) {
+                    write_img.setImageResource(R.drawable.write_btn);
                 }
                 break;
             }
