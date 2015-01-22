@@ -54,7 +54,7 @@
                 android:layout_width="45dp"
                 android:layout_height="60dp"
                 android:layout_alignLeft="@+id/menu_img"
-                android:src="@drawable/"/>
+                android:src="@drawable/search_btn"/>
 
             <Button
                 android:id="@+id/menu_btn"
@@ -67,7 +67,7 @@
                 android:layout_width="45dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/menu_button"/>
+                android:src="@drawable/menu_btn"/>
 
         </RelativeLayout>
 
@@ -94,13 +94,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/write_btn"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/write_img"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:src="@drawable/write_btn"/>
 
     </RelativeLayout>
     //아래하단
@@ -136,7 +138,7 @@
                     android:id="@+id/all_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cftr_btmn__review"
+                    android:src="@drawable/all_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     />
@@ -155,7 +157,7 @@
                     android:id="@+id/notice_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cftr_btmn__twelve_basket"
+                    android:src="@drawable/notice_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -175,7 +177,7 @@
                     android:id="@+id/outer_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cftr_btmn__moms"
+                    android:src="@drawable/outer_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -195,7 +197,7 @@
                     android:id="@+id/seminar_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cftr_btmn__hyoam"
+                    android:src="@drawable/seminar_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -214,7 +216,7 @@
                     android:id="@+id/recruit_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cftr_btmn__cafe"
+                    android:src="@drawable/recruit_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -234,7 +236,7 @@
                     android:id="@+id/agora_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cftr_btmn__delivery"
+                    android:src="@drawable/agora_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
