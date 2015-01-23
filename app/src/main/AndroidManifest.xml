@@ -35,18 +35,19 @@
             android:label="@string/app_name" >
         </activity>
 
-        >
+        <activity android:name=".UploadPost"
+            android:label="@string/app_name"/>
 
         <activity
-            android:name="yj_activity"
+            android:name=".yj_activity"
             android:label="smart_handongi">
         </activity>
         <activity
-            android:name="yy_activity"
-            android:label="smart_handongi">
+            android:name=".yy_activity"
+            android:label="@string/app_name">
         </activity>
         <activity
-            android:name="ds_activity"
+            android:name=".ds_activity"
             android:label="smart_handongi">
         </activity>
         <activity
