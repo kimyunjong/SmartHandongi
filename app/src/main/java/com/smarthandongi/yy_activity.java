@@ -25,7 +25,7 @@ public class yy_activity extends Activity implements View.OnClickListener{
     }
 
     public void onClick(View v) {
-        Intent intent = new Intent(yy_activity.this, com.smarthandongi.UploadPost.class).putExtra("carrier", carrier);
+        Intent intent = new Intent(yy_activity.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
         startActivity(intent);
         finish();
     }

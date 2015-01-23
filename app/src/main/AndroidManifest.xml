@@ -35,17 +35,28 @@
             android:label="@string/app_name" >
         </activity>
 
-        <activity android:name=".UploadPost"
-            android:label="@string/app_name"/>
-
         <activity
             android:name=".yj_activity"
             android:label="smart_handongi">
         </activity>
+
+
+
+        <!-- 영민 유진 엑티비티 관련-->
         <activity
             android:name=".yy_activity"
             android:label="@string/app_name">
         </activity>
+
+        <activity android:name=".SelectGroupOrNot"
+            android:label="@string/app_name"/>
+
+        <activity android:name=".Writing"
+            android:label="@string/app_name"/>
+
+
+        <!-- 영민 유진 엑티비티 끝-->
+
         <activity
             android:name=".ds_activity"
             android:label="smart_handongi">
