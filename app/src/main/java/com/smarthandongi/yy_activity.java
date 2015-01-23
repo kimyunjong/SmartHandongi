@@ -58,8 +58,8 @@ public class yy_activity extends Activity {
     private int has_pic = 0;
 
     ImageView image_test;
-    Button test_btn;
-    phpUpload task;
+    Button test_btn, confirm_btn;
+    phpUpload php_upload;
     String testUrl;
 
     @Override
@@ -68,7 +68,7 @@ public class yy_activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.yy_layout);
 
-        Log.v("in","onCreate");
+        Log.d("in","onCreate");
 
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
@@ -79,24 +79,40 @@ public class yy_activity extends Activity {
         test_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.v("in", "onClick");
+                Log.d("in", "onClick");
                 Intent i = new Intent(Intent.ACTION_PICK);
                 i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 i.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, REQ_CODE_PICK_GALLERY);
-                Log.v("out", "onClick");
+                Log.d("out", "onClick");
+            }
+        });
+
+        confirm_btn = (Button)findViewById(R.id.confirm_btn);
+        confirm_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                phpCreate();
             }
         });
 
     }
 
+    public void phpCreate(){
+        Log.d("in", "phpCreate");
+        testUrl = "http://hungry.portfolio1000.com/smarthandongi/prac.php?title=aa&contents=test";
+         php_upload = new phpUpload();
+        php_upload.execute(testUrl);
+
+    }
+
     public void onBackPressed(){
-        Log.v("in","onBackpressed");
+        Log.d("in", "onBackpressed");
         Intent intent = new Intent();
         intent.putExtra("carrier", carrier);
         setResult(0, intent);
         finish();
-        Log.v("out","onBackpressed");
+        Log.d("out","onBackpressed");
     }
 
 
@@ -112,7 +128,7 @@ public class yy_activity extends Activity {
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
             String review_id = null;
-            Log.v("in","doInBackground");
+            Log.d("in", "doInBackground");
             try {
                 URL url = new URL(urls[0]);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -145,27 +161,27 @@ public class yy_activity extends Activity {
                 e.printStackTrace();
             }
 //            if(has_pic == 1)
-//                DoPhotoUpLoad(getSelectedImageFile().getAbsolutePath(), review_id);
+                DoPhotoUpLoad(getSelectedImageFile().getAbsolutePath(), review_id);
             return review_id;
 
         }
 
         @Override
         protected void onPostExecute(String s) {
-            Log.v("in","onPostExecute");
+            Log.d("in", "onPostExecute");
 
-            DoPhotoUpLoad(getSelectedImageFile().getAbsolutePath(), s);
+          //  DoPhotoUpLoad(getSelectedImageFile().getAbsolutePath(), s);
         }
     }
 
     private void DoPhotoUpLoad(String fileName, String review_id){
-        Log.v("in","DoPhotoUpLoad");
+        Log.d("in", "DoPhotoUpLoad");
         HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/photo/upload.php?review_id="+review_id, review_id, fileName);
-        Log.v("out","DoPhotoUpLoad");
+        Log.d("out","DoPhotoUpLoad");
     }
 
     private void HttpPhotoUpload(String url, String review_id, String fileName){
-        Log.v("in","HttpPhotoUpload");
+        Log.d("in","HttpPhotoUpload");
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         Bitmap bitmap = BitmapFactory.decodeFile(fileName);
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
@@ -252,19 +268,23 @@ public class yy_activity extends Activity {
         return state.equals(Environment.MEDIA_MOUNTED);
     }
     private File getTempImageFile() {
-        File path = new File(Environment.getExternalStorageDirectory() + "/Android/data/" + getPackageName() + "/temp/");
+        File path = new File(Environment.getExternalStorageDirectory() + "/Android/data/com.hungry_handongi/temp/");
         if (!path.exists()) {
             path.mkdirs();
         }
         File file = new File(path, "tempimage.png");
+        Log.d("in", "getTempImageFile");
         return file;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("in", "onActivityResult");
         if (requestCode == REQ_CODE_PICK_GALLERY && resultCode == Activity.RESULT_OK) {
             // 갤러리의 경우 곧바로 data 에 uri가 넘어옴.
+            Log.d("in", "gallery");
             Uri uri = data.getData();
             copyUriToFile(uri, getTempImageFile());
+            Log.d("in", "afterURIcopy");
             if (mCropRequested) {
                 cropImage();
             } else {
@@ -441,6 +461,7 @@ public class yy_activity extends Activity {
     }
 
     private void copyUriToFile(Uri srcUri, File target) {
+        Log.d("in", "copyUriToFile");
         FileInputStream inputStream = null;
         FileOutputStream outputStream = null;
         FileChannel fcin = null;
