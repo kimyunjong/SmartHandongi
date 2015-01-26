@@ -1,10 +1,18 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by LEWIS on 2015-01-23.
@@ -42,9 +50,6 @@ public class Writing extends Activity implements View.OnClickListener {
 
         writing_title = (EditText)findViewById(R.id.writing_title);
         writing_body  = (EditText)findViewById(R.id.writing_body);
-
-        writing_title.setOnClickListener(this);
-        writing_body.setOnClickListener(this);
     }
 
     @Override
@@ -102,19 +107,60 @@ public class Writing extends Activity implements View.OnClickListener {
                 break;
             }
             //Category buttons done
-
-            //Title and Body
-            case R.id.writing_title:{
-                //입력된 내용을 디비에 저장
-                break;
-            }
-
-            case R.id.writing_body:{
-                //입력된 내용을 캐리어에 저장
-                break;
-            }
-
-
         }
     }
+
+    private class PhpUpload extends AsyncTask<String, Integer, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            try {
+                //연결 URL설정
+                URL url = new URL(urls[0]);
+                //커넥션 객체 생성
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                //연결되었으면
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                    br.close();
+                    conn.disconnect();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return jsonHtml.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            super.onPostExecute(s);
+        }
+    }
+
+    public void phpCreate(){
+        String title, body, upload_url;
+
+        title = writing_title.getText().toString();
+        body = writing_body.getText().toString();
+
+        try {
+            title = URLEncoder.encode(title, "UTF-8");
+            body = URLEncoder.encode(body, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                    + "kakao_id=" + carrier.getId()
+                    + "&kakao_nick=" + carrier.getNickname()
+                    + "&category=" + carrier.getCategory()
+                    + "&group=" + carrier.getGroup_indicator()
+                    + "&title=" + title
+                    + "&body=" + body;
+    }
+
 }

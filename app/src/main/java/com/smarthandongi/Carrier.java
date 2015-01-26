@@ -13,7 +13,7 @@ public class Carrier implements Serializable {
 
 
     //youngmin variable begins
-    private String group_indicator = "z";
+    private String group_indicator = null;
 
     private int category = 0;
 
