@@ -9,16 +9,16 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
     <Button
-        android:id="@+id/nongroup_btn"
+        android:id="@+id/write_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="개인"/>
+        android:text="글쓰기"/>
     <Button
-        android:id="@+id/group_btn"
-        android:layout_toRightOf="@+id/nongroup_btn"
+        android:id="@+id/undecided"
+        android:layout_toRightOf="@+id/write_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="단체"/>
+        android:text="다른거"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -10,6 +10,16 @@ public class Carrier implements Serializable {
     private String nickname = "not_logged_in";
     private String id = "000000";
 
+
+
+    //youngmin variable begins
+    private String group_indicator = null;
+
+    private int category = 0;
+
+
+    //youngmin variable ends
+
     public boolean isLogged_in() {
         return logged_in;
     }
@@ -34,7 +44,13 @@ public class Carrier implements Serializable {
         this.id = id;
     }
 
+    public String getGroup_indicator() { return group_indicator; }
 
+    public void setGroup_indicator(String group_indicator) { this.group_indicator = group_indicator; }
+
+    public int getCategory() { return category; }
+
+    public void setCategory(int category) { this.category = category; }
 
 
 }
