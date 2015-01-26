@@ -48,30 +48,35 @@
         android:layout_height="60dp">
 
         <Button
+            android:id="@+id/writing_notice_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="일반"/>
+            android:background="@drawable/notice_btn"/>
         <Button
+            android:id="@+id/writing_outer_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="대외"/>
+            android:background="@drawable/outer_btn"/>
         <Button
+            android:id="@+id/writing_seminar_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="공연"/>
+            android:background="@drawable/seminar_btn"/>
         <Button
+            android:id="@+id/writing_recruit_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="리쿠"/>
+            android:background="@drawable/recruit_btn"/>
         <Button
+            android:id="@+id/writing_agora_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="아고라"/>
+            android:background="@drawable/agora_btn"/>
 
         </LinearLayout>
 
@@ -177,7 +182,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="날짜를 입력하세요"
+            android:hint="이미지 추가"
             android:textSize="13dp"
             android:gravity="center|left"/>
     </LinearLayout>

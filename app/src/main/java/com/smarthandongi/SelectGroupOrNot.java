@@ -32,6 +32,7 @@ public class SelectGroupOrNot extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.individual_btn : {
+                //개인이니까 group indicator가 디폴트 값을 그대로 유지한다.
                 Intent intent = new Intent(SelectGroupOrNot.this, Writing.class).putExtra("carrier", carrier);
                 startActivity(intent);
                 finish();
