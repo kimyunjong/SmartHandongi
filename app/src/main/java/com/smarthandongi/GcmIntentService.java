@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
+import com.google.android.gcm.GCMRegistrar;
 
 /**
  * Created by Administrator on 2015-01-22.
@@ -28,7 +29,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         Notification notification = new Notification(icon, message, when);
 
         String title = context.getString(R.string.app_name);
-            Intent notificationIntent = new Intent(context, MainActivity.class);
+            Intent notificationIntent = new Intent(context, ds_activity.class);
             re_message = message;
 
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -55,6 +56,7 @@ public class GcmIntentService extends GCMBaseIntentService {
     }
     @Override
     protected void onUnregistered(Context arg0, String arg1){
+     //   GCMRegistrar.unregister(arg0);
         Log.e("키를 제거합니다.(GCM INTENTSERVICE", "제거되었습니다.");
 
     }

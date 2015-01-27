@@ -22,6 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.android.gcm.GCMRegistrar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -34,7 +35,7 @@ public class ds_activity extends Activity {
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
-    String SENDER_ID = "940751559616";
+    String SENDER_ID = "651406894161";
     String myResult;
     ProgressDialog loagindDialog;
     /**
@@ -53,7 +54,7 @@ public class ds_activity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //GCMRegistrar.unregister(context);
         setContentView(R.layout.activity_main);
         mDisplay = (TextView) findViewById(R.id.display);
 
@@ -179,7 +180,7 @@ public class ds_activity extends Activity {
             protected void onPostExecute(String msg)
             {
                 //loagindDialog.dismiss();
-                Log.i("MainActivity.java | onPostExecute", "|" + msg + "|");
+                Log.i("ds_activity.java | onPostExecute", "|" + msg + "|");
                 mDisplay.append(msg);
             }
         }.execute(null, null, null);
@@ -253,7 +254,7 @@ public class ds_activity extends Activity {
    }*/
     public void HttpPostData(String reg_id ) {
         try {
-            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_insert.php?reg_id="+regid);       // URL 설정
+            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_reg_insert.php?reg_id="+regid);       // URL 설정
             HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
             //--------------------------
             //   전송 모드 설정 - 기본적인 설정이다
