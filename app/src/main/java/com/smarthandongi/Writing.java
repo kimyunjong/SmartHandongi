@@ -228,6 +228,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
     public void phpCreate(){
         String title, content, upload_url, kakao_nick, link;
+        String group_code = "", group_name = "";
 
         title = writing_title.getText().toString();
         content = writing_content.getText().toString();
@@ -246,19 +247,28 @@ public class Writing extends Activity implements View.OnClickListener {
         carrier.setContent(content);
         carrier.setLink(link);
 
-            //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
+        carrier.setPosting_date("150126");  //TODO 나중에 이 부분에 날짜를 넘겨 받아서 저장한다.
+        carrier.setStart_date("20150127");
+        carrier.setEnd_date("20150130");
 
+            //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
+ //       if((carrier.getGroup_code() == null) && (carrier.getGroup_name() == null))          //개인인 경우
             upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
                     + "kakao_id=" + carrier.getId()
                     + "&kakao_nick=" + kakao_nick
                     + "&category=" + carrier.getCategory()
-                    + "&group_code=" + "a1"
+                    + "&group_code=" + group_code
+                    + "&group_name=" + group_name
                     + "&title=" + carrier.getTitle()
                     + "&content=" + carrier.getContent()
                     + "&link=" + carrier.getLink()
+                    + "&posting_date=" + carrier.getPosting_date()
+                    + "&start_date=" + carrier.getStart_date()
+                    + "&end_date=" + carrier.getEnd_date()
                     + "&has_pic=" + has_pic;
             task = new PhpUpload();
             task.execute(upload_url);
+
 
     }
 

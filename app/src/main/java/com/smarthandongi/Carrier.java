@@ -12,11 +12,15 @@ public class Carrier implements Serializable {
 
     //youngmin variable begins
     private String group_code = null;
+    private String group_name = null;
     private String title = null;
     private String content = null;
     private int category = 0;
     private String image_name = null;
     private String link = null;
+    private String posting_date = null;
+    private String start_date = null;
+    private String end_date = null;
     //youngmin variable ends
 
     public boolean isLogged_in() {
@@ -66,6 +70,24 @@ public class Carrier implements Serializable {
     public String getLink() { return link;}
 
     public void setLink(String link) { this.link = link;}
+
+    public String getPosting_date() { return posting_date;}
+
+    public void setPosting_date(String posting_date) { this.posting_date = posting_date;}
+
+    public String getStart_date() { return start_date;}
+
+    public void setStart_date(String start_date) { this.start_date = start_date;}
+
+    public String getEnd_date() { return end_date;}
+
+    public void setEnd_date(String end_date) { this.end_date = end_date;}
+
+    public String getGroup_name() { return group_name;}
+
+    public void setGroup_name(String group_name) { this.group_name = group_name;}
+
+
 
 
 }
