@@ -65,7 +65,7 @@
 
         <!-- 영민 유진 엑티비티 끝-->
         <!-- 수영 다은 gcm -->
-
+        <service android:name=".GcmIntentService" />
         <!-- 수영 다은 gcm 끝 -->
         <activity
             android:name=".ds_activity"
