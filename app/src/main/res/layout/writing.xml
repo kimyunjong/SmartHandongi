@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -41,151 +43,170 @@
             android:text="앞"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/select_category_bar"
+    <ScrollView
         android:layout_below="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content">
+    <RelativeLayout
 
-        <Button
-            android:id="@+id/writing_notice_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/notice_btn"/>
-        <Button
-            android:id="@+id/writing_outer_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/outer_btn"/>
-        <Button
-            android:id="@+id/writing_seminar_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/seminar_btn"/>
-        <Button
-            android:id="@+id/writing_recruit_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/recruit_btn"/>
-        <Button
-            android:id="@+id/writing_agora_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/agora_btn"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/select_category_bar"
 
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <Button
+                android:id="@+id/writing_notice_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/notice_btn"/>
+            <Button
+                android:id="@+id/writing_outer_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/outer_btn"/>
+            <Button
+                android:id="@+id/writing_seminar_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/seminar_btn"/>
+            <Button
+                android:id="@+id/writing_recruit_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/recruit_btn"/>
+            <Button
+                android:id="@+id/writing_agora_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/agora_btn"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_below="@+id/select_category_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="제목"
+                android:textSize="15dp"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/writing_title"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="제목을 입력하세요"
+                android:textSize="13dp"
+                android:gravity="center|left"/>
         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/title"
-        android:layout_below="@+id/select_category_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="제목"
-            android:textSize="15dp"
-            android:gravity="center"/>
-        <EditText
-            android:id="@+id/writing_title"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="제목을 입력하세요"
-            android:textSize="13dp"
-            android:gravity="center|left"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/warning"
-        android:layout_below="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="뻘글 올리지마라"
-        android:textSize="10dp"
-        android:gravity="center"
-        android:textColor="#ffff0a00"/>
-
-    <LinearLayout
-        android:id="@+id/body"
-        android:layout_below="@id/warning"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="내용"
-            android:textSize="15dp"
-            android:gravity="top"/>
-        <EditText
-            android:id="@+id/writing_body"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="내용용을 입하세요"
-            android:textSize="13dp"
-            android:gravity="top"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/date"
-        android:layout_below="@+id/body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="날짜"
-            android:textSize="15dp"
-            android:gravity="center"/>
-        <EditText
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="날짜를 입력하세요"
-            android:textSize="13dp"
-            android:gravity="center|left"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/image_upload_btn"
-        android:layout_below="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/warning"
+            android:layout_below="@+id/title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="이미지"
-            android:textSize="15dp"
-            android:gravity="center"/>
-        <Button
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
+            android:text="뻘글 올리지마라"
+            android:textSize="10dp"
+            android:gravity="center"
+            android:textColor="#ffff0a00"/>
+
+        <LinearLayout
+            android:id="@+id/body"
+            android:layout_below="@id/warning"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="이미지 추가"
-            android:textSize="13dp"
-            android:gravity="center|left"/>
-    </LinearLayout>
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="내용"
+                android:textSize="15dp"
+                android:gravity="top"/>
+            <EditText
+                android:id="@+id/writing_content"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="내용을 입력하세요"
+                android:textSize="13dp"
+                android:gravity="top"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/date"
+            android:layout_marginTop="100dp"
+            android:layout_below="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="날짜"
+                android:textSize="15dp"
+                android:gravity="center"/>
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="날짜를 입력하세요"
+                android:textSize="13dp"
+                android:gravity="center|left"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/image_upload_btn"
+            android:layout_below="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미지"
+                android:textSize="15dp"
+                android:gravity="center"/>
+            <Button
+                android:id="@+id/writing_image_btn"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="이미지 추가"
+                android:textSize="13dp"
+                android:gravity="center|left"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/writing_preview_img"
+            android:layout_below="@+id/image_upload_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </RelativeLayout>
+    </ScrollView>
 
     <LinearLayout
 
@@ -199,6 +220,7 @@
             android:layout_weight="1"
             android:text="취소"/>
         <Button
+            android:id="@+id/writing_confirm_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

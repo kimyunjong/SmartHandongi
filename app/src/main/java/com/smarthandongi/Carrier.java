@@ -14,10 +14,9 @@ public class Carrier implements Serializable {
 
     //youngmin variable begins
     private String group_indicator = null;
-
+    private String title = null;
+    private String content = null;
     private int category = 0;
-
-
     //youngmin variable ends
 
     public boolean isLogged_in() {
@@ -51,6 +50,14 @@ public class Carrier implements Serializable {
     public int getCategory() { return category; }
 
     public void setCategory(int category) { this.category = category; }
+
+    public String getTitle() { return title;}
+
+    public void setTitle(String title) { this.title = title;}
+
+    public String getContent() { return content;}
+
+    public void setContent(String body) { this.content = body;}
 
 
 }
