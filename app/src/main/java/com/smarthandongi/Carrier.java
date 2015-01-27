@@ -10,13 +10,13 @@ public class Carrier implements Serializable {
     private String nickname = "not_logged_in";
     private String id = "000000";
 
-
-
     //youngmin variable begins
-    private String group_indicator = null;
+    private String group_code = null;
     private String title = null;
     private String content = null;
     private int category = 0;
+    private String image_name = null;
+    private String link = null;
     //youngmin variable ends
 
     public boolean isLogged_in() {
@@ -43,9 +43,9 @@ public class Carrier implements Serializable {
         this.id = id;
     }
 
-    public String getGroup_indicator() { return group_indicator; }
+    public String getGroup_code() { return group_code; }
 
-    public void setGroup_indicator(String group_indicator) { this.group_indicator = group_indicator; }
+    public void setGroup_code(String group_code) { this.group_code = group_code; }
 
     public int getCategory() { return category; }
 
@@ -58,6 +58,14 @@ public class Carrier implements Serializable {
     public String getContent() { return content;}
 
     public void setContent(String body) { this.content = body;}
+
+    public String getImage_name() { return image_name;}
+
+    public void setImage_name(String image_name) { this.image_name = image_name;}
+
+    public String getLink() { return link;}
+
+    public void setLink(String link) { this.link = link;}
 
 
 }

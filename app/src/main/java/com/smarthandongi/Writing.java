@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.graphics.Matrix;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -62,8 +62,9 @@ public class Writing extends Activity implements View.OnClickListener {
     Button writing_notice_btn, writing_outer_btn, writing_seminar_btn, writing_recruit_btn, writing_agora_btn;
     Button writing_confirm_btn, writing_image_btn;
 
-    EditText writing_title, writing_content;
+    EditText writing_title, writing_content, writing_link_text;
     PhpUpload task;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
         writing_title = (EditText)findViewById(R.id.writing_title);
         writing_content  = (EditText)findViewById(R.id.writing_content);
+        writing_link_text = (EditText)findViewById(R.id.writing_link_text);
 
         writing_image_btn = (Button)findViewById(R.id.writing_image_btn);
         writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
@@ -178,9 +180,7 @@ public class Writing extends Activity implements View.OnClickListener {
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
-            String return_str="";
             String posting_id = null;
-            Log.d("111", jsonHtml.toString());
             try {
                 //연결 URL설정
                 URL url = new URL(urls[0]);
@@ -205,7 +205,6 @@ public class Writing extends Activity implements View.OnClickListener {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            return_str = jsonHtml.toString();
             try {
                 JSONObject root = new JSONObject(jsonHtml.toString());
                 JSONArray ja = root.getJSONArray("results");
@@ -227,55 +226,48 @@ public class Writing extends Activity implements View.OnClickListener {
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == REQ_CODE_PICK_GALLERY){
-//            if(resultCode == Activity.RESULT_OK){
-//                ImageView img = (ImageView) findViewById(R.id.writing_preview_img);
-//                img.setImageURI(data.getData());
-//            }
-//        }
-//    }
-
-
     public void phpCreate(){
-        String title, content, upload_url, kakao_nick;
+        String title, content, upload_url, kakao_nick, link;
 
         title = writing_title.getText().toString();
         content = writing_content.getText().toString();
         kakao_nick = carrier.getNickname();
+        link = writing_link_text.getText().toString();
         try {
             title = URLEncoder.encode(title, "UTF-8");
             content = URLEncoder.encode(content, "UTF-8");
             kakao_nick = URLEncoder.encode(kakao_nick, "UTF-8");
+            link = URLEncoder.encode(link, "UTF-8");
             } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
         carrier.setTitle(title);
         carrier.setContent(content);
+        carrier.setLink(link);
 
-        //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
+            //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
 
-        upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                + "kakao_id=" + carrier.getId()
-                + "&kakao_nick=" + kakao_nick
-                + "&category=" + carrier.getCategory()
-                + "&title=" + carrier.getTitle()
-                + "&content=" + carrier.getContent()
-                + "&has_pic=" + has_pic;
-        task = new PhpUpload();
-        task.execute(upload_url);
+            upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                    + "kakao_id=" + carrier.getId()
+                    + "&kakao_nick=" + kakao_nick
+                    + "&category=" + carrier.getCategory()
+                    + "&group_code=" + "a1"
+                    + "&title=" + carrier.getTitle()
+                    + "&content=" + carrier.getContent()
+                    + "&link=" + carrier.getLink()
+                    + "&has_pic=" + has_pic;
+            task = new PhpUpload();
+            task.execute(upload_url);
+
     }
 
     private void DoPhotoUpLoad(String fileName, String posting_id){
-        Log.d("in", "DoPhotoUpLoad");
-        HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/photo/upload.php?id="+posting_id, posting_id, fileName);
-        Log.d("out","DoPhotoUpLoad");
+        HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/photo/upload.php?id=" + posting_id, posting_id, fileName);
     }
 
     private void HttpPhotoUpload(String url, String posting_id, String fileName){
-        Log.d("in","HttpPhotoUpload");
+//        Log.d("in","HttpPhotoUpload");
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         Bitmap bitmap = BitmapFactory.decodeFile(fileName);
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
@@ -367,18 +359,19 @@ public class Writing extends Activity implements View.OnClickListener {
             path.mkdirs();
         }
         File file = new File(path, "tempimage.png");
-        Log.d("in", "getTempImageFile");
+        Log.d("path", path.toString());
         return file;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("in", "onActivityResult");
+//        Log.d("in", "onActivityResult");
         if (requestCode == REQ_CODE_PICK_GALLERY && resultCode == Activity.RESULT_OK) {
             // 갤러리의 경우 곧바로 data 에 uri가 넘어옴.
-            Log.d("in", "gallery");
+//            Log.d("in", "gallery");
             Uri uri = data.getData();
+            Log.d("uri", uri.toString());
             copyUriToFile(uri, getTempImageFile());
-            Log.d("in", "afterURIcopy");
+//            Log.d("in", "afterURIcopy");
             if (mCropRequested) {
                 cropImage();
             } else {
@@ -414,7 +407,7 @@ public class Writing extends Activity implements View.OnClickListener {
         // show image on ImageView
         Bitmap bm = BitmapFactory.decodeFile(getTempImageFile().getAbsolutePath());
         ((ImageView) findViewById(R.id.writing_preview_img)).setImageBitmap(bm);
-        has_pic = 1;
+         has_pic = 1;
     }
 
     private void saveBitmapToFile(Bitmap bitmap) {
@@ -555,7 +548,6 @@ public class Writing extends Activity implements View.OnClickListener {
     }
 
     private void copyUriToFile(Uri srcUri, File target) {
-        Log.d("in", "copyUriToFile");
         FileInputStream inputStream = null;
         FileOutputStream outputStream = null;
         FileChannel fcin = null;
