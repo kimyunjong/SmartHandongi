@@ -42,6 +42,11 @@
             android:layout_height="wrap_content"
             android:text="다은,수영"
             android:id="@+id/dsbtn"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dday"
+            android:textSize="15dp"/>
 
     </LinearLayout>
 </RelativeLayout>

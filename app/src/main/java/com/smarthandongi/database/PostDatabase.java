@@ -1,10 +1,12 @@
 package com.smarthandongi.database;
 
+import java.io.Serializable;
+
 /**
  * Created by Joel on 2015-01-22.
  */
-public class PostDatabase {
-    public PostDatabase(String title, int id, String kakao_id, String category, String group, String content, String posting_date, String image_link, String start_date, String end_date, int has_pic){
+public class PostDatabase implements Serializable{
+    public PostDatabase(String title, int id, String kakao_id, String category, String group, String content, String posting_date, String image_link, String start_date, String end_date, String has_pic){
 
         this.title=title;
         this.id=id;
@@ -18,6 +20,7 @@ public class PostDatabase {
         this.has_pic=has_pic;
         this.group=group;
 
+
 }
     private String title;
     private int id;
@@ -29,7 +32,8 @@ public class PostDatabase {
     private String image_link;
     private String start_date;
     private String end_date;
-    private int has_pic;
+    private String has_pic;
+
 
     public int getId(){return  id;}
     public String getKakao_id(){return kakao_id;}
@@ -41,7 +45,7 @@ public class PostDatabase {
     public String getImage_link(){return image_link;}
     public String getStart_date(){return start_date;}
     public String getEnd_date(){return end_date;}
-    public int getHas_pic(){return has_pic;}
+    public String getHas_pic(){return has_pic;}
 
 
 
