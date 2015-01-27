@@ -102,11 +102,11 @@ public class PostAdapter extends BaseAdapter{
         temp_date_e=getItem(position).getEnd_date();
         e_date=Integer.parseInt(temp_date_e);
 
-        e_year=e_date/10000;
-        e_date=e_date-(s_year*10000);
-        e_month=e_date/100;
-        e_date=e_date-e_month*100;
-        e_day=e_date;
+//        e_year=e_date/10000;
+//        e_date=e_date-(s_year*10000);
+//        e_month=e_date/100;
+//        e_date=e_date-e_month*100;
+//        e_day=e_date;
 
 
 
