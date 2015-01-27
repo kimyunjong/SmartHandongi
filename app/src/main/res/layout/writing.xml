@@ -215,6 +215,7 @@
         android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/writing_cancel_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
