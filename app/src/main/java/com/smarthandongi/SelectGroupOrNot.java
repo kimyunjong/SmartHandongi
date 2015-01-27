@@ -36,6 +36,13 @@ public class SelectGroupOrNot extends Activity implements View.OnClickListener {
                 Intent intent = new Intent(SelectGroupOrNot.this, Writing.class).putExtra("carrier", carrier);
                 startActivity(intent);
                 finish();
+                break;
+            }
+            case R.id.group_btn : {
+                Intent intent = new Intent(SelectGroupOrNot.this,GroupSearch.class).putExtra("carrier",carrier);
+                startActivity(intent);
+
+                break;
             }
 
         }
