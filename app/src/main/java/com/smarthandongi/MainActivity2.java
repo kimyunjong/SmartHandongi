@@ -74,9 +74,9 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
     @Override
     public void onClick(View v){
 
-
         switch (v.getId()){
             case R.id.yjbtn:{
+
 
                 Intent intent=new Intent(MainActivity2.this,yj_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
