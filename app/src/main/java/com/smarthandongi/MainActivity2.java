@@ -20,6 +20,8 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
     private TextView text;
     private Button button;
     Button yjbtn,yybtn,dsbtn;
+    TextView dday;
+    dday deadline= new dday();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,15 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
 
         text = (TextView)findViewById(R.id.text);
         button = (Button)findViewById(R.id.button);
-
+        dday=(TextView)findViewById(R.id.dday);
         button.setText(carrier.isLogged_in() ? "로그아웃" : "로그인");
         text.setText(carrier.getId() + " " + carrier.getNickname());
+
+        dday.setText(String.valueOf(deadline.caldate(2015,1,18))+ "남았습니다!!!! "); //월은 -1, 일은 +1
+
+
+
+
 
         button.setOnClickListener( new View.OnClickListener() {
             @Override

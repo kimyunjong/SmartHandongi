@@ -2,17 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"  tools:context=".MainActivity"
     android:background="#fffaff5e">
-
+//상단바
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="75dp"
     android:layout_alignParentTop="true"
     android:background="#fffefafc"
-    android:orientation="vertical">
+    android:orientation="vertical"
+        android:id="@+id/upper_bar">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
+
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,7 +29,7 @@
                 android:id="@+id/board_img"
                 android:layout_height="60dp"
                 android:layout_width="140dp"
-                android:src="@drawable/board_btn"/>
+                android:src="@drawable/board_btn_on"/>
             <Button
 
                 android:id="@+id/timeline_btn"
@@ -79,70 +81,89 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:background="#ffcececf"
+
         ></LinearLayout>
 
-
-
 </LinearLayout>
+
+    //리스트
+    <ListView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/list"
+    android:layout_below="@+id/upper_bar">
+
+    </ListView>
+
+    //리스트 2 전체
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/upper_bar"
+        android:id="@+id/list_container"
+
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:id="@+id/list2_upperbar">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="텍스트입니다. 여기에는 이미지가 올 것입니다."/>
+            </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list2"
+        android:layout_below="@+id/list2_upperbar">
+
+    </ListView>
+    </RelativeLayout>
+
+
     //write버튼
     <RelativeLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/downbar">
-        <Button
+        android:layout_above="@+id/downbar"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="8dp">
+
+        <ImageButton
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/write_btn"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="15dp"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/write_img"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="15dp"
             android:src="@drawable/write_btn"/>
 
     </RelativeLayout>
+
     //아래하단
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:id="@+id/downbar">
+        android:id="@+id/downbar"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:background="#ffffffff"></LinearLayout>
+            android:background="#ffffffff"
+            ></LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="97"
             android:background="#ff7fc3fe">
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="16.6"
 
-                >
-                <Button
-                    android:id="@+id/all_btn"
-                    android:layout_width="match_parent"
-
-                    android:layout_height="match_parent"
-                    android:background="#fff"/>
-                <ImageView
-                    android:id="@+id/all_img"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/all_btn"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    />
-            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -157,7 +178,7 @@
                     android:id="@+id/notice_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/notice_btn"
+                    android:src="@drawable/notice_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -177,7 +198,7 @@
                     android:id="@+id/outer_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/outer_btn"
+                    android:src="@drawable/outer_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -197,7 +218,7 @@
                     android:id="@+id/seminar_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/seminar_btn"
+                    android:src="@drawable/seminar_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -216,7 +237,7 @@
                     android:id="@+id/recruit_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/recruit_btn"
+                    android:src="@drawable/recruit_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -236,7 +257,7 @@
                     android:id="@+id/agora_img"
                     android:layout_width="40dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/agora_btn"
+                    android:src="@drawable/agora_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -248,5 +269,159 @@
 
     </LinearLayout>
 
+<RelativeLayout
+    android:layout_width="130dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/upper_bar"
+    android:background="#000000"
+    android:visibility="gone"
+    android:id="@+id/menu"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/write_btn_in_menu"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/write_btn_in_menu_img"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrap_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrap_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_posting_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_posting_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/push_set_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/push_set_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_group"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_group_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bustime_table_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bustime_table_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/error_report_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/error_report_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ourstory_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ourstory_img"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/other_handongi_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/other_handongi_img"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_btn"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_img"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>
 </RelativeLayout>
