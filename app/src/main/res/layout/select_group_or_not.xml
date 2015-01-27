@@ -8,7 +8,7 @@
         android:layout_height="80dp">
 
         <Button
-            android:id="@+id/back_sel_btn"
+            android:id="@+id/sel_back_btn"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_centerVertical="true"
@@ -32,7 +32,7 @@
             android:gravity="center"/>
 
         <Button
-            android:id="@+id/forward_sel_btn"
+            android:id="@+id/sel_forward_btn"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_alignParentRight="true"

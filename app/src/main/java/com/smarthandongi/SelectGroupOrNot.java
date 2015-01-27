@@ -33,12 +33,16 @@ public class SelectGroupOrNot extends Activity implements View.OnClickListener {
         switch(v.getId()){
             case R.id.individual_btn : {
                 //개인이니까 group indicator가 디폴트 값을 그대로 유지한다.
+                carrier.setGroup_code(null);
+
+
                 Intent intent = new Intent(SelectGroupOrNot.this, Writing.class).putExtra("carrier", carrier);
                 startActivity(intent);
                 finish();
                 break;
             }
             case R.id.group_btn : {
+                //carrier.setGroup_code(); 여기서 그룹코드를 받아와서 세팅을 해주도록 함
                 Intent intent = new Intent(SelectGroupOrNot.this,GroupSearch.class).putExtra("carrier",carrier);
                 startActivity(intent);
 
