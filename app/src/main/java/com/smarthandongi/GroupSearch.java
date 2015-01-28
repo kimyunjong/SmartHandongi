@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -102,6 +103,19 @@ public class GroupSearch extends Activity {
                     }
                 }
 
+                if(str.length()>1&&filtered_list.size()==0) {
+                    LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
+                    EditText unresistered = (EditText)findViewById(R.id.unresistered);
+                    popup.setVisibility(View.VISIBLE);
+                    unresistered.setText(str);
+
+                }
+                else
+                {
+                    LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
+                    popup.setVisibility(View.INVISIBLE);
+                }
+
             }
         };
 
@@ -122,6 +136,11 @@ public class GroupSearch extends Activity {
                     Log.d("선택된거", filtered_list.get(pos).getGroup_code());
                     carrier.setGroup_code(filtered_list.get(pos).getGroup_code());
                 }
+                else if(filtered_list.size()==0&&str.length()!=0) {
+                    Log.d("선택된거",str);
+                    carrier.setGroup_name(str);
+                }
+
                 else {
                     Log.d("선택된거",group_list.get(pos).getGroup_code());
                     Log.d("index",String.valueOf(pos));
