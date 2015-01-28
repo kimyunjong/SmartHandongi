@@ -21,6 +21,10 @@ public class Carrier implements Serializable {
     private String posting_date = null;
     private String start_date = null;
     private String end_date = null;
+
+    private int push_sports = 0;
+    private int push_nightfood = 0;
+    private int push_game = 0;
     //youngmin variable ends
 
     //yoojin variable begins
@@ -97,7 +101,16 @@ public class Carrier implements Serializable {
 
     public void setGroup_name(String group_name) { this.group_name = group_name;}
 
+    public int getPush_sports() { return push_sports;}
 
+    public void setPush_sports(int push_sports) { this.push_sports = push_sports;}
 
+    public int getPush_nightfood() { return push_nightfood;}
+
+    public void setPush_nightfood(int push_nightfood) { this.push_nightfood = push_nightfood;}
+
+    public int getPush_game() { return push_game;}
+
+    public void setPush_game(int push_game) { this.push_game = push_game;}
 
 }
