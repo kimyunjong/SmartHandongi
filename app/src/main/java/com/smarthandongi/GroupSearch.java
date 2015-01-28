@@ -45,7 +45,7 @@ public class GroupSearch extends Activity {
     private GroupPhp group_php;
     EditText group_search;
     RelativeLayout layoutView;
-    String str;
+    String str=null;
 
 
 
@@ -136,12 +136,12 @@ public class GroupSearch extends Activity {
                     Log.d("선택된거", filtered_list.get(pos).getGroup_code());
                     carrier.setGroup_code(filtered_list.get(pos).getGroup_code());
                 }
-                else if(filtered_list.size()==0&&str.length()!=0) {
+                else if(filtered_list.size()==0&&group_search.getText().toString().length()!=0) {
                     Log.d("선택된거",str);
                     carrier.setGroup_name(str);
                 }
 
-                else {
+                else if(filtered_list.size()==0&&str==null){
                     Log.d("선택된거",group_list.get(pos).getGroup_code());
                     Log.d("index",String.valueOf(pos));
                     carrier.setGroup_code(group_list.get(pos).getGroup_code());
