@@ -23,6 +23,12 @@ public class Carrier implements Serializable {
     private String end_date = null;
     //youngmin variable ends
 
+    //yoojin variable begins
+    private String group_pw = null;
+    //yoojin variable ends
+
+
+
     public boolean isLogged_in() {
         return logged_in;
     }
@@ -50,6 +56,10 @@ public class Carrier implements Serializable {
     public String getGroup_code() { return group_code; }
 
     public void setGroup_code(String group_code) { this.group_code = group_code; }
+
+    public String getGroup_pw() { return group_pw; }
+
+    public void setGroup_pw(String group_pw) { this.group_pw = group_pw; }
 
     public int getCategory() { return category; }
 
