@@ -63,6 +63,9 @@
 
         <activity android:name=".Writing"
             android:label="@string/app_name"/>
+        <activity android:name=".BugReport"
+            android:label="@string/app_name"/>
+
         <activity android:name=".GroupSearch"
             />
 

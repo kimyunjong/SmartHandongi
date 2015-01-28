@@ -197,10 +197,19 @@ public class Writing extends Activity implements View.OnClickListener {
                 carrier.setStart_date(null);
                 carrier.setEnd_date(null);
                 carrier.setLink(null);
+                carrier.setGroup_code("");
 
-                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-                startActivity(intent);
-                finish();
+                if(carrier.getGroup_name().compareTo("") != 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+                    Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    carrier.setGroup_name("");
+                    Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
             }
             case R.id.writing_cancel_btn :{
