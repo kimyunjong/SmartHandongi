@@ -56,7 +56,7 @@ public class GcmIntentService extends GCMBaseIntentService {
     }
     @Override
     protected void onUnregistered(Context arg0, String arg1){
-     //   GCMRegistrar.unregister(arg0);
+         GCMRegistrar.unregister(arg0);
         Log.e("키를 제거합니다.(GCM INTENTSERVICE", "제거되었습니다.");
 
     }
