@@ -78,7 +78,6 @@
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
-        <service android:name=".GcmIntentService" />
 
         <!-- 수영 다은 gcm 끝 -->
         <activity
