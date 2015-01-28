@@ -2,6 +2,7 @@ package com.smarthandongi;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -15,10 +16,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -60,9 +65,11 @@ public class Writing extends Activity implements View.OnClickListener {
 
     //Category Buttons
     Button writing_notice_btn, writing_outer_btn, writing_seminar_btn, writing_recruit_btn, writing_agora_btn;
-    Button writing_confirm_btn, writing_image_btn;
+    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_forward_btn, writing_cancel_btn;
 
     EditText writing_title, writing_content, writing_link_text;
+    RelativeLayout entire_layout;
+
     PhpUpload task;
 
 
@@ -71,6 +78,8 @@ public class Writing extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.writing);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //Category Buttons
         writing_notice_btn  = (Button) findViewById(R.id.writing_notice_btn);
@@ -85,18 +94,33 @@ public class Writing extends Activity implements View.OnClickListener {
         writing_recruit_btn.setOnClickListener(this);
         writing_agora_btn.setOnClickListener(this);
 
-
         //Category buttons done
-
-        writing_title = (EditText)findViewById(R.id.writing_title);
-        writing_content  = (EditText)findViewById(R.id.writing_content);
+        writing_title =     (EditText)findViewById(R.id.writing_title);
+        writing_content  =  (EditText)findViewById(R.id.writing_content);
         writing_link_text = (EditText)findViewById(R.id.writing_link_text);
 
-        writing_image_btn = (Button)findViewById(R.id.writing_image_btn);
-        writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
+        writing_image_btn   = (Button)findViewById(R.id.writing_image_btn);
+//      writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
+        writing_back_btn    = (Button)findViewById(R.id.writing_back_btn);
+        writing_forward_btn = (Button)findViewById(R.id.writing_forward_btn);
+        writing_cancel_btn  = (Button)findViewById(R.id.writing_cancel_btn);
 
         writing_image_btn.setOnClickListener(this);
-        writing_confirm_btn.setOnClickListener(this);
+//        writing_confirm_btn.setOnClickListener(this);
+        writing_back_btn.setOnClickListener(this);
+        writing_forward_btn.setOnClickListener(this);
+        writing_cancel_btn.setOnClickListener(this);
+
+        entire_layout = (RelativeLayout)findViewById(R.id.entire_layout);
+        entire_layout.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(writing_title.getWindowToken(), 0);
+                inputManager.hideSoftInputFromWindow(writing_content.getWindowToken(), 0);
+                inputManager.hideSoftInputFromWindow(writing_link_text.getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -152,17 +176,38 @@ public class Writing extends Activity implements View.OnClickListener {
                 break;
             }
             //Category buttons done
-            case R.id.writing_confirm_btn:{
+            case R.id.writing_forward_btn:{
                 phpCreate();
                 break;
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
 
             case R.id.writing_image_btn:{
-
                 Intent i = new Intent(Intent.ACTION_PICK);
                 i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 i.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, REQ_CODE_PICK_GALLERY);
+                break;
+            }
+
+            case R.id.writing_back_btn :{               //TODO 뒤로 가기를 눌렀을 때 이미 작성된 내용은 저장되지 않는다는 경고팝업 띄우기
+                carrier.setCategory(0);
+                carrier.setTitle(null);
+                carrier.setContent(null);
+                carrier.setPosting_date(null);
+                carrier.setStart_date(null);
+                carrier.setEnd_date(null);
+                carrier.setLink(null);
+
+                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                startActivity(intent);
+                finish();
+                break;
+            }
+            case R.id.writing_cancel_btn :{
+                Intent intent = new Intent(Writing.this, MainActivity2.class).putExtra("carrier", carrier);
+                startActivity(intent);
+                finish();
+                break;
             }
         }
     }
@@ -228,12 +273,21 @@ public class Writing extends Activity implements View.OnClickListener {
 
     public void phpCreate(){
         String title, content, upload_url, kakao_nick, link;
-        String group_code = "", group_name = "";
+        String group_name = "", group_code = "";
 
         title = writing_title.getText().toString();
         content = writing_content.getText().toString();
         kakao_nick = carrier.getNickname();
         link = writing_link_text.getText().toString();
+
+        if((carrier.getGroup_code() == null) && (carrier.getGroup_name() != null)){     //임의 입력 단체의 경우
+            group_name = carrier.getGroup_name();
+        }
+        if((carrier.getGroup_code() != null) && (carrier.getGroup_name() != null)){     //리스트내 존재하는 단체의 경우
+            group_name = carrier.getGroup_name();
+            group_code = carrier.getGroup_code();
+        }
+
         try {
             title = URLEncoder.encode(title, "UTF-8");
             content = URLEncoder.encode(content, "UTF-8");
@@ -252,22 +306,21 @@ public class Writing extends Activity implements View.OnClickListener {
         carrier.setEnd_date("20150130");
 
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
- //       if((carrier.getGroup_code() == null) && (carrier.getGroup_name() == null))          //개인인 경우
-            upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                    + "kakao_id=" + carrier.getId()
-                    + "&kakao_nick=" + kakao_nick
-                    + "&category=" + carrier.getCategory()
-                    + "&group_code=" + group_code
-                    + "&group_name=" + group_name
-                    + "&title=" + carrier.getTitle()
-                    + "&content=" + carrier.getContent()
-                    + "&link=" + carrier.getLink()
-                    + "&posting_date=" + carrier.getPosting_date()
-                    + "&start_date=" + carrier.getStart_date()
-                    + "&end_date=" + carrier.getEnd_date()
-                    + "&has_pic=" + has_pic;
-            task = new PhpUpload();
-            task.execute(upload_url);
+        upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                + "kakao_id=" + carrier.getId()
+                + "&kakao_nick=" + kakao_nick
+                + "&category=" + carrier.getCategory()
+                + "&group_code=" + group_code
+                + "&group_name=" + group_name
+                + "&title=" + carrier.getTitle()
+                + "&content=" + carrier.getContent()
+                + "&link=" + carrier.getLink()
+                + "&posting_date=" + carrier.getPosting_date()
+                + "&start_date=" + carrier.getStart_date()
+                + "&end_date=" + carrier.getEnd_date()
+                + "&has_pic=" + has_pic;
+        task = new PhpUpload();
+        task.execute(upload_url);
 
 
     }

@@ -2,13 +2,14 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/writing_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="70dp">
 
         <Button
             android:id="@+id/writing_back_btn"
@@ -19,7 +20,7 @@
 
         <TextView
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_alignParentTop="true"
             android:text="글쓰기"
@@ -27,7 +28,7 @@
             android:gravity="center"/>
         <TextView
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_alignParentBottom="true"
             android:text="내용입력하기"
@@ -44,11 +45,12 @@
     </RelativeLayout>
 
     <ScrollView
+
         android:layout_below="@+id/writing_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <RelativeLayout
-
+        android:id="@+id/entire_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -235,8 +237,15 @@
             android:layout_weight="1"
             android:layout_centerHorizontal="true"/>
 
+        <TextView
+            android:layout_below="@id/writing_preview_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
     </RelativeLayout>
     </ScrollView>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -249,12 +258,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="취소"/>
+
+        <!--
         <Button
             android:id="@+id/writing_confirm_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="확인"/>
+            android:text="확인"/> -->
 
 
     </LinearLayout>
