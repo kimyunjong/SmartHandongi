@@ -71,6 +71,8 @@
 
         <activity android:name=".GroupSearch"
             />
+        <activity android:name=".GroupPassword"
+            />
 
 
         <!-- 영민 유진 엑티비티 끝-->

@@ -34,15 +34,6 @@
             android:gravity="center"/>
 
 
-        <Button
-            android:id="@+id/group_forward_btn"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="앞"
-            android:onClick="groupForwardOnClick"
-            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/main_search_bar"
@@ -129,6 +120,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             />
+            <Button
+                android:id="@+id/unresistered_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="확인"
+                />
         </LinearLayout>
         <TextView
             android:layout_marginTop="10dp"
