@@ -22,6 +22,7 @@ public class Carrier implements Serializable {
     private String start_date = null;
     private String end_date = null;
     private String regid = null;
+    private int selector = 0;
     //youngmin variable ends
 
     private String Group_pw = null;
@@ -89,6 +90,10 @@ public class Carrier implements Serializable {
     public String getGroup_pw() { return Group_pw;}
 
     public void setGroup_pw(String group_pw) { Group_pw = group_pw;}
+
+    public int getSelector() { return selector;}
+
+    public void setSelector(int selector) { this.selector = selector;}
 
 
 
