@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
@@ -40,7 +41,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         notificationManager.notify(0,notification);
 
         // Play default notification sound
-//        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal);
+        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal);
         //notification.defaults |= Notification.DEFAULT_SOUND;
 
         // Vibrate if vibrate is enabled
