@@ -65,7 +65,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
     //Category Buttons
     Button writing_notice_btn, writing_outer_btn, writing_seminar_btn, writing_recruit_btn, writing_agora_btn;
-    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_forward_btn, writing_cancel_btn;
+    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
 
     EditText writing_title, writing_content, writing_link_text;
     RelativeLayout entire_layout;
@@ -100,15 +100,15 @@ public class Writing extends Activity implements View.OnClickListener {
         writing_link_text = (EditText)findViewById(R.id.writing_link_text);
 
         writing_image_btn   = (Button)findViewById(R.id.writing_image_btn);
-//      writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
+        writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
         writing_back_btn    = (Button)findViewById(R.id.writing_back_btn);
-        writing_forward_btn = (Button)findViewById(R.id.writing_forward_btn);
+//      writing_forward_btn = (Button)findViewById(R.id.writing_forward_btn);
         writing_cancel_btn  = (Button)findViewById(R.id.writing_cancel_btn);
 
         writing_image_btn.setOnClickListener(this);
-//        writing_confirm_btn.setOnClickListener(this);
+        writing_confirm_btn.setOnClickListener(this);
         writing_back_btn.setOnClickListener(this);
-        writing_forward_btn.setOnClickListener(this);
+//      writing_forward_btn.setOnClickListener(this);
         writing_cancel_btn.setOnClickListener(this);
 
         entire_layout = (RelativeLayout)findViewById(R.id.entire_layout);
@@ -176,7 +176,7 @@ public class Writing extends Activity implements View.OnClickListener {
                 break;
             }
             //Category buttons done
-            case R.id.writing_forward_btn:{
+            case R.id.writing_confirm_btn:{
                 phpCreate();
                 break;
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
@@ -199,7 +199,7 @@ public class Writing extends Activity implements View.OnClickListener {
                 carrier.setLink(null);
                 carrier.setGroup_code("");
 
-                if(carrier.getGroup_name().compareTo("") != 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+                if(carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
                     Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
                     startActivity(intent);
                     finish();
@@ -210,7 +210,6 @@ public class Writing extends Activity implements View.OnClickListener {
                     startActivity(intent);
                     finish();
                 }
-                break;
             }
             case R.id.writing_cancel_btn :{
                 Intent intent = new Intent(Writing.this, MainActivity2.class).putExtra("carrier", carrier);
@@ -222,10 +221,26 @@ public class Writing extends Activity implements View.OnClickListener {
     }
 
     public void onBackPressed(){
-        Intent intent = new Intent();
-        intent.putExtra("carrier", carrier);
-        setResult(0, intent);
-        finish();
+        carrier.setCategory(0);
+        carrier.setTitle(null);
+        carrier.setContent(null);
+        carrier.setPosting_date(null);
+        carrier.setStart_date(null);
+        carrier.setEnd_date(null);
+        carrier.setLink(null);
+        carrier.setGroup_code("");
+
+        if(carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+            Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            carrier.setGroup_name("");
+            Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private class PhpUpload extends AsyncTask<String, Integer, String> {
@@ -336,6 +351,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
     private void DoPhotoUpLoad(String fileName, String posting_id){
         HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/photo/upload.php?id=" + posting_id, posting_id, fileName);
+//        HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/upload.php?id=" + posting_id, posting_id, fileName);
     }
 
     private void HttpPhotoUpload(String url, String posting_id, String fileName){

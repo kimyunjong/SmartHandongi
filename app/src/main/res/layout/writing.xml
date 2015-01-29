@@ -36,12 +36,12 @@
             android:gravity="center"/>
 
         <Button
-            android:id="@+id/writing_forward_btn"
-            android:layout_width="50dp"
+            android:id="@+id/writing_confirm_btn"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="앞"/>
+            android:text="등록하기"/>
     </RelativeLayout>
 
     <ScrollView
