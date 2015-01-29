@@ -29,7 +29,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
 public class ds_activity extends Activity {
-
+    Carrier carrier;
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
@@ -58,6 +58,7 @@ public class ds_activity extends Activity {
         setContentView(R.layout.activity_main);
         mDisplay = (TextView) findViewById(R.id.display);
 
+        carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         context = getApplicationContext();
 
         // Check device for Play Services APK. If check succeeds, proceed with
@@ -73,6 +74,7 @@ public class ds_activity extends Activity {
             Log.i(TAG, "No valid Google Play Services APK found.");
 
         }
+        carrier.setRegid(regid);
         RegIDInsertTask regIDInsertTask  = new RegIDInsertTask();
         regIDInsertTask.execute(regid);
         // regIDInsertTaske= new regIDInsertTask.execute(regid);

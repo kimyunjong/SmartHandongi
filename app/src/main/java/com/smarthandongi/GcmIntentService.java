@@ -39,6 +39,12 @@ public class GcmIntentService extends GCMBaseIntentService {
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0,notification);
 
+        // Play default notification sound
+        notification.defaults |= Notification.DEFAULT_SOUND;
+
+        // Vibrate if vibrate is enabled
+        notification.defaults |= Notification.DEFAULT_VIBRATE;
+        notificationManager.notify(0, notification);
     }
     @Override
     protected void onError (Context arg0, String arg1){
