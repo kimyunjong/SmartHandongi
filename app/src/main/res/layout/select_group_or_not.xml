@@ -32,14 +32,6 @@
             android:textSize="15dp"
             android:gravity="center"/>
 
-        <Button
-            android:id="@+id/sel_forward_btn"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="앞"/>
-
 
     </RelativeLayout>
 

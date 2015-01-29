@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffa4e7ff">
     <RelativeLayout
         android:id="@+id/bug_top_bar"
         android:layout_width="match_parent"
@@ -25,14 +26,68 @@
     <LinearLayout
         android:layout_below="@+id/bug_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
-    
-    <RelativeLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp">
+
+
+        <TextView
+            android:id="@+id/bug_content1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="내용"
+            android:textSize="20dp"/>
+        <EditText
+            android:id="@+id/bug_content2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:gravity="top"
+            android:background="#ffffff"
+            android:hint="내용을 입력하세요.(200자)"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="사진"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:id="@+id/bug_preview_img"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_marginTop="5dp"
+            android:background="#ffffff"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        >
-        
-        </RelativeLayout>
-    
-    
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+    <Button
+        android:id="@+id/bug_camera_btn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="camera"/>
+    <Button
+        android:id="@+id/bug_gallery_btn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="gallery"/>
+    <Button
+        android:id="@+id/bug_confirm_btn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="confirm"/>
+    </LinearLayout>
+
 </RelativeLayout>

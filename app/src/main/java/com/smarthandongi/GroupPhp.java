@@ -1,20 +1,19 @@
 package com.smarthandongi;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-
+import android.R.integer;
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.integer;
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.util.Log;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 /**
  * Created by user on 2015-01-27.
  */
@@ -67,8 +66,8 @@ public class GroupPhp extends AsyncTask<String, integer , String> {
             for(int i=0; i<ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
 
-                group_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code")));
-                temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code")));
+                group_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
+                temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
 
             }
 

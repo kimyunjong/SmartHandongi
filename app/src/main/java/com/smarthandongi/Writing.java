@@ -1,6 +1,7 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,9 +23,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -36,6 +40,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -51,6 +56,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -63,15 +69,45 @@ public class Writing extends Activity implements View.OnClickListener {
     private final int REQ_CODE_PICK_CROP = 900003;
     private int has_pic = 0;
 
+
     //Category Buttons
     Button writing_notice_btn, writing_outer_btn, writing_seminar_btn, writing_recruit_btn, writing_agora_btn;
-    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_forward_btn, writing_cancel_btn;
+    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
 
     EditText writing_title, writing_content, writing_link_text;
     RelativeLayout entire_layout;
 
     PhpUpload task;
 
+    //날짜관련 변수
+    int year, month, day; //날짜 받기위해
+    Calendar dateAndtime = Calendar.getInstance();
+    TextView start_dateLabel,end_dateLabel;
+    java.text.DateFormat fmDateAndTime = java.text.DateFormat.getDateInstance();
+    Button startDate_btn, endDate_btn;
+
+    DatePickerDialog.OnDateSetListener start_d = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            dateAndtime.set(Calendar.YEAR, year);
+            dateAndtime.set(Calendar.MONTH,monthOfYear);
+            dateAndtime.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            start_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
+        }
+    };
+
+    DatePickerDialog.OnDateSetListener end_d = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            dateAndtime.set(Calendar.YEAR, year);
+            dateAndtime.set(Calendar.MONTH,monthOfYear);
+            dateAndtime.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            end_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
+        }
+    };
+
+
+    //날짜관련 변수 끝
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,15 +136,15 @@ public class Writing extends Activity implements View.OnClickListener {
         writing_link_text = (EditText)findViewById(R.id.writing_link_text);
 
         writing_image_btn   = (Button)findViewById(R.id.writing_image_btn);
-//      writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
+        writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
         writing_back_btn    = (Button)findViewById(R.id.writing_back_btn);
-        writing_forward_btn = (Button)findViewById(R.id.writing_forward_btn);
+//      writing_forward_btn = (Button)findViewById(R.id.writing_forward_btn);
         writing_cancel_btn  = (Button)findViewById(R.id.writing_cancel_btn);
 
         writing_image_btn.setOnClickListener(this);
-//        writing_confirm_btn.setOnClickListener(this);
+        writing_confirm_btn.setOnClickListener(this);
         writing_back_btn.setOnClickListener(this);
-        writing_forward_btn.setOnClickListener(this);
+//      writing_forward_btn.setOnClickListener(this);
         writing_cancel_btn.setOnClickListener(this);
 
         entire_layout = (RelativeLayout)findViewById(R.id.entire_layout);
@@ -121,6 +157,19 @@ public class Writing extends Activity implements View.OnClickListener {
                 return true;
             }
         });
+
+        //날짜표시
+        start_dateLabel=(TextView)findViewById(R.id.start_date_label);
+        start_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
+        end_dateLabel=(TextView)findViewById(R.id.end_date_label);
+        end_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
+
+        startDate_btn=(Button)findViewById(R.id.startdate_choose);
+        endDate_btn=(Button)findViewById(R.id.enddate_choose);
+
+        startDate_btn.setOnClickListener(this);
+        endDate_btn.setOnClickListener(this);
+
     }
 
     @Override
@@ -176,7 +225,7 @@ public class Writing extends Activity implements View.OnClickListener {
                 break;
             }
             //Category buttons done
-            case R.id.writing_forward_btn:{
+            case R.id.writing_confirm_btn:{
                 phpCreate();
                 break;
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
@@ -197,11 +246,19 @@ public class Writing extends Activity implements View.OnClickListener {
                 carrier.setStart_date(null);
                 carrier.setEnd_date(null);
                 carrier.setLink(null);
+                carrier.setGroup_code("");
 
-                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-                startActivity(intent);
-                finish();
-                break;
+                if(carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+                    Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    carrier.setGroup_name("");
+                    Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
             }
             case R.id.writing_cancel_btn :{
                 Intent intent = new Intent(Writing.this, MainActivity2.class).putExtra("carrier", carrier);
@@ -209,14 +266,47 @@ public class Writing extends Activity implements View.OnClickListener {
                 finish();
                 break;
             }
+            case R.id.startdate_choose : {
+                year = dateAndtime.get(Calendar.YEAR);
+                month = dateAndtime.get(Calendar.MONTH);
+                day = dateAndtime.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(Writing.this,start_d,year,month,day).show();
+                break;
+            }
+            case R.id.enddate_choose : {
+                year = dateAndtime.get(Calendar.YEAR);
+                month = dateAndtime.get(Calendar.MONTH);
+                day = dateAndtime.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(Writing.this,end_d,year,month,day).show();
+                break;
+            }
+
+
+
         }
     }
 
     public void onBackPressed(){
-        Intent intent = new Intent();
-        intent.putExtra("carrier", carrier);
-        setResult(0, intent);
-        finish();
+        carrier.setCategory(0);
+        carrier.setTitle(null);
+        carrier.setContent(null);
+        carrier.setPosting_date(null);
+        carrier.setStart_date(null);
+        carrier.setEnd_date(null);
+        carrier.setLink(null);
+        carrier.setGroup_code("");
+
+        if(carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+            Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            carrier.setGroup_name("");
+            Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private class PhpUpload extends AsyncTask<String, Integer, String> {
@@ -327,6 +417,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
     private void DoPhotoUpLoad(String fileName, String posting_id){
         HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/photo/upload.php?id=" + posting_id, posting_id, fileName);
+//        HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/upload.php?id=" + posting_id, posting_id, fileName);
     }
 
     private void HttpPhotoUpload(String url, String posting_id, String fileName){

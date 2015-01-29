@@ -21,7 +21,6 @@ public class Carrier implements Serializable {
     private String posting_date = null;
     private String start_date = null;
     private String end_date = null;
-    private String regid = null;
     //youngmin variable ends
 
     public boolean isLogged_in() {
@@ -87,15 +86,6 @@ public class Carrier implements Serializable {
     public String getGroup_name() { return group_name;}
 
     public void setGroup_name(String group_name) { this.group_name = group_name;}
-
-
-    public String getRegid() {
-        return regid;
-    }
-
-    public void setRegid(String regid) {
-        this.regid = regid;
-    }
 
 
 

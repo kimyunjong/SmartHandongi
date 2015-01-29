@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffa4e7ff">
+
+    <RelativeLayout
+        android:id="@+id/push_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <Button
+            android:id="@+id/push_back_btn"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:text="뒤"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:text="푸시설정"
+            android:textSize="20dp"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+
+        <CheckBox
+            android:id="@+id/push_sports_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="운동경기"
+            android:textSize="20dp"
+            android:background="#ffffff"/>
+
+         <CheckBox
+            android:id="@+id/push_game_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="게임"
+            android:textSize="20dp"
+            android:background="#ffffff"/>
+
+        <CheckBox
+            android:id="@+id/push_nightfood_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="야식"
+            android:textSize="20dp"
+            android:background="#ffffff"/>
+
+</LinearLayout>
