@@ -29,6 +29,8 @@ public class PushSetup extends Activity implements View.OnClickListener{
     CollectPushInfoPhp push_php;
     ArrayList<PushDatabase> push_list = new ArrayList<PushDatabase>();
 
+
+
     public void phpCreate(){
         push_php = new CollectPushInfoPhp(push_list, this);
         push_php.execute("http://hungry.portfolio1000.com/smarthandongi/push_setup.php/");
@@ -40,6 +42,7 @@ public class PushSetup extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.push_setup);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+
 
         push_sports_chk = (CheckBox)findViewById(R.id.push_sports_chk);
         push_game_chk = (CheckBox)findViewById(R.id.push_game_chk);
@@ -111,21 +114,15 @@ public class PushSetup extends Activity implements View.OnClickListener{
             return jsonHtml.toString();
         }
         protected void onPostExecute(String str) {
-            Log.d("in", str);
             try {
-                Log.d("in", "11");
                 JSONObject root = new JSONObject(str);
-                Log.d("in", "22");
                 JSONArray ja = root.getJSONArray("results");
-                Log.d("in", "33");
 
                 push_list.removeAll(push_list);
-                Log.d("in", "onPostExecute2");
                 for (int i = 0; i < ja.length(); i++) {
-                    Log.d("in", "onPostExecute3");
                     JSONObject jo = ja.getJSONObject(i);
                     push_list.add(new PushDatabase(jo.getInt("id"), jo.getString("kakao_id"), jo.getString("kakao_nick"), jo.getString("register_id")));
-                    Log.d("!!!!!!", jo.getString("register_id"));
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

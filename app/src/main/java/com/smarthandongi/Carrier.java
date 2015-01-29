@@ -21,31 +21,26 @@ public class Carrier implements Serializable {
     private String posting_date = null;
     private String start_date = null;
     private String end_date = null;
+    private String regid = null;
     //youngmin variable ends
 
-    public boolean isLogged_in() {
-        return logged_in;
-    }
+    private String Group_pw = null;
+
+
+
+    public boolean isLogged_in() { return logged_in; }
 
     public void setLogged_in(boolean logged_in) {
         this.logged_in = logged_in;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
+    public String getNickname() { return nickname;}
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+    public void setNickname(String nickname) { this.nickname = nickname;}
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id;}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id;}
 
     public String getGroup_code() { return group_code; }
 
@@ -87,6 +82,13 @@ public class Carrier implements Serializable {
 
     public void setGroup_name(String group_name) { this.group_name = group_name;}
 
+    public String getRegid() { return regid;}
+
+    public void setRegid(String regid) { this.regid = regid;}
+
+    public String getGroup_pw() { return Group_pw;}
+
+    public void setGroup_pw(String group_pw) { Group_pw = group_pw;}
 
 
 
