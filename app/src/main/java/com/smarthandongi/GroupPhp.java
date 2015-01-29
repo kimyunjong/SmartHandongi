@@ -66,8 +66,8 @@ public class GroupPhp extends AsyncTask<String, integer , String> {
             for(int i=0; i<ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
 
-                group_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code")));
-                temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code")));
+                group_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
+                temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
 
             }
 
