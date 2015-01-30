@@ -180,56 +180,12 @@ public class GroupSearch extends Activity {
       }
     };
 
+    public void onBackPressed() {
 
-/*
-    public void groupForwardOnClick(View v) {
-        switch(v.getId()) {
-            case R.id.group_forward_btn :
-
-                int pos = listview.getCheckedItemPosition();
-                Log.d("pos값은 뭘까요?",String.valueOf(pos));
-
-
-                if(filtered_list.size()!=0)
-                {
-                    Log.d("선택된거", filtered_list.get(pos).getGroup_code());
-                    carrier.setGroup_code(filtered_list.get(pos).getGroup_code());
-                    carrier.setGroup_name(filtered_list.get(pos).getGroup_name());
-                    carrier.setGroup_pw(filtered_list.get(pos).getGroup_pw());
-                    Intent intent = new Intent(GroupSearch.this,GroupPassword.class).putExtra("carrier",carrier);
-                    startActivity(intent);
-                    finish();
-                }
-                else if(filtered_list.size()==0&&group_search.getText().toString().length()!=0) {
-                    Log.d("선택된거",str);
-                    carrier.setGroup_name(str);
-                    Intent intent = new Intent(GroupSearch.this,Writing.class).putExtra("carrier",carrier);
-                    startActivity(intent);
-                    finish();
-                }
-
-                else if(filtered_list.size()==0&&str==null){
-                    if(pos==-1)
-                    {
-                        Toast toastView =Toast.makeText(this, "단체를 선택/입력하십시오", Toast.LENGTH_SHORT);
-                        toastView.setGravity(Gravity.CENTER,0,0);
-                        toastView.show();
-                    }
-                    else {
-                        Log.d("선택된거", group_list.get(pos).getGroup_code());
-                        Log.d("index", String.valueOf(pos));
-                        carrier.setGroup_code(group_list.get(pos).getGroup_code());
-                        carrier.setGroup_name(group_list.get(pos).getGroup_name());
-                        carrier.setGroup_pw(group_list.get(pos).getGroup_pw());
-                        Intent intent = new Intent(GroupSearch.this, GroupPassword.class).putExtra("carrier", carrier);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-
-                break;
-
-        }
+        Intent intent = new Intent(GroupSearch.this,SelectGroupOrNot.class).putExtra("carrier",carrier);
+        startActivity(intent);
+        finish();
     }
-    */
+
+
 }

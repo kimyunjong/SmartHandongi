@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -81,7 +83,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
     //날짜관련 변수
     int year, month, day; //날짜 받기위해
-    Calendar dateAndtime = Calendar.getInstance();
+    Calendar dateAndtime = Calendar.getInstance(),startDay,endDay;
     TextView start_dateLabel,end_dateLabel;
     java.text.DateFormat fmDateAndTime = java.text.DateFormat.getDateInstance();
     Button startDate_btn, endDate_btn;
@@ -89,19 +91,55 @@ public class Writing extends Activity implements View.OnClickListener {
     DatePickerDialog.OnDateSetListener start_d = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+            String sdate;//carrier에 저장하기 위한 스트링
+
             dateAndtime.set(Calendar.YEAR, year);
             dateAndtime.set(Calendar.MONTH,monthOfYear);
             dateAndtime.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+
+            System.out.println(monthOfYear);
+            System.out.println(String.valueOf(monthOfYear));
+
+
+            startDay = Calendar.getInstance();
+            startDay.set(year,monthOfYear,dayOfMonth);
+            endDay=Calendar.getInstance();
+            endDay.set(year, monthOfYear, dayOfMonth); //default로 같은날 설정
+            Log.d("시작일년도",String.valueOf(year));
+            Log.d("시작일먼스",String.valueOf(monthOfYear));
+            Log.d("시작일데이",String.valueOf(dayOfMonth));
+            System.out.println(dayOfMonth);
+            sdate=convertDateToString(year,monthOfYear,dayOfMonth);
+            carrier.setStart_date(sdate);
+            carrier.setEnd_date(sdate);
+
             start_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
+            end_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime())); //default로 같은날 설정
+
         }
     };
 
     DatePickerDialog.OnDateSetListener end_d = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            String sdate;
+
             dateAndtime.set(Calendar.YEAR, year);
             dateAndtime.set(Calendar.MONTH,monthOfYear);
             dateAndtime.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+
+            endDay = Calendar.getInstance();
+            endDay.set(year,monthOfYear,dayOfMonth);
+            Log.d("종료일년도",String.valueOf(year));
+            Log.d("종료일데이",String.valueOf(monthOfYear));
+            Log.d("종료일데이",String.valueOf(dayOfMonth));
+
+            sdate=convertDateToString(year,monthOfYear,dayOfMonth);
+            carrier.setEnd_date(sdate);
+
             end_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
         }
     };
@@ -161,6 +199,12 @@ public class Writing extends Activity implements View.OnClickListener {
         //날짜표시
         start_dateLabel=(TextView)findViewById(R.id.start_date_label);
         start_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
+        String str=convertDateToString(dateAndtime.get(Calendar.YEAR),dateAndtime.get(Calendar.MONTH),dateAndtime.get(Calendar.DAY_OF_MONTH));
+        carrier.setStart_date(str);
+        carrier.setEnd_date(str);
+        carrier.setPosting_date(str);
+
+
         end_dateLabel=(TextView)findViewById(R.id.end_date_label);
         end_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
 
@@ -227,6 +271,7 @@ public class Writing extends Activity implements View.OnClickListener {
             //Category buttons done
             case R.id.writing_confirm_btn:{
                 phpCreate();
+
                 break;
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
 
@@ -278,6 +323,7 @@ public class Writing extends Activity implements View.OnClickListener {
                 month = dateAndtime.get(Calendar.MONTH);
                 day = dateAndtime.get(Calendar.DAY_OF_MONTH);
                 new DatePickerDialog(Writing.this,end_d,year,month,day).show();
+
                 break;
             }
 
@@ -362,18 +408,36 @@ public class Writing extends Activity implements View.OnClickListener {
     }
 
     public void phpCreate(){
+
+        int possible; // 날짜계산한게 맞나 안맞나 체크
+
         String title, content, upload_url, kakao_nick, link;
         String group_name = "", group_code = "";
 
         title = writing_title.getText().toString();
+        Log.d("타이틀",title);
         content = writing_content.getText().toString();
         kakao_nick = carrier.getNickname();
         link = writing_link_text.getText().toString();
 
-        if((carrier.getGroup_code() == null) && (carrier.getGroup_name() != null)){     //임의 입력 단체의 경우
+        if(startDay!=null) { //사용자가 날짜를 선택했을떄
+            possible = dayCal(startDay, endDay);
+            Log.d("함수실행", "true");
+            Log.d("possible 값", String.valueOf(possible));
+            if (possible == -1) {
+                Toast toastView = Toast.makeText(this, "날짜를 올바르게 입력하세요", Toast.LENGTH_SHORT);
+                toastView.setGravity(Gravity.CENTER, 0, 0);
+                toastView.show();
+                //Toast.makeText(this, "날짜입력을 다시하십시오",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
+        if ((carrier.getGroup_code() == null) && (carrier.getGroup_name() != null)) {     //임의 입력 단체의 경우
             group_name = carrier.getGroup_name();
         }
-        if((carrier.getGroup_code() != null) && (carrier.getGroup_name() != null)){     //리스트내 존재하는 단체의 경우
+        if ((carrier.getGroup_code() != null) && (carrier.getGroup_name() != null)) {     //리스트내 존재하는 단체의 경우
             group_name = carrier.getGroup_name();
             group_code = carrier.getGroup_code();
         }
@@ -383,7 +447,7 @@ public class Writing extends Activity implements View.OnClickListener {
             content = URLEncoder.encode(content, "UTF-8");
             kakao_nick = URLEncoder.encode(kakao_nick, "UTF-8");
             link = URLEncoder.encode(link, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -391,26 +455,34 @@ public class Writing extends Activity implements View.OnClickListener {
         carrier.setContent(content);
         carrier.setLink(link);
 
-        carrier.setPosting_date("150126");  //TODO 나중에 이 부분에 날짜를 넘겨 받아서 저장한다.
-        carrier.setStart_date("20150127");
-        carrier.setEnd_date("20150130");
+        if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getCategory() == 0)
+        {
+            Toast toastView =Toast.makeText(this, "글을 올바르게 작성하세요", Toast.LENGTH_SHORT);
+            toastView.setGravity(Gravity.CENTER,0,0);
+            toastView.show();
+        }
+        else {
 
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
-        upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                + "kakao_id=" + carrier.getId()
-                + "&kakao_nick=" + kakao_nick
-                + "&category=" + carrier.getCategory()
-                + "&group_code=" + group_code
-                + "&group_name=" + group_name
-                + "&title=" + carrier.getTitle()
-                + "&content=" + carrier.getContent()
-                + "&link=" + carrier.getLink()
-                + "&posting_date=" + carrier.getPosting_date()
-                + "&start_date=" + carrier.getStart_date()
-                + "&end_date=" + carrier.getEnd_date()
-                + "&has_pic=" + has_pic;
-        task = new PhpUpload();
-        task.execute(upload_url);
+            upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                    + "kakao_id=" + carrier.getId()
+                    + "&kakao_nick=" + kakao_nick
+                    + "&category=" + carrier.getCategory()
+                    + "&group_code=" + group_code
+                    + "&group_name=" + group_name
+                    + "&title=" + carrier.getTitle()
+                    + "&content=" + carrier.getContent()
+                    + "&link=" + carrier.getLink()
+                    + "&posting_date=" + carrier.getPosting_date()
+                    + "&start_date=" + carrier.getStart_date()
+                    + "&end_date=" + carrier.getEnd_date()
+                    + "&has_pic=" + has_pic;
+            task = new PhpUpload();
+            task.execute(upload_url);
+        }
+
+
+
 
 
     }
@@ -760,4 +832,90 @@ public class Writing extends Activity implements View.OnClickListener {
         }
     }
 
+    public int dayCal(Calendar startday, Calendar endday) {
+        Calendar startDay, endDay;
+        long sday,eday;
+
+        startDay = startday;
+        endDay=endday;
+
+        sday = startDay.getTimeInMillis()/86400000;
+        Log.d("시작일 계산",String.valueOf(sday));
+        eday = endDay.getTimeInMillis()/86400000;
+        Log.d("마감일 계산",String.valueOf(eday));
+
+        if(sday>eday)
+            return -1;
+        else
+            return 1;
+
+    } //날짜입력을 제대로 했나 안했나 확인하는 함수
+
+    public String convertDateToString(int year, int month, int day) {
+        String syear = String.valueOf(year);
+        String sday = String.valueOf(day);
+        String str=null;//월 반환을 위해
+        String sdate=null;
+        switch(month) {
+            case 0 :
+                str="01";
+                break;
+            case 1 :
+                str="02";
+                break;
+            case 2 :
+                str="03";
+                break;
+            case 3 :
+                str="04";
+                break;
+            case 4 :
+                str="05";
+                break;
+            case 5 :
+                str="06";
+                break;
+            case 6 :
+                str="07";
+                break;
+            case 7 :
+                str="08";
+                break;
+            case 8 :
+                str="09";
+                break;
+            case 9 :
+                str="10";
+                break;
+            case 10 :
+                str="11";
+                break;
+            case 11 :
+                str="12";
+                break;
+
+        }
+        switch(day) {
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+            case 5 :
+            case 6 :
+            case 7 :
+            case 8 :
+            case 9 :
+
+                String zero="0";
+                sday=zero.concat(sday);
+                Log.d("day",sday);
+                break;
+        }
+
+        sdate=syear.concat(str);
+        sdate=sdate.concat(sday);
+        Log.d("작성일",sdate);
+
+        return sdate;
+    }
 }
