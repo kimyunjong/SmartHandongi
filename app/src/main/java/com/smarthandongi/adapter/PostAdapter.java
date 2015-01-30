@@ -1,17 +1,29 @@
 package com.smarthandongi.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.smarthandongi.Carrier;
 import com.smarthandongi.R;
 import com.smarthandongi.database.PostDatabase;
 import com.smarthandongi.dday;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -34,10 +46,12 @@ public class PostAdapter extends BaseAdapter{
     int e_year;
     int e_month;
     int e_day;
+    private Carrier carrier;
 
-    public PostAdapter(Context context, List<PostDatabase> list){
+    public PostAdapter(Context context, List<PostDatabase> list, Carrier carrier){
         this.context=context;
         this.list=list;
+        this.carrier=carrier;
     }
     @Override
     public int getCount() {
@@ -75,15 +89,24 @@ public class PostAdapter extends BaseAdapter{
             holder.post_category = (ImageView)v.findViewById(R.id.post_category);
             holder.post_dday = (TextView)v.findViewById(R.id.post_dday);
             holder.post_group=(TextView)v.findViewById(R.id.post_group);
+            holder.like=(ImageButton)v.findViewById(R.id.like_button);
             v.setTag(holder);
         }
         else {
             holder = (ViewHolder)v.getTag();
         }
 
+        holder.like.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
+
+        holder.like.setFocusable(false);
+        holder.like.setBackgroundResource(getItem(position).getLike() == 0 ? R.drawable.not_like : R.drawable.like);
+        holder.like.setOnTouchListener(new LikeListener(carrier.getId(), getItem(position).getId(), holder.like, getItem(position)));
+
         holder.post_title.setText(getItem(position).getTitle()+ " ");
         holder.post_id.setText(getItem(position).getId()+ " ");
         holder.post_group.setText(getItem(position).getGroup()+" ");
+
+
 
         temp_date=getItem(position).getStart_date();
         s_date=Integer.parseInt(temp_date);
@@ -145,9 +168,100 @@ public class PostAdapter extends BaseAdapter{
         return v;
     }
 
+    //like list 에 관련된 것 !!
+    class LikeListener implements View.OnTouchListener {
+        private String kakao_id;
+
+        private int scrap_id;
+        private View view;
+        private PostDatabase database;
+
+        public LikeListener(String kakao_id, int scrap_id, View view, PostDatabase database){
+            this.scrap_id =scrap_id;
+            this.kakao_id= kakao_id;
+            this.view = view;
+            this.database = database;
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            if (event.getAction()==MotionEvent.ACTION_DOWN) {
+            }
+            else if (event.getAction()==MotionEvent.ACTION_UP) {
+                LikeTask like_task = new LikeTask(view, database);
+                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/like_upload.php?" + "scrap_id" + scrap_id + "&kakao_id=" + String.valueOf(kakao_id));
+
+            }
+            else if (event.getAction()==MotionEvent.ACTION_MOVE) {
+            }
+            return false;
+        }
+    }
+
+    class LikeTask extends AsyncTask {
+
+        private View view;
+        private PostDatabase database;
+        public LikeTask(View view, PostDatabase database) {
+            this.view = view;
+            this.database = database;
+        }
+
+        @Override
+        protected Object doInBackground(Object... params) {
+            // TODO Auto-generated method stub
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str="";
+
+            while (return_str.equalsIgnoreCase("")) {
+                try{
+                    URL data_url = new URL((String)params[0]);
+                    HttpURLConnection conn = (HttpURLConnection)data_url.openConnection();
+                    if(conn != null){
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                            for(;;){
+                                String line = br.readLine();
+                                if(line == null) break;
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                return_str = jsonHtml.toString();
+            }
+
+            return jsonHtml.toString();
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            try{
+                JSONObject root = new JSONObject((String)result);
+                JSONArray ja = root.getJSONArray("results");
+                JSONObject jo = ja.getJSONObject(0);
+                view.setBackgroundResource(jo.getInt("result") == 0 ? R.drawable.not_like : R.drawable.like);
+                database.setLike(jo.getInt("result"));
+            }
+            catch(JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     static class ViewHolder{
         TextView post_title, post_id, post_group, post_dday;
         ImageView post_category;
+        ImageButton like;
 
     }
 }

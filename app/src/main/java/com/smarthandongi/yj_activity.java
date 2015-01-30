@@ -571,7 +571,7 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
                 //filter_by_category();                         나중에 필터할때 손봐주기
                 filter_by_category();
                 filter_by_date();
-                adapter = new PostAdapter(yj_activity.this, board_list);
+                adapter = new PostAdapter(yj_activity.this, board_list,carrier);
                 adapter2= new Post2Adapter(yj_activity.this, timeline_list );
                 Log.v("연결 시도", "연결되어라@*********************************************");
 
@@ -608,7 +608,7 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
             timeline_list.add(db);
         }
 
-        adapter = new PostAdapter(yj_activity.this, board_list);
+        adapter = new PostAdapter(yj_activity.this, board_list,carrier);
         board_listview.setAdapter(adapter);
 
     }

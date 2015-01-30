@@ -35,6 +35,7 @@ public class PostDatabase implements Serializable{
     private String has_pic;
     private int dday;
     private boolean first_day=false;
+    private int like=0;
 
     public int getId(){return  id;}
     public String getKakao_id(){return kakao_id;}
@@ -49,6 +50,9 @@ public class PostDatabase implements Serializable{
     public String getHas_pic(){return has_pic;}
     public void setFirst_day_T(){this.first_day=true;}
     public void setFirst_day_F(){this.first_day=false;}
+    public int getLike(){return this.like;}
+    public void setLike(int like){this.like=like;}
+
 
     public boolean getFirst_day(){return first_day;}
      public void setDday(int dday){this.dday=dday;}

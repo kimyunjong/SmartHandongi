@@ -44,6 +44,14 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         />
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/like_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignTop="@+id/dday"/>
 
 
 
