@@ -94,7 +94,7 @@ public class PostAdapter extends BaseAdapter{
         s_month=s_date/100;
         s_date=s_date-s_month*100;
         s_day=s_date;
-        System.out.println(s_year+"년"+s_month+"월"+s_day+"일"+"확인하려는 것 음수인지 아닌지");
+
 
         temp_date_e=getItem(position).getEnd_date();
         e_date=Integer.parseInt(temp_date_e);

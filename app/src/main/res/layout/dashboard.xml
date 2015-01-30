@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"  tools:context=".MainActivity"
-    android:background="#fffaff5e">
+    android:background="#ffd3eaff">
 //상단바
     <LinearLayout
     android:layout_width="match_parent"
@@ -91,7 +91,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/list"
-    android:layout_below="@+id/upper_bar">
+    android:layout_below="@+id/upper_bar"
+        android:scrollbars="none"
+        >
 
     </ListView>
 
@@ -117,7 +119,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/list2"
-        android:layout_below="@+id/list2_upperbar">
+        android:layout_below="@+id/list2_upperbar"
+        android:dividerHeight="0dp"
+        android:divider="#ffffff"
+        android:scrollbars="none">
 
     </ListView>
     </RelativeLayout>

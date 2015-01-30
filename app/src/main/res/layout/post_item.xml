@@ -18,6 +18,7 @@
         android:id="@+id/post_dday"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp"
         />
     <TextView

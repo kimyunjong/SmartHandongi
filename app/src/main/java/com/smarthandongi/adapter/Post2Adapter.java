@@ -59,9 +59,11 @@ public class Post2Adapter extends BaseAdapter{
             holder = new ViewHolder();
 
             holder.post_title = (TextView)v.findViewById(R.id.title);
-            holder.post_category = (ImageView)v.findViewById(R.id.post_category);
+            holder.first_date=(TextView)v.findViewById(R.id.first_date);
             holder.post_group=(TextView)v.findViewById(R.id.group);
+            holder.left_bar=(ImageView)v.findViewById(R.id.left_bar);
             v.setTag(holder);
+
         }
         else {
             holder = (ViewHolder)v.getTag();
@@ -72,28 +74,40 @@ public class Post2Adapter extends BaseAdapter{
 
 
         //나중에 이미지 추가되면 이미지 넣기
-        if(getItem(position).getCategory()=="1")
-        {holder.post_category.setImageResource(R.drawable.notice_btn);}
-        else if(getItem(position).getCategory()=="2")
-        {   holder.post_category.setImageResource(R.drawable.notice_btn);}
+        if(getItem(position).getFirst_day())
+        {   holder.left_bar.setImageResource(R.drawable.first_event);
+            if(getItem(position).getDday()==0)
+                {holder.first_date.setText("오늘");}
+            else if(getItem(position).getDday()==-1)
+                {
+                    holder.first_date.setText("내일");
+                 }
+        else{
+                 int temp=Integer.parseInt(getItem(position).getStart_date());
+                 int s_year;
+                 int s_month;
+                 int s_day;
+                 s_year=temp/10000;
+                 temp=temp-(s_year*10000);
+                 s_month=temp/100;
+                 temp=temp-s_month*100;
+                 s_day=temp;
+                holder.first_date.setText(String.valueOf(s_month)+"월 "+String.valueOf(s_day)+"일");
+             }
+        }
 
-        else if(getItem(position).getCategory()=="3")
-        { holder.post_category.setImageResource(R.drawable.notice_btn);}
-
-        else if(getItem(position).getCategory()=="4")
-        { holder.post_category.setImageResource(R.drawable.notice_btn);}
-
-        else if(getItem(position).getCategory()=="5")
-        { holder.post_category.setImageResource(R.drawable.notice_btn);}
-
+        else{
+            holder.left_bar.setImageResource(R.drawable.non_first_event);
+            holder.first_date.setText("  ");
+        }
 
 
         return v;
     }
 
     static class ViewHolder{
-        TextView post_title, post_id, post_group, post_dday;
-        ImageView post_category;
+        TextView post_title, post_group,first_date;
+        ImageView left_bar;
 
     }
 }
