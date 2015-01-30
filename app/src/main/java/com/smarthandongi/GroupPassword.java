@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -89,5 +90,29 @@ public class GroupPassword extends Activity {
         }
 
     }
+
+    public void onBackPressed() {
+        carrier.setGroup_name(null);
+        carrier.setGroup_code(null);
+        carrier.setGroup_pw(null);
+        Intent intent = new Intent(GroupPassword.this,GroupSearch.class).putExtra("carrier",carrier);
+        startActivity(intent);
+        finish();
+    }
+    /*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        super.onKeyDown(keyCode, event);
+        if(event.getAction() == KeyEvent.KEYCODE_BACK) {
+            carrier.setGroup_name(null);
+            carrier.setGroup_code(null);
+            carrier.setGroup_pw(null);
+            Intent intent = new Intent(GroupPassword.this,GroupSearch.class).putExtra("carrier",carrier);
+            startActivity(intent);
+            finish();
+        }
+        return false;
+    }
+    */
 
 }
