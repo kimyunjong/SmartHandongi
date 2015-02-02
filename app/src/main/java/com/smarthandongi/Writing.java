@@ -19,9 +19,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -160,8 +160,6 @@ public class Writing extends Activity implements View.OnClickListener {
 
         big_category_btn = (Button)findViewById(R.id.big_category_btn);
         big_category_btn.setOnClickListener(this);
-
-        registerForContextMenu(big_category_btn);
 
         //Category Buttons
 //        writing_notice_btn  = (Button) findViewById(R.id.writing_notice_btn);
@@ -334,21 +332,34 @@ public class Writing extends Activity implements View.OnClickListener {
 
                 break;
             }
+            case R.id.big_category_btn : {
+
+            }
         }
     }
 
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuinfo){
-        if(v.getId() == R.id.big_category_btn){
-            getMenuInflater().inflate(R.menu.big_category_menu, menu);
-        }
-        else {
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
 
-            menu.setHeaderTitle("대분류");
-            menu.add(Menu.NONE, 1, Menu.NONE, "음");
-            menu.add(Menu.NONE, 1, Menu.NONE, "음");
-        }
+            MenuItem item = menu.add(0,1,0,"짜장");
+            item.setIcon(R.drawable.ic_launcher);
+            item.setAlphabeticShortcut('a');
 
-        super.onCreateContextMenu(menu, v, menuinfo);
+            menu.add(0,2,0,"짬뽕").setIcon(R.drawable.ic_launcher);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case 1:
+                Toast.makeText(this, "짜장은 달콤해", Toast.LENGTH_SHORT).show();
+                return true;
+            case 2:
+                Toast.makeText(this, "짬뽕은 매워", Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return false;
     }
 
     public void onBackPressed(){
@@ -475,6 +486,10 @@ public class Writing extends Activity implements View.OnClickListener {
         carrier.setContent(content);
         carrier.setLink(link);
 
+
+        carrier.setCategory(1);     /////////////////////////
+
+
         if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getCategory() == 0)
         {
             Toast toastView =Toast.makeText(this, "글을 올바르게 작성하세요", Toast.LENGTH_SHORT);
@@ -489,6 +504,8 @@ public class Writing extends Activity implements View.OnClickListener {
                     .setPositiveButton("확인",new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+
                             carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
                                     + "kakao_id=" + carrier.getId()
                                     + "&kakao_nick=" + carrier.getNickname()
