@@ -78,7 +78,7 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
 
     public void phpCreate() {
         postDatabasePhp = new PostDatabasePhp(post_list, this);
-        postDatabasePhp.execute("http://hungry.portfolio1000.com/smarthandongi/posting_php.php/");
+        postDatabasePhp.execute("http://hungry.portfolio1000.com/smarthandongi/posting_php.php?kakao_id=995977");
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 
@@ -564,9 +564,13 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
                     JSONObject jo = ja.getJSONObject(i);
                     post_list.add(new PostDatabase(
                             jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("category"), jo.getString("group"),
-                            jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic")
+                            jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
                     ));
+
+                    System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
                 }
+
+
                 //필터 카테고리 호출, 넣어준다.
                 //filter_by_category();                         나중에 필터할때 손봐주기
                 filter_by_category();
