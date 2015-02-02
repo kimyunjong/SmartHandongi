@@ -84,21 +84,22 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
 
         switch (v.getId()){
             case R.id.yjbtn:{
-
-
                 Intent intent=new Intent(MainActivity2.this,yj_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
                 finish();
+                break;
             }
             case R.id.yybtn:{
                 Intent intent=new Intent(MainActivity2.this,yy_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
                 finish();
+                break;
             }
             case R.id.dsbtn:{
                 Intent intent=new Intent(MainActivity2.this,ds_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
                 finish();
+                break;
 
             }
         }
