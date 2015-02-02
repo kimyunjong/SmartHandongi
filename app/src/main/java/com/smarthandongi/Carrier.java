@@ -27,7 +27,12 @@ public class Carrier implements Serializable {
 
     private String Group_pw = null;
     private String upload_url=null;
+    private int fromWriting=0;
 
+
+    public void setFromWriting(int fromWriting) {this.fromWriting=fromWriting;}
+
+    public int getFromWriting() {return fromWriting;}
 
     public void setUpload_url(String url) {upload_url=url;}
 

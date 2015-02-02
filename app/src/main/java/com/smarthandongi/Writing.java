@@ -17,10 +17,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -44,7 +45,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -77,6 +77,7 @@ public class Writing extends Activity implements View.OnClickListener {
     //Category Buttons
     Button writing_notice_btn, writing_outer_btn, writing_seminar_btn, writing_recruit_btn, writing_agora_btn;
     Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
+    Button big_category_btn;
 
     EditText writing_title, writing_content, writing_link_text;
     RelativeLayout entire_layout;
@@ -157,18 +158,23 @@ public class Writing extends Activity implements View.OnClickListener {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        //Category Buttons
-        writing_notice_btn  = (Button) findViewById(R.id.writing_notice_btn);
-        writing_outer_btn   = (Button) findViewById(R.id.writing_outer_btn);
-        writing_seminar_btn = (Button) findViewById(R.id.writing_seminar_btn);
-        writing_recruit_btn = (Button) findViewById(R.id.writing_recruit_btn);
-        writing_agora_btn   = (Button) findViewById(R.id.writing_agora_btn);
+        big_category_btn = (Button)findViewById(R.id.big_category_btn);
+        big_category_btn.setOnClickListener(this);
 
-        writing_notice_btn.setOnClickListener(this);
-        writing_outer_btn.setOnClickListener(this);
-        writing_seminar_btn.setOnClickListener(this);
-        writing_recruit_btn.setOnClickListener(this);
-        writing_agora_btn.setOnClickListener(this);
+        registerForContextMenu(big_category_btn);
+
+        //Category Buttons
+//        writing_notice_btn  = (Button) findViewById(R.id.writing_notice_btn);
+//        writing_outer_btn   = (Button) findViewById(R.id.writing_outer_btn);
+//        writing_seminar_btn = (Button) findViewById(R.id.writing_seminar_btn);
+//        writing_recruit_btn = (Button) findViewById(R.id.writing_recruit_btn);
+//        writing_agora_btn   = (Button) findViewById(R.id.writing_agora_btn);
+
+//        writing_notice_btn.setOnClickListener(this);
+//        writing_outer_btn.setOnClickListener(this);
+//        writing_seminar_btn.setOnClickListener(this);
+//        writing_recruit_btn.setOnClickListener(this);
+//        writing_agora_btn.setOnClickListener(this);
 
         //Category buttons done
         writing_title =     (EditText)findViewById(R.id.writing_title);
@@ -222,54 +228,54 @@ public class Writing extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()){
             //Category buttons
-            case R.id.writing_notice_btn:{                //카테고리를 0으로 시작해서 처음에는 아무것도 선택되지 않은 상태에서 확인을 누를 시 완료하지 않았다는 경고메시지가 뜸
-                //카테고리 번호 지정
-                carrier.setCategory(1);
-                //배경 초기화
-                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn_on);
-                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
-                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
-                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
-                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
-
-                break;
-            }
-            case R.id.writing_outer_btn:{
-                carrier.setCategory(2);
-                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
-                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn_on);
-                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
-                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
-                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
-                break;
-            }
-            case R.id.writing_seminar_btn:{
-                carrier.setCategory(3);
-                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
-                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
-                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn_on);
-                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
-                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
-                break;
-            }
-            case R.id.writing_recruit_btn:{
-                carrier.setCategory(4);
-                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
-                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
-                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
-                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn_on);
-                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
-                break;
-            }
-            case R.id.writing_agora_btn:{
-                carrier.setCategory(5);
-                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
-                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
-                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
-                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
-                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn_on);
-                break;
-            }
+//            case R.id.writing_notice_btn:{                //카테고리를 0으로 시작해서 처음에는 아무것도 선택되지 않은 상태에서 확인을 누를 시 완료하지 않았다는 경고메시지가 뜸
+//                //카테고리 번호 지정
+//                carrier.setCategory(1);
+//                //배경 초기화
+//                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn_on);
+//                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
+//                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
+//                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
+//                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
+//
+//                break;
+//            }
+//            case R.id.writing_outer_btn:{
+//                carrier.setCategory(2);
+//                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
+//                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn_on);
+//                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
+//                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
+//                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
+//                break;
+//            }
+//            case R.id.writing_seminar_btn:{
+//                carrier.setCategory(3);
+//                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
+//                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
+//                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn_on);
+//                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
+//                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
+//                break;
+//            }
+//            case R.id.writing_recruit_btn:{
+//                carrier.setCategory(4);
+//                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
+//                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
+//                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
+//                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn_on);
+//                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn);
+//                break;
+//            }
+//            case R.id.writing_agora_btn:{
+//                carrier.setCategory(5);
+//                writing_notice_btn.setBackgroundResource(R.drawable.notice_btn);
+//                writing_outer_btn.setBackgroundResource(R.drawable.outer_btn);
+//                writing_seminar_btn.setBackgroundResource(R.drawable.seminar_btn);
+//                writing_recruit_btn.setBackgroundResource(R.drawable.recruit_btn);
+//                writing_agora_btn.setBackgroundResource(R.drawable.agora_btn_on);
+//                break;
+//            }
             //Category buttons done
             case R.id.writing_confirm_btn:{
                 phpCreate();
@@ -328,10 +334,21 @@ public class Writing extends Activity implements View.OnClickListener {
 
                 break;
             }
-
-
-
         }
+    }
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuinfo){
+        if(v.getId() == R.id.big_category_btn){
+            getMenuInflater().inflate(R.menu.big_category_menu, menu);
+        }
+        else {
+
+            menu.setHeaderTitle("대분류");
+            menu.add(Menu.NONE, 1, Menu.NONE, "음");
+            menu.add(Menu.NONE, 1, Menu.NONE, "음");
+        }
+
+        super.onCreateContextMenu(menu, v, menuinfo);
     }
 
     public void onBackPressed(){
@@ -487,6 +504,7 @@ public class Writing extends Activity implements View.OnClickListener {
                                     + "&has_pic=" + has_pic);
                             task = new PhpUpload();
                             task.execute(carrier.getUpload_url());
+                            carrier.setFromWriting(1);
                             Intent intent = new Intent(Writing.this, PostDetail.class).putExtra("carrier", carrier);
                             startActivity(intent);
                             finish();
