@@ -11,8 +11,8 @@ public class Carrier implements Serializable {
     private String id = "000000";
 
     //youngmin variable begins
-    private String group_code = null;
-    private String group_name = null;
+    private String group_code = "";
+    private String group_name = "";
     private String title = null;
     private String content = null;
     private int category = 0;

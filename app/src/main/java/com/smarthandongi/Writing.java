@@ -448,12 +448,10 @@ public class Writing extends Activity implements View.OnClickListener {
             }
         }
 
-
-
-        if ((carrier.getGroup_code() == null) && (carrier.getGroup_name() != null)) {     //임의 입력 단체의 경우
+        if ((carrier.getGroup_code().compareTo("") == 0) && (carrier.getGroup_name().compareTo("") != 0)) {     //임의 입력 단체의 경우
             group_name = carrier.getGroup_name();
         }
-        if ((carrier.getGroup_code() != null) && (carrier.getGroup_name() != null)) {     //리스트내 존재하는 단체의 경우
+        if ((carrier.getGroup_code().compareTo("") != 0) && (carrier.getGroup_name().compareTo("") != 0)) {     //리스트내 존재하는 단체의 경우
             group_name = carrier.getGroup_name();
             group_code = carrier.getGroup_code();
         }
@@ -463,6 +461,7 @@ public class Writing extends Activity implements View.OnClickListener {
             content = URLEncoder.encode(content, "UTF-8");
             kakao_nick = URLEncoder.encode(kakao_nick, "UTF-8");
             link = URLEncoder.encode(link, "UTF-8");
+            group_name = URLEncoder.encode(group_name, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -470,7 +469,9 @@ public class Writing extends Activity implements View.OnClickListener {
         carrier.setTitle(title);
         carrier.setContent(content);
         carrier.setLink(link);
-
+        carrier.setGroup_name(group_name);
+        carrier.setGroup_code(group_code);
+        carrier.setNickname(kakao_nick);
 
         carrier.setCategory(1);     /////////////////////////
 
@@ -489,23 +490,6 @@ public class Writing extends Activity implements View.OnClickListener {
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-                            if ((carrier.getGroup_code() == null) && (carrier.getGroup_name() == null)) {
-                                carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                                        + "kakao_id=" + carrier.getId()
-                                        + "&kakao_nick=" + carrier.getNickname()
-                                        + "&category=" + carrier.getCategory()
-                                        + "&group_code=" + ""
-                                        + "&group_name=" + ""
-                                        + "&title=" + carrier.getTitle()
-                                        + "&content=" + carrier.getContent()
-                                        + "&link=" + carrier.getLink()
-                                        + "&posting_date=" + carrier.getPosting_date()
-                                        + "&start_date=" + carrier.getStart_date()
-                                        + "&end_date=" + carrier.getEnd_date()
-                                        + "&has_pic=" + has_pic);
-                            }
-                            else {
                                 carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
                                         + "kakao_id=" + carrier.getId()
                                         + "&kakao_nick=" + carrier.getNickname()
@@ -519,7 +503,7 @@ public class Writing extends Activity implements View.OnClickListener {
                                         + "&start_date=" + carrier.getStart_date()
                                         + "&end_date=" + carrier.getEnd_date()
                                         + "&has_pic=" + has_pic);
-                            }
+
                             task = new PhpUpload();
                             task.execute(carrier.getUpload_url());
                             carrier.setFromWriting(1);
