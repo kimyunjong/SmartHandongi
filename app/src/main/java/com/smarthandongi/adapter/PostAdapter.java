@@ -189,7 +189,7 @@ public class PostAdapter extends BaseAdapter{
             }
             else if (event.getAction()==MotionEvent.ACTION_UP) {
                 LikeTask like_task = new LikeTask(view, database);
-                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/scrap.php?" + "post_id" + scrap_id + "&kakao_id=" + String.valueOf(kakao_id));
+                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/scrap.php?post_id=" + scrap_id + "&kakao_id=" + String.valueOf(kakao_id));
 
             }
             else if (event.getAction()==MotionEvent.ACTION_MOVE) {
@@ -248,7 +248,7 @@ public class PostAdapter extends BaseAdapter{
                 JSONObject root = new JSONObject((String)result);
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
-                view.setBackgroundResource(jo.getInt("result") == 0 ? R.drawable.not_like : R.drawable.like);
+                view.setBackgroundResource(jo.getInt("result") == 0 ? R.drawable.like : R.drawable.not_like);
                 database.setLike(jo.getString("result"));
             }
             catch(JSONException e) {

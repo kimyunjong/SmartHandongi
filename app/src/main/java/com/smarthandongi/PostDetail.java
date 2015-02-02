@@ -2,6 +2,7 @@ package com.smarthandongi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,8 +21,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -42,8 +47,10 @@ public class PostDetail extends Activity{
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
 
     private int posting_id;
-
-
+   //수영 추가
+    String myResult;
+    ProgressDialog loagindDialog;
+    //수영 추가 끝
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -81,8 +88,8 @@ public class PostDetail extends Activity{
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-
+                        SendPush sendPush = new SendPush();
+                            sendPush.execute();
                         }
                     })
                     .setNegativeButton("취소", null)
@@ -180,4 +187,62 @@ public class PostDetail extends Activity{
             }
         }
     }
+        //수영 추가
+    private class SendPush extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loagindDialog = ProgressDialog.show(PostDetail.this, "키 등록 중입니다..",
+                    "Please wait..", true, false);
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            HttpPostData(posting_id);
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            loagindDialog.dismiss();
+        }
+    }
+    public void HttpPostData(int posting_id ) {
+        try {
+            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id);       // URL 설정
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
+            //--------------------------
+            //   전송 모드 설정 - 기본적인 설정이다
+            //--------------------------
+            http.setDefaultUseCaches(false);
+            http.setDoInput(true);
+            http.setDoOutput(true);
+            http.setRequestMethod("POST");
+
+            http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
+            StringBuffer buffer = new StringBuffer();
+            buffer.append("posting_id").append("=").append(posting_id);                 // php 변수에 값 대입
+
+
+            OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "EUC-KR");
+            PrintWriter writer = new PrintWriter(outStream);
+            writer.write(buffer.toString());
+            writer.flush();
+            InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "EUC-KR");
+            BufferedReader reader = new BufferedReader(tmp);
+            StringBuilder builder = new StringBuilder();
+            String str;
+            while ((str = reader.readLine()) != null) {
+                builder.append(str + "\n");
+            }
+
+            myResult = builder.toString();
+
+        } catch (MalformedURLException e) {
+            //
+        } catch (IOException e) {
+            //
+        } // try
+    } // HttpPostData
+
 }

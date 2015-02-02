@@ -23,7 +23,7 @@ public class GcmIntentService extends GCMBaseIntentService {
     static String re_message = null;
 
     private static void generateNotifiaction(Context context, String message){
-        int icon =R.drawable.lee;
+        int icon =R.drawable.recruit;
         long when = System.currentTimeMillis();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -41,7 +41,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         notificationManager.notify(0,notification);
 
         // Play default notification sound
-        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal);
+        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal1);
         //notification.defaults |= Notification.DEFAULT_SOUND;
 
         // Vibrate if vibrate is enabled
