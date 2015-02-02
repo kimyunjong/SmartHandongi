@@ -203,7 +203,8 @@ public class PostDetail extends Activity{
     }
     public void HttpPostData(int posting_id ) {
         try {
-            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id);       // URL 설정
+            String posting_id1 = String.valueOf(posting_id);
+            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
             HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
             //--------------------------
             //   전송 모드 설정 - 기본적인 설정이다
