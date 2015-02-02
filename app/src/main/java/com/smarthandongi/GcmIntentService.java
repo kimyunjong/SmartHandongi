@@ -41,7 +41,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         notificationManager.notify(0,notification);
 
         // Play default notification sound
-        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal1);
+        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal);
         //notification.defaults |= Notification.DEFAULT_SOUND;
 
         // Vibrate if vibrate is enabled

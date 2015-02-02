@@ -4,11 +4,44 @@
     <string name="app_name">SmartHandongi</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string-array name="temp">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
+    <string-array name="big_category">
+        <item>일반공지</item>
+        <item>대외활동</item>
+        <item>공연/세미나</item>
+        <item>리쿠르팅</item>
+        <item>붙어라</item>
     </string-array>
 
+    <string-array name="small_category_outer">
+        <item>공모전</item>
+        <item>인턴</item>
+        <item>봉사활동</item>
+    </string-array>
+
+    <string-array name="small_category_seminar">
+        <item>공연</item>
+        <item>세미나</item>
+        <item>발표</item>
+    </string-array>
+
+    <string-array name="small_category_recruiting">
+        <item>학술</item>
+        <item>운동</item>
+        <item>공연</item>
+        <item>신앙</item>
+        <item>전시</item>
+        <item>봉사</item>
+    </string-array>
+
+    <string-array name="small_category_together">
+        <item>운동경기</item>
+        <item>게임</item>
+        <item>야식</item>
+        <item>공동구매</item>
+        <item>카풀</item>
+        <item>스터디</item>
+        <item>사고팔기</item>
+        <item>분실물</item>
+        <item>구인/구직</item>
+    </string-array>
 </resources>

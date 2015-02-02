@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.smarthandongi.adapter.Post2Adapter;
-import com.smarthandongi.adapter.PostAdapter;
 import com.smarthandongi.database.PostDatabase;
 
 import org.json.JSONArray;
@@ -57,10 +55,6 @@ public class PostDetail extends Activity{
         Intent intent=getIntent();
         carrier=(Carrier)intent.getSerializableExtra("carrier");
         post=(PostDatabase)intent.getSerializableExtra("post");
-
-        if(carrier.getId().compareTo(post.getKakao_id())==0) {
-
-        }
 
         setContentView(R.layout.post_detail);
 

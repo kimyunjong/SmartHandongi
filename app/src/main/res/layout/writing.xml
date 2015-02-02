@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/writing_small_category"
+            android:id="@+id/small_category"
             android:layout_below="@+id/writing_big_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,20 +86,19 @@
                 android:text="소분류"
                 android:textSize="15dp"
                 android:gravity="center"/>
-            <EditText
-                android:id="@+id/writing_select_small"
+            <Button
+                android:id="@+id/small_category_btn"
                 android:layout_marginLeft="10dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="제목을 입력하세요"
                 android:textSize="13dp"
                 android:gravity="center|left"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/title"
-            android:layout_below="@+id/writing_small_category"
+            android:layout_below="@+id/small_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
