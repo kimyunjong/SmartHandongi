@@ -99,7 +99,7 @@ public class PostAdapter extends BaseAdapter{
         holder.like.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
 
         holder.like.setFocusable(false);
-        holder.like.setBackgroundResource(getItem(position).getLike() == 0 ? R.drawable.not_like : R.drawable.like);
+        holder.like.setBackgroundResource(getItem(position).getLike() == "1" ? R.drawable.not_like : R.drawable.like);
         holder.like.setOnTouchListener(new LikeListener(carrier.getId(), getItem(position).getId(), holder.like, getItem(position)));
 
         holder.post_title.setText(getItem(position).getTitle()+ " ");
@@ -189,7 +189,7 @@ public class PostAdapter extends BaseAdapter{
             }
             else if (event.getAction()==MotionEvent.ACTION_UP) {
                 LikeTask like_task = new LikeTask(view, database);
-                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/like_upload.php?" + "scrap_id" + scrap_id + "&kakao_id=" + String.valueOf(kakao_id));
+                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/scrap.php?" + "post_id" + scrap_id + "&kakao_id=" + String.valueOf(kakao_id));
 
             }
             else if (event.getAction()==MotionEvent.ACTION_MOVE) {
@@ -249,7 +249,7 @@ public class PostAdapter extends BaseAdapter{
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
                 view.setBackgroundResource(jo.getInt("result") == 0 ? R.drawable.not_like : R.drawable.like);
-                database.setLike(jo.getInt("result"));
+                database.setLike(jo.getString("result"));
             }
             catch(JSONException e) {
                 e.printStackTrace();
