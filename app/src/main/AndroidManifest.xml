@@ -72,6 +72,8 @@
             />
         <activity android:name=".GroupPassword"
             />
+        <activity android:name=".Review"
+            />
 
 
         <!-- 영민 유진 엑티비티 끝-->
@@ -100,6 +102,7 @@
         <activity
             android:name="com.kakao.LoginActivity"
             android:configChanges="orientation|screenSize"/>
+
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="ddeea2953497222f88542be190749e85"/>
     </application>

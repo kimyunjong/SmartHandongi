@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 /**
  * Created by Joel on 2015-01-25.
  */
-public class PostDetail extends Activity{
+public class PostDetail extends Activity implements View.OnClickListener{
 
     private Carrier carrier;
     private PostDatabase post;
@@ -40,7 +41,7 @@ public class PostDetail extends Activity{
                      type;
 
     private ImageView background,post_img;
-    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn;
+    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
 
@@ -61,6 +62,16 @@ public class PostDetail extends Activity{
         //버튼
         writer_btn=(Button)findViewById(R.id.writer_name);
         writer_btn.setShadowLayer(0,0,0,0);
+        scrap_btn=(Button)findViewById(R.id.pos_scrap_btn);
+        report_btn=(Button)findViewById(R.id.pos_report_btn);
+        edit_btn=(Button)findViewById(R.id.pos_edit_btn);
+        del_btn=(Button)findViewById(R.id.pos_del_btn);
+        review_show_btn=(Button)findViewById(R.id.pos_review_show_btn);
+
+        review_show_btn.setOnClickListener(this);
+
+
+
 
         //텍스트뷰
         start_day=(TextView)findViewById(R.id.pos_start_day);
@@ -91,6 +102,12 @@ public class PostDetail extends Activity{
         }
         else
         {
+            if(carrier.getId().compareTo(post.getKakao_id())==0) {
+                scrap_btn.setVisibility(View.INVISIBLE);
+                report_btn.setVisibility(View.INVISIBLE);
+                edit_btn.setVisibility(View.VISIBLE);
+                del_btn.setVisibility(View.VISIBLE);
+            }
             start_day.setText(post.getStart_date());
             end_day.setText(post.getEnd_date());
             //link.setText(post.getLink());
@@ -101,6 +118,16 @@ public class PostDetail extends Activity{
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.pos_review_show_btn :
+                Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier",carrier);
+                startActivity(intent);
+                break;
+
+        }
+    }
     public void phpCreate() {
         postdbphp = new PostDB_Php(post_list,this);
         postdbphp.execute("http://hungry.portfolio1000.com/smarthandongi/posting_php.php?kakao_id=995977");
@@ -174,6 +201,11 @@ public class PostDetail extends Activity{
                 post_day.setText(ja.getJSONObject(0).getString("posting_date"));
                 title.setText(ja.getJSONObject(0).getString("title"));
                 content.setText(ja.getJSONObject(0).getString("content"));
+                scrap_btn.setVisibility(View.INVISIBLE);
+                report_btn.setVisibility(View.INVISIBLE);
+                edit_btn.setVisibility(View.VISIBLE);
+                del_btn.setVisibility(View.VISIBLE);
+
             }
             catch (JSONException e)
             {
