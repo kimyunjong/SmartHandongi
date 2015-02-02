@@ -1,6 +1,8 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,6 +50,11 @@ public class PostDetail extends Activity{
         Intent intent=getIntent();
         carrier=(Carrier)intent.getSerializableExtra("carrier");
         post=(PostDatabase)intent.getSerializableExtra("post");
+
+        if(carrier.getId().compareTo(post.getKakao_id())==0) {
+
+        }
+
         setContentView(R.layout.post_detail);
 
         //버튼
@@ -67,13 +74,19 @@ public class PostDetail extends Activity{
 
         if(carrier.getFromWriting()==1) {
             phpCreate();
-            start_day.setText(carrier.getStart_date());
-            end_day.setText(carrier.getEnd_date());
-            link.setText(carrier.getLink());
-            //type.setText(carrier.getCategory());
-            post_day.setText(carrier.getPosting_date());
-            title.setText(carrier.getTitle());
-            content.setText(carrier.getContent());
+            new AlertDialog.Builder(this)
+                    .setTitle("푸시알람설정")
+                    .setMessage("바로 푸시를 보내시겠습니까?")
+                    .setIcon(R.drawable.handongi)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+
+                        }
+                    })
+                    .setNegativeButton("취소", null)
+                    .show();
         }
         else
         {
@@ -135,7 +148,7 @@ public class PostDetail extends Activity{
         }
 
         protected void onPostExecute(String str) {
-            int last;
+
             try {
                 JSONObject root = new JSONObject(str);
                 JSONArray ja = root.getJSONArray("results");
@@ -153,6 +166,13 @@ public class PostDetail extends Activity{
                 }
                 posting_id=ja.getJSONObject(0).getInt("id");
                 System.out.println(posting_id);
+                start_day.setText(ja.getJSONObject(0).getString("start_date"));
+                end_day.setText(ja.getJSONObject(0).getString("end_date"));
+                link.setText(ja.getJSONObject(0).getString("link"));
+                //type.setText(carrier.getCategory());
+                post_day.setText(ja.getJSONObject(0).getString("posting_date"));
+                title.setText(ja.getJSONObject(0).getString("title"));
+                content.setText(ja.getJSONObject(0).getString("content"));
             }
             catch (JSONException e)
             {
