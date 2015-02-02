@@ -76,6 +76,11 @@
 
 
         <!-- 영민 유진 엑티비티 끝-->
+
+        <!--윤종이의 액티피티 시작-->
+        <activity android:name=".PostDetail"
+            />
+        <!--윤종이의 액티피티 끝-->
         <!-- 수영 다은 gcm -->
         <receiver
             android:name=".GcmBroadcastReceiver"

@@ -1,9 +1,11 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -411,8 +413,9 @@ public class Writing extends Activity implements View.OnClickListener {
 
         int possible; // 날짜계산한게 맞나 안맞나 체크
 
-        String title, content, upload_url, kakao_nick, link;
+        String title, content,kakao_nick, link;
         String group_name = "", group_code = "";
+
 
         title = writing_title.getText().toString();
         Log.d("타이틀",title);
@@ -462,23 +465,40 @@ public class Writing extends Activity implements View.OnClickListener {
             toastView.show();
         }
         else {
+            new AlertDialog.Builder(this)
+                    .setTitle("게시물 등록")
+                    .setMessage("글을 등록하시겠습니까?")
+                    .setIcon(R.drawable.handongi)
+                    .setPositiveButton("확인",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                                    + "kakao_id=" + carrier.getId()
+                                    + "&kakao_nick=" + carrier.getNickname()
+                                    + "&category=" + carrier.getCategory()
+                                    + "&group_code=" + carrier.getGroup_code()
+                                    + "&group_name=" + carrier.getGroup_name()
+                                    + "&title=" + carrier.getTitle()
+                                    + "&content=" + carrier.getContent()
+                                    + "&link=" + carrier.getLink()
+                                    + "&posting_date=" + carrier.getPosting_date()
+                                    + "&start_date=" + carrier.getStart_date()
+                                    + "&end_date=" + carrier.getEnd_date()
+                                    + "&has_pic=" + has_pic);
+                            task = new PhpUpload();
+                            task.execute(carrier.getUpload_url());
+                            Intent intent = new Intent(Writing.this, PostDetail.class).putExtra("carrier", carrier);
+                            startActivity(intent);
+                            finish();
 
+
+                        }
+                    })
+                    .setNegativeButton("취소",null)
+                    .show();
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
-            upload_url = "http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                    + "kakao_id=" + carrier.getId()
-                    + "&kakao_nick=" + kakao_nick
-                    + "&category=" + carrier.getCategory()
-                    + "&group_code=" + group_code
-                    + "&group_name=" + group_name
-                    + "&title=" + carrier.getTitle()
-                    + "&content=" + carrier.getContent()
-                    + "&link=" + carrier.getLink()
-                    + "&posting_date=" + carrier.getPosting_date()
-                    + "&start_date=" + carrier.getStart_date()
-                    + "&end_date=" + carrier.getEnd_date()
-                    + "&has_pic=" + has_pic;
-            task = new PhpUpload();
-            task.execute(upload_url);
+
+
         }
 
 

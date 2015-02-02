@@ -26,8 +26,12 @@ public class Carrier implements Serializable {
     //youngmin variable ends
 
     private String Group_pw = null;
+    private String upload_url=null;
 
 
+    public void setUpload_url(String url) {upload_url=url;}
+
+    public String getUpload_url() {return upload_url;}
 
     public boolean isLogged_in() { return logged_in; }
 
