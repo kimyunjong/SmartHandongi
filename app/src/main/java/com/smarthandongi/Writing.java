@@ -105,11 +105,11 @@ public class Writing extends Activity implements View.OnClickListener {
 
 
             startDay = Calendar.getInstance();
-            startDay.set(year,monthOfYear,dayOfMonth);
+            startDay.set(year, monthOfYear, dayOfMonth);
             endDay=Calendar.getInstance();
             endDay.set(year, monthOfYear, dayOfMonth); //default로 같은날 설정
-            Log.d("시작일년도",String.valueOf(year));
-            Log.d("시작일먼스",String.valueOf(monthOfYear));
+            Log.d("시작일년도", String.valueOf(year));
+            Log.d("시작일먼스", String.valueOf(monthOfYear));
             Log.d("시작일데이",String.valueOf(dayOfMonth));
             System.out.println(dayOfMonth);
             sdate=convertDateToString(year,monthOfYear,dayOfMonth);
@@ -486,24 +486,40 @@ public class Writing extends Activity implements View.OnClickListener {
                     .setTitle("게시물 등록")
                     .setMessage("글을 등록하시겠습니까?")
                     .setIcon(R.drawable.handongi)
-                    .setPositiveButton("확인",new DialogInterface.OnClickListener() {
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-
-                            carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                                    + "kakao_id=" + carrier.getId()
-                                    + "&kakao_nick=" + carrier.getNickname()
-                                    + "&category=" + carrier.getCategory()
-                                    + "&group_code=" + carrier.getGroup_code()
-                                    + "&group_name=" + carrier.getGroup_name()
-                                    + "&title=" + carrier.getTitle()
-                                    + "&content=" + carrier.getContent()
-                                    + "&link=" + carrier.getLink()
-                                    + "&posting_date=" + carrier.getPosting_date()
-                                    + "&start_date=" + carrier.getStart_date()
-                                    + "&end_date=" + carrier.getEnd_date()
-                                    + "&has_pic=" + has_pic);
+                            if ((carrier.getGroup_code() == null) && (carrier.getGroup_name() == null)) {
+                                carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                                        + "kakao_id=" + carrier.getId()
+                                        + "&kakao_nick=" + carrier.getNickname()
+                                        + "&category=" + carrier.getCategory()
+                                        + "&group_code=" + ""
+                                        + "&group_name=" + ""
+                                        + "&title=" + carrier.getTitle()
+                                        + "&content=" + carrier.getContent()
+                                        + "&link=" + carrier.getLink()
+                                        + "&posting_date=" + carrier.getPosting_date()
+                                        + "&start_date=" + carrier.getStart_date()
+                                        + "&end_date=" + carrier.getEnd_date()
+                                        + "&has_pic=" + has_pic);
+                            }
+                            else {
+                                carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                                        + "kakao_id=" + carrier.getId()
+                                        + "&kakao_nick=" + carrier.getNickname()
+                                        + "&category=" + carrier.getCategory()
+                                        + "&group_code=" + carrier.getGroup_code()
+                                        + "&group_name=" + carrier.getGroup_name()
+                                        + "&title=" + carrier.getTitle()
+                                        + "&content=" + carrier.getContent()
+                                        + "&link=" + carrier.getLink()
+                                        + "&posting_date=" + carrier.getPosting_date()
+                                        + "&start_date=" + carrier.getStart_date()
+                                        + "&end_date=" + carrier.getEnd_date()
+                                        + "&has_pic=" + has_pic);
+                            }
                             task = new PhpUpload();
                             task.execute(carrier.getUpload_url());
                             carrier.setFromWriting(1);
@@ -514,7 +530,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
                         }
                     })
-                    .setNegativeButton("취소",null)
+                    .setNegativeButton("취소", null)
                     .show();
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
 

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 /**
  * Created by Joel on 2015-01-21.
  */
-public class yj_activity extends Activity implements View.OnTouchListener, AdapterView.OnItemClickListener,AbsListView.OnScrollListener {
+public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener {
     Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn;
     ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img;
     ImageButton write_btn;
@@ -68,6 +68,7 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
     int timer = 1000;
     int count;
     int taskPosition = -1;
+    int boardOrNot=0; // 보드에서 클릭한건지 타임라인에서 클릭한건지 체크하기 위해서
 
     public void construction() {
         board_listview = (ListView) findViewById(R.id.list);
@@ -514,12 +515,18 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
 
         private yj_activity context;
         private ArrayList<PostDatabase> post_list;
-
+        private Activity activity;
 
         public PostDatabasePhp(ArrayList<PostDatabase> post_list, yj_activity context) {
             super();
             this.post_list = post_list;
             this.context = context;
+        }
+
+        public PostDatabasePhp(ArrayList<PostDatabase> post_list, Activity activity) {
+            super();
+            this.post_list = post_list;
+            this.activity=activity;
         }
 
         protected String doInBackground(String... urls) {
@@ -581,11 +588,11 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
 
                 board_listview.setAdapter(adapter);
                 board_listview.setOnScrollListener(context);
-                board_listview.setOnItemClickListener(context);
+                board_listview.setOnItemClickListener(boardItemClickListener);
 
                 timeline_listview.setAdapter(adapter2);
                 timeline_listview.setOnScrollListener(context);
-                timeline_listview.setOnItemClickListener(context);
+                timeline_listview.setOnItemClickListener(timelineItemClickListener);
 
             }
             catch (JSONException e)
@@ -768,17 +775,28 @@ public class yj_activity extends Activity implements View.OnTouchListener, Adapt
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-        // TODO Auto-generated method stub
 
-        Intent intent = new Intent(yj_activity.this, PostDetail.class);
-        intent.putExtra("carrier", carrier);
-        intent.putExtra("post", board_list.get(position));
-        startActivityForResult(intent, 0);
-        overridePendingTransition(0,0);
-    }
+    AdapterView.OnItemClickListener boardItemClickListener = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            Intent intent = new Intent(yj_activity.this, PostDetail.class);
+            intent.putExtra("carrier", carrier);
+            intent.putExtra("post", board_list.get(position));
+            startActivityForResult(intent, 0);
+            overridePendingTransition(0,0);
+        }
+    };
+
+    AdapterView.OnItemClickListener timelineItemClickListener = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            Intent intent = new Intent(yj_activity.this, PostDetail.class);
+            intent.putExtra("carrier", carrier);
+            intent.putExtra("post", timeline_list.get(position));
+            startActivityForResult(intent, 0);
+            overridePendingTransition(0,0);
+        }
+    };
 
 
 }
