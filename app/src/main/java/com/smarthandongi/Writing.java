@@ -20,8 +20,6 @@ import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -333,33 +331,20 @@ public class Writing extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.big_category_btn : {
-
+                new AlertDialog.Builder(this)
+                        .setTitle("대분류")
+                        .setItems(R.array.temp,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String[] temp = getResources().getStringArray(R.array.temp);
+                                        big_category_btn.setText("선택 = " + temp[which]);
+                                    }
+                                })
+                        .setNegativeButton("취소", null)
+                        .show();
+                break;
             }
         }
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu){
-        super.onCreateOptionsMenu(menu);
-
-            MenuItem item = menu.add(0,1,0,"짜장");
-            item.setIcon(R.drawable.ic_launcher);
-            item.setAlphabeticShortcut('a');
-
-            menu.add(0,2,0,"짬뽕").setIcon(R.drawable.ic_launcher);
-
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case 1:
-                Toast.makeText(this, "짜장은 달콤해", Toast.LENGTH_SHORT).show();
-                return true;
-            case 2:
-                Toast.makeText(this, "짬뽕은 매워", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return false;
     }
 
     public void onBackPressed(){
