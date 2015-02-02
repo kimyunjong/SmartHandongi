@@ -67,9 +67,6 @@
             android:label="@string/app_name"/>
         <activity android:name=".PushSetup"
             android:label="@string/app_name"/>
-        <activity android:name=".SendPushInfo"
-            android:label="@string/app_name"/>
-
 
         <activity android:name=".GroupSearch"
             />
