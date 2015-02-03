@@ -33,6 +33,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
     int scholarship_in, r_sports_in, r_perf_in, faith_in, display_in, r_service_in;
 
     Carrier carrier;
+    CheckBox outer_chk, together_chk, recruiting_chk, seminar_chk; //대분류    아래는 소분류
     CheckBox push_sports_chk, push_game_chk, push_nightfood_chk, push_gonggu_chk, push_carpool_chk, push_study_chk, push_trading_chk, push_lost_chk, push_recruiting_chk;
     CheckBox push_contest_chk, push_intern_chk, push_service_chk, push_perf_chk, push_seminar_chk, push_presentation_chk;
     CheckBox push_scholarship_chk, push_r_sports_chk, push_r_perf_chk, push_faith_chk, push_display_chk, push_r_service_chk;
@@ -54,6 +55,13 @@ public class PushSetup extends Activity implements View.OnClickListener {
         setContentView(R.layout.push_setup);
         carrier = (Carrier) getIntent().getSerializableExtra("carrier");
 
+        // 대분류 체크박스
+        together_chk = (CheckBox)findViewById(R.id.together_chk);
+        outer_chk = (CheckBox)findViewById(R.id.outer_chk);
+        recruiting_chk = (CheckBox)findViewById(R.id.recruiting_chk);
+        seminar_chk = (CheckBox)findViewById(R.id.seminar_chk);
+
+        // 소분류 체크박스
         push_sports_chk = (CheckBox) findViewById(R.id.push_sports_chk);
         push_game_chk = (CheckBox) findViewById(R.id.push_game_chk);
         push_nightfood_chk = (CheckBox) findViewById(R.id.push_nightfood_chk);
@@ -63,6 +71,26 @@ public class PushSetup extends Activity implements View.OnClickListener {
         push_trading_chk = (CheckBox) findViewById(R.id.push_trading_chk);
         push_lost_chk = (CheckBox) findViewById(R.id.push_lost_chk);
         push_recruiting_chk = (CheckBox) findViewById(R.id.push_recruiting_chk);
+
+        push_contest_chk = (CheckBox) findViewById(R.id.push_contest_chk);
+        push_intern_chk = (CheckBox) findViewById(R.id.push_intern_chk);
+        push_service_chk = (CheckBox) findViewById(R.id.push_service_chk);
+
+        push_perf_chk = (CheckBox) findViewById(R.id.push_perf_chk);
+        push_seminar_chk = (CheckBox) findViewById(R.id.push_seminar_chk);
+        push_presentation_chk = (CheckBox) findViewById(R.id.push_presentation_chk);
+
+        push_scholarship_chk = (CheckBox) findViewById(R.id.push_scholarship_chk);
+        push_r_sports_chk = (CheckBox) findViewById(R.id.push_r_sports_chk);
+        push_r_perf_chk = (CheckBox) findViewById(R.id.push_r_perf_chk);
+        push_faith_chk = (CheckBox) findViewById(R.id.push_faith_chk);
+        push_display_chk = (CheckBox) findViewById(R.id.push_display_chk);
+        push_r_service_chk = (CheckBox) findViewById(R.id.push_r_service_chk);
+
+        together_chk.setOnClickListener(this);
+        outer_chk.setOnClickListener(this);
+        seminar_chk.setOnClickListener(this);
+        recruiting_chk.setOnClickListener(this);
 
         push_sports_chk.setOnClickListener(this);
         push_game_chk.setOnClickListener(this);
@@ -74,28 +102,13 @@ public class PushSetup extends Activity implements View.OnClickListener {
         push_lost_chk.setOnClickListener(this);
         push_recruiting_chk.setOnClickListener(this);
 
-        push_contest_chk = (CheckBox) findViewById(R.id.push_contest_chk);
-        push_intern_chk = (CheckBox) findViewById(R.id.push_intern_chk);
-        push_service_chk = (CheckBox) findViewById(R.id.push_service_chk);
-
         push_contest_chk.setOnClickListener(this);
         push_intern_chk.setOnClickListener(this);
         push_service_chk.setOnClickListener(this);
 
-        push_perf_chk = (CheckBox) findViewById(R.id.push_perf_chk);
-        push_seminar_chk = (CheckBox) findViewById(R.id.push_seminar_chk);
-        push_presentation_chk = (CheckBox) findViewById(R.id.push_presentation_chk);
-
         push_perf_chk.setOnClickListener(this);
         push_seminar_chk.setOnClickListener(this);
         push_presentation_chk.setOnClickListener(this);
-
-        push_scholarship_chk = (CheckBox) findViewById(R.id.push_scholarship_chk);
-        push_r_sports_chk = (CheckBox) findViewById(R.id.push_r_sports_chk);
-        push_r_perf_chk = (CheckBox) findViewById(R.id.push_r_perf_chk);
-        push_faith_chk = (CheckBox) findViewById(R.id.push_faith_chk);
-        push_display_chk = (CheckBox) findViewById(R.id.push_display_chk);
-        push_r_service_chk = (CheckBox) findViewById(R.id.push_r_service_chk);
 
         push_scholarship_chk.setOnClickListener(this);
         push_r_sports_chk.setOnClickListener(this);
@@ -113,6 +126,126 @@ public class PushSetup extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.together_chk :{
+                if(sports == 0 || game == 0 || nightfood == 0 || gonggu == 0 || carpool == 0 || study == 0 || trading == 0 || lost == 0 || recruiting == 0) {
+                    together_chk.setChecked(true);
+                    sports = 1;
+                    game = 1;
+                    nightfood = 1;
+                    gonggu = 1;
+                    carpool = 1;
+                    study = 1;
+                    trading = 1;
+                    lost = 1;
+                    recruiting = 1;
+                    push_sports_chk.setChecked(true);
+                    push_game_chk.setChecked(true);
+                    push_nightfood_chk.setChecked(true);
+                    push_gonggu_chk.setChecked(true);
+                    push_carpool_chk.setChecked(true);
+                    push_study_chk.setChecked(true);
+                    push_trading_chk.setChecked(true);
+                    push_lost_chk.setChecked(true);
+                    push_recruiting_chk.setChecked(true);
+                }
+                else {
+                    together_chk.setChecked(false);
+                    sports = 0;
+                    game = 0;
+                    nightfood = 0;
+                    gonggu = 0;
+                    carpool = 0;
+                    study = 0;
+                    trading = 0;
+                    lost = 0;
+                    recruiting = 0;
+                    push_sports_chk.setChecked(false);
+                    push_game_chk.setChecked(false);
+                    push_nightfood_chk.setChecked(false);
+                    push_gonggu_chk.setChecked(false);
+                    push_carpool_chk.setChecked(false);
+                    push_study_chk.setChecked(false);
+                    push_trading_chk.setChecked(false);
+                    push_lost_chk.setChecked(false);
+                    push_recruiting_chk.setChecked(false);
+                }
+                break;
+            }
+            case R.id.outer_chk : {
+                if(contest == 0 || intern == 0 || service == 0){
+                    outer_chk.setChecked(true);
+                    contest = 1;
+                    intern = 1;
+                    service = 1;
+                    push_contest_chk.setChecked(true);
+                    push_intern_chk.setChecked(true);
+                    push_service_chk.setChecked(true);
+                }
+                else {
+                    outer_chk.setChecked(false);
+                    contest = 0;
+                    intern = 0;
+                    service = 0;
+                    push_contest_chk.setChecked(false);
+                    push_intern_chk.setChecked(false);
+                    push_service_chk.setChecked(false);
+                }
+                break;
+            }
+            case R.id.seminar_chk : {
+                if(perf == 0 || seminar == 0 || presentation == 0){
+                    seminar_chk.setChecked(true);
+                    perf = 1;
+                    seminar = 1;
+                    presentation = 1;
+                    push_perf_chk.setChecked(true);
+                    push_seminar_chk.setChecked(true);
+                    push_presentation_chk.setChecked(true);
+                }
+                else {
+                    seminar_chk.setChecked(false);
+                    perf = 0;
+                    seminar = 0;
+                    presentation = 0;
+                    push_perf_chk.setChecked(false);
+                    push_seminar_chk.setChecked(false);
+                    push_presentation_chk.setChecked(false);
+                }
+                break;
+            }
+            case R.id.recruiting_chk : {
+                if(scholarship == 0 || r_sports == 0 || r_perf == 0 || faith == 0 || display == 0 || r_service == 0){
+                    recruiting_chk.setChecked(true);
+                    scholarship = 1;
+                    r_sports = 1;
+                    r_perf = 1;
+                    faith = 1;
+                    display = 1;
+                    r_service = 1;
+                    push_scholarship_chk.setChecked(true);
+                    push_r_sports_chk.setChecked(true);
+                    push_r_perf_chk.setChecked(true);
+                    push_faith_chk.setChecked(true);
+                    push_display_chk.setChecked(true);
+                    push_r_service_chk.setChecked(true);
+                }
+                else {
+                    recruiting_chk.setChecked(false);
+                    scholarship = 0;
+                    r_sports = 0;
+                    r_perf = 0;
+                    faith = 0;
+                    display = 0;
+                    r_service = 0;
+                    push_scholarship_chk.setChecked(false);
+                    push_r_sports_chk.setChecked(false);
+                    push_r_perf_chk.setChecked(false);
+                    push_faith_chk.setChecked(false);
+                    push_display_chk.setChecked(false);
+                    push_r_service_chk.setChecked(false);
+                }
+                break;
+            }
                                                                 //붙어라
             case R.id.push_sports_chk: {                        //운동
                 if(sports == 0){
@@ -376,7 +509,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
             if (sports == 0) {
-                push_sports_chk.setChecked(false);        //읽어들일 때 1이면 노란색으로 표시
+                push_sports_chk.setChecked(false);        //읽어들일 때 1이면 체크 표시
             } else push_sports_chk.setChecked(true);
             if (game == 0) {
                 push_game_chk.setChecked(false);

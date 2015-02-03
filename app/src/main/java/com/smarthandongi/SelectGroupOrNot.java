@@ -23,11 +23,11 @@ public class SelectGroupOrNot extends Activity implements View.OnClickListener {
 
         individual_btn =    (Button)findViewById(R.id.individual_btn);
         group_btn =         (Button)findViewById(R.id.group_btn);
-        sel_cancel_btn =    (Button)findViewById(R.id.sel_cancel_btn);
+//        sel_cancel_btn =    (Button)findViewById(R.id.sel_cancel_btn);
 
         individual_btn.setOnClickListener(this);
         group_btn.setOnClickListener(this);
-        sel_cancel_btn.setOnClickListener(this);
+//        sel_cancel_btn.setOnClickListener(this);
     }
 
     @Override
@@ -47,12 +47,12 @@ public class SelectGroupOrNot extends Activity implements View.OnClickListener {
                 finish();
                 break;
             }
-            case R.id.sel_cancel_btn : {
-                Intent intent = new Intent(SelectGroupOrNot.this, MainActivity2.class).putExtra("carrier", carrier);
-                startActivity(intent);
-                finish();
-                break;
-            }
+//            case R.id.sel_cancel_btn : {
+//                Intent intent = new Intent(SelectGroupOrNot.this, MainActivity2.class).putExtra("carrier", carrier);
+//                startActivity(intent);
+//                finish();
+//                break;
+//            }
         }
     }
     public void onBackPressed(){
