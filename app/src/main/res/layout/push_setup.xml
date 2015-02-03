@@ -9,13 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="70dp">
 
-        <Button
-            android:id="@+id/push_save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_centerVertical="true"
-            android:text="저장하기"/>
-
         <TextView
             android:layout_width="100dp"
             android:layout_height="40dp"
@@ -25,31 +18,245 @@
             android:gravity="center"/>
     </RelativeLayout>
 
+    <!-- 붙어라 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <CheckBox
+            android:id="@+id/together_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="붙어라"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_sports_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="운동"/>
+            <CheckBox
+                android:id="@+id/push_game_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="게임"/>
+            <CheckBox
+                android:id="@+id/push_nightfood_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="야식"/>
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_gonggu_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="공동구매"/>
+            <CheckBox
+                android:id="@+id/push_carpool_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="카풀"/>
+            <CheckBox
+                android:id="@+id/push_study_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="스터디"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_trading_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="교환"/>
+            <CheckBox
+                android:id="@+id/push_lost_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="분실물"/>
+            <CheckBox
+                android:id="@+id/push_recruiting_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="구인구직"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 대외활동 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/outer_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대외활동"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_contest_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="공모전"/>
+            <CheckBox
+                android:id="@+id/push_intern_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="인턴"/>
+            <CheckBox
+                android:id="@+id/push_service_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="자원봉사"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 공연세미나 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <CheckBox
+            android:id="@+id/seminar_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공연/세미나"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_perf_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="공연"/>
+            <CheckBox
+                android:id="@+id/push_seminar_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="세미나"/>
+            <CheckBox
+                android:id="@+id/push_presentation_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="발표"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 리쿠르팅 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/recruiting_chk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리쿠르팅"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_scholarship_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="학술"/>
+            <CheckBox
+                android:id="@+id/push_r_sports_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="운동"/>
+            <CheckBox
+                android:id="@+id/push_r_perf_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="공연"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+            <CheckBox
+                android:id="@+id/push_faith_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="신앙"/>
+            <CheckBox
+                android:id="@+id/push_display_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="전시"/>
+            <CheckBox
+                android:id="@+id/push_r_service_chk"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="봉사"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
         <Button
-            android:id="@+id/push_sports_chk"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginBottom="10dp"
-            android:text="운동경기"
-            android:textSize="20dp"
-            android:background="#ffffff"/>
-
-         <Button
-            android:id="@+id/push_game_chk"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-             android:layout_marginBottom="10dp"
-            android:text="게임"
-            android:textSize="20dp"
-            android:background="#ffffff"/>
-
+            android:id="@+id/push_cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="취소"/>
         <Button
-            android:id="@+id/push_nightfood_chk"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="야식"
-            android:textSize="20dp"
-            android:background="#ffffff"/>
-
+            android:id="@+id/push_save_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="확인"/>
+        </LinearLayout>
 </LinearLayout>

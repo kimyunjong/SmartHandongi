@@ -3,6 +3,7 @@ package com.smarthandongi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,6 +12,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.google.android.gcm.GCMRegistrar;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
 public class ds_activity extends Activity {
@@ -292,5 +292,10 @@ public class ds_activity extends Activity {
         } // try
     } // HttpPostData
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ds_activity.this, MainActivity2.class).putExtra("carrier", carrier);
+        startActivity(intent);
+        finish();
+    }
 }
