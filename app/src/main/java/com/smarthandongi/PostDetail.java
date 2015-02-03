@@ -57,6 +57,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         carrier=(Carrier)intent.getSerializableExtra("carrier");
         post=(PostDatabase)intent.getSerializableExtra("post");
 
+
         setContentView(R.layout.post_detail);
 
         //버튼
@@ -85,6 +86,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         review_num=(TextView)findViewById(R.id.pos_review_num);
 
         if(carrier.getFromWriting()==1) {
+
             phpCreate();
             new AlertDialog.Builder(this)
                     .setTitle("푸시알람설정")
@@ -102,6 +104,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         }
         else
         {
+            if(post.getHas_pic().compareTo("1")==0)
+                setContentView(R.layout.post_detailwpic);
             if(carrier.getId().compareTo(post.getKakao_id())==0) {
                 scrap_btn.setVisibility(View.INVISIBLE);
                 report_btn.setVisibility(View.INVISIBLE);
@@ -125,6 +129,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier",carrier);
                 startActivity(intent);
                 break;
+
 
         }
     }
@@ -194,6 +199,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 }
                 posting_id=ja.getJSONObject(0).getInt("id");
                 System.out.println(posting_id);
+
+                if(ja.getJSONObject(0).getString("has_pic").compareTo("1")==0)
+                    setContentView(R.layout.post_detailwpic);
                 start_day.setText(ja.getJSONObject(0).getString("start_date"));
                 end_day.setText(ja.getJSONObject(0).getString("end_date"));
                 link.setText(ja.getJSONObject(0).getString("link"));

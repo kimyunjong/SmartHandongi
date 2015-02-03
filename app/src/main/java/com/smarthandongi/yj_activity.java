@@ -515,7 +515,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         private yj_activity context;
         private ArrayList<PostDatabase> post_list;
-        private Activity activity;
+
 
         public PostDatabasePhp(ArrayList<PostDatabase> post_list, yj_activity context) {
             super();
@@ -523,11 +523,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             this.context = context;
         }
 
-        public PostDatabasePhp(ArrayList<PostDatabase> post_list, Activity activity) {
-            super();
-            this.post_list = post_list;
-            this.activity=activity;
-        }
 
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
