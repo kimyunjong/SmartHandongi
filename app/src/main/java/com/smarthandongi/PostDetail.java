@@ -3,16 +3,19 @@ package com.smarthandongi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.smarthandongi.database.Picture;
 import com.smarthandongi.database.PostDatabase;
 
 import org.json.JSONArray;
@@ -40,16 +43,22 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link,
                      type;
 
-    private ImageView background,post_img;
+    ImageView post_img;
     private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
 
     private int posting_id;
+    int screen_width;
+    Picture poster = new Picture();
+
+
    //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
     //수영 추가 끝
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -72,8 +81,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
         review_show_btn.setOnClickListener(this);
 
 
-
-
         //텍스트뷰
         start_day=(TextView)findViewById(R.id.pos_start_day);
         end_day=(TextView)findViewById(R.id.pos_end_day);
@@ -84,6 +91,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
         content=(TextView)findViewById(R.id.pos_content);
         view_num=(TextView)findViewById(R.id.pos_view_num);
         review_num=(TextView)findViewById(R.id.pos_review_num);
+
+        //이미지뷰
+        post_img=(ImageView)findViewById(R.id.poster);
+
+
+
 
         if(carrier.getFromWriting()==1) {
 
@@ -104,8 +117,11 @@ public class PostDetail extends Activity implements View.OnClickListener{
         }
         else
         {
-            if(post.getHas_pic().compareTo("1")==0)
-                setContentView(R.layout.post_detailwpic);
+            if(post.getHas_pic().compareTo("1")==0) {
+
+                construction();
+            }
+
             if(carrier.getId().compareTo(post.getKakao_id())==0) {
                 scrap_btn.setVisibility(View.INVISIBLE);
                 report_btn.setVisibility(View.INVISIBLE);
@@ -120,6 +136,16 @@ public class PostDetail extends Activity implements View.OnClickListener{
             title.setText(post.getTitle());
             content.setText(post.getContent());
         }
+    }
+
+    public void construction() {
+        post_img.setVisibility(View.VISIBLE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        screen_width = metrics.widthPixels;
+        PostImageTask postImageTask = new PostImageTask(poster, post.getId(),post_img,screen_width);
+        postImageTask.execute(0);
+
     }
 
     @Override
