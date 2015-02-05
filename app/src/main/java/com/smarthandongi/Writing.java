@@ -1,10 +1,10 @@
+
 package com.smarthandongi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +12,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,15 +21,13 @@ import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,10 +72,11 @@ public class Writing extends Activity implements View.OnClickListener {
 
 
     Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
+    ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img ;
     Button big_category_btn, small_category_btn;
-
     EditText writing_title, writing_content, writing_link_text;
-    RelativeLayout entire_layout;
+    LinearLayout entire_layout;
+    Typeface fonttest;
 
     PhpUpload task;
 
@@ -151,6 +151,7 @@ public class Writing extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.writing);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+//        Typeface.createFromAsset(fonttest.ge)
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -162,6 +163,8 @@ public class Writing extends Activity implements View.OnClickListener {
         writing_title =     (EditText)findViewById(R.id.writing_title);
         writing_content  =  (EditText)findViewById(R.id.writing_content);
         writing_link_text = (EditText)findViewById(R.id.writing_link_text);
+
+        writing_title.setOnClickListener(this);
 
         writing_image_btn   = (Button)findViewById(R.id.writing_image_btn);
         writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
@@ -175,16 +178,21 @@ public class Writing extends Activity implements View.OnClickListener {
 //      writing_forward_btn.setOnClickListener(this);
         writing_cancel_btn.setOnClickListener(this);
 
-        entire_layout = (RelativeLayout)findViewById(R.id.entire_layout);
-        entire_layout.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(writing_title.getWindowToken(), 0);
-                inputManager.hideSoftInputFromWindow(writing_content.getWindowToken(), 0);
-                inputManager.hideSoftInputFromWindow(writing_link_text.getWindowToken(), 0);
-                return true;
-            }
-        });
+        writing_title_img = (ImageView)findViewById(R.id.writing_title_img);
+        writing_body_img = (ImageView)findViewById(R.id.writing_body_img);
+        writing_preview_img = (ImageView)findViewById(R.id.writing_preview_img);
+        small_category_img = (ImageView)findViewById(R.id.small_category_img);
+
+//        entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
+//        entire_layout.setOnTouchListener(new View.OnTouchListener() {
+//            public boolean onTouch(View v, MotionEvent event) {
+//                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                inputManager.hideSoftInputFromWindow(writing_title.getWindowToken(), 0);
+//                inputManager.hideSoftInputFromWindow(writing_content.getWindowToken(), 0);
+//                inputManager.hideSoftInputFromWindow(writing_link_text.getWindowToken(), 0);
+//                return true;
+//            }
+//        });
 
         //날짜표시
         start_dateLabel=(TextView)findViewById(R.id.start_date_label);
@@ -209,13 +217,21 @@ public class Writing extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()){
+            case R.id.writing_title : {
+                writing_title_img.setBackgroundResource(0);
+                break;
+            }
+
+            case R.id.writing_content : {
+                writing_body_img.setBackgroundResource(0);
+                break;
+            }
 
             case R.id.writing_confirm_btn:{
                 phpCreate();
-
                 break;
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
-
+            
             case R.id.writing_image_btn:{
                 Intent i = new Intent(Intent.ACTION_PICK);
                 i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
@@ -245,6 +261,7 @@ public class Writing extends Activity implements View.OnClickListener {
                     startActivity(intent);
                     finish();
                 }
+                break;
             }
             case R.id.writing_cancel_btn :{
                 Intent intent = new Intent(Writing.this, MainActivity2.class).putExtra("carrier", carrier);
@@ -280,11 +297,17 @@ public class Writing extends Activity implements View.OnClickListener {
                                         if(temp[which].compareTo("공연/세미나") == 0){ carrier.setBig_category(3);}
                                         if(temp[which].compareTo("리쿠르팅") == 0){ carrier.setBig_category(4);}
                                         if(temp[which].compareTo("붙어라") == 0){ carrier.setBig_category(5);}
-                                        Log.d(carrier.getCategory(), temp[which]);
+                                        if(carrier.getBig_category() == 1){
+                                            small_category_img.setBackgroundResource(0);         //일반공지인 경우 소분류 탭을 사라지게 만듬. 혹은 일반공지가 뜨게끔?
+                                        }
+                                        else small_category_img.setBackgroundResource(R.drawable.writing_small_category);
+                                        small_category_btn.setText("");
+                                        carrier.setCategory(null);
                                     }
                                 })
                         .setNegativeButton("취소", null)
                         .show();
+
                 break;
             }
             case R.id.small_category_btn : {
@@ -496,13 +519,16 @@ public class Writing extends Activity implements View.OnClickListener {
         carrier.setGroup_code(group_code);
         carrier.setNickname(kakao_nick);
 
-        if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getCategory() == null)
-        {
-            Toast toastView =Toast.makeText(this, "글을 올바르게 작성하세요", Toast.LENGTH_SHORT);
-            toastView.setGravity(Gravity.CENTER,0,0);
-            toastView.show();
-        }
-        else {
+//        carrier.setBig_category(1);
+//
+//        if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getCategory() == null)
+//        {
+//            Toast toastView =Toast.makeText(this, "글을 올바르게 작성하세요", Toast.LENGTH_SHORT);
+//            toastView.setGravity(Gravity.CENTER,0,0);
+//            toastView.show();
+//        }
+//        else {
+            {
             new AlertDialog.Builder(this)
                     .setTitle("게시물 등록")
                     .setMessage("글을 등록하시겠습니까?")
@@ -692,6 +718,7 @@ public class Writing extends Activity implements View.OnClickListener {
 
         // show image on ImageView
         Bitmap bm = BitmapFactory.decodeFile(getTempImageFile().getAbsolutePath());
+        writing_preview_img.setBackgroundResource(0);
         ((ImageView) findViewById(R.id.writing_preview_img)).setImageBitmap(bm);
          has_pic = 1;
     }

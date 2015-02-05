@@ -1,324 +1,394 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/writing_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp">
+    android:layout_height="match_parent"
+    android:background="@drawable/writing_background">
 
-        <Button
-            android:id="@+id/writing_back_btn"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:layout_centerVertical="true"
-            android:text="뒤"/>
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentTop="true"
-            android:text="글쓰기"
-            android:textSize="20dp"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentBottom="true"
-            android:text="내용입력하기"
-            android:textSize="15dp"
-            android:gravity="center"/>
-
-
-    </RelativeLayout>
-
-    <ScrollView
-
-        android:layout_below="@+id/writing_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/entire_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/writing_big_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4d111111">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="대분류"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/big_category_btn"
-                android:layout_marginLeft="10dp"
+        <LinearLayout
+            android:id="@+id/writing_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56.5dp">
+            <RelativeLayout
+                android:layout_width="48.5dp"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/writing_back_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/writing_backarrow"/>
+            </RelativeLayout>
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint=""
-                android:textSize="13dp"
-                android:gravity="center|left"/>
+                android:background="@drawable/writing_topbar_margin"/>
+            <ImageView
+                android:layout_width="134.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_writing"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/writing_topbar_margin"/>
+            <ImageView
+                android:layout_width="48.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_top_right"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/small_category"
-            android:layout_below="@+id/writing_big_category"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="소분류"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/small_category_btn"
-                android:layout_marginLeft="10dp"
+            android:layout_height="8dp"
+            android:layout_marginTop="20dp">
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="13dp"
-                android:gravity="center|left"/>
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="64.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_bubble_4"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/title"
-            android:layout_below="@+id/small_category"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="제목"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <EditText
-                android:id="@+id/writing_title"
-                android:layout_marginLeft="10dp"
+            android:layout_height="17dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp">
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="제목을 입력하세요"
-                android:textSize="13dp"
-                android:gravity="center|left"/>
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/writing_downarrow_extend"/>
+            <ImageView
+                android:layout_width="131.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_downarrow_extend"/>
+            <ImageView
+                android:layout_width="27.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_downarrow"/>
+            <ImageView
+                android:layout_width="131.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_downarrow_extend"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/writing_downarrow_extend"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/warning"
-            android:layout_below="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="뻘글 올리지마라"
-            android:textSize="10dp"
-            android:gravity="center"
-            android:textColor="#ffff0a00"/>
-
+     
         <LinearLayout
-            android:id="@+id/body"
-            android:layout_below="@id/warning"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="내용"
-                android:textSize="15dp"
-                android:gravity="top"/>
-            <EditText
-                android:id="@+id/writing_content"
-                android:layout_marginLeft="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="내용을 입력하세요"
-                android:textSize="13dp"
-                android:gravity="top"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/start_date"
-            android:layout_marginTop="100dp"
-            android:layout_below="@+id/body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="시작일"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/start_date_label"
-                android:layout_marginLeft="10dp"
+            android:layout_height="33dp">
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="디폴트오늘날짜"
-                android:textSize="13dp"
-                android:gravity="center|left"/>
-            <Button
-                android:id="@+id/startdate_choose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="선택"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/end_date"
-            android:layout_below="@+id/start_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="종료일"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/end_date_label"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="1"/>
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="디폴트오늘날짜"
-                android:textSize="13dp"
-                android:gravity="center|left"/>
-            <Button
-                android:id="@+id/enddate_choose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="선택"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/writing_link"
-            android:layout_below="@+id/end_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="링크"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <EditText
-                android:id="@+id/writing_link_text"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="0.25"/>
+            <RelativeLayout
+                android:layout_width="131.5dp"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/big_category_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#ffffff"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:id="@+id/big_category_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/writing_big_category"/>
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="match_parent"/>
+            <RelativeLayout
+                android:layout_width="131.5dp"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/small_category_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#ffffff"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:id="@+id/small_category_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/writing_small_category"/>
+            </RelativeLayout>
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="링크를 입력하세요"
-                android:textSize="13dp"
-                android:gravity="center|left"/>
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/image_upload_btn"
-            android:layout_below="@+id/writing_link"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이미지"
-                android:textSize="15dp"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/writing_image_btn"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="0.25"/>
+            <ImageView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="이미지 추가"
-                android:textSize="13dp"
-                android:gravity="center|left"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/writing_preview_img"
-            android:layout_below="@+id/image_upload_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="17dp"
+            android:background="@drawable/writing_downarrow_extend"/>
 
-        <TextView
-            android:layout_below="@id/writing_preview_img"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="24dp">
 
-    </RelativeLayout>
-    </ScrollView>
+            <ImageView
+                android:id="@+id/writing_title_img"
+                android:layout_width="35.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_title"
+                android:layout_marginLeft="15dp"/>
+            <EditText
+                android:id="@+id/writing_title"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:gravity="left"
+                android:layout_marginRight="15dp"
+                android:hint="          제목"
+                android:textColor="#ffffff"
+                android:fontFamily="kopub"
+                android:background="#00000000"/>
+        </RelativeLayout>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:background="@drawable/writing_downarrow_extend"/>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/writing_cancel_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="취소"/>
-        <Button
-            android:id="@+id/writing_confirm_btn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="등록하기"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:onClick="onClick">
+            <ImageView
+                android:id="@+id/writing_body_img"
+                android:layout_width="37dp"
+                android:layout_height="25dp"
+                android:background="@drawable/writing_body"/>
+            <EditText
+                android:id="@+id/writing_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:textSize="18dp"
+                android:textColor="#ffffff"
+                android:hint="      내용"
 
-        <!--
-        <Button
-            android:id="@+id/writing_confirm_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="확인"/> -->
+                android:gravity="top|left"
+                android:onClick="onClick"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:background="@drawable/writing_downarrow_extend"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <RelativeLayout
+                    android:id="@+id/writing_image"
+                    android:layout_width="81dp"
+                    android:layout_height="90dp">
+                    <Button
+                        android:id="@+id/writing_image_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"/>
+                    <ImageView
+                        android:id="@+id/writing_preview_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/writing_picture"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/start_date"
+                    android:layout_width="128dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/writing_image">
+                    <EditText
+                        android:id="@+id/start_date_label"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:hint="0000_00_00"
+                        android:textSize="13dp"
+                        android:layout_alignParentRight="true"
+                        android:background="#00000000"/>
+                    <Button
+                        android:id="@+id/startdate_choose"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/writing_startdate"/>
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/writing_inbetween_dates"
+                    android:layout_width="12.5dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/writing_inbetween_dates"
+                    android:layout_toRightOf="@id/start_date"/>
+
+                <RelativeLayout
+                    android:id="@+id/end_date"
+                    android:layout_width="126dp"
+                    android:layout_height="36dp"
+                    android:layout_toRightOf="@id/writing_inbetween_dates">
+                    <EditText
+                        android:id="@+id/end_date_label"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:hint="0000_00_00"
+                        android:textSize="13dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="#00000000"
+                        />
+                    <Button
+                        android:id="@+id/enddate_choose"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/writing_enddate"/>
+                </RelativeLayout>
 
 
+                <LinearLayout
+                    android:id="@+id/writing_link"
+                    android:layout_below="@+id/end_date"
+                    android:layout_toRightOf="@id/writing_image"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="266.5dp"
+                    android:layout_height="33dp">
+
+                    <ImageView
+                        android:layout_width="29.5dp"
+                        android:layout_height="33dp"
+                        android:background="@drawable/writing_link"/>
+                    <RelativeLayout
+                        android:layout_width="237dp"
+                        android:layout_height="match_parent">
+                        <EditText
+                            android:id="@+id/writing_link_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="13dp"
+                            android:gravity="center|left"
+                            android:background="#00000000"/>
+                        <ImageView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="112dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/writing_link_message"/>
+                        <ImageView
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:background="@drawable/writing_link_underline"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/writing_cancel_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/writing_cancel"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/writing_confirm_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/writing_confirm"/>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
-
-
-
-
 </RelativeLayout>
