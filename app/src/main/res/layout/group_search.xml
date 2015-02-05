@@ -3,143 +3,233 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/writing_background"
     android:id="@+id/screen">
-    <RelativeLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-
-        <Button
-            android:id="@+id/group_backward_btn"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:layout_centerVertical="true"
-            android:text="뒤"/>
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentTop="true"
-            android:text="글쓰기"
-            android:textSize="20dp"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentBottom="true"
-            android:text="단체선택하기"
-            android:textSize="15dp"
-            android:gravity="center"/>
-
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/main_search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/top_bar">
-        <LinearLayout
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="단체명"
-                android:textSize="18dp"
-                />
-            <EditText
-                android:id="@+id/groupsearch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_weight="3"
-                />
-
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/search_bar"
-            android:layout_centerHorizontal="true"
-            android:text="아래 단체에서 선택하시오"
-            />
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/search_text_bar"
-        android:layout_below="@id/main_search_bar"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="단체명 검색"
-        android:background="#ffa3f7ff"
-        />
-    <ListView
-        android:id="@+id/list"
-        android:layout_below="@id/search_text_bar"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:listSelector="@android:color/darker_gray"
-        >
-    </ListView>
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/group_popup"
-        android:visibility="invisible"
-        android:layout_below="@id/search_text_bar"
-        android:orientation="vertical"
-        android:background="#ffffd7f3"
-        >
+        android:background="#4d111111">
         <LinearLayout
-            android:background="#ffffff"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            >
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="56.5dp">
+            <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="48.5dp"
+            android:layout_height="match_parent">
 
-            android:text="    임의입력   "/>
-        <EditText
-            android:id="@+id/unresistered"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            />
-            <Button
-                android:id="@+id/unresistered_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="확인"
-                />
+                <Button
+                    android:id="@+id/group_backward_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/writing_backarrow"
+                    />
+
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/writing_topbar_margin"/>
+            <ImageView
+                android:layout_width="133.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/group_search"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/writing_topbar_margin"/>
+            <ImageView
+                android:layout_width="48.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_top_right"/>
+
         </LinearLayout>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="임의입력한 단체는 사용자에게 기관정보가 제공되지 않으며 단체명 사칭의 위험이 있을 수 있음을 알려드립니다"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="64.5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/writing_bubble_2"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
             />
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="단체 등록을 원하시면 홈화면 상단메뉴바>기관(동아리)정보>신규등록신청로 가서 신청하십시오"
-            />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/writing_downarrow_extend"/>
+                    <ImageView
+                        android:layout_width="131.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/writing_downarrow_extend"/>
+                    <ImageView
+                        android:layout_width="27.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/writing_downarrow"/>
+                    <ImageView
+                        android:layout_width="131.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/writing_downarrow_extend"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/writing_downarrow_extend"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="16dp">
+                 <ImageView
+                    android:layout_width="196.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/group_name_enter_please"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="32dp">
+
+                <ImageView
+                    android:layout_width="19.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/search_left"
+                    />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/search_middle"
+                        />
+                    <EditText
+                        android:id="@+id/groupsearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:singleLine="true"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="47.5dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/search_right_x"
+                        android:layout_width="47.5dp"
+                        android:layout_height="match_parent"
+                        android:visibility="invisible"
+                        android:background="@drawable/search_right_x"
+                        />
+                    <ImageView
+                        android:id="@+id/search_right_glass"
+                        android:layout_width="47.5dp"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        android:background="@drawable/search_right_glass"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="25.5dp"
+                    android:background="#F7F6F5"
+                    android:alpha="0.7"
+                    >
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="37.5dp"
+                    android:layout_height="15.5dp"
+                    android:background="@drawable/group_name"
+                    />
+
+                    </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:background="#F7F6F5"
+                    android:alpha="0.3"
+                    >
+                <ListView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:listSelector="@android:color/darker_gray"
+                    android:visibility="visible"
+                    > </ListView>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+
+            </LinearLayout>
 
     </LinearLayout>
 

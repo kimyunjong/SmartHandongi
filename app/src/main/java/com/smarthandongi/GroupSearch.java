@@ -110,16 +110,19 @@ public class GroupSearch extends Activity {
                 }
 
                 if(str.length()>1&&filtered_list.size()==0) {
-                    LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
-                    EditText unresistered = (EditText)findViewById(R.id.unresistered);
-                    popup.setVisibility(View.VISIBLE);
-                    unresistered.setText(str);
+                    listview.setVisibility(View.INVISIBLE);
+
+                    //LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
+                    //EditText unresistered = (EditText)findViewById(R.id.unresistered);
+                    //popup.setVisibility(View.VISIBLE);
+                    //unresistered.setText(str);
 
                 }
                 else
                 {
-                    LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
-                    popup.setVisibility(View.INVISIBLE);
+                    listview.setVisibility(View.VISIBLE);
+                    //LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
+                    //popup.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -129,7 +132,8 @@ public class GroupSearch extends Activity {
         group_search.addTextChangedListener(watcher);
 
         //미등록단체 확인하기
-        unresistered_forward_btn = (Button)findViewById(R.id.unresistered_btn);
+        //unresistered_forward_btn = (Button)findViewById(R.id.unresistered_btn);
+        /*
         unresistered_forward_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 if(filtered_list.size()==0&&group_search.getText().toString().length()!=0) {
@@ -141,7 +145,7 @@ public class GroupSearch extends Activity {
                 }
 
             }
-        });
+        });*/
 
         backward_btn = (Button)findViewById(R.id.group_backward_btn);
         backward_btn.setOnClickListener(new Button.OnClickListener() {
