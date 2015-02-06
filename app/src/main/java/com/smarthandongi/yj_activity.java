@@ -79,7 +79,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
     public void phpCreate() {
         postDatabasePhp = new PostDatabasePhp(post_list, this);
-        postDatabasePhp.execute("http://hungry.portfolio1000.com/smarthandongi/posting_php.php?kakao_id=995977");
+        postDatabasePhp.execute("http://hungry.portfolio1000.com/smarthandongi/posting_php.php?kakao_id="+carrier.getId());
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 

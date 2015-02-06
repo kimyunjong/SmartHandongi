@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/writing_background"
+    android:background="@drawable/background"
     android:id="@+id/screen">
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +27,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/writing_backarrow"
+                    android:background="@drawable/backarrow"
                     />
 
             </RelativeLayout>
