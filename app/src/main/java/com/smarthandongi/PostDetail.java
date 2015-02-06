@@ -55,6 +55,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
    //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
+    int temp=1;
     //수영 추가 끝
 
 
@@ -143,7 +144,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_width = metrics.widthPixels;
-        PostImageTask postImageTask = new PostImageTask(poster, post.getId(),post_img,screen_width);
+
+        PostImageTask postImageTask = new PostImageTask(poster, post.getId(),post_img,screen_width, temp);//수영 수정, temp 추가
         postImageTask.execute(0);
     }
 

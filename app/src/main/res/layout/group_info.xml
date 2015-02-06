@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/group_info">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/group_category"
+        android:layout_toStartOf="@+id/group_category" />
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/small_image"
+
+        android:layout_below="@+id/back"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_category"
+        android:textSize="25dp"
+        android:text="category"
+        android:layout_toRightOf="@+id/modify"
+        android:layout_below="@+id/small_image" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/slash"
+        android:textSize="25dp"
+        android:text="| "
+        android:layout_alignTop="@+id/group_category"
+        android:layout_toRightOf="@+id/group_category"
+        android:layout_toEndOf="@+id/group_category" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_name"
+        android:textSize="25dp"
+        android:text="group_name"
+        android:layout_alignTop="@+id/group_category"
+        android:layout_toRightOf="@+id/slash"
+        android:layout_toEndOf="@+id/slash" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/intro"
+        android:textSize="20dp"
+        android:text="             소개하는 말 입니다.         안녕하세요         동아리 소개입니다. 성공하면 좋겠습니다."
+        android:layout_below="@+id/group_category"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/modify"
+        android:layout_alignBottom="@id/intro" />
+</RelativeLayout>

@@ -23,9 +23,11 @@ public class PostImageTask extends AsyncTask<Integer, Integer,Integer> {
     private int post_id;
     ImageView post_img;
     int pic_width;
+    int temp=1;
 
 
-    public PostImageTask(Picture picture, int post_id,ImageView post_img, int pic_width) {
+    public PostImageTask(Picture picture, int post_id,ImageView post_img, int pic_width, int temp)  {
+        this.temp = temp;
         this.picture=picture;
         this.post_id=post_id;
         this.post_img=post_img;
@@ -50,7 +52,12 @@ public class PostImageTask extends AsyncTask<Integer, Integer,Integer> {
         InputStream bis;
 
         try{
+            //수영 수정
+            if(temp==2)
+            bis = new java.net.URL("http://hungry.portfolio1000.com/smarthandongi/group_photo/" + post_id +".jpg").openStream();
+            else
             bis = new java.net.URL("http://hungry.portfolio1000.com/smarthandongi/photo/" + post_id +".jpg").openStream();
+            //
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 1;
             Bitmap image = BitmapFactory.decodeStream(new FlushedInputStream(bis),null,options);

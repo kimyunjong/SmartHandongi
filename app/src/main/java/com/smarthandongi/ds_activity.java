@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +30,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class ds_activity extends Activity {
+
+    Button group_info1;
+    GroupDatabase1 group;
     Carrier carrier;
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
@@ -49,13 +53,19 @@ public class ds_activity extends Activity {
     SharedPreferences prefs;
     Context context;
 
+
     String regid;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
-        //GCMRegistrar.unregister(context);
         setContentView(R.layout.activity_main);
+
+        //Intent intent=getIntent();
+        //group=(GroupDatabase1)intent.getSerializableExtra("group");
+
         mDisplay = (TextView) findViewById(R.id.display);
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
@@ -79,6 +89,13 @@ public class ds_activity extends Activity {
         regIDInsertTask.execute(regid);
         // regIDInsertTaske= new regIDInsertTask.execute(regid);
         // sendAPIkey();
+        group_info1 = (Button)findViewById(R.id.group_info);
+        group_info1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ds_activity.this, group_infoList.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -228,7 +245,13 @@ public class ds_activity extends Activity {
             }.execute(null, null, null);
         } else if (view == findViewById(R.id.clear)) {
             mDisplay.setText("");
+        }/*
+        else if (view==findViewById(R.id.group_info)){
+            Intent intent = new Intent(ds_activity.this, group_info.class).putExtra("carrier", carrier);
+            startActivity(intent);
         }
+*/
+
     }
     private class RegIDInsertTask extends AsyncTask<String, Void, Void> {
 
