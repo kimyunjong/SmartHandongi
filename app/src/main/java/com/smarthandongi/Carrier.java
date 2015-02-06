@@ -25,6 +25,7 @@ public class Carrier implements Serializable {
     private String regid = null;
     private int selector = 0;
     private int edit_count = 0;
+    private int has_pic = 0;
     //youngmin variable ends
 
     private String Group_pw = null;
@@ -113,5 +114,9 @@ public class Carrier implements Serializable {
     public int getEdit_count() { return edit_count;}
 
     public void setEdit_count(int edit_count) { this.edit_count = edit_count;}
+
+    public int getHas_pic() { return has_pic;}
+
+    public void setHas_pic(int has_pic) { this.has_pic = has_pic;}
 
 }

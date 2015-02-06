@@ -24,17 +24,17 @@ import java.net.URLEncoder;
  * Created by LEWIS on 2015-01-28.
  */
 public class PushSetup extends Activity implements View.OnClickListener {
-    int sports, game, nightfood, id, gonggu, carpool, study, trading, lost, recruiting;
+    int sports, game, nightfood, id, gonggu, carpool, study, trading, lost, recruiting, exchange;
     int contest, intern, service, perf, seminar, presentation;
     int scholarship, r_sports, r_perf, faith, display, r_service;
 
-    int sports_in, game_in, nightfood_in, gonggu_in, carpool_in, study_in, trading_in, lost_in, recruiting_in;  //푸시 설정에 들어왔을 때 초기값
+    int sports_in, game_in, nightfood_in, gonggu_in, carpool_in, study_in, trading_in, lost_in, recruiting_in, exchange_in;  //푸시 설정에 들어왔을 때 초기값
     int contest_in, intern_in, service_in, perf_in, seminar_in, presentation_in;
     int scholarship_in, r_sports_in, r_perf_in, faith_in, display_in, r_service_in;
 
     Carrier carrier;
     CheckBox outer_chk, together_chk, recruiting_chk, seminar_chk; //대분류    아래는 소분류
-    CheckBox push_sports_chk, push_game_chk, push_nightfood_chk, push_gonggu_chk, push_carpool_chk, push_study_chk, push_trading_chk, push_lost_chk, push_recruiting_chk;
+    CheckBox push_sports_chk, push_game_chk, push_nightfood_chk, push_gonggu_chk, push_carpool_chk, push_study_chk, push_trading_chk, push_lost_chk, push_recruiting_chk, push_exchange_chk;
     CheckBox push_contest_chk, push_intern_chk, push_service_chk, push_perf_chk, push_seminar_chk, push_presentation_chk;
     CheckBox push_scholarship_chk, push_r_sports_chk, push_r_perf_chk, push_faith_chk, push_display_chk, push_r_service_chk;
     Button push_save_btn;
@@ -71,6 +71,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
         push_trading_chk = (CheckBox) findViewById(R.id.push_trading_chk);
         push_lost_chk = (CheckBox) findViewById(R.id.push_lost_chk);
         push_recruiting_chk = (CheckBox) findViewById(R.id.push_recruiting_chk);
+        push_exchange_chk = (CheckBox) findViewById(R.id.push_exchange_chk);
 
         push_contest_chk = (CheckBox) findViewById(R.id.push_contest_chk);
         push_intern_chk = (CheckBox) findViewById(R.id.push_intern_chk);
@@ -101,6 +102,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
         push_trading_chk.setOnClickListener(this);
         push_lost_chk.setOnClickListener(this);
         push_recruiting_chk.setOnClickListener(this);
+        push_exchange_chk.setOnClickListener(this);
 
         push_contest_chk.setOnClickListener(this);
         push_intern_chk.setOnClickListener(this);
@@ -127,7 +129,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.together_chk :{
-                if(sports == 0 || game == 0 || nightfood == 0 || gonggu == 0 || carpool == 0 || study == 0 || trading == 0 || lost == 0 || recruiting == 0) {
+                if(sports == 0 || game == 0 || nightfood == 0 || gonggu == 0 || carpool == 0 || study == 0 || trading == 0 || lost == 0 || recruiting == 0 || exchange == 0) {
                     together_chk.setChecked(true);
                     sports = 1;
                     game = 1;
@@ -138,6 +140,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     trading = 1;
                     lost = 1;
                     recruiting = 1;
+                    exchange = 1;
                     push_sports_chk.setChecked(true);
                     push_game_chk.setChecked(true);
                     push_nightfood_chk.setChecked(true);
@@ -147,6 +150,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     push_trading_chk.setChecked(true);
                     push_lost_chk.setChecked(true);
                     push_recruiting_chk.setChecked(true);
+                    push_exchange_chk.setChecked(true);
                 }
                 else {
                     together_chk.setChecked(false);
@@ -159,6 +163,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     trading = 0;
                     lost = 0;
                     recruiting = 0;
+                    exchange = 0;
                     push_sports_chk.setChecked(false);
                     push_game_chk.setChecked(false);
                     push_nightfood_chk.setChecked(false);
@@ -168,6 +173,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     push_trading_chk.setChecked(false);
                     push_lost_chk.setChecked(false);
                     push_recruiting_chk.setChecked(false);
+                    push_exchange_chk.setChecked(false);
                 }
                 break;
             }
@@ -295,7 +301,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     study = 0;}
                 break;
             }
-            case R.id.push_trading_chk: {                          //교환
+            case R.id.push_trading_chk: {                          //사고팔기
                 if(trading == 0){
                     push_trading_chk.setChecked(true);
                     trading = 1;
@@ -317,6 +323,14 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     recruiting = 1;
                 } else {push_recruiting_chk.setChecked(false);
                     recruiting = 0;}
+                break;
+            }
+            case R.id.push_exchange_chk: {                          //교환
+                if(exchange == 0){
+                    push_exchange_chk.setChecked(true);
+                    exchange = 1;
+                } else {push_exchange_chk.setChecked(false);
+                    exchange = 0;}
                 break;
             }
             case R.id.push_contest_chk: {                          //공모전
@@ -488,6 +502,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                         trading     = trading_in    = jo.getInt("together_trading_7");
                         lost        = lost_in       = jo.getInt("together_lost_8");
                         recruiting  = recruiting_in = jo.getInt("together_recruiting_9");
+                        exchange    = exchange_in = jo.getInt("together_exchange_10");
 
                         contest     = contest_in    = jo.getInt("outer_contest_21");
                         intern      = intern_in     = jo.getInt("outer_intern_22");
@@ -535,6 +550,9 @@ public class PushSetup extends Activity implements View.OnClickListener {
             if (recruiting == 0) {
                 push_recruiting_chk.setChecked(false);
             } else push_recruiting_chk.setChecked(true);
+            if (exchange == 0) {
+                push_exchange_chk.setChecked(false);
+            } else push_exchange_chk.setChecked(true);
 
             if (contest == 0) {
                 push_contest_chk.setChecked(false);
@@ -641,7 +659,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
         task = "http://hungry.portfolio1000.com/smarthandongi/send_pushinfo.php?"
                 + "id=" + id                    + "&sports=" + sports       + "&game=" + game
                 + "&nightfood=" + nightfood     + "&gonggu=" + gonggu       + "&carpool=" + carpool
-                + "&study=" + study             + "&trading=" + trading     + "&lost=" + lost       + "&recruiting=" + recruiting
+                + "&study=" + study             + "&trading=" + trading     + "&lost=" + lost       + "&recruiting=" + recruiting + "&exchange=" + exchange
                 + "&contest=" + contest         + "&intern=" + intern       + "&service=" + service
                 + "&perf=" + perf               + "&seminar=" + seminar     + "&presentation=" + presentation
                 + "&scholarship=" + scholarship + "&r_sports=" + r_sports   + "&r_perf=" + r_perf
@@ -649,7 +667,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 + "&kakao_id=" + carrier.getId() + "&kakao_nick=" + kakao_nick   + "&regid=" + carrier.getRegid()
                 + "&sports_in=" + sports_in     + "&game_in=" + game_in     + "&nightfood_in=" + nightfood_in
                 + "&gonggu_in=" + gonggu_in     + "&carpool_in=" + carpool_in + "&study_in=" + study_in
-                + "&trading_in=" + trading_in   + "&lost_in=" + lost_in + "&recruiting_in=" + recruiting_in
+                + "&trading_in=" + trading_in   + "&lost_in=" + lost_in + "&recruiting_in=" + recruiting_in + "&exchange_in=" + exchange_in
                 + "&contest_in=" + contest_in   + "&intern_in=" + intern_in + "&service_in=" + service_in
                 + "&perf_in=" + perf_in         + "&seminar_in=" + seminar_in + "&presentation_in=" + presentation_in
                 + "&scholarship_in=" + scholarship_in + "&r_sports_in=" +r_sports_in + "&r_perf_in=" + r_perf_in
@@ -673,6 +691,8 @@ public class PushSetup extends Activity implements View.OnClickListener {
         if(lost_in == 0 && lost == 1) lost_in = 1;
         if(recruiting_in == 1 && recruiting == 0) recruiting_in = 0;
         if(recruiting_in == 0 && recruiting == 1) recruiting_in = 1;
+        if(exchange_in == 1 && exchange == 0) exchange_in = 0;
+        if(exchange_in == 0 && exchange == 1) exchange_in = 1;
 
         if(contest_in == 1 && contest == 0) contest_in = 0;
         if(contest_in == 0 && contest == 1) contest_in = 1;

@@ -52,4 +52,11 @@ public class yy_activity extends Activity implements View.OnClickListener{
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(yy_activity.this, MainActivity2.class).putExtra("carrier", carrier);
+        startActivity(intent);
+        finish();
+    }
 }

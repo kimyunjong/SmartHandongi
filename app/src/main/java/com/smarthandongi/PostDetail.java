@@ -3,7 +3,6 @@ package com.smarthandongi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -66,7 +65,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
         carrier=(Carrier)intent.getSerializableExtra("carrier");
         post=(PostDatabase)intent.getSerializableExtra("post");
 
-
         setContentView(R.layout.post_detail);
 
         //버튼
@@ -79,6 +77,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         review_show_btn=(Button)findViewById(R.id.pos_review_show_btn);
 
         review_show_btn.setOnClickListener(this);
+        edit_btn.setOnClickListener(this);
+        scrap_btn.setOnClickListener(this);
 
 
         //텍스트뷰
@@ -123,7 +123,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
 
             if(carrier.getId().compareTo(post.getKakao_id())==0) {
-                scrap_btn.setVisibility(View.INVISIBLE);
+                scrap_btn.setVisibility(View.GONE);
                 report_btn.setVisibility(View.INVISIBLE);
                 edit_btn.setVisibility(View.VISIBLE);
                 del_btn.setVisibility(View.VISIBLE);
@@ -145,18 +145,32 @@ public class PostDetail extends Activity implements View.OnClickListener{
         screen_width = metrics.widthPixels;
         PostImageTask postImageTask = new PostImageTask(poster, post.getId(),post_img,screen_width);
         postImageTask.execute(0);
-
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.pos_review_show_btn :
-                Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier",carrier);
+            case R.id.pos_review_show_btn : {
+                Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier", carrier);
                 startActivity(intent);
                 break;
+            }
+            case R.id.pos_edit_btn : {
+                carrier.setEdit_count(1);
+                carrier.setBig_category(Integer.valueOf(post.getBig_category()));
+                carrier.setCategory(post.getCategory());
+                carrier.setTitle(post.getTitle());
+                carrier.setContent(post.getContent());
+                carrier.setStart_date(post.getStart_date());
+                carrier.setEnd_date(post.getEnd_date());
+                carrier.setLink(post.getLink());
+                carrier.setHas_pic(Integer.valueOf(post.getHas_pic()));
 
-
+                Intent intent = new Intent(PostDetail.this, Writing.class).putExtra("carrier", carrier);
+                finish();
+                startActivity(intent);
+                break;
+            }
         }
     }
     public void phpCreate() {

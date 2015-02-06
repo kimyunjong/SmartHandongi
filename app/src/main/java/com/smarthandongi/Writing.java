@@ -34,7 +34,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smarthandongi.database.Picture;
-import com.smarthandongi.database.PostDatabase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -79,7 +78,6 @@ public class Writing extends Activity implements OnClickListener {
     private final int REQ_CODE_PICK_CROP = 900003;
     private int has_pic = 0;
     int screen_height = 0;
-    private PostDatabase post;
 
     Picture poster = new Picture();
     Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
@@ -231,7 +229,6 @@ public class Writing extends Activity implements OnClickListener {
 //                return true;
 //            }
 //        });
-        carrier.setEdit_count(1);
 
         if(carrier.getEdit_count() == 0){
         //날짜표시
@@ -249,40 +246,48 @@ public class Writing extends Activity implements OnClickListener {
     }
 
     public void preset(){
-        String[] category_temp;
+        String[] small_category, small_category_hangul;
 
-        big_category_img.setImageResource(R.drawable.writing_category_empty);       //대분류
-        switch(carrier.getBig_category()) {
-            case 1 : { big_category_btn.setText("일반공지");
-                small_category_img.setBackgroundResource(0);
-                break;}
+        switch(carrier.getBig_category()) {                                         //대분류
+            case 1 : { big_category_btn.setText("일반공지"); break;}
             case 2 : { big_category_btn.setText("대외활동"); break;}
             case 3 : { big_category_btn.setText("공연/세미나"); break;}
             case 4 : { big_category_btn.setText("리쿠르팅"); break;}
             case 5 : { big_category_btn.setText("붙어라"); break;}
         }
+        big_category_img.setBackgroundResource(R.drawable.writing_category_empty);  //대분류 배경
 
-        category_temp = getResources().getStringArray(R.array.category_name);       //소분류
-        for(int i = 0; i < category_temp.length; i++){
-            if(carrier.getCategory().compareTo(category_temp[i]) == 0){
-                small_category_btn.setText(category_temp[i]);
+        small_category = getResources().getStringArray(R.array.category_name);       //소분류
+        small_category_hangul = getResources().getStringArray(R.array.category_name_hangul);
+        for(int i = 0; i < small_category.length; i++){
+            if(carrier.getCategory().compareTo(small_category[i]) == 0){             //TODO 이거 PHP 건드려야 함. 테이블 하나 추가했던거!!
+                small_category_btn.setText(small_category_hangul[i]);
                 break;
             }
         }
+        if(carrier.getBig_category() == 1){                                         //소분류 배경
+            small_category_img.setBackgroundResource(0);}
+        else small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
 
         writing_title.setText(carrier.getTitle());                                  //제목
         writing_content.setText(carrier.getContent());                              //내용
+
+        writing_additional.setBackgroundResource(R.drawable.writing_additional_hide);   //+추가옵션 -> -추가옵션
         start_dateLabel.setText(carrier.getStart_date());                           //시작일
         writing_startdate_img.setVisibility(GONE);
         end_dateLabel.setText(carrier.getEnd_date());                               //종료일
         writing_enddate_img.setVisibility(GONE);
         writing_link.setText(carrier.getLink());                                    //링크
-
-        if(has_pic == 1){
-            writing_preview_img.setVisibility(GONE);
-            PostImageTask postImageTask = new PostImageTask(poster, post.getId(), writing_preview_img, writing_preview_img.getWidth());
-            postImageTask.execute(0);
+        has_pic = carrier.getHas_pic();                                             // 사진 유무
+        if(carrier.getStart_date() != null || carrier.getEnd_date() != null || carrier.getLink() != null || carrier.getHas_pic() == 1){
+            writing_additional.setVisibility(VISIBLE);
         }
+
+//        if(has_pic == 1){
+//            writing_preview_img.setVisibility(GONE);
+//            PostImageTask postImageTask = new PostImageTask(poster, post_carrier.getId(), writing_preview_img, writing_preview_img.getWidth());
+//            postImageTask.execute(0);
+//        }
 
         //사진이 없는 경우 표시 안 되게
         //사진불러오기 - 사진은 글 아이디에 맞는걸 가지고 와야함. 글 아이디를 미리 받아와야 함.

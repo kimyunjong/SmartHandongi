@@ -74,4 +74,32 @@
         <item>recruiting_r_service_66</item>
 
     </string-array>
+    <string-array name="category_name_hangul">
+        <item>운동경기</item>
+        <item>게임</item>
+        <item>야식</item>
+        <item>공동구매</item>
+        <item>카풀</item>
+        <item>스터디</item>
+        <item>사고팔기</item>
+        <item>분실물</item>
+        <item>구인구직</item>
+        <item>교환</item>
+
+        <item>공모전</item>
+        <item>인턴</item>
+        <item>봉사활동</item>
+
+        <item>공연</item>
+        <item>세미나</item>
+        <item>발표</item>
+
+        <item>학술</item>
+        <item>운동</item>
+        <item>공연</item>
+        <item>신앙</item>
+        <item>전시</item>
+        <item>봉사</item>
+    </string-array>
+
 </resources>
