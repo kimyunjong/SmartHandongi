@@ -4,55 +4,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/writing_background">
+    android:background="@drawable/background">
 
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4d111111">
-
-
-
+    android:background="#66000000">
 
     <LinearLayout
         android:id="@+id/sel_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="56.5dp">
+        android:layout_height="45dp">
         <RelativeLayout
-            android:layout_width="48.5dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
                 android:id="@+id/sel_back_btn"
-                android:layout_width="match_parent"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
-
             <ImageView
+                android:layout_width="28.5dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/backarrow"/>
+            <ImageView
+                android:layout_width="76.5dp"
+                android:layout_height="38dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/writing_writing"/>
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/writing_backarrow"/>
+                android:layout_height="1dp"
+                android:alpha="0.5"
+                android:layout_alignParentBottom="true"
+                android:background="#ffffff"/>
         </RelativeLayout>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/writing_topbar_margin"/>
-        <ImageView
-            android:layout_width="133.5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/writing_select"/>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/writing_topbar_margin"/>
-        <ImageView
-            android:layout_width="48.5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/writing_top_right"/>
     </LinearLayout>
-    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="15.5dp"
@@ -89,20 +80,28 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:background="@drawable/writing_downarrow_extend"/>
-        <ImageView
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:background="@drawable/writing_downarrow_extend"/>
-        <ImageView
-            android:layout_width="27.5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/writing_downarrow"/>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:background="@drawable/writing_downarrow_extend"/>
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="17dp"
+                android:background="@drawable/writing_downarrow_extend"/>
+            <ImageView
+                android:layout_width="27.5dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                android:background="@drawable/writing_downarrow"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="17dp"
+                android:background="@drawable/writing_downarrow_extend"/>
+        </LinearLayout>
         <ImageView
             android:layout_width="120dp"
             android:layout_height="match_parent"
@@ -111,8 +110,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
-
-
     </LinearLayout>
 
     <LinearLayout

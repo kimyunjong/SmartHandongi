@@ -24,6 +24,7 @@ public class Carrier implements Serializable {
     private String end_date = null;
     private String regid = null;
     private int selector = 0;
+    private int edit_count = 0;
     //youngmin variable ends
 
     private String Group_pw = null;
@@ -109,7 +110,8 @@ public class Carrier implements Serializable {
 
     public void setBig_category(int big_category) { this.big_category = big_category;}
 
+    public int getEdit_count() { return edit_count;}
 
-
+    public void setEdit_count(int edit_count) { this.edit_count = edit_count;}
 
 }

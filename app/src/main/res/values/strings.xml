@@ -42,6 +42,36 @@
         <item>스터디</item>
         <item>사고팔기</item>
         <item>분실물</item>
-        <item>구인/구직</item>
+        <item>구인구직</item>
+        <item>교환</item>
+    </string-array>
+
+    <string-array name="category_name">
+        <item>together_sports_1</item>
+        <item>together_game_2</item>
+        <item>together_nightfood_3</item>
+        <item>together_gonggu_4</item>
+        <item>together_carpool_5</item>
+        <item>together_study_6</item>
+        <item>together_trading_7</item>
+        <item>together_lost_8</item>
+        <item>together_recruiting_9</item>
+        <item>together_exchange_10</item>
+
+        <item>outer_contest_21</item>
+        <item>outer_intern_22</item>
+        <item>outer_service_23</item>
+
+        <item>seminar_perf_41</item>
+        <item>seminar_seminar_42</item>
+        <item>seminar_presentation_43</item>
+
+        <item>recruiting_scholarship_61</item>
+        <item>recruiting_r_sports_62</item>
+        <item>recruiting_r_perf_63</item>
+        <item>recruiting_faith_64</item>
+        <item>recruiting_display_65</item>
+        <item>recruiting_r_service_66</item>
+
     </string-array>
 </resources>
