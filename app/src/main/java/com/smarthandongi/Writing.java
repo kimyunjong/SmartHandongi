@@ -285,7 +285,7 @@ public class Writing extends Activity implements OnClickListener {
 
 //        if(has_pic == 1){
 //            writing_preview_img.setVisibility(GONE);
-//            PostImageTask postImageTask = new PostImageTask(poster, post_carrier.getId(), writing_preview_img, writing_preview_img.getWidth());
+//            PostImageTask postImageTask = new PostImageTask(poster, carrier.getId(), writing_preview_img, writing_preview_img.getWidth());
 //            postImageTask.execute(0);
 //        }
 

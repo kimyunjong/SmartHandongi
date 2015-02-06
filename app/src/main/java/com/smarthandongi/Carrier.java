@@ -11,6 +11,7 @@ public class Carrier implements Serializable {
     private String id = "000000";
 
     //youngmin variable begins
+    private int post_id;
     private String group_code = "";
     private String group_name = "";
     private String title = null;
@@ -118,5 +119,9 @@ public class Carrier implements Serializable {
     public int getHas_pic() { return has_pic;}
 
     public void setHas_pic(int has_pic) { this.has_pic = has_pic;}
+
+    public int getPost_id() { return post_id;}
+
+    public void setPost_id(int post_id) { this.post_id = post_id;}
 
 }
