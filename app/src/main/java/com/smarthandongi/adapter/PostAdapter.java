@@ -99,9 +99,9 @@ public class PostAdapter extends BaseAdapter{
         holder.like.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
 
         holder.like.setFocusable(false);
-        holder.like.setBackgroundResource(getItem(position).getLike() == "1" ? R.drawable.not_like : R.drawable.like);
+        holder.like.setBackgroundResource( getItem(position).getLike().compareTo("0") ==0 ? R.drawable.like : R.drawable.not_like);
         holder.like.setOnTouchListener(new LikeListener(carrier.getId(), getItem(position).getId(), holder.like, getItem(position)));
-
+        System.out.println(getItem(position).getLike()+"확인할 어댑터 부분 입니다."+getItem(position).getTitle());
         holder.post_title.setText(getItem(position).getTitle()+ " ");
         holder.post_id.setText(getItem(position).getId()+ " ");
         holder.post_group.setText(getItem(position).getGroup()+" ");
@@ -144,22 +144,22 @@ public class PostAdapter extends BaseAdapter{
         }
 
        //나중에 이미지 추가되면 이미지 넣기
-        if(getItem(position).getCategory().equalsIgnoreCase("1"))
+        if(getItem(position).getBig_category().equalsIgnoreCase("1"))
         {holder.post_category.setImageResource(R.drawable.notice);
             }
-        else if(getItem(position).getCategory().equalsIgnoreCase("2"))
+        else if(getItem(position).getBig_category().equalsIgnoreCase("2"))
         {   holder.post_category.setImageResource(R.drawable.outer);
             }
 
-        else if(getItem(position).getCategory().equalsIgnoreCase("3"))
+        else if(getItem(position).getBig_category().equalsIgnoreCase("3"))
         { holder.post_category.setImageResource(R.drawable.seminar);
             }
 
-        else if(getItem(position).getCategory().equalsIgnoreCase("4"))
+        else if(getItem(position).getBig_category().equalsIgnoreCase("4"))
         { holder.post_category.setImageResource(R.drawable.recruit);
             }
 
-        else if(getItem(position).getCategory().equalsIgnoreCase("5"))
+        else if(getItem(position).getBig_category().equalsIgnoreCase("5"))
         { holder.post_category.setImageResource(R.drawable.agora);
             }
 

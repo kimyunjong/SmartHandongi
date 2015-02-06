@@ -217,7 +217,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
                     post_list.add(new PostDatabase(
-                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("category"), jo.getString("group"),
+                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"),jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                             jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
                     ));
 

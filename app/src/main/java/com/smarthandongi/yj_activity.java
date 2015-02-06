@@ -565,8 +565,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
                     post_list.add(new PostDatabase(
-                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("category"), jo.getString("group"),
-                            jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
+                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"),jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
+                            jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
                     ));
 
                     System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
@@ -604,11 +604,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         for (PostDatabase db : post_list) {
 
-            if (db.getCategory().equalsIgnoreCase("1")&&ca1==0) continue;
-            if (db.getCategory().equalsIgnoreCase("2")&&ca2==0) continue;
-            if (db.getCategory().equalsIgnoreCase("3")&&ca3==0) continue;
-            if (db.getCategory().equalsIgnoreCase("4")&&ca4==0) continue;
-            if (db.getCategory().equalsIgnoreCase("5")&&ca5==0) continue;
+            if (db.getBig_category().equalsIgnoreCase("1")&&ca1==0) continue;
+            if (db.getBig_category().equalsIgnoreCase("2")&&ca2==0) continue;
+            if (db.getBig_category().equalsIgnoreCase("3")&&ca3==0) continue;
+            if (db.getBig_category().equalsIgnoreCase("4")&&ca4==0) continue;
+            if (db.getBig_category().equalsIgnoreCase("5")&&ca5==0) continue;
 
             board_list.add(db);
             timeline_list.add(db);
