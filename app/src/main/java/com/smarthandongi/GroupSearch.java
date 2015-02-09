@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -48,8 +49,8 @@ public class GroupSearch extends Activity {
     EditText group_search;
     RelativeLayout layoutView;
     String str=null;
-    Button unresistered_forward_btn, backward_btn;
-
+    Button backward_btn,unresistered_btn,search_cancel_btn;
+    ImageView search_cancel_img,search_glass_img;
 
 
     @Override
