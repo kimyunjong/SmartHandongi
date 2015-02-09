@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,7 @@ public class GroupPassword extends Activity {
                 return true;
             }
         });
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         backward_btn = (Button)findViewById(R.id.pw_backward_btn);
         backward_btn.setOnClickListener(new Button.OnClickListener() {
@@ -99,20 +101,6 @@ public class GroupPassword extends Activity {
         startActivity(intent);
         finish();
     }
-    /*
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        super.onKeyDown(keyCode, event);
-        if(event.getAction() == KeyEvent.KEYCODE_BACK) {
-            carrier.setGroup_name(null);
-            carrier.setGroup_code(null);
-            carrier.setGroup_pw(null);
-            Intent intent = new Intent(GroupPassword.this,GroupSearch.class).putExtra("carrier",carrier);
-            startActivity(intent);
-            finish();
-        }
-        return false;
-    }
-    */
+
 
 }
