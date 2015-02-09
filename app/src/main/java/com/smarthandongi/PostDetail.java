@@ -195,9 +195,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
             case R.id.pos_report_btn : {
                 //신고하시겠습니까 메시지가 뜨고 난 후에 다음 엑티비티로.
-                //넘어갈 때 필요한 변수,   게시물 아이디, 카
+
+                //넘어갈 때 필요한 변수,   게시물 아이디,
+                carrier.setPost_id(post.getId());
+                carrier.setPosting_date(post.getPosting_date());
+
                 Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
-                finish();
                 startActivity(intent);
                 break;
             }
