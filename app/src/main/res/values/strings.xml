@@ -72,8 +72,62 @@
         <item>recruiting_faith_64</item>
         <item>recruiting_display_65</item>
         <item>recruiting_r_service_66</item>
-
     </string-array>
+    <string-array name="push_name">
+        <item>sports</item>
+        <item>game</item>
+        <item>nightfood</item>
+        <item>gonggu</item>
+        <item>carpool</item>
+        <item>study</item>
+        <item>trading</item>
+        <item>lost</item>
+        <item>recruiting</item>
+        <item>exchange</item>
+
+        <item>contest</item>
+        <item>intern</item>
+        <item>service</item>
+
+        <item>perf</item>
+        <item>seminar</item>
+        <item>presentation</item>
+
+        <item>scholarship</item>
+        <item>r_sports</item>
+        <item>r_perf</item>
+        <item>faith</item>
+        <item>display</item>
+        <item>r_service</item>
+    </string-array>
+    <string-array name="push_in_name">
+        <item>sports_in</item>
+        <item>game_in</item>
+        <item>nightfood_in</item>
+        <item>gonggu_in</item>
+        <item>carpool_in</item>
+        <item>study_in</item>
+        <item>trading_in</item>
+        <item>lost_in</item>
+        <item>recruiting_in</item>
+        <item>exchange_in</item>
+
+        <item>contest_in</item>
+        <item>intern_in</item>
+        <item>service_in</item>
+
+        <item>perf_in</item>
+        <item>seminar_in</item>
+        <item>presentation_in</item>
+
+        <item>scholarship_in</item>
+        <item>r_sports_in</item>
+        <item>r_perf_in</item>
+        <item>faith_in</item>
+        <item>display_in</item>
+        <item>r_service_in</item>
+    </string-array>
+
     <string-array name="category_name_hangul">
         <item>운동경기</item>
         <item>게임</item>

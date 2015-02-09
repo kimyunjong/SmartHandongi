@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,8 +22,10 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -78,15 +81,18 @@ public class Writing extends Activity implements OnClickListener {
     private final int REQ_CODE_PICK_CROP = 900003;
     private int has_pic = 0;
     int screen_height = 0;
+    int screen_width = 0;
+    String kakao_nick;
+
 
     Picture poster = new Picture();
-    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
+    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn, writing_edit_btn;
     ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img;
     ImageView writing_startdate_img, writing_enddate_img;
     Button big_category_btn, small_category_btn;
     EditText writing_title, writing_content, writing_link;
     ImageButton writing_additional_btn, writing_additional_hide_btn, writing_remove_pic_btn;
-    LinearLayout writing_additional, linear;
+    LinearLayout writing_additional, linear, entire_layout;
     ScrollView scroll;
 
     PhpUpload task;
@@ -191,7 +197,7 @@ public class Writing extends Activity implements OnClickListener {
         writing_additional_btn = (ImageButton)findViewById(R.id.writing_additional_btn);
         writing_additional_hide_btn = (ImageButton)findViewById(R.id.writing_additional_hide_btn);
         writing_cancel_btn  = (Button)findViewById(R.id.writing_cancel_btn);
-
+        writing_edit_btn  = (Button)findViewById(R.id.writing_edit_btn);
 
         writing_image_btn.setOnClickListener(this);
         writing_confirm_btn.setOnClickListener(this);
@@ -199,6 +205,7 @@ public class Writing extends Activity implements OnClickListener {
         writing_additional_btn.setOnClickListener(this);
         writing_additional_hide_btn.setOnClickListener(this);
         writing_cancel_btn.setOnClickListener(this);
+        writing_edit_btn.setOnClickListener(this);
 
         writing_title_img = (ImageView)findViewById(R.id.writing_title_img);
         writing_body_img = (ImageView)findViewById(R.id.writing_body_img);
@@ -219,16 +226,15 @@ public class Writing extends Activity implements OnClickListener {
         startDate_btn.setOnClickListener(this);
         endDate_btn.setOnClickListener(this);
 
-//        entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
-//        entire_layout.setOnTouchListener(new View.OnTouchListener() {
-//            public boolean onTouch(View v, MotionEvent event) {
-//                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputManager.hideSoftInputFromWindow(writing_title.getWindowToken(), 0);
-//                inputManager.hideSoftInputFromWindow(writing_content.getWindowToken(), 0);
-//                inputManager.hideSoftInputFromWindow(writing_link_text.getWindowToken(), 0);
-//                return true;
-//            }
-//        });
+        entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
+        entire_layout.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(writing_title.getWindowToken(), 0);
+                inputManager.hideSoftInputFromWindow(writing_content.getWindowToken(), 0);
+                return true;
+            }
+        });
 
         if(carrier.getEdit_count() == 0){
         //날짜표시
@@ -248,31 +254,32 @@ public class Writing extends Activity implements OnClickListener {
     public void preset(){
         String[] small_category, small_category_hangul;
 
+
         switch(carrier.getBig_category()) {                                         //대분류
-            case 1 : { big_category_btn.setText("일반공지"); break;}
-            case 2 : { big_category_btn.setText("대외활동"); break;}
-            case 3 : { big_category_btn.setText("공연/세미나"); break;}
-            case 4 : { big_category_btn.setText("리쿠르팅"); break;}
-            case 5 : { big_category_btn.setText("붙어라"); break;}
+            case "1" : { big_category_btn.setText("일반공지"); break;}
+            case "2" : { big_category_btn.setText("대외활동"); break;}
+            case "3" : { big_category_btn.setText("공연/세미나"); break;}
+            case "4" : { big_category_btn.setText("리쿠르팅"); break;}
+            case "5" : { big_category_btn.setText("붙어라"); break;}
         }
         big_category_img.setBackgroundResource(R.drawable.writing_category_empty);  //대분류 배경
 
         small_category = getResources().getStringArray(R.array.category_name);       //소분류
         small_category_hangul = getResources().getStringArray(R.array.category_name_hangul);
         for(int i = 0; i < small_category.length; i++){
-            if(carrier.getCategory().compareTo(small_category[i]) == 0){             //TODO 이거 PHP 건드려야 함. 테이블 하나 추가했던거!!
+            if(carrier.getCategory().compareTo(small_category[i]) == 0){
                 small_category_btn.setText(small_category_hangul[i]);
                 break;
             }
         }
-        if(carrier.getBig_category() == 1){                                         //소분류 배경
+        if(carrier.getBig_category().compareTo("1") == 0){                                         //소분류 배경
             small_category_img.setBackgroundResource(0);}
         else small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
 
         writing_title.setText(carrier.getTitle());                                  //제목
         writing_content.setText(carrier.getContent());                              //내용
 
-        writing_additional.setBackgroundResource(R.drawable.writing_additional_hide);   //+추가옵션 -> -추가옵션
+           //+추가옵션 -> -추가옵션
         start_dateLabel.setText(carrier.getStart_date());                           //시작일
         writing_startdate_img.setVisibility(GONE);
         end_dateLabel.setText(carrier.getEnd_date());                               //종료일
@@ -280,18 +287,19 @@ public class Writing extends Activity implements OnClickListener {
         writing_link.setText(carrier.getLink());                                    //링크
         has_pic = carrier.getHas_pic();                                             // 사진 유무
         if(carrier.getStart_date() != null || carrier.getEnd_date() != null || carrier.getLink() != null || carrier.getHas_pic() == 1){
+            writing_additional_btn.setVisibility(GONE);
+            writing_additional_hide_btn.setVisibility(VISIBLE);
             writing_additional.setVisibility(VISIBLE);
         }
 
-//        if(has_pic == 1){
-//            writing_preview_img.setVisibility(GONE);
-//            PostImageTask postImageTask = new PostImageTask(poster, carrier.getId(), writing_preview_img, writing_preview_img.getWidth());
-//            postImageTask.execute(0);
-//        }
-
-        //사진이 없는 경우 표시 안 되게
-        //사진불러오기 - 사진은 글 아이디에 맞는걸 가지고 와야함. 글 아이디를 미리 받아와야 함.
-        //글을 수정하는 PHP
+        if(has_pic == 1){
+            writing_preview_img.setBackgroundResource(0);
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            screen_width = metrics.widthPixels;
+            PostImageTask postImageTask = new PostImageTask(poster, carrier.getPost_id(), writing_preview_img, screen_width, 1);
+            postImageTask.execute(0);
+        }
     }
 
 
@@ -299,19 +307,19 @@ public class Writing extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.writing_confirm_btn:{
+            case R.id.writing_confirm_btn:{                                                                                                  //확인btn
                 phpCreate();
                 break;
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
             
-            case R.id.writing_image_btn:{
+            case R.id.writing_image_btn:{                                                                                                    //이미지업로드btn
                 Intent i = new Intent(Intent.ACTION_PICK);
                 i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 i.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, REQ_CODE_PICK_GALLERY);
                 break;
             }
-            case R.id.writing_additional_btn : {
+            case R.id.writing_additional_btn : {                                                                                             //+추가옵션btn
                 writing_additional_btn.setVisibility(GONE);
                 writing_additional_hide_btn.setVisibility(VISIBLE);
                 writing_additional.setVisibility(VISIBLE);
@@ -319,23 +327,19 @@ public class Writing extends Activity implements OnClickListener {
                 scroll.post(new Runnable() {
                     @Override
                     public void run() {
-                        // This method works but animates the scrolling
-                        // which looks weird on first load
-                        // scroll_view.fullScroll(View.FOCUS_DOWN);
-
-                        // This method works even better because there are no animations.
                         scroll.scrollTo(0, scroll.getBottom());
                     }
                 });
                 break;
             }
-            case R.id.writing_additional_hide_btn : {
+            case R.id.writing_additional_hide_btn : {                                                                                        //-추가옵션btn
                 writing_additional_hide_btn.setVisibility(GONE);
                 writing_additional_btn.setVisibility(VISIBLE);
                 writing_additional.setVisibility(GONE);
                 break;
             }
-            case R.id.writing_back_btn :{               //TODO 뒤로 가기를 눌렀을 때 이미 작성된 내용은 저장되지 않는다는 경고팝업 띄우기
+            case R.id.writing_back_btn :{               //TODO 뒤로 가기를 눌렀을 때 이미 작성된 내용은 저장되지 않는다는 경고팝업 띄우기               //뒤로가기btn
+                carrier.setBig_category(null);
                 carrier.setCategory(null);
                 carrier.setTitle(null);
                 carrier.setContent(null);
@@ -358,13 +362,13 @@ public class Writing extends Activity implements OnClickListener {
                 }
                 break;
             }
-            case R.id.writing_cancel_btn :{
+            case R.id.writing_cancel_btn :{                                                                                                 //취소btn
                 Intent intent = new Intent(Writing.this, MainActivity2.class).putExtra("carrier", carrier);
                 startActivity(intent);
                 finish();
                 break;
             }
-            case R.id.startdate_choose : {
+            case R.id.startdate_choose : {                                                                                                  //시작일btn
                 year = dateAndtime.get(Calendar.YEAR);
                 month = dateAndtime.get(Calendar.MONTH);
                 day = dateAndtime.get(Calendar.DAY_OF_MONTH);
@@ -376,7 +380,7 @@ public class Writing extends Activity implements OnClickListener {
                     end_dateLabel.setVisibility(VISIBLE);}
                 break;
             }
-            case R.id.enddate_choose : {
+            case R.id.enddate_choose : {                                                                                                    //종료일btn
                 year = dateAndtime.get(Calendar.YEAR);
                 month = dateAndtime.get(Calendar.MONTH);
                 day = dateAndtime.get(Calendar.DAY_OF_MONTH);
@@ -387,7 +391,7 @@ public class Writing extends Activity implements OnClickListener {
                    }
                 break;
             }
-            case R.id.big_category_btn : {
+            case R.id.big_category_btn : {                                                                                                  //대분류btn
                 new AlertDialog.Builder(this)
                         .setTitle("대분류")
                         .setItems(R.array.big_category,
@@ -395,14 +399,14 @@ public class Writing extends Activity implements OnClickListener {
                                     public void onClick(DialogInterface dialog, int which) {
                                         String[] temp = getResources().getStringArray(R.array.big_category);
                                         big_category_btn.setText(temp[which]);
-                                        if(temp[which].compareTo("일반공지") == 0){ carrier.setBig_category(1);}
-                                        if(temp[which].compareTo("대외활동") == 0){ carrier.setBig_category(2);}
-                                        if(temp[which].compareTo("공연/세미나") == 0){ carrier.setBig_category(3);}
-                                        if(temp[which].compareTo("리쿠르팅") == 0){ carrier.setBig_category(4);}
-                                        if(temp[which].compareTo("붙어라") == 0){ carrier.setBig_category(5);}
-                                        if(carrier.getBig_category() > 0 && carrier.getBig_category() < 6)
+                                        if(temp[which].compareTo("일반공지") == 0){ carrier.setBig_category("1");}
+                                        if(temp[which].compareTo("대외활동") == 0){ carrier.setBig_category("2");}
+                                        if(temp[which].compareTo("공연/세미나") == 0){ carrier.setBig_category("3");}
+                                        if(temp[which].compareTo("리쿠르팅") == 0){ carrier.setBig_category("4");}
+                                        if(temp[which].compareTo("붙어라") == 0){ carrier.setBig_category("5");}
+                                        if(Integer.parseInt(carrier.getBig_category()) > 0 && Integer.parseInt(carrier.getBig_category()) < 6)
                                             big_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                                        if(carrier.getBig_category() == 1){
+                                        if(carrier.getBig_category().compareTo("1") == 0){
                                             small_category_img.setBackgroundResource(0);         //일반공지인 경우 소분류 탭을 사라지게 만듬. 혹은 일반공지가 뜨게끔?
                                         }
                                         else small_category_img.setBackgroundResource(R.drawable.writing_small_category);
@@ -415,8 +419,8 @@ public class Writing extends Activity implements OnClickListener {
 
                 break;
             }
-            case R.id.small_category_btn : {
-                if(carrier.getBig_category() == 5) {  //TODO 붙어라!!
+            case R.id.small_category_btn : {                                                                                                          //소분류btn
+                if(carrier.getBig_category().compareTo("5") == 0) {  //TODO 붙어라!!
                     new AlertDialog.Builder(this)
                             .setTitle("소분류")
                             .setItems(R.array.small_category_together,
@@ -440,7 +444,7 @@ public class Writing extends Activity implements OnClickListener {
                             .setNegativeButton("취소", null)
                             .show();
                 }
-                if(carrier.getBig_category() == 2) {   //TODO 대외활동!!!!!
+                if(carrier.getBig_category().compareTo("2") == 0) {   //TODO 대외활동!!!!!
                     new AlertDialog.Builder(this)
                             .setTitle("소분류")
                             .setItems(R.array.small_category_outer,
@@ -457,7 +461,7 @@ public class Writing extends Activity implements OnClickListener {
                             .setNegativeButton("취소", null)
                             .show();
                 }
-                if(carrier.getBig_category() == 3) {     //TODO 공연세미나!!!!!!
+                if(carrier.getBig_category().compareTo("3") == 0) {     //TODO 공연세미나!!!!!!
                     new AlertDialog.Builder(this)
                             .setTitle("소분류")
                             .setItems(R.array.small_category_seminar,
@@ -474,7 +478,7 @@ public class Writing extends Activity implements OnClickListener {
                             .setNegativeButton("취소", null)
                             .show();
                 }
-                if(carrier.getBig_category() == 4) {        //TODO 리쿠르팅!!!
+                if(carrier.getBig_category().compareTo("4") == 0) {        //TODO 리쿠르팅!!!
                     new AlertDialog.Builder(this)
                             .setTitle("소분류")
                             .setItems(R.array.small_category_recruiting,
@@ -496,16 +500,19 @@ public class Writing extends Activity implements OnClickListener {
                 }
                 break;
             }
-            case R.id.writing_remove_pic_btn : {
+            case R.id.writing_remove_pic_btn : {                                                                                                        //사진삭제btn
                 has_pic = 0;
                 ((ImageView) findViewById(R.id.writing_preview_img)).setImageBitmap(null);
                 writing_preview_img.setBackgroundResource(R.drawable.writing_picture);
                 writing_remove_pic_btn.setVisibility(GONE);
             }
+            case R.id.writing_edit_btn : {                                                                                                              //수정하기btn
+            }
         }
     }
 
     public void onBackPressed(){
+        carrier.setBig_category(null);
         carrier.setCategory(null);
         carrier.setTitle(null);
         carrier.setContent(null);
@@ -534,7 +541,7 @@ public class Writing extends Activity implements OnClickListener {
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
-            String posting_id = null;
+            String posting_id = null, result;
             try {
                 //연결 URL설정
                 URL url = new URL(urls[0]);
@@ -564,6 +571,8 @@ public class Writing extends Activity implements OnClickListener {
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
                 posting_id = jo.getString("id");
+//                result = jo.getString("result");                                                       //php를 통해서 업로드가 되었는지 확인하기 위해 $result의 값을 받아온다.
+//                Log.d("result", result);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -575,8 +584,9 @@ public class Writing extends Activity implements OnClickListener {
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+
             //TODO 확인 혹은 취소 하는 팝업 표시
+
         }
     }
 
@@ -584,13 +594,14 @@ public class Writing extends Activity implements OnClickListener {
 
         int possible; // 날짜계산한게 맞나 안맞나 체크
 
-        String title, content,kakao_nick, link;
-        String group_name = "", group_code = "";
-
+        String title_message, message, title, content, link;
+        String group_code = "", group_name = "";
 
         title = writing_title.getText().toString();
         Log.d("타이틀",title);
         content = writing_content.getText().toString();
+
+        Log.d("content", content);
         kakao_nick = carrier.getNickname();
         link = writing_link.getText().toString();
 
@@ -624,33 +635,41 @@ public class Writing extends Activity implements OnClickListener {
             e.printStackTrace();
         }
 
+        if(carrier.getEdit_count() == 1){
+            message = "글을 수정하시겠습니까?";
+            title_message = "게시물 수정";
+        }
+        else {
+            message = "글을 등록하시겠습니까?";
+            title_message = "게시물 등록";
+        }
+
         carrier.setTitle(title);
         carrier.setContent(content);
         carrier.setLink(link);
         carrier.setGroup_name(group_name);
         carrier.setGroup_code(group_code);
-        carrier.setNickname(kakao_nick);
 
-//        carrier.setBig_category(1);
-//
-//        if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getCategory() == null)
-//        {
-//            Toast toastView =Toast.makeText(this, "글을 올바르게 작성하세요", Toast.LENGTH_SHORT);
-//            toastView.setGravity(Gravity.CENTER,0,0);
-//            toastView.show();
-//        }
-//        else {
+        if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getBig_category().compareTo("0") == 0 )
+        {
+            Toast toastView =Toast.makeText(this, "글을 올바르게 작성하세요", Toast.LENGTH_SHORT);
+            toastView.setGravity(Gravity.CENTER,0,0);
+            toastView.show();
+        }
+        else
             {
             new AlertDialog.Builder(this)
-                    .setTitle("게시물 등록")
-                    .setMessage("글을 등록하시겠습니까?")
+                    .setTitle(title_message)
+                    .setMessage(message)
                     .setIcon(R.drawable.handongi)
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                                    + "kakao_id=" + carrier.getId()
-                                    + "&kakao_nick=" + carrier.getNickname()
+                                    + "posting_id=" + carrier.getPost_id()
+                                    + "&kakao_id=" + carrier.getId()
+                                    + "&kakao_nick=" + kakao_nick
+                                    + "&big_category=" + carrier.getBig_category()
                                     + "&category=" + carrier.getCategory()
                                     + "&group_code=" + carrier.getGroup_code()
                                     + "&group_name=" + carrier.getGroup_name()
@@ -660,34 +679,38 @@ public class Writing extends Activity implements OnClickListener {
                                     + "&posting_date=" + carrier.getPosting_date()
                                     + "&start_date=" + carrier.getStart_date()
                                     + "&end_date=" + carrier.getEnd_date()
-                                    + "&has_pic=" + has_pic);
+                                    + "&has_pic=" + has_pic
+                                    + "&edit_count=" + carrier.getEdit_count());
+//                            Log.d("postingid", String.valueOf(carrier.getPost_id()));
+//                            Log.d("bigcategory", String.valueOf(carrier.getBig_category()));
+//                            Log.d("category", String.valueOf(carrier.getCategory()));
+//                            Log.d("title", String.valueOf(carrier.getTitle()));
+//                            Log.d("content", String.valueOf(carrier.getContent()));
+//                            Log.d("startdate", String.valueOf(carrier.getStart_date()));
+//                            Log.d("enddate", String.valueOf(carrier.getEnd_date()));
+//                            Log.d("editcount", String.valueOf(carrier.getEdit_count()));
 
                             task = new PhpUpload();
                             task.execute(carrier.getUpload_url());
-                            carrier.setFromWriting(1);
+                                                                   //edit count가 0이면 writing에서 온 것이 아니기 때문에
+                            carrier.setFromWriting(1);                                          //from edit을 1로 만들어준다.
+                            carrier.setFromPostDetail(0);
+                            carrier.setEdit_count(0);
+
                             Intent intent = new Intent(Writing.this, PostDetail.class).putExtra("carrier", carrier);
-                            startActivity(intent);
                             finish();
-
-
+                            startActivity(intent);
                         }
                     })
                     .setNegativeButton("취소", null)
                     .show();
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
-
-
         }
-
-
-
-
-
     }
+
 
     private void DoPhotoUpLoad(String fileName, String posting_id){
         HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/photo/upload.php?id=" + posting_id, posting_id, fileName);
-//        HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/upload.php?id=" + posting_id, posting_id, fileName);
     }
 
     private void HttpPhotoUpload(String url, String posting_id, String fileName){

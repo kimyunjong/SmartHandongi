@@ -24,6 +24,7 @@ import java.net.URLEncoder;
  * Created by LEWIS on 2015-01-28.
  */
 public class PushSetup extends Activity implements View.OnClickListener {
+
     int sports, game, nightfood, id, gonggu, carpool, study, trading, lost, recruiting, exchange;
     int contest, intern, service, perf, seminar, presentation;
     int scholarship, r_sports, r_perf, faith, display, r_service;
@@ -493,6 +494,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
 //                        push_list = new PushDatabase(jo.getInt("id"), jo.getString("kakao_id"), jo.getString("kakao_nick"),
 //                                jo.getInt("together_sports_1"), jo.getInt("together_game_2"), jo.getInt("together_nightfood_3"));  //1이면 클릭 0이면 언클릭이 되게 설정
                         id = jo.getInt("id");
+
                         sports      = sports_in     = jo.getInt("together_sports_1");
                         game        = game_in       = jo.getInt("together_game_2");
                         nightfood   = nightfood_in  = jo.getInt("together_nightfood_3");
@@ -502,7 +504,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                         trading     = trading_in    = jo.getInt("together_trading_7");
                         lost        = lost_in       = jo.getInt("together_lost_8");
                         recruiting  = recruiting_in = jo.getInt("together_recruiting_9");
-                        exchange    = exchange_in = jo.getInt("together_exchange_10");
+                        exchange    = exchange_in   = jo.getInt("together_exchange_10");
 
                         contest     = contest_in    = jo.getInt("outer_contest_21");
                         intern      = intern_in     = jo.getInt("outer_intern_22");

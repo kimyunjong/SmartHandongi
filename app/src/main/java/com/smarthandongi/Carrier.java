@@ -16,7 +16,7 @@ public class Carrier implements Serializable {
     private String group_name = "";
     private String title = null;
     private String content = null;
-    private int big_category = 0;
+    private String big_category = "0";
     private String category = null;
     private String image_name = null;
     private String link = null;
@@ -32,6 +32,7 @@ public class Carrier implements Serializable {
     private String Group_pw = null;
     private String upload_url=null;
     private int fromWriting=0;
+    private int fromPostDetail =0;
 
 
     public void setFromWriting(int fromWriting) {this.fromWriting=fromWriting;}
@@ -108,9 +109,9 @@ public class Carrier implements Serializable {
 
     public void setSelector(int selector) { this.selector = selector;}
 
-    public int getBig_category() { return big_category;}
+    public String getBig_category() { return big_category;}
 
-    public void setBig_category(int big_category) { this.big_category = big_category;}
+    public void setBig_category(String big_category) { this.big_category = big_category;}
 
     public int getEdit_count() { return edit_count;}
 
@@ -123,5 +124,10 @@ public class Carrier implements Serializable {
     public int getPost_id() { return post_id;}
 
     public void setPost_id(int post_id) { this.post_id = post_id;}
+
+    public int getFromPostDetail() { return fromPostDetail;}
+
+    public void setFromPostDetail(int fromPostDetail) { this.fromPostDetail = fromPostDetail;}
+
 
 }

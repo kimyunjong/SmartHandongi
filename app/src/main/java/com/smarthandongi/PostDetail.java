@@ -29,6 +29,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 /**
@@ -39,6 +40,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private Carrier carrier;
     private PostDatabase post;
     private PostDB_Php postdbphp;
+    private DeletePhp del_php;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link,
                      type;
 
@@ -79,8 +81,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
         review_show_btn.setOnClickListener(this);
         edit_btn.setOnClickListener(this);
+        del_btn.setOnClickListener(this);
         scrap_btn.setOnClickListener(this);
-
+        report_btn.setOnClickListener(this);
 
         //텍스트뷰
         start_day=(TextView)findViewById(R.id.pos_start_day);
@@ -102,6 +105,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         if(carrier.getFromWriting()==1) {
 
             phpCreate();
+
             new AlertDialog.Builder(this)
                     .setTitle("푸시알람설정")
                     .setMessage("바로 푸시를 보내시겠습니까?")
@@ -119,7 +123,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
         else
         {
             if(post.getHas_pic().compareTo("1")==0) {
-
                 construction();
             }
 
@@ -158,17 +161,51 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.pos_edit_btn : {
+
+                    if(carrier.getFromWriting() == 0){
+                    carrier.setPost_id(post.getId());
+                    carrier.setBig_category(post.getBig_category());
+                    carrier.setCategory(post.getCategory());
+                    carrier.setTitle(post.getTitle());
+                    carrier.setContent(post.getContent());
+                    carrier.setStart_date(post.getStart_date());
+                    carrier.setEnd_date(post.getEnd_date());
+                    carrier.setLink(post.getLink());
+                    carrier.setHas_pic(Integer.parseInt(post.getHas_pic()));
+                }
+                else {
+                    try {
+                        carrier.setTitle(URLDecoder.decode(carrier.getTitle(), "UTF-8"));
+                        carrier.setContent(URLDecoder.decode(carrier.getContent(), "UTF-8"));
+                        carrier.setNickname(URLDecoder.decode(carrier.getNickname(), "UTF-8"));
+                        carrier.setLink(URLDecoder.decode(carrier.getLink(), "UTF-8"));
+                        carrier.setGroup_name(URLDecoder.decode(carrier.getGroup_name(), "UTF-8"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 carrier.setEdit_count(1);
-                carrier.setBig_category(Integer.valueOf(post.getBig_category()));
-                carrier.setCategory(post.getCategory());
-                carrier.setTitle(post.getTitle());
-                carrier.setContent(post.getContent());
-                carrier.setStart_date(post.getStart_date());
-                carrier.setEnd_date(post.getEnd_date());
-                carrier.setLink(post.getLink());
-                carrier.setHas_pic(Integer.valueOf(post.getHas_pic()));
+                carrier.setFromPostDetail(1);
+                carrier.setFromWriting(0);
 
                 Intent intent = new Intent(PostDetail.this, Writing.class).putExtra("carrier", carrier);
+                finish();
+                startActivity(intent);
+                break;
+            }
+            case R.id.pos_report_btn : {
+                //신고하시겠습니까 메시지가 뜨고 난 후에 다음 엑티비티로.
+                //넘어갈 때 필요한 변수,   게시물 아이디, 카
+                Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
+                finish();
+                startActivity(intent);
+                break;
+            }
+            case R.id.pos_del_btn : {
+                delPhp();
+                Log.d("delete_posting_id", String.valueOf(post.getId()));
+
+                Intent intent = new Intent(PostDetail.this, MainActivity2.class).putExtra("carrier", carrier);
                 finish();
                 startActivity(intent);
                 break;
@@ -233,15 +270,16 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
                     post_list.add(new PostDatabase(
-                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"),jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
+                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                             jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
                     ));
 
                     System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
                 }
+
                 posting_id=ja.getJSONObject(0).getInt("id");
                 System.out.println(posting_id);
-
+                carrier.setPost_id(posting_id);
                 if(ja.getJSONObject(0).getString("has_pic").compareTo("1")==0)
                     setContentView(R.layout.post_detailwpic);
                 start_day.setText(ja.getJSONObject(0).getString("start_date"));
@@ -251,6 +289,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 post_day.setText(ja.getJSONObject(0).getString("posting_date"));
                 title.setText(ja.getJSONObject(0).getString("title"));
                 content.setText(ja.getJSONObject(0).getString("content"));
+
                 scrap_btn.setVisibility(View.INVISIBLE);
                 report_btn.setVisibility(View.INVISIBLE);
                 edit_btn.setVisibility(View.VISIBLE);
@@ -321,5 +360,58 @@ public class PostDetail extends Activity implements View.OnClickListener{
             //
         } // try
     } // HttpPostData
+    public void delPhp(){
+        del_php = new DeletePhp();
+        del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
+    }
 
+    public class DeletePhp extends AsyncTask<String, Integer, String>{
+
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str = "";
+            String result = "";
+
+            while (return_str.equalsIgnoreCase("")) {
+                try {
+                    URL data_url = new URL(urls[0]);
+                    HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                    if (conn != null) {
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                            for (; ; ) {
+                                String line = br.readLine();
+                                if (line == null) break;
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    JSONObject root = new JSONObject(jsonHtml.toString());
+                    JSONArray ja = root.getJSONArray("results");
+                    JSONObject jo = ja.getJSONObject(0);
+                    result = jo.getString("result");                                                       //php를 통해서 업로드가 되었는지 확인하기 위해 $result의 값을 받아온다.
+                    Log.d("result", result);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return_str = jsonHtml.toString();
+            }
+            Log.v("연결 시도", "연결되어라doinbackground$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
+            return jsonHtml.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 }
