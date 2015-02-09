@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,10 +49,12 @@ public class GroupSearch extends Activity {
     private ArrayList<GroupDatabase> filtered_list = new ArrayList<GroupDatabase>();
     private GroupPhp group_php;
     EditText group_search;
-    RelativeLayout layoutView;
+    RelativeLayout layoutView,unresistered_screen;
+    LinearLayout group_listitem;
     String str=null;
     Button backward_btn,unresistered_btn,search_cancel_btn;
-    ImageView search_cancel_img,search_glass_img;
+    ImageView search_cancel_img,search_glass_img,search_please,unresistered_background,background_hidden;
+    TextView unresistered;
 
 
     @Override
@@ -62,8 +66,27 @@ public class GroupSearch extends Activity {
         group_php = new GroupPhp(group_list,temp_list,this);
         group_php.execute("http://hungry.portfolio1000.com/smarthandongi/group.php");
 
+        search_cancel_img=(ImageView)findViewById(R.id.search_cancel_img);
+        search_glass_img=(ImageView)findViewById(R.id.search_glass_img);
+        search_please=(ImageView)findViewById(R.id.search_please);
+        unresistered_background=(ImageView)findViewById(R.id.unresistered_background);
+        background_hidden=(ImageView)findViewById(R.id.background_hidden);
+
+        unresistered_screen=(RelativeLayout)findViewById(R.id.unresistered_screen);
+
+        unresistered=(TextView)findViewById(R.id.unresistered);
 
         group_search = (EditText)findViewById(R.id.groupsearch);
+        group_search.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                group_search.setCursorVisible(true);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(group_search,0);
+                search_please.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
         listview = (ListView)findViewById(R.id.list);
         layoutView = (RelativeLayout)findViewById(R.id.screen);
         layoutView.setOnTouchListener(new View.OnTouchListener() {
@@ -71,6 +94,8 @@ public class GroupSearch extends Activity {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(group_search
                         .getWindowToken(), 0);
+                group_search.setCursorVisible(false);
+                search_please.setVisibility(View.INVISIBLE);
                 return true;
             }
         });
@@ -95,6 +120,18 @@ public class GroupSearch extends Activity {
             @Override
             public void afterTextChanged(Editable editable) {
                 // TODO Auto-generated method stub
+                search_glass_img.setVisibility(View.INVISIBLE);
+                search_cancel_img.setVisibility(View.VISIBLE);
+                search_cancel_btn=(Button)findViewById(R.id.search_cancel_btn);
+                search_cancel_btn.setVisibility(View.VISIBLE);
+                search_cancel_btn.setOnClickListener(new Button.OnClickListener () {
+                    public void onClick(View v) {
+                        group_search.setText("");
+                        search_cancel_img.setVisibility(View.INVISIBLE);
+                        search_glass_img.setVisibility(View.VISIBLE);
+                    }
+                });
+
                 str = group_search.getText().toString();
                 filtered_list.removeAll(filtered_list);
                 Log.d("test", Integer.toString(temp_list.size()));
@@ -104,38 +141,47 @@ public class GroupSearch extends Activity {
                         filtered_list.add(new GroupDatabase(temp_list.get(i).getId(), temp_list.get(i).getGroup_name(),
                                                             temp_list.get(i).getNickname_list(),temp_list.get(i).getGroup_code(),
                                                             temp_list.get(i).getGroup_pw()));
+
                         adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
                         listview.setAdapter(adapter);
                         Log.d("filtered_list", Integer.toString(filtered_list.size()));
+
                     }
                 }
 
+
+
                 if(str.length()>1&&filtered_list.size()==0) {
                     listview.setVisibility(View.INVISIBLE);
-
-                    //LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
-                    //EditText unresistered = (EditText)findViewById(R.id.unresistered);
-                    //popup.setVisibility(View.VISIBLE);
-                    //unresistered.setText(str);
+                    background_hidden.setVisibility(View.GONE);
+                    unresistered_background.setVisibility(View.VISIBLE);
+                    unresistered_screen.setVisibility(View.VISIBLE);
+                    unresistered.setText("\""+str+"\"");
 
                 }
                 else
                 {
-                    listview.setVisibility(View.VISIBLE);
-                    //LinearLayout popup = (LinearLayout)findViewById(R.id.group_popup);
-                    //popup.setVisibility(View.INVISIBLE);
+
+                        listview.setVisibility(View.VISIBLE);
+                        unresistered_background.setVisibility(View.INVISIBLE);
+                        unresistered_screen.setVisibility(View.INVISIBLE);
+                        if(filtered_list.size()!=0) {
+                            background_hidden.getLayoutParams().height=getTotalHeightOfListView(listview);
+                            background_hidden.setVisibility(View.VISIBLE);
+                            Log.d("이거되는건가", "제발되람고");
+                            unresistered_background.setVisibility(View.VISIBLE);
+                            Log.d("이거되는건가","아마될거야아마아망마아마");
+
+                        }
+
                 }
 
             }
         };
-
-
         group_search.addTextChangedListener(watcher);
 
-        //미등록단체 확인하기
-        //unresistered_forward_btn = (Button)findViewById(R.id.unresistered_btn);
-        /*
-        unresistered_forward_btn.setOnClickListener(new Button.OnClickListener() {
+        unresistered_btn = (Button)findViewById(R.id.unresistered_btn);
+        unresistered_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 if(filtered_list.size()==0&&group_search.getText().toString().length()!=0) {
                     Log.d("선택된거",str);
@@ -146,7 +192,7 @@ public class GroupSearch extends Activity {
                 }
 
             }
-        });*/
+        });
 
         backward_btn = (Button)findViewById(R.id.group_backward_btn);
         backward_btn.setOnClickListener(new Button.OnClickListener() {
@@ -156,6 +202,21 @@ public class GroupSearch extends Activity {
                 finish();
             }
         });
+    }
+
+    public int getTotalHeightOfListView(ListView listview) { ///////리스트뷰의 높이를 구하기 위한 함수
+        ListAdapter mAdapter = listview.getAdapter();
+        int totalHeight=0;
+
+        for(int i=0; i<mAdapter.getCount();i++) {
+            View mView=mAdapter.getView(i,null,listview);
+            mView.measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            totalHeight += mView.getMeasuredHeight();
+
+        }
+        return totalHeight;
     }
 
     AdapterView.OnItemClickListener groupListClickListener = new AdapterView.OnItemClickListener() {

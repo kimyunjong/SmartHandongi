@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="단체이름"
-        android:textSize="18dp"
-        android:id="@+id/group_name"
-        />
+    android:layout_height="match_parent"
+    android:id="@+id/group_listitem"
+    >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ffc0dde1"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="35dp"
+            android:background="@drawable/bottom"
+            />
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="단체이름"
+        android:gravity="center_vertical"
+        android:textSize="14.5dp"
+        android:textColor="#58595B"
+        android:id="@+id/group_name"
+        android:background="@drawable/bottom"
+
+        />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:alpha="0.5"
         ></LinearLayout>
 
 </LinearLayout>
