@@ -29,7 +29,6 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 
 /**
@@ -170,35 +169,30 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
             case R.id.pos_edit_btn : {
 
-                    if(carrier.getFromWriting() == 0){
-                    carrier.setPost_id(post.getId());
-                    carrier.setBig_category(post.getBig_category());
-                    carrier.setCategory(post.getCategory());
-                    carrier.setTitle(post.getTitle());
-                    carrier.setContent(post.getContent());
-                    carrier.setStart_date(post.getStart_date());
-                    carrier.setEnd_date(post.getEnd_date());
-                    carrier.setLink(post.getLink());
-                    carrier.setHas_pic(Integer.parseInt(post.getHas_pic()));
-                }
-                else {
-                    try {
-                        carrier.setTitle(URLDecoder.decode(carrier.getTitle(), "UTF-8"));
-                        carrier.setContent(URLDecoder.decode(carrier.getContent(), "UTF-8"));
-                        carrier.setNickname(URLDecoder.decode(carrier.getNickname(), "UTF-8"));
-                        carrier.setLink(URLDecoder.decode(carrier.getLink(), "UTF-8"));
-                        carrier.setGroup_name(URLDecoder.decode(carrier.getGroup_name(), "UTF-8"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                carrier.setPost_id(post.getId());
+                carrier.setBig_category(post.getBig_category());
+                carrier.setCategory(post.getCategory());
+                carrier.setTitle(post.getTitle());
+                carrier.setContent(post.getContent());
+                carrier.setStart_date(post.getStart_date());
+                carrier.setEnd_date(post.getEnd_date());
+                carrier.setLink(post.getLink());
+                carrier.setHas_pic(Integer.parseInt(post.getHas_pic()));
+
+                Log.d("postingid", String.valueOf(carrier.getPost_id()));
+                Log.d("bigcategory", String.valueOf(carrier.getBig_category()));
+                Log.d("category", carrier.getCategory());
+                Log.d("title", carrier.getTitle());
+                Log.d("content", carrier.getContent());
+                Log.d("startdate", carrier.getStart_date());
+                Log.d("enddate", carrier.getEnd_date());
+                Log.d("editcount", String.valueOf(carrier.getEdit_count()));
+
                 carrier.setEdit_count(1);
-                carrier.setFromPostDetail(1);
-                carrier.setFromWriting(0);
 
                 Intent intent = new Intent(PostDetail.this, Writing.class).putExtra("carrier", carrier);
-                finish();
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.pos_report_btn : {
@@ -213,12 +207,22 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.pos_del_btn : {
-                delPhp();
-                Log.d("delete_posting_id", String.valueOf(post.getId()));
-
-                Intent intent = new Intent(PostDetail.this, MainActivity2.class).putExtra("carrier", carrier);
-                finish();
-                startActivity(intent);
+                new AlertDialog.Builder(this)
+                        .setTitle("삭제")
+                        .setMessage("삭제하시겠습니까?")
+                        .setIcon(R.drawable.handongi)
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                delPhp();
+                                Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
+                                startActivity(intent);
+                                finish();
+                                Log.d("delete_posting_id", String.valueOf(post.getId()));
+                            }
+                        })
+                        .setNegativeButton("취소", null)
+                        .show();
                 break;
             }
         }
@@ -290,7 +294,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
                 posting_id=ja.getJSONObject(0).getInt("id");
                 System.out.println(posting_id);
-                carrier.setPost_id(posting_id);
+                //carrier.setPost_id(posting_id);
                 if(ja.getJSONObject(0).getString("has_pic").compareTo("1")==0)
                 {
                     construction();

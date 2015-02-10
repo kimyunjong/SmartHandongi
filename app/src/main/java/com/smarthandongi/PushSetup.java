@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +34,10 @@ public class PushSetup extends Activity implements View.OnClickListener {
     int scholarship_in, r_sports_in, r_perf_in, faith_in, display_in, r_service_in;
 
     Carrier carrier;
-    CheckBox outer_chk, together_chk, recruiting_chk, seminar_chk; //대분류    아래는 소분류
-    CheckBox push_sports_chk, push_game_chk, push_nightfood_chk, push_gonggu_chk, push_carpool_chk, push_study_chk, push_trading_chk, push_lost_chk, push_recruiting_chk, push_exchange_chk;
-    CheckBox push_contest_chk, push_intern_chk, push_service_chk, push_perf_chk, push_seminar_chk, push_presentation_chk;
-    CheckBox push_scholarship_chk, push_r_sports_chk, push_r_perf_chk, push_faith_chk, push_display_chk, push_r_service_chk;
+    ImageButton outer_btn, together_btn, recruiting_btn, seminar_btn; //대분류    아래는 소분류
+    ImageButton push_sports_btn, push_game_btn, push_nightfood_btn, push_gonggu_btn, push_carpool_btn, push_study_btn, push_trading_btn, push_lost_btn, push_recruiting_btn, push_exchange_btn;
+    ImageButton push_contest_btn, push_intern_btn, push_service_btn, push_perf_btn, push_seminar_btn, push_presentation_btn;
+    ImageButton push_scholarship_btn, push_r_sports_btn, push_r_perf_btn, push_faith_btn, push_display_btn, push_r_service_btn;
     Button push_save_btn;
     CollectPushInfoPhp push_php;
     SendPushInfoPhp send_php;
@@ -57,68 +57,68 @@ public class PushSetup extends Activity implements View.OnClickListener {
         carrier = (Carrier) getIntent().getSerializableExtra("carrier");
 
         // 대분류 체크박스
-        together_chk = (CheckBox)findViewById(R.id.together_chk);
-        outer_chk = (CheckBox)findViewById(R.id.outer_chk);
-        recruiting_chk = (CheckBox)findViewById(R.id.recruiting_chk);
-        seminar_chk = (CheckBox)findViewById(R.id.seminar_chk);
+        together_btn = (ImageButton)findViewById(R.id.together_btn);
+        outer_btn = (ImageButton)findViewById(R.id.outer_btn);
+        recruiting_btn = (ImageButton)findViewById(R.id.recruiting_btn);
+        seminar_btn = (ImageButton)findViewById(R.id.seminar_btn);
 
         // 소분류 체크박스
-        push_sports_chk = (CheckBox) findViewById(R.id.push_sports_chk);
-        push_game_chk = (CheckBox) findViewById(R.id.push_game_chk);
-        push_nightfood_chk = (CheckBox) findViewById(R.id.push_nightfood_chk);
-        push_gonggu_chk = (CheckBox) findViewById(R.id.push_gonggu_chk);
-        push_carpool_chk = (CheckBox) findViewById(R.id.push_carpool_chk);
-        push_study_chk = (CheckBox) findViewById(R.id.push_study_chk);
-        push_trading_chk = (CheckBox) findViewById(R.id.push_trading_chk);
-        push_lost_chk = (CheckBox) findViewById(R.id.push_lost_chk);
-        push_recruiting_chk = (CheckBox) findViewById(R.id.push_recruiting_chk);
-        push_exchange_chk = (CheckBox) findViewById(R.id.push_exchange_chk);
+        push_sports_btn = (ImageButton) findViewById(R.id.push_sports_btn);
+        push_game_btn = (ImageButton) findViewById(R.id.push_game_btn);
+        push_nightfood_btn = (ImageButton) findViewById(R.id.push_nightfood_btn);
+        push_gonggu_btn = (ImageButton) findViewById(R.id.push_gonggu_btn);
+        push_carpool_btn = (ImageButton) findViewById(R.id.push_carpool_btn);
+        push_study_btn = (ImageButton) findViewById(R.id.push_study_btn);
+        push_trading_btn = (ImageButton) findViewById(R.id.push_trading_btn);
+        push_lost_btn = (ImageButton) findViewById(R.id.push_lost_btn);
+        push_recruiting_btn = (ImageButton) findViewById(R.id.push_recruiting_btn);
+        push_exchange_btn = (ImageButton) findViewById(R.id.push_exchange_btn);
 
-        push_contest_chk = (CheckBox) findViewById(R.id.push_contest_chk);
-        push_intern_chk = (CheckBox) findViewById(R.id.push_intern_chk);
-        push_service_chk = (CheckBox) findViewById(R.id.push_service_chk);
+        push_contest_btn = (ImageButton) findViewById(R.id.push_contest_btn);
+        push_intern_btn = (ImageButton) findViewById(R.id.push_intern_btn);
+        push_service_btn = (ImageButton) findViewById(R.id.push_service_btn);
 
-        push_perf_chk = (CheckBox) findViewById(R.id.push_perf_chk);
-        push_seminar_chk = (CheckBox) findViewById(R.id.push_seminar_chk);
-        push_presentation_chk = (CheckBox) findViewById(R.id.push_presentation_chk);
+        push_perf_btn = (ImageButton) findViewById(R.id.push_perf_btn);
+        push_seminar_btn = (ImageButton) findViewById(R.id.push_seminar_btn);
+        push_presentation_btn = (ImageButton) findViewById(R.id.push_presentation_btn);
 
-        push_scholarship_chk = (CheckBox) findViewById(R.id.push_scholarship_chk);
-        push_r_sports_chk = (CheckBox) findViewById(R.id.push_r_sports_chk);
-        push_r_perf_chk = (CheckBox) findViewById(R.id.push_r_perf_chk);
-        push_faith_chk = (CheckBox) findViewById(R.id.push_faith_chk);
-        push_display_chk = (CheckBox) findViewById(R.id.push_display_chk);
-        push_r_service_chk = (CheckBox) findViewById(R.id.push_r_service_chk);
+        push_scholarship_btn = (ImageButton) findViewById(R.id.push_scholarship_btn);
+        push_r_sports_btn = (ImageButton) findViewById(R.id.push_r_sports_btn);
+        push_r_perf_btn = (ImageButton) findViewById(R.id.push_r_perf_btn);
+        push_faith_btn = (ImageButton) findViewById(R.id.push_faith_btn);
+        push_display_btn = (ImageButton) findViewById(R.id.push_display_btn);
+        push_r_service_btn = (ImageButton) findViewById(R.id.push_r_service_btn);
 
-        together_chk.setOnClickListener(this);
-        outer_chk.setOnClickListener(this);
-        seminar_chk.setOnClickListener(this);
-        recruiting_chk.setOnClickListener(this);
+        together_btn.setOnClickListener(this);
+        outer_btn.setOnClickListener(this);
+        seminar_btn.setOnClickListener(this);
+        recruiting_btn.setOnClickListener(this);
 
-        push_sports_chk.setOnClickListener(this);
-        push_game_chk.setOnClickListener(this);
-        push_nightfood_chk.setOnClickListener(this);
-        push_gonggu_chk.setOnClickListener(this);
-        push_carpool_chk.setOnClickListener(this);
-        push_study_chk.setOnClickListener(this);
-        push_trading_chk.setOnClickListener(this);
-        push_lost_chk.setOnClickListener(this);
-        push_recruiting_chk.setOnClickListener(this);
-        push_exchange_chk.setOnClickListener(this);
+        push_sports_btn.setOnClickListener(this);
+        push_game_btn.setOnClickListener(this);
+        push_nightfood_btn.setOnClickListener(this);
+        push_gonggu_btn.setOnClickListener(this);
+        push_carpool_btn.setOnClickListener(this);
+        push_study_btn.setOnClickListener(this);
+        push_trading_btn.setOnClickListener(this);
+        push_lost_btn.setOnClickListener(this);
+        push_recruiting_btn.setOnClickListener(this);
+        push_exchange_btn.setOnClickListener(this);
 
-        push_contest_chk.setOnClickListener(this);
-        push_intern_chk.setOnClickListener(this);
-        push_service_chk.setOnClickListener(this);
+        push_contest_btn.setOnClickListener(this);
+        push_intern_btn.setOnClickListener(this);
+        push_service_btn.setOnClickListener(this);
 
-        push_perf_chk.setOnClickListener(this);
-        push_seminar_chk.setOnClickListener(this);
-        push_presentation_chk.setOnClickListener(this);
+        push_perf_btn.setOnClickListener(this);
+        push_seminar_btn.setOnClickListener(this);
+        push_presentation_btn.setOnClickListener(this);
 
-        push_scholarship_chk.setOnClickListener(this);
-        push_r_sports_chk.setOnClickListener(this);
-        push_r_perf_chk.setOnClickListener(this);
-        push_faith_chk.setOnClickListener(this);
-        push_display_chk.setOnClickListener(this);
-        push_r_service_chk.setOnClickListener(this);
+        push_scholarship_btn.setOnClickListener(this);
+        push_r_sports_btn.setOnClickListener(this);
+        push_r_perf_btn.setOnClickListener(this);
+        push_faith_btn.setOnClickListener(this);
+        push_display_btn.setOnClickListener(this);
+        push_r_service_btn.setOnClickListener(this);
 
         push_save_btn = (Button) findViewById(R.id.push_save_btn);
         push_save_btn.setOnClickListener(this);
@@ -129,9 +129,9 @@ public class PushSetup extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.together_chk :{
+            case R.id.together_btn :{
                 if(sports == 0 || game == 0 || nightfood == 0 || gonggu == 0 || carpool == 0 || study == 0 || trading == 0 || lost == 0 || recruiting == 0 || exchange == 0) {
-                    together_chk.setChecked(true);
+                    together_btn.setBackgroundResource(R.drawable.push_together_on);
                     sports = 1;
                     game = 1;
                     nightfood = 1;
@@ -142,19 +142,19 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     lost = 1;
                     recruiting = 1;
                     exchange = 1;
-                    push_sports_chk.setChecked(true);
-                    push_game_chk.setChecked(true);
-                    push_nightfood_chk.setChecked(true);
-                    push_gonggu_chk.setChecked(true);
-                    push_carpool_chk.setChecked(true);
-                    push_study_chk.setChecked(true);
-                    push_trading_chk.setChecked(true);
-                    push_lost_chk.setChecked(true);
-                    push_recruiting_chk.setChecked(true);
-                    push_exchange_chk.setChecked(true);
+                    push_sports_btn.setBackgroundResource(R.drawable.push_together_sports_on);
+                    push_game_btn.setBackgroundResource(R.drawable.push_together_game_on);
+                    push_nightfood_btn.setBackgroundResource(R.drawable.push_together_nightfood_on);
+                    push_gonggu_btn.setBackgroundResource(R.drawable.push_together_gonggu_on);
+                    push_carpool_btn.setBackgroundResource(R.drawable.push_together_carpool_on);
+                    push_study_btn.setBackgroundResource(R.drawable.push_together_study_on);
+                    push_trading_btn.setBackgroundResource(R.drawable.push_together_trading_on);
+                    push_lost_btn.setBackgroundResource(R.drawable.push_together_lost_on);
+                    push_recruiting_btn.setBackgroundResource(R.drawable.push_together_recruiting_on);
+                    push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange_on);
                 }
                 else {
-                    together_chk.setChecked(false);
+                    together_btn.setBackgroundResource(R.drawable.push_together);
                     sports = 0;
                     game = 0;
                     nightfood = 0;
@@ -165,275 +165,307 @@ public class PushSetup extends Activity implements View.OnClickListener {
                     lost = 0;
                     recruiting = 0;
                     exchange = 0;
-                    push_sports_chk.setChecked(false);
-                    push_game_chk.setChecked(false);
-                    push_nightfood_chk.setChecked(false);
-                    push_gonggu_chk.setChecked(false);
-                    push_carpool_chk.setChecked(false);
-                    push_study_chk.setChecked(false);
-                    push_trading_chk.setChecked(false);
-                    push_lost_chk.setChecked(false);
-                    push_recruiting_chk.setChecked(false);
-                    push_exchange_chk.setChecked(false);
+                    push_sports_btn.setBackgroundResource(R.drawable.push_together_sports);
+                    push_game_btn.setBackgroundResource(R.drawable.push_together_game);
+                    push_nightfood_btn.setBackgroundResource(R.drawable.push_together_nightfood);
+                    push_gonggu_btn.setBackgroundResource(R.drawable.push_together_gonggu);
+                    push_carpool_btn.setBackgroundResource(R.drawable.push_together_carpool);
+                    push_study_btn.setBackgroundResource(R.drawable.push_together_study);
+                    push_trading_btn.setBackgroundResource(R.drawable.push_together_trading);
+                    push_lost_btn.setBackgroundResource(R.drawable.push_together_lost);
+                    push_recruiting_btn.setBackgroundResource(R.drawable.push_together_recruiting);
+                    push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange);
                 }
                 break;
             }
-            case R.id.outer_chk : {
+            case R.id.outer_btn : {
                 if(contest == 0 || intern == 0 || service == 0){
-                    outer_chk.setChecked(true);
+                    outer_btn.setBackgroundResource(R.drawable.push_outer_on);
                     contest = 1;
                     intern = 1;
                     service = 1;
-                    push_contest_chk.setChecked(true);
-                    push_intern_chk.setChecked(true);
-                    push_service_chk.setChecked(true);
+                    push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest_on);
+                    push_intern_btn.setBackgroundResource(R.drawable.push_outer_intern_on);
+                    push_service_btn.setBackgroundResource(R.drawable.push_outer_service_on);
                 }
                 else {
-                    outer_chk.setChecked(false);
+                    outer_btn.setBackgroundResource(R.drawable.push_outer);
                     contest = 0;
                     intern = 0;
                     service = 0;
-                    push_contest_chk.setChecked(false);
-                    push_intern_chk.setChecked(false);
-                    push_service_chk.setChecked(false);
+                    push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest);
+                    push_intern_btn.setBackgroundResource(R.drawable.push_outer_intern);
+                    push_service_btn.setBackgroundResource(R.drawable.push_outer_service);
                 }
                 break;
             }
-            case R.id.seminar_chk : {
+            case R.id.seminar_btn : {
                 if(perf == 0 || seminar == 0 || presentation == 0){
-                    seminar_chk.setChecked(true);
+                    seminar_btn.setBackgroundResource(R.drawable.push_seminar_on);
                     perf = 1;
                     seminar = 1;
                     presentation = 1;
-                    push_perf_chk.setChecked(true);
-                    push_seminar_chk.setChecked(true);
-                    push_presentation_chk.setChecked(true);
+                    push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf_on);
+                    push_seminar_btn.setBackgroundResource(R.drawable.push_seminar_seminar_on);
+                    push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation_on);
                 }
                 else {
-                    seminar_chk.setChecked(false);
+                    seminar_btn.setBackgroundResource(R.drawable.push_seminar);
                     perf = 0;
                     seminar = 0;
                     presentation = 0;
-                    push_perf_chk.setChecked(false);
-                    push_seminar_chk.setChecked(false);
-                    push_presentation_chk.setChecked(false);
+                    push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf);
+                    push_seminar_btn.setBackgroundResource(R.drawable.push_seminar_seminar);
+                    push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation);
                 }
                 break;
             }
-            case R.id.recruiting_chk : {
+            case R.id.recruiting_btn : {
                 if(scholarship == 0 || r_sports == 0 || r_perf == 0 || faith == 0 || display == 0 || r_service == 0){
-                    recruiting_chk.setChecked(true);
+                    recruiting_btn.setBackgroundResource(R.drawable.push_recruiting_on);
                     scholarship = 1;
                     r_sports = 1;
                     r_perf = 1;
                     faith = 1;
                     display = 1;
                     r_service = 1;
-                    push_scholarship_chk.setChecked(true);
-                    push_r_sports_chk.setChecked(true);
-                    push_r_perf_chk.setChecked(true);
-                    push_faith_chk.setChecked(true);
-                    push_display_chk.setChecked(true);
-                    push_r_service_chk.setChecked(true);
+                    push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship_on);
+                    push_r_sports_btn.setBackgroundResource(R.drawable.push_recruiting_sports_on);
+                    push_r_perf_btn.setBackgroundResource(R.drawable.push_recruiting_perf_on);
+                    push_faith_btn.setBackgroundResource(R.drawable.push_recruiting_faith_on);
+                    push_display_btn.setBackgroundResource(R.drawable.push_recruiting_display_on);
+                    push_r_service_btn.setBackgroundResource(R.drawable.push_recruiting_service_on);
                 }
                 else {
-                    recruiting_chk.setChecked(false);
+                    recruiting_btn.setBackgroundResource(R.drawable.push_recruiting);
                     scholarship = 0;
                     r_sports = 0;
                     r_perf = 0;
                     faith = 0;
                     display = 0;
                     r_service = 0;
-                    push_scholarship_chk.setChecked(false);
-                    push_r_sports_chk.setChecked(false);
-                    push_r_perf_chk.setChecked(false);
-                    push_faith_chk.setChecked(false);
-                    push_display_chk.setChecked(false);
-                    push_r_service_chk.setChecked(false);
+                    push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship);
+                    push_r_sports_btn.setBackgroundResource(R.drawable.push_recruiting_sports);
+                    push_r_perf_btn.setBackgroundResource(R.drawable.push_recruiting_perf);
+                    push_faith_btn.setBackgroundResource(R.drawable.push_recruiting_faith);
+                    push_display_btn.setBackgroundResource(R.drawable.push_recruiting_display);
+                    push_r_service_btn.setBackgroundResource(R.drawable.push_recruiting_service);
                 }
                 break;
             }
-                                                                //붙어라
-            case R.id.push_sports_chk: {                        //운동
+            //붙어라
+            case R.id.push_sports_btn: {                        //운동
                 if(sports == 0){
-                    push_sports_chk.setChecked(true);       //클릭하기전에 값이 0이었으면 true를 만들어야 하므로 1로 바꿈
+                    push_sports_btn.setBackgroundResource(R.drawable.push_together_sports_on);       //클릭하기전에 값이 0이었으면 true를 만들어야 하므로 1로 바꿈
                     sports = 1;
-                } else {push_sports_chk.setChecked(false);
+                } else {
+                    push_sports_btn.setBackgroundResource(R.drawable.push_together_sports);
                     sports = 0;}
                 break;
             }
-            case R.id.push_game_chk: {                          //게임
+            case R.id.push_game_btn: {                          //게임
                 if(game == 0){
-                    push_game_chk.setChecked(true);
+                    push_game_btn.setBackgroundResource(R.drawable.push_together_game_on);
                     game = 1;
-                } else {push_game_chk.setChecked(false);
+                } else {
+                    push_game_btn.setBackgroundResource(R.drawable.push_together_game);
                     game = 0;}
                 break;
             }
-            case R.id.push_nightfood_chk: {                     //야식
+            case R.id.push_nightfood_btn: {                     //야식
                 if(nightfood == 0){
-                    push_nightfood_chk.setChecked(true);
+                    push_nightfood_btn.setBackgroundResource(R.drawable.push_together_nightfood_on);
                     nightfood = 1;
-                } else {push_nightfood_chk.setChecked(false);
+                } else {
+                    push_nightfood_btn.setBackgroundResource(R.drawable.push_together_nightfood);
                     nightfood = 0;}
                 break;
             }
-            case R.id.push_gonggu_chk: {                          //공동구매
+            case R.id.push_gonggu_btn: {                          //공동구매
                 if(gonggu == 0){
-                    push_gonggu_chk.setChecked(true);
+                    push_gonggu_btn.setBackgroundResource(R.drawable.push_together_gonggu_on);
                     gonggu = 1;
-                } else {push_gonggu_chk.setChecked(false);
+                } else {
+                    push_gonggu_btn.setBackgroundResource(R.drawable.push_together_gonggu);
                     gonggu = 0;}
                 break;
             }
-            case R.id.push_carpool_chk: {                          //카풀
+            case R.id.push_carpool_btn: {                          //카풀
                 if(carpool == 0){
-                    push_carpool_chk.setChecked(true);
+                    push_carpool_btn.setBackgroundResource(R.drawable.push_together_carpool_on);
                     carpool = 1;
-                } else {push_carpool_chk.setChecked(false);
+                } else {
+                    push_carpool_btn.setBackgroundResource(R.drawable.push_together_carpool);
                     carpool = 0;}
                 break;
             }
-            case R.id.push_study_chk: {                          //스터디
+            case R.id.push_study_btn: {                          //스터디
                 if(study == 0){
-                    push_study_chk.setChecked(true);
+                    push_study_btn.setBackgroundResource(R.drawable.push_together_study_on);
                     study = 1;
-                } else {push_study_chk.setChecked(false);
+                } else {
+                    push_study_btn.setBackgroundResource(R.drawable.push_together_study);
                     study = 0;}
                 break;
             }
-            case R.id.push_trading_chk: {                          //사고팔기
+            case R.id.push_trading_btn: {                          //사고팔기
                 if(trading == 0){
-                    push_trading_chk.setChecked(true);
+                    push_trading_btn.setBackgroundResource(R.drawable.push_together_trading_on);
                     trading = 1;
-                } else {push_trading_chk.setChecked(false);
+                } else {
+                    push_trading_btn.setBackgroundResource(R.drawable.push_together_trading);
                     trading = 0;}
                 break;
             }
-            case R.id.push_lost_chk: {                          //분실물
+            case R.id.push_lost_btn: {                          //분실물
                 if(lost == 0){
-                    push_lost_chk.setChecked(true);
+                    push_lost_btn.setBackgroundResource(R.drawable.push_together_lost_on);
                     lost = 1;
-                } else {push_lost_chk.setChecked(false);
+                } else {
+                    push_lost_btn.setBackgroundResource(R.drawable.push_together_lost);
                     lost = 0;}
                 break;
             }
-            case R.id.push_recruiting_chk: {                          //구인구직
+            case R.id.push_recruiting_btn: {                          //구인구직
                 if(recruiting == 0){
-                    push_recruiting_chk.setChecked(true);
+                    push_recruiting_btn.setBackgroundResource(R.drawable.push_together_recruiting_on);
                     recruiting = 1;
-                } else {push_recruiting_chk.setChecked(false);
+                } else {
+                    push_recruiting_btn.setBackgroundResource(R.drawable.push_together_recruiting);
                     recruiting = 0;}
                 break;
             }
-            case R.id.push_exchange_chk: {                          //교환
+            case R.id.push_exchange_btn: {                          //교환
                 if(exchange == 0){
-                    push_exchange_chk.setChecked(true);
+                    push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange_on);
                     exchange = 1;
-                } else {push_exchange_chk.setChecked(false);
+                } else {
+                    push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange);
                     exchange = 0;}
                 break;
             }
-            case R.id.push_contest_chk: {                          //공모전
+            case R.id.push_contest_btn: {                          //공모전
                 if(contest == 0){
-                    push_contest_chk.setChecked(true);
+                    push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest_on);
                     contest = 1;
-                } else {push_contest_chk.setChecked(false);
+                } else {
+                    push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest);
                     contest = 0;}
                 break;
             }
-            case R.id.push_intern_chk: {                          //인턴
+            case R.id.push_intern_btn: {                          //인턴
                 if(intern == 0){
-                    push_intern_chk.setChecked(true);
+                    push_intern_btn.setBackgroundResource(R.drawable.push_outer_intern_on);
                     intern = 1;
-                } else {push_intern_chk.setChecked(false);
+                } else {
+                    push_intern_btn.setBackgroundResource(R.drawable.push_outer_intern);
                     intern = 0;}
                 break;
             }
-            case R.id.push_service_chk: {                          //자원봉사
+            case R.id.push_service_btn: {                          //자원봉사
                 if(service == 0){
-                    push_service_chk.setChecked(true);
+                    push_service_btn.setBackgroundResource(R.drawable.push_outer_service_on);
                     service = 1;
-                } else {push_service_chk.setChecked(false);
+                } else {
+                    push_service_btn.setBackgroundResource(R.drawable.push_outer_service);
                     service = 0;}
                 break;
             }
-            case R.id.push_perf_chk: {                          //공연
+            case R.id.push_perf_btn: {                          //공연
                 if(perf == 0){
-                    push_perf_chk.setChecked(true);
+                    push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf_on);
                     perf = 1;
-                } else {push_perf_chk.setChecked(false);
+                } else {
+                    push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf);
                     perf = 0;}
                 break;
             }
-            case R.id.push_seminar_chk: {                          //세미나
+            case R.id.push_seminar_btn: {                          //세미나
                 if(seminar == 0){
-                    push_seminar_chk.setChecked(true);
+                    push_seminar_btn.setBackgroundResource(R.drawable.push_seminar_seminar_on);
                     seminar = 1;
-                } else {push_seminar_chk.setChecked(false);
+                } else {
+                    push_seminar_btn.setBackgroundResource(R.drawable.push_seminar_seminar);
                     seminar = 0;}
                 break;
             }
-            case R.id.push_presentation_chk: {                          //발표
+            case R.id.push_presentation_btn: {                          //발표
                 if(presentation == 0){
-                    push_presentation_chk.setChecked(true);
+                    push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation_on);
                     presentation = 1;
-                } else {push_presentation_chk.setChecked(false);
+                } else {
+                    push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation);
                     presentation = 0;}
                 break;
             }
-                                                                //리쿠르팅
-            case R.id.push_scholarship_chk: {                          //학술
+            //리쿠르팅
+            case R.id.push_scholarship_btn: {                          //학술
                 if(scholarship == 0){
-                    push_scholarship_chk.setChecked(true);
+                    push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship_on);
                     scholarship = 1;
-                } else {push_scholarship_chk.setChecked(false);
+                } else {
+                    push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship);
                     scholarship = 0;}
                 break;
             }
-            case R.id.push_r_sports_chk: {                          //운동
+            case R.id.push_r_sports_btn: {                          //운동
                 if(r_sports == 0){
-                    push_r_sports_chk.setChecked(true);
+                    push_r_sports_btn.setBackgroundResource(R.drawable.push_recruiting_sports_on);
                     r_sports = 1;
-                } else {push_r_sports_chk.setChecked(false);
+                } else {
+                    push_r_sports_btn.setBackgroundResource(R.drawable.push_recruiting_sports);
                     r_sports = 0;}
                 break;
             }
-            case R.id.push_r_perf_chk: {                          //공연
+            case R.id.push_r_perf_btn: {                          //공연
                 if(r_perf == 0){
-                    push_r_perf_chk.setChecked(true);
+                    push_r_perf_btn.setBackgroundResource(R.drawable.push_recruiting_perf_on);
                     r_perf = 1;
-                } else {push_r_perf_chk.setChecked(false);
+                } else {
+                    push_r_perf_btn.setBackgroundResource(R.drawable.push_recruiting_perf);
                     r_perf = 0;}
                 break;
             }
-            case R.id.push_faith_chk: {                          //신앙
+            case R.id.push_faith_btn: {                          //신앙
                 if(faith == 0){
-                    push_faith_chk.setChecked(true);
+                    push_faith_btn.setBackgroundResource(R.drawable.push_recruiting_faith_on);
                     faith = 1;
-                } else {push_faith_chk.setChecked(false);
-                   faith = 0;}
+                } else {
+                    push_faith_btn.setBackgroundResource(R.drawable.push_recruiting_faith);
+                    faith = 0;}
                 break;
             }
-            case R.id.push_display_chk: {                          //전시
+            case R.id.push_display_btn: {                          //전시
                 if(display == 0){
-                    push_display_chk.setChecked(true);
+                    push_display_btn.setBackgroundResource(R.drawable.push_recruiting_display_on);
                     display = 1;
-                } else {push_display_chk.setChecked(false);
+                } else {
+                    push_display_btn.setBackgroundResource(R.drawable.push_recruiting_display);
                     display = 0;}
                 break;
             }
-            case R.id.push_r_service_chk: {                          //봉사
+            case R.id.push_r_service_btn: {                          //봉사
                 if(r_service == 0){
-                    push_r_service_chk.setChecked(true);
+                    push_r_service_btn.setBackgroundResource(R.drawable.push_recruiting_service_on);
                     r_service = 1;
-                } else {push_r_service_chk.setChecked(false);
+                } else {
+                    push_r_service_btn.setBackgroundResource(R.drawable.push_recruiting_service);
                     r_service = 0;}
                 break;
+            }
+            case R.id.push_back_btn:{
+                phpCreateSend();
+                //저장하시겠습니까해서 예 하면 저장하고 나가게
+
+                Intent intent = new Intent(PushSetup.this, yy_activity.class).putExtra("carrier", carrier);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
 
             case R.id.push_save_btn:{                           //저장하기
                 phpCreateSend();
+
                 break;
             }
         }
@@ -453,26 +485,26 @@ public class PushSetup extends Activity implements View.OnClickListener {
             Log.d("in","doInBackground - CollectPushInfoPhp");
             StringBuilder jsonHtml = new StringBuilder();
 
-                try {
-                    URL data_url = new URL(urls[0]);
-                    HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
-                    if (conn != null) {
-                        conn.setConnectTimeout(10000);
-                        conn.setUseCaches(false);
-                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                            for (; ; ) {
-                                String line = br.readLine();
-                                if (line == null) break;
-                                jsonHtml.append(line + "\n");
-                            }
-                            br.close();
+            try {
+                URL data_url = new URL(urls[0]);
+                HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        for (; ; ) {
+                            String line = br.readLine();
+                            if (line == null) break;
+                            jsonHtml.append(line + "\n");
                         }
-                        conn.disconnect();
+                        br.close();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    conn.disconnect();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return jsonHtml.toString();
 
 
@@ -526,73 +558,73 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
             if (sports == 0) {
-                push_sports_chk.setChecked(false);        //읽어들일 때 1이면 체크 표시
-            } else push_sports_chk.setChecked(true);
+                push_sports_btn.setBackgroundResource(R.drawable.push_together_sports);        //읽어들일 때 1이면 체크 표시
+            } else push_sports_btn.setBackgroundResource(R.drawable.push_together_sports_on);
             if (game == 0) {
-                push_game_chk.setChecked(false);
-            } else push_game_chk.setChecked(true);
+                push_game_btn.setBackgroundResource(R.drawable.push_together_game);
+            } else push_game_btn.setBackgroundResource(R.drawable.push_together_game_on);
             if (nightfood == 0) {
-                push_nightfood_chk.setChecked(false);
-            } else push_nightfood_chk.setChecked(true);
+                push_nightfood_btn.setBackgroundResource(R.drawable.push_together_nightfood);
+            } else push_nightfood_btn.setBackgroundResource(R.drawable.push_together_nightfood_on);
             if (gonggu == 0) {
-                push_gonggu_chk.setChecked(false);
-            } else push_gonggu_chk.setChecked(true);
+                push_gonggu_btn.setBackgroundResource(R.drawable.push_together_gonggu);
+            } else push_gonggu_btn.setBackgroundResource(R.drawable.push_together_gonggu_on);
             if (carpool == 0) {
-                push_carpool_chk.setChecked(false);
-            } else push_carpool_chk.setChecked(true);
+                push_carpool_btn.setBackgroundResource(R.drawable.push_together_carpool);
+            } else push_carpool_btn.setBackgroundResource(R.drawable.push_together_carpool_on);
             if (study == 0) {
-                push_study_chk.setChecked(false);
-            } else push_study_chk.setChecked(true);
+                push_study_btn.setBackgroundResource(R.drawable.push_together_study);
+            } else push_study_btn.setBackgroundResource(R.drawable.push_together_study_on);
             if (trading == 0) {
-                push_trading_chk.setChecked(false);
-            } else push_trading_chk.setChecked(true);
+                push_trading_btn.setBackgroundResource(R.drawable.push_together_trading);
+            } else push_trading_btn.setBackgroundResource(R.drawable.push_together_trading_on);
             if (lost == 0) {
-                push_lost_chk.setChecked(false);
-            } else push_lost_chk.setChecked(true);
+                push_lost_btn.setBackgroundResource(R.drawable.push_together_lost);
+            } else push_lost_btn.setBackgroundResource(R.drawable.push_together_lost_on);
             if (recruiting == 0) {
-                push_recruiting_chk.setChecked(false);
-            } else push_recruiting_chk.setChecked(true);
+                push_recruiting_btn.setBackgroundResource(R.drawable.push_together_recruiting);
+            } else push_recruiting_btn.setBackgroundResource(R.drawable.push_together_recruiting_on);
             if (exchange == 0) {
-                push_exchange_chk.setChecked(false);
-            } else push_exchange_chk.setChecked(true);
+                push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange);
+            } else push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange_on);
 
             if (contest == 0) {
-                push_contest_chk.setChecked(false);
-            } else push_contest_chk.setChecked(true);
+                push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest);
+            } else push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest_on);
             if (intern == 0) {
-                push_intern_chk.setChecked(false);
-            } else push_intern_chk.setChecked(true);
+                push_intern_btn.setBackgroundResource(R.drawable.push_outer_intern);
+            } else push_intern_btn.setBackgroundResource(R.drawable.push_outer_intern_on);
             if (service == 0) {
-                push_service_chk.setChecked(false);
-            } else push_service_chk.setChecked(true);
+                push_service_btn.setBackgroundResource(R.drawable.push_outer_service);
+            } else push_service_btn.setBackgroundResource(R.drawable.push_outer_service_on);
             if (perf == 0) {
-                push_perf_chk.setChecked(false);
-            } else push_perf_chk.setChecked(true);
+                push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf);
+            } else push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf_on);
             if (seminar == 0) {
-                push_seminar_chk.setChecked(false);
-            } else push_seminar_chk.setChecked(true);
+                push_seminar_btn.setBackgroundResource(R.drawable.push_seminar_seminar);
+            } else push_seminar_btn.setBackgroundResource(R.drawable.push_seminar_seminar_on);
             if (presentation == 0) {
-                push_presentation_chk.setChecked(false);
-            } else push_presentation_chk.setChecked(true);
+                push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation);
+            } else push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation_on);
 
             if (scholarship == 0) {
-                push_scholarship_chk.setChecked(false);
-            } else push_scholarship_chk.setChecked(true);
+                push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship);
+            } else push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship_on);
             if (r_sports == 0) {
-                push_r_sports_chk.setChecked(false);
-            } else push_r_sports_chk.setChecked(true);
+                push_r_sports_btn.setBackgroundResource(R.drawable.push_recruiting_sports);
+            } else push_r_sports_btn.setBackgroundResource(R.drawable.push_recruiting_sports_on);
             if (r_perf == 0) {
-                push_r_perf_chk.setChecked(false);
-            } else push_r_perf_chk.setChecked(true);
+                push_r_perf_btn.setBackgroundResource(R.drawable.push_recruiting_perf);
+            } else push_r_perf_btn.setBackgroundResource(R.drawable.push_recruiting_perf_on);
             if (faith == 0) {
-                push_faith_chk.setChecked(false);
-            } else push_faith_chk.setChecked(true);
+                push_faith_btn.setBackgroundResource(R.drawable.push_recruiting_faith);
+            } else push_faith_btn.setBackgroundResource(R.drawable.push_recruiting_faith_on);
             if (display == 0) {
-                push_display_chk.setChecked(false);
-            } else push_display_chk.setChecked(true);
+                push_display_btn.setBackgroundResource(R.drawable.push_recruiting_display);
+            } else push_display_btn.setBackgroundResource(R.drawable.push_recruiting_display_on);
             if (r_service == 0) {
-                push_r_service_chk.setChecked(false);
-            } else push_r_service_chk.setChecked(true);
+                push_r_service_btn.setBackgroundResource(R.drawable.push_recruiting_service);
+            } else push_r_service_btn.setBackgroundResource(R.drawable.push_recruiting_service_on);
         }
     }
 
@@ -603,6 +635,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
         phpCreateSend();
 
         Intent intent = new Intent(PushSetup.this, yy_activity.class).putExtra("carrier", carrier);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
@@ -613,26 +646,26 @@ public class PushSetup extends Activity implements View.OnClickListener {
             Log.d("", "doInBackground SendPushInfo");
             StringBuilder jsonHtml = new StringBuilder();
 
-                try {
-                    URL data_url = new URL(urls[0]);
-                    HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
-                    if (conn != null) {
-                        conn.setConnectTimeout(10000);
-                        conn.setUseCaches(false);
-                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                            for (; ; ) {
-                                String line = br.readLine();
-                                if (line == null) break;
-                                jsonHtml.append(line + "\n");
-                            }
-                            br.close();
+            try {
+                URL data_url = new URL(urls[0]);
+                HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        for (; ; ) {
+                            String line = br.readLine();
+                            if (line == null) break;
+                            jsonHtml.append(line + "\n");
                         }
-                        conn.disconnect();
+                        br.close();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    conn.disconnect();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             return jsonHtml.toString();
 

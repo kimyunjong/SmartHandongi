@@ -91,6 +91,7 @@ public class SelectGroupOrNot extends Activity implements View.OnTouchListener, 
             }
             case R.id.sel_back_btn : {
                 Intent intent = new Intent(SelectGroupOrNot.this, yy_activity.class).putExtra("carrier", carrier);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
                 break;
@@ -99,8 +100,10 @@ public class SelectGroupOrNot extends Activity implements View.OnTouchListener, 
     }
 
     public void onBackPressed(){
-            Intent intent = new Intent(SelectGroupOrNot.this, yy_activity.class).putExtra("carrier", carrier);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(SelectGroupOrNot.this, yy_activity.class).putExtra("carrier", carrier);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
     }
 }

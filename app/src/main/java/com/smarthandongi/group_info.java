@@ -56,8 +56,13 @@ public class group_info extends Activity {
         String group_category1 = intent.getStringExtra("group_category");
         String introduce1 = intent.getStringExtra("introduce");
 
-        back_btn=(Button)findViewById(R.id.back);
-        //back_btn.setOnClickListener();
+        back_btn=(Button)findViewById(R.id.back);// 뒤로가기 버튼
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(group_info.this, group_infoList.class);
+                startActivity(intent);
+            }
+        });
 
         group_name=(TextView) findViewById(R.id.group_name);
         group_name.setText(group_name1);
