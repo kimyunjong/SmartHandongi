@@ -37,9 +37,9 @@ import java.util.ArrayList;
  * Created by Joel on 2015-01-21.
  */
 public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener {
-    Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn;
-    ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img;
-    ImageButton write_btn;
+    Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn;
+    ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img;
+
     RelativeLayout menu;
     Carrier carrier;
     private Intent intent;
@@ -107,7 +107,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         timeline_btn = (Button) findViewById(R.id.timeline_btn);
         search_btn = (Button) findViewById(R.id.search_btn);
         menu_btn = (Button) findViewById(R.id.menu_btn);
-        write_btn = (ImageButton) findViewById(R.id.write_btn);
+        write_btn = (Button) findViewById(R.id.write_btn);
 
 
         notice_img = (ImageView) findViewById(R.id.notice_img);
@@ -447,7 +447,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
             case R.id.menu_btn: {
                 if (event.getAction() == 0) {
-                    menu_img.setImageResource(R.drawable.menu_btn);
+                    menu_img.setImageResource(R.drawable.menu_btn_on);
                 } else if (event.getAction() == 1) {
                     menu_img.setImageResource(R.drawable.menu_btn);
                     menu_toggle();
@@ -456,9 +456,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
             case R.id.write_btn: {
                 if (event.getAction() == 0) {
-                    write_btn.setImageResource(R.drawable.write_btn);
+                    write_img.setImageResource(R.drawable.write_btn_on);
                 } else if (event.getAction() == 1) {
-                    write_btn.setImageResource(R.drawable.write_btn);
+                    write_img.setImageResource(R.drawable.write_btn);
                 }
                 break;
             }
