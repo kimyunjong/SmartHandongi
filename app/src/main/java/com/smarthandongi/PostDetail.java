@@ -45,7 +45,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                      type;
 
     ImageView post_img;
-    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn;
+    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn,group_btn;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
 
@@ -78,12 +78,14 @@ public class PostDetail extends Activity implements View.OnClickListener{
         edit_btn=(Button)findViewById(R.id.pos_edit_btn);
         del_btn=(Button)findViewById(R.id.pos_del_btn);
         review_show_btn=(Button)findViewById(R.id.pos_review_show_btn);
+        group_btn=(Button)findViewById(R.id.writer_name);
 
         review_show_btn.setOnClickListener(this);
         edit_btn.setOnClickListener(this);
         del_btn.setOnClickListener(this);
         scrap_btn.setOnClickListener(this);
         report_btn.setOnClickListener(this);
+        group_btn.setOnClickListener(this);
 
         //텍스트뷰
         start_day=(TextView)findViewById(R.id.pos_start_day);
@@ -147,9 +149,14 @@ public class PostDetail extends Activity implements View.OnClickListener{
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_width = metrics.widthPixels;
-
-        PostImageTask postImageTask = new PostImageTask(poster, post.getId(),post_img,screen_width, temp);//수영 수정, temp 추가
-        postImageTask.execute(0);
+        PostImageTask postImageTask;
+        if(carrier.getFromWriting()==1) {
+            postImageTask = new PostImageTask(poster,posting_id,post_img,screen_width,temp);
+        }
+        else {
+            postImageTask = new PostImageTask(poster, post.getId(), post_img, screen_width, temp);//수영 수정, temp 추가
+        }
+            postImageTask.execute(0);
     }
 
     @Override
@@ -284,7 +291,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 System.out.println(posting_id);
                 carrier.setPost_id(posting_id);
                 if(ja.getJSONObject(0).getString("has_pic").compareTo("1")==0)
-                    setContentView(R.layout.post_detailwpic);
+                {
+                    construction();
+                }
                 start_day.setText(ja.getJSONObject(0).getString("start_date"));
                 end_day.setText(ja.getJSONObject(0).getString("end_date"));
                 link.setText(ja.getJSONObject(0).getString("link"));

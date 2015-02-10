@@ -39,6 +39,14 @@ public class GroupPassword extends Activity {
         group_name.setText(carrier.getGroup_name());
 
         group_pw = (EditText)findViewById(R.id.password);
+        group_pw.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                group_pw.setCursorVisible(true);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(group_pw,0);
+                return true;
+            }
+        });
         layoutView = (RelativeLayout)findViewById(R.id.pw_screen);
         layoutView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
