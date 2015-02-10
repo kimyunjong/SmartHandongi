@@ -564,10 +564,12 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
+
                     post_list.add(new PostDatabase(
-                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"),jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
-                            jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like"),jo.getInt("view")
-                    ));
+                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
+                            jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
+                            jo.getString("like"), jo.getInt("view"))
+                    );
 
                     System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
                 }
@@ -776,9 +778,12 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                                 long id) {
             ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
             Log.d("글번호잘못??",String.valueOf(board_list.get(position).getId()));
+            Log.d("글의 포지션",String.valueOf(position));
             viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+board_list.get(position).getId());
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
+            intent.putExtra("post_list",board_list);
+            intent.putExtra("position",position);
             intent.putExtra("post", board_list.get(position));
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
@@ -791,9 +796,12 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                                 long id) {
             ViewNumPhp viewNumPhp = new ViewNumPhp(timeline_list.get(position));
             Log.d("글번호잘못??",String.valueOf(timeline_list.get(position).getId()));
+            Log.d("글의 포지션",String.valueOf(position));
             viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+timeline_list.get(position).getId());
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
+            intent.putExtra("post_list",timeline_list);
+            intent.putExtra("position",position);
             intent.putExtra("post", timeline_list.get(position));
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);

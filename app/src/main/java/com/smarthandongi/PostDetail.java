@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,12 +44,14 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link,
                      type;
 
+
     ImageView post_img;
-    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn,group_btn;
+    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
+    ArrayList<PostDatabase> posting_list;
 
-    private int posting_id;
+    private int posting_id,position;
     int screen_width;
     Picture poster = new Picture();
 
@@ -66,6 +69,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         Intent intent=getIntent();
         carrier=(Carrier)intent.getSerializableExtra("carrier");
         post=(PostDatabase)intent.getSerializableExtra("post");
+        posting_list=(ArrayList)intent.getSerializableExtra("post_list");
+        position=(int)intent.getSerializableExtra("position");
 
         setContentView(R.layout.post_detail);
 
@@ -78,6 +83,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         del_btn=(Button)findViewById(R.id.pos_del_btn);
         review_show_btn=(Button)findViewById(R.id.pos_review_show_btn);
         group_btn=(Button)findViewById(R.id.writer_name);
+        forward_btn=(Button)findViewById(R.id.post_forward_btn);
+        backward_btn=(Button)findViewById(R.id.post_backward_btn);
+        home_btn=(Button)findViewById(R.id.post_detail_home);
 
         review_show_btn.setOnClickListener(this);
         edit_btn.setOnClickListener(this);
@@ -85,6 +93,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         scrap_btn.setOnClickListener(this);
         report_btn.setOnClickListener(this);
         group_btn.setOnClickListener(this);
+        forward_btn.setOnClickListener(this);
+        backward_btn.setOnClickListener(this);
+        home_btn.setOnClickListener(this);
 
         //텍스트뷰
         start_day=(TextView)findViewById(R.id.pos_start_day);
@@ -225,6 +236,54 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         .show();
                 break;
             }
+            case R.id.post_detail_home : {
+                carrier.setFromWriting(0);
+                carrier.setFromPostDetail(0);
+                carrier.setEdit_count(0);
+                carrier.setGroup_name("");
+                carrier.setGroup_code("");
+                carrier.setBig_category(null);
+                carrier.setCategory(null);
+                carrier.setTitle(null);
+                carrier.setContent(null);
+                carrier.setPosting_date(null);
+                carrier.setStart_date(null);
+                carrier.setEnd_date(null);
+                carrier.setLink(null);
+                Intent intent = new Intent(PostDetail.this,yj_activity.class).putExtra("carrier",carrier);
+                startActivity(intent);
+                finish();
+                break;
+            }
+            case R.id.post_forward_btn : {
+                if(position==posting_list.size()-1)
+                    break;
+                else {
+                    Intent intent=new Intent(this,PostDetail.class);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list",posting_list);
+                    intent.putExtra("position",position+1);
+                    intent.putExtra("post", posting_list.get(position+1));
+                    startActivity(intent);
+                    finish();
+                    break;
+                }
+            }
+
+            case R.id.post_backward_btn : {
+                if(position==0)
+                    break;
+                else {
+                    Intent intent=new Intent(this,PostDetail.class);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list",posting_list);
+                    intent.putExtra("position",position-1);
+                    intent.putExtra("post", posting_list.get(position-1));
+                    startActivity(intent);
+                    finish();
+                    break;
+                }
+            }
         }
     }
     public void phpCreate() {
@@ -282,35 +341,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
                 post_list.removeAll(post_list);
 
-                for (int i = 0; i < ja.length(); i++) {
-                    JSONObject jo = ja.getJSONObject(i);
-                    post_list.add(new PostDatabase(
-                            jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
-                            jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like"),jo.getInt("view")
-                    ));
-
-                    System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
-                }
-
                 posting_id=ja.getJSONObject(0).getInt("id");
-                System.out.println(posting_id);
-                //carrier.setPost_id(posting_id);
-                if(ja.getJSONObject(0).getString("has_pic").compareTo("1")==0)
-                {
-                    construction();
-                }
-                start_day.setText(ja.getJSONObject(0).getString("start_date"));
-                end_day.setText(ja.getJSONObject(0).getString("end_date"));
-                link.setText(ja.getJSONObject(0).getString("link"));
-                //type.setText(carrier.getCategory());
-                post_day.setText(ja.getJSONObject(0).getString("posting_date"));
-                title.setText(ja.getJSONObject(0).getString("title"));
-                content.setText(ja.getJSONObject(0).getString("content"));
 
-                scrap_btn.setVisibility(View.INVISIBLE);
-                report_btn.setVisibility(View.INVISIBLE);
-                edit_btn.setVisibility(View.VISIBLE);
-                del_btn.setVisibility(View.VISIBLE);
 
             }
             catch (JSONException e)

@@ -6,7 +6,10 @@ import java.io.Serializable;
  * Created by Joel on 2015-01-22.
  */
 public class PostDatabase implements Serializable{
-    public PostDatabase(String title, int id, String kakao_id, String big_category,String category, String group, String content, String posting_date, String link, String start_date, String end_date, String has_pic,String like,int view_num){
+    public PostDatabase(String title, int id, String kakao_id, String big_category,String category, String group,
+                        String content, String posting_date, String link, String start_date, String end_date,
+                        String has_pic,String like,int view_num)
+    {
 
         this.title=title;
         this.id=id;
@@ -22,6 +25,7 @@ public class PostDatabase implements Serializable{
         this.like=like;
         this.big_category=big_category;
         this.view_num=view_num;
+
 }
     private String title;
     private int id;
@@ -39,6 +43,7 @@ public class PostDatabase implements Serializable{
     private String like="0";
     private String big_category;
     private int view_num;
+
 
 
     public int getId(){return  id;}
