@@ -4,43 +4,34 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/background_menu">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#66000000">
+        android:layout_height="match_parent">
         <!-- bug_top_bar -->
         <LinearLayout
             android:id="@+id/bug_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="52dp"
+            android:background="#32000000">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Button
                     android:id="@+id/bug_back_btn"
-                    android:layout_width="40dp"
+                    android:layout_width="50.5dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"/>
                 <ImageView
-                    android:layout_width="28.5dp"
-                    android:layout_height="38dp"
-                    android:layout_marginLeft="7dp"
+                    android:layout_width="50.5dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/backarrow"/>
                 <ImageView
-                    android:layout_width="76.5dp"
-                    android:layout_height="38dp"
+                    android:layout_width="125dp"
+                    android:layout_height="50.5dp"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/writing_writing"/>
-                <ImageView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:alpha="0.5"
-                    android:layout_alignParentBottom="true"
-                    android:background="#ffffff"/>
+                    android:background="@drawable/bug_report"/>
             </RelativeLayout>
         </LinearLayout>
         <!-- bug_top_bar end -->
@@ -48,14 +39,13 @@
         <!-- 오류 내용 부 -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:layout_height="77dp">
+            <ImageView
+                android:layout_width="70.5dp"
+                android:layout_height="28dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
-                android:textColor="#ffffff"
-                android:text="오류 내용"/>
+                android:background="@drawable/bug_title"/>
         </RelativeLayout>
         <!-- 오류 내용 부 끝-->
 
@@ -74,16 +64,16 @@
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
+            android:textColorHint="#32111111"
             android:background="#00000000"
             android:gravity="top"
             android:hint="내용을 입력하세요"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginBottom="59.5dp"
-            >
+            android:layout_height="87dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="59dp">
             <ImageView
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
@@ -93,28 +83,28 @@
                 android:background="#ffffff"/>
             <ImageView
                 android:id="@+id/bug_addpic"
-                android:layout_width="66.5dp"
-                android:layout_height="23.5dp"
+                android:layout_width="70.5dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/writing_picture_message"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bug_insert_pic"
                 android:layout_alignParentTop="true"/>
             <ImageButton
                 android:id="@+id/bug_remove_pic_btn"
                 android:layout_marginTop="10dp"
-                android:layout_width="41dp"
-                android:layout_height="26dp"
+                android:layout_width="55dp"
+                android:layout_height="45dp"
                 android:layout_toRightOf="@id/bug_addpic"
                 android:visibility="gone"
-                android:background="@drawable/writing_remove_pic"/>
+                android:background="@drawable/bug_remove_pic"/>
             <ImageView
                 android:id="@+id/bug_preview_img"
-                android:layout_width="81dp"
+                android:layout_width="78dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/writing_picture"
+                android:background="@drawable/bug_picture"
                 android:layout_alignParentTop="true"/>
             <Button
                 android:id="@+id/bug_image_btn"
@@ -132,7 +122,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="59.5dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#33000000">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -143,7 +134,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <ImageView
-                android:layout_width="52.5dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="@drawable/cancel"/>
@@ -159,7 +150,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <ImageView
-                android:layout_width="52.5dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="@drawable/confirm"/>

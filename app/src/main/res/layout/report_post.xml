@@ -7,25 +7,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#66000000">
+        android:orientation="vertical">
         <!-- top bar -->
         <LinearLayout
             android:id="@+id/report_post_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="52dp"
+            android:background="#32000000">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Button
                     android:id="@+id/report_post_back_btn"
-                    android:layout_width="40dp"
+                    android:layout_width="50.5dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"/>
                 <ImageView
-                    android:layout_width="28.5dp"
-                    android:layout_height="38dp"
-                    android:layout_marginLeft="7dp"
+                    android:layout_width="50.5dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/backarrow"/>
                 <ImageView
                     android:layout_width="76.5dp"
@@ -59,7 +58,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="59.5dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#32000000">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <ImageView
-                android:layout_width="52.5dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="@drawable/cancel"/>
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <ImageView
-                android:layout_width="52.5dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="@drawable/confirm"/>

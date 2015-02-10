@@ -17,7 +17,7 @@ public class Carrier implements Serializable {
     private String title = null;
     private String content = null;
     private String big_category = "0";
-    private String category = null;
+    private String category = "";
     private String image_name = null;
     private String link = null;
     private String posting_date = null;
