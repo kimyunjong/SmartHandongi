@@ -10,20 +10,48 @@
         <LinearLayout
             android:id="@+id/writing_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="66dp">
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="50.5dp"
                 android:layout_height="match_parent">
                 <Button
                     android:id="@+id/post_backward_btn"
-                    android:layout_width="40dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"/>
                 <ImageView
-                    android:layout_width="28.5dp"
-                    android:layout_height="38dp"
-                    android:layout_marginLeft="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="52.5dp"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/backarrow"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/post_detail_home"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:text="홈"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50.5dp"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/post_forward_btn"
+                    android:layout_width="50.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:layout_width="46.5dp"
+                    android:layout_height="41dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/forward"/>
             </RelativeLayout>
         </LinearLayout>
 

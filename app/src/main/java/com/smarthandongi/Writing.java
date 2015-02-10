@@ -88,9 +88,9 @@ public class Writing extends Activity implements OnClickListener {
 
 
     Picture poster = new Picture();
-    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn, writing_edit_btn;
-    ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img;
-    ImageView writing_startdate_img, writing_enddate_img, writing_title_message, writing_confirm_img;
+    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
+    ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img, writing_edit_title;
+    ImageView writing_startdate_img, writing_enddate_img, writing_title_message, writing_confirm_img, writing_edit_confirm;
     Button big_category_btn, small_category_btn;
     EditText writing_title, writing_content, writing_link;
     ImageButton writing_additional_btn, writing_additional_hide_btn, writing_remove_pic_btn;
@@ -199,7 +199,6 @@ public class Writing extends Activity implements OnClickListener {
         writing_additional_btn = (ImageButton)findViewById(R.id.writing_additional_btn);
         writing_additional_hide_btn = (ImageButton)findViewById(R.id.writing_additional_hide_btn);
         writing_cancel_btn  = (Button)findViewById(R.id.writing_cancel_btn);
-        writing_edit_btn  = (Button)findViewById(R.id.writing_edit_btn);
 
         writing_image_btn.setOnClickListener(this);
         writing_confirm_btn.setOnClickListener(this);
@@ -207,7 +206,6 @@ public class Writing extends Activity implements OnClickListener {
         writing_additional_btn.setOnClickListener(this);
         writing_additional_hide_btn.setOnClickListener(this);
         writing_cancel_btn.setOnClickListener(this);
-        writing_edit_btn.setOnClickListener(this);
 
         writing_title_img = (ImageView)findViewById(R.id.writing_title_img);
         writing_body_img = (ImageView)findViewById(R.id.writing_body_img);
@@ -218,6 +216,8 @@ public class Writing extends Activity implements OnClickListener {
         writing_enddate_img = (ImageView)findViewById(R.id.writing_enddate_img);
         writing_title_message = (ImageView)findViewById(R.id.writing_title_message);
         writing_confirm_img = (ImageView)findViewById(R.id.writing_confirm_img);
+        writing_edit_confirm = (ImageView)findViewById(R.id.writing_edit_confirm);
+        writing_edit_title = (ImageView)findViewById(R.id.writing_title_edit);
 
         writing_remove_pic_btn = (ImageButton)findViewById(R.id.writing_remove_pic_btn);
         writing_remove_pic_btn.setOnClickListener(this);
@@ -258,9 +258,12 @@ public class Writing extends Activity implements OnClickListener {
     public void preset(){
         String[] small_category, small_category_hangul;
 
+        writing_title_message.setVisibility(GONE);
+        writing_edit_title.setVisibility(VISIBLE);
 
-        writing_title_message.setBackgroundResource(R.drawable.writing_edit);
-        writing_confirm_img.setBackgroundResource(R.drawable.writing_edit_confirm);
+        writing_confirm_img.setVisibility(GONE);
+        writing_edit_confirm.setVisibility(VISIBLE);
+
         switch(carrier.getBig_category()) {                                         //대분류
             case "1" : { big_category_btn.setText("일반공지"); break;}
             case "2" : { big_category_btn.setText("대외활동"); break;}
@@ -556,8 +559,6 @@ public class Writing extends Activity implements OnClickListener {
                 writing_preview_img.setBackgroundResource(R.drawable.writing_picture);
                 writing_remove_pic_btn.setVisibility(GONE);
             }
-            case R.id.writing_edit_btn : {                                                                                                              //수정하기btn
-            }
         }
     }
 
@@ -584,7 +585,6 @@ public class Writing extends Activity implements OnClickListener {
         if(title_temp.compareTo("") != 0 || content_temp.compareTo("") != 0) {                          //제목이랑 내용이 있을 때 뒤로가기 하면 메시지 뜸
             new AlertDialog.Builder(this)
                     .setTitle("뒤로가기")
-                    .setView(R.layout.dialog_writing)
                     .setMessage("확인 누르면 내용 다 없어지는데 괜춘?")
                     .setIcon(R.drawable.handongi)
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
