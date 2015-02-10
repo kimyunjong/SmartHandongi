@@ -141,6 +141,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             post_day.setText(post.getPosting_date());
             title.setText(post.getTitle());
             content.setText(post.getContent());
+            view_num.setText(post.getView_num()+"Views");
         }
     }
 
@@ -281,7 +282,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     JSONObject jo = ja.getJSONObject(i);
                     post_list.add(new PostDatabase(
                             jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
-                            jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
+                            jo.getString("content"), jo.getString("posting_date"), jo.getString("image_link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like"),jo.getInt("view")
                     ));
 
                     System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Joel on 2015-01-22.
  */
 public class PostDatabase implements Serializable{
-    public PostDatabase(String title, int id, String kakao_id, String big_category,String category, String group, String content, String posting_date, String link, String start_date, String end_date, String has_pic,String like){
+    public PostDatabase(String title, int id, String kakao_id, String big_category,String category, String group, String content, String posting_date, String link, String start_date, String end_date, String has_pic,String like,int view_num){
 
         this.title=title;
         this.id=id;
@@ -21,6 +21,7 @@ public class PostDatabase implements Serializable{
         this.group=group;
         this.like=like;
         this.big_category=big_category;
+        this.view_num=view_num;
 }
     private String title;
     private int id;
@@ -37,6 +38,7 @@ public class PostDatabase implements Serializable{
     private boolean first_day=false;
     private String like="0";
     private String big_category;
+    private int view_num;
 
 
     public int getId(){return  id;}
@@ -58,9 +60,10 @@ public class PostDatabase implements Serializable{
     public void setBig_category(String big_category){this.big_category=big_category;}
     public void setLink(String link){this.link=link;}
     public String getLink(){return link;}
-
+    public int getView_num(){return view_num;}
+    public void setView_num(int view_num){this.view_num=view_num;}
     public boolean getFirst_day(){return first_day;}
-     public void setDday(int dday){this.dday=dday;}
+    public void setDday(int dday){this.dday=dday;}
     public int getDday(){return dday;}
 
 }

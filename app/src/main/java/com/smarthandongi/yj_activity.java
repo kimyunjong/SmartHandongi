@@ -566,7 +566,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     JSONObject jo = ja.getJSONObject(i);
                     post_list.add(new PostDatabase(
                             jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"),jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
-                            jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like")
+                            jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"), jo.getString("like"),jo.getInt("view")
                     ));
 
                     System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
@@ -774,8 +774,10 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     AdapterView.OnItemClickListener boardItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
+
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
+
             intent.putExtra("post", board_list.get(position));
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
