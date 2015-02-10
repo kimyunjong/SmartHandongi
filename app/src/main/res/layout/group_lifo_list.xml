@@ -164,21 +164,6 @@
                         android:layout_marginBottom="59.5dp"
                         > </ListView>
 
-                    <RelativeLayout
-                        android:id="@+id/unresistered_screen"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        >
-                        <Button
-                            android:id="@+id/unresistered_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="35dp"
-                            android:background="@android:color/transparent"
-                            />
-
-
-                    </RelativeLayout>
 
 
                 </RelativeLayout>

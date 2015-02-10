@@ -74,10 +74,9 @@ public class group_infoList extends Activity {
         public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.group_lifo_list);
-            group_list_view = (ListView)findViewById(R.id.group_list);
 
             construction();
-            //group_list_view.setOnItemClickListener(mItemClickListener);
+
 
             backward_btn=(Button)findViewById(R.id.back_btn);// 뒤로가기
             backward_btn.setOnClickListener(new View.OnClickListener() {
@@ -93,9 +92,9 @@ public class group_infoList extends Activity {
 
 
 
-            //unresistered_background=(ImageView)findViewById(R.id.unresistered_background);
-            //background_hidden=(ImageView)findViewById(R.id.background_hiddenbackground_hidden);
-            //unresistered_screen=(RelativeLayout)findViewById(R.id.unresistered_screen);
+            unresistered_background=(ImageView)findViewById(R.id.unresistered_background);
+           // background_hidden=(ImageView)findViewById(R.id.background_hiddenbackground_hidden);
+            unresistered_screen=(RelativeLayout)findViewById(R.id.unresistered_screen);
             unresistered=(TextView)findViewById(R.id.unresistered);
 
 
@@ -111,7 +110,8 @@ public class group_infoList extends Activity {
                 }
             });
             //adapter중복?
-            groupinfoAdapter = new GroupinfoAdapter(this, group_list, R.layout.group_lifo_list );
+
+            group_list_view = (ListView)findViewById(R.id.group_list);
 
             layoutView = (RelativeLayout)findViewById(R.id.group_info_list);
             layoutView.setOnTouchListener(new View.OnTouchListener() {
@@ -127,7 +127,7 @@ public class group_infoList extends Activity {
 
 
 
-
+            groupinfoAdapter = new GroupinfoAdapter(this, group_list, R.layout.group_lifo_list );
             group_list_view.setAdapter(groupinfoAdapter);
             group_list_view.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             group_list_view.setOnItemClickListener(groupListClickListener);
@@ -169,7 +169,7 @@ public class group_infoList extends Activity {
                                     temp_list.get(i).getNickname_list(),temp_list.get(i).getGroup_category(),temp_list.get(i).getIntroduce()
                                     ));
 
-                            groupinfoAdapter= new GroupinfoAdapter(group_infoList.this, group_list, R.layout.group_lifo_list );
+                            groupinfoAdapter= new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list );
                             group_list_view.setAdapter(groupinfoAdapter);
                             Log.d("filtered_list", Integer.toString(filtered_list.size()));
 
@@ -179,7 +179,7 @@ public class group_infoList extends Activity {
 
 
                     if(str.length()>1&&filtered_list.size()==0) {
-                        group_list_view.setVisibility(View.INVISIBLE);
+                        //group_list_view.setVisibility(View.INVISIBLE);
                        // background_hidden.setVisibility(View.GONE);
                         //unresistered_background.setVisibility(View.VISIBLE);
                        // unresistered_screen.setVisibility(View.VISIBLE);
@@ -227,39 +227,42 @@ public class group_infoList extends Activity {
 
     AdapterView.OnItemClickListener groupListClickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-
-            /*Intent intent = new Intent(group_infoList.this,group_info.class );
+/*
+            Intent intent = new Intent(group_infoList.this,group_info.class );
             intent.putExtra("group_id",group_list.get(position).getGroup_id());
             intent.putExtra("group_name",group_list.get(position).getGroup_name());
             intent.putExtra("group_category",group_list.get(position).getGroup_category());
             intent.putExtra("introduce",group_list.get(position).getIntroduce());
 
             startActivity(intent);
-            */
+        */
             //group search
             int pos = position;
             if(filtered_list.size()!=0) //검색했는데 검색결과가 리스트에 있을때
             {
                 Log.d("선택된거", filtered_list.get(pos).getGroup_category());
               //  group.setGroup_code(filtered_list.get(pos).getGroup_code());
-                group.setGroup_name(filtered_list.get(pos).getGroup_name());
-                group.setGroup_category(filtered_list.get(pos).getGroup_category());
-                group.setIntroduce(filtered_list.get(pos).getIntroduce());
-                Intent intent = new Intent(group_infoList.this,group_info.class).putExtra("group",group);
+                Intent intent = new Intent(group_infoList.this,group_info.class );
+                intent.putExtra("group_id",filtered_list.get(pos).getGroup_id());
+                intent.putExtra("group_name",filtered_list.get(pos).getGroup_name());
+                intent.putExtra("group_category",filtered_list.get(pos).getGroup_category());
+                intent.putExtra("introduce",filtered_list.get(pos).getIntroduce());
+
                 startActivity(intent);
                 finish();
             }
             else {
                 Log.d("선택된거", group_list.get(pos).getGroup_category());
                 Log.d("index", String.valueOf(pos));
-                //group.setGroup_code(group_list.get(pos).getGroup_code());
-                group.setGroup_name(filtered_list.get(pos).getGroup_name());
-                group.setGroup_category(filtered_list.get(pos).getGroup_category());
-                group.setIntroduce(filtered_list.get(pos).getIntroduce());
-                Intent intent = new Intent(group_infoList.this,group_info.class).putExtra("group",group);
+                Intent intent = new Intent(group_infoList.this,group_info.class );
+                intent.putExtra("group_id",group_list.get(pos).getGroup_id());
+                intent.putExtra("group_name",group_list.get(pos).getGroup_name());
+                intent.putExtra("group_category",group_list.get(pos).getGroup_category());
+                intent.putExtra("introduce",group_list.get(pos).getIntroduce());
                 startActivity(intent);
                 finish();
             }
+
             //group search
         }
     };
