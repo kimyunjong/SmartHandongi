@@ -1,9 +1,11 @@
 package com.smarthandongi;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.smarthandongi.database.PostDatabase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +17,7 @@ import java.net.URL;
 /**
  * Created by user on 2015-02-10.
  */
-public class ViewNumPhp extends AsyncTask<String, Integer, String> {
+public class ViewNumPhp extends AsyncTask<String, String, String> {
     private PostDatabase postDatabase;
 
     public ViewNumPhp(PostDatabase postDatabase) {
@@ -57,7 +59,11 @@ public class ViewNumPhp extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String str) {
         try{
             JSONObject root = new JSONObject(str);
-
+            JSONArray ja = root.getJSONArray("results");
+            JSONObject jo = ja.getJSONObject(0);
+            Log.d("넌되겠찌???",String.valueOf(jo.getInt("view_num")));
+            postDatabase.setView_num(jo.getInt("view_num"));
+            Log.d("니가먼저되야만해니가먼저","너뿐이야너뿐이야");
         } catch(JSONException e) {
             e.printStackTrace();
         }

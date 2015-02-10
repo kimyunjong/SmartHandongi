@@ -140,7 +140,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             post_day.setText(post.getPosting_date());
             title.setText(post.getTitle());
             content.setText(post.getContent());
-            view_num.setText(post.getView_num()+"Views");
+            view_num.setText(post.getView_num()+1+" Views");
         }
     }
 

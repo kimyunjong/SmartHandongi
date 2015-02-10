@@ -774,11 +774,13 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     AdapterView.OnItemClickListener boardItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-
+            ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
+            Log.d("글번호잘못??",String.valueOf(board_list.get(position).getId()));
+            viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+board_list.get(position).getId());
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
-
             intent.putExtra("post", board_list.get(position));
+            Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
         }
@@ -787,9 +789,13 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     AdapterView.OnItemClickListener timelineItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
+            ViewNumPhp viewNumPhp = new ViewNumPhp(timeline_list.get(position));
+            Log.d("글번호잘못??",String.valueOf(timeline_list.get(position).getId()));
+            viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+timeline_list.get(position).getId());
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
             intent.putExtra("post", timeline_list.get(position));
+            Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
         }
