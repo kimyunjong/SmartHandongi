@@ -73,8 +73,7 @@ public class group_info extends Activity {
         introduce.setText(introduce1);
 
 
-        slash=(TextView)findViewById(R.id.slash);
-        slash.setText("  |  ");
+
 
         group_image=(ImageView)findViewById(R.id.small_image);
 

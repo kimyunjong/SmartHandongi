@@ -55,6 +55,8 @@ public class GroupinfoAdapter extends BaseAdapter {
 
         TextView local = (TextView)convertView.findViewById(R.id.group_name);
         local.setText( group_list.get(position).getGroup_name());
+
+
         return convertView;
     }
 
