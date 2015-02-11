@@ -231,7 +231,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
             title.setText(post.getTitle());                                                     //제목
 
-
             content.setText(post.getContent());                                                 //내용
 
             view_num.setText(post.getView_num()+1+"");                                          //조회수
