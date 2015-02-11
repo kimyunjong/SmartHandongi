@@ -57,6 +57,12 @@ public class ReportPost extends Activity implements View.OnClickListener{
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     public void phpCreate(){
         String task, reason, kakao_nick;
         reason = report_post_content.getText().toString();

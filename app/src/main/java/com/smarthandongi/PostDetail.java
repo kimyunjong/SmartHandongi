@@ -2,7 +2,9 @@ package com.smarthandongi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,7 +48,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private PostDB_Php postdbphp;
     private DeletePhp del_php;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
-                     type;
+            type;
+    final Context context = this;
+    Dialog dialog_del, dialog_report;
+    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm;
 
 
     ImageView post_img;
@@ -62,7 +68,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     LinearLayout pos_dates, pos_linkbar;
     String category = "", small_category = "";
 
-   //수영 추가
+    //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
     int temp=1;
@@ -138,7 +144,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                        SendPush sendPush = new SendPush();
+                            SendPush sendPush = new SendPush();
                             sendPush.execute();
                         }
                     })
@@ -176,7 +182,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
 
             if(post.getLink().length() == 0){
-                    pos_linkbar.setVisibility(View.GONE);                                       //링크
+                pos_linkbar.setVisibility(View.GONE);                                       //링크
             } else {
                 pos_linkbar.setVisibility(View.VISIBLE);
                 link.setText(post.getLink());
@@ -244,7 +250,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         else {
             postImageTask = new PostImageTask(poster, post.getId(), post_img, screen_width, temp);//수영 수정, temp 추가
         }
-            postImageTask.execute(0);
+        postImageTask.execute(0);
     }
 
     @Override
@@ -284,33 +290,71 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.pos_report_btn : {
-                //신고하시겠습니까 메시지가 뜨고 난 후에 다음 엑티비티로.
 
-                //넘어갈 때 필요한 변수,   게시물 아이디,
-                carrier.setPost_id(post.getId());
-                carrier.setPosting_date(post.getPosting_date());
+                dialog_report = new Dialog(context);
+                dialog_report.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_report.setContentView(R.layout.dialog_report);
+                dialog_report.show();
 
-                Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
-                startActivity(intent);
+                dialog_report_cancel = (Button)dialog_report.findViewById(R.id.dialog_report_cancel);
+                dialog_report_cancel.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        dialog_report.dismiss();
+                    }
+                });
+
+                dialog_report_confirm = (Button)dialog_report.findViewById(R.id.dialog_report_confirm);
+                dialog_report_confirm.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        //신고하시겠습니까 메시지가 뜨고 난 후에 다음 엑티비티로.
+                        dialog_report.dismiss();
+                        //넘어갈 때 필요한 변수,   게시물 아이디,
+                        carrier.setPost_id(post.getId());
+                        carrier.setPosting_date(post.getPosting_date());
+                        Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
+                        startActivity(intent);
+                    }
+                });
+
+
+
+
+
                 break;
             }
+            case R.id.pos_scrap_btn : {
+                //스크랩 동작
+                break;
+            }
+
             case R.id.pos_del_btn : {
-                new AlertDialog.Builder(this)
-                        .setTitle("삭제")
-                        .setMessage("삭제하시겠습니까?")
-                        .setIcon(R.drawable.handongi)
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                delPhp();
-                                Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
-                                startActivity(intent);
-                                finish();
-                                Log.d("delete_posting_id", String.valueOf(post.getId()));
-                            }
-                        })
-                        .setNegativeButton("취소", null)
-                        .show();
+
+                dialog_del = new Dialog(context);
+                dialog_del.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_del.setContentView(R.layout.dialog_delete);
+                dialog_del.show();
+
+                dialog_delete_cancel = (Button)dialog_del.findViewById(R.id.dialog_delete_cancel);
+                dialog_delete_cancel.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        dialog_del.dismiss();
+                    }
+                });
+
+                dialog_delete_confirm = (Button)dialog_del.findViewById(R.id.dialog_delete_confirm);
+                dialog_delete_confirm.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        dialog_del.dismiss();
+                        delPhp();
+                        Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
                 break;
             }
             case R.id.post_detail_home : {
@@ -431,7 +475,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
         }
     }
-        //수영 추가
+    //수영 추가
     private class SendPush extends AsyncTask<String, Void, Void> {
 
         @Override

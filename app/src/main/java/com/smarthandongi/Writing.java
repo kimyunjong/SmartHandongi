@@ -73,6 +73,8 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.view.View.GONE;
 import static android.view.View.OnClickListener;
@@ -105,6 +107,7 @@ public class Writing extends Activity implements OnClickListener {
     ImageButton writing_additional_btn, writing_additional_hide_btn, writing_remove_pic_btn;
     LinearLayout writing_additional, linear, entire_layout;
     ScrollView scroll;
+    Dialog dialog, dialogout;
 
     PhpUpload task;
 
@@ -239,8 +242,8 @@ public class Writing extends Activity implements OnClickListener {
         startDate_btn.setOnClickListener(this);
         endDate_btn.setOnClickListener(this);
 
-        dialog_push_cancel = (Button)findViewById(R.id.dialog_push_cancel);
-        dialog_push_confirm = (Button)findViewById(R.id.dialog_push_confirm);
+
+
 
         entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
         entire_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -324,55 +327,68 @@ public class Writing extends Activity implements OnClickListener {
         }
     }
 
+    protected void onDestroy(){
+        super.onDestroy();
 
+        if(dialog != null){
+            if(dialog.isShowing()){
+                dialog.dismiss();
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.writing_confirm_btn:{                                                                                                  //확인btn
+
                 phpCreate();
 
-                final Dialog dialog = new Dialog(context);
+                dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_writing);
                 dialog.show();
-                new CountDownTimer(1500, 1000){
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        // TODO Auto-generated method stub
+
+                final Timer t = new Timer();
+                t.schedule(new TimerTask() {
+                    public void run() {
+                        dialog.dismiss(); // when the task active then close the dialog
+                        t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+                        Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                        startActivity(intent);
+                        finish();
                     }
-                    @Override
-                    public void onFinish() {
-                        // TODO Auto-generated method stub
-                        dialog.dismiss();
-                    }
-                }.start();
+                }, 2000);
 
-                dialog.setContentView(R.layout.dialog_push);
-                dialog.show();
-                if(v.getId() == R.id.dialog_push_cancel){
-                    dialog.dismiss();
-                }
-                else if(v.getId() == R.id.dialog_push_confirm){
-                    SendPush sendPush = new SendPush();
-                    sendPush.execute();
-                    dialog.dismiss();
+//                dialogout = new Dialog(context);
+//                dialogout.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                dialogout.setContentView(R.layout.dialog_push);
+//                dialogout.show();
+//
+//                new CountDownTimer(3000, 1000){
+//                    public void onTick(long millisUntilFinished) {
+//                    }
+//                    public void onFinish() {
+//                        if(dialogout != null){
+//                            if(dialogout.isShowing()){
+//                                dialogout.dismiss();
+//                            }
+//                        }
+//                    }
+//                }.start();
+//                new CountDownTimer(3000, 1000){
+//                    public void onTick(long millisUntilFinished) {
+//                    }
+//                    public void onFinish() {
+//                        if(dialog != null){
+//                            if(dialog.isShowing()){
+//                                dialog.dismiss();
+//                            }
+//                        }
+//                    }
+//                }.start();
 
-                    dialog.setContentView(R.layout.dialog_push_confirm);
-                    dialog.show();
-                    new CountDownTimer(1500, 1000){
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            // TODO Auto-generated method stub
-                        }
-                        @Override
-                        public void onFinish() {
-                            // TODO Auto-generated method stub
-                            dialog.dismiss();
-                        }
-                    }.start();
 
-                }
 
 
 
@@ -695,66 +711,6 @@ public class Writing extends Activity implements OnClickListener {
 //        }
     }
 
-    private class SendPush extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loagindDialog = ProgressDialog.show(Writing.this, "키 등록 중입니다..",
-                    "Please wait..", true, false);
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-            HttpPostData(carrier.getPost_id());
-            return null;
-        }
-
-        protected void onPostExecute(Void result) {
-            loagindDialog.dismiss();
-        }
-    }
-
-    public void HttpPostData(int posting_id ) {
-        try {
-            String posting_id1 = String.valueOf(posting_id);
-            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
-            //--------------------------
-            //   전송 모드 설정 - 기본적인 설정이다
-            //--------------------------
-            http.setDefaultUseCaches(false);
-            http.setDoInput(true);
-            http.setDoOutput(true);
-            http.setRequestMethod("POST");
-
-            http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
-            StringBuffer buffer = new StringBuffer();
-            buffer.append("posting_id").append("=").append(posting_id);                 // php 변수에 값 대입
-
-
-            OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "EUC-KR");
-            PrintWriter writer = new PrintWriter(outStream);
-            writer.write(buffer.toString());
-            writer.flush();
-            InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "EUC-KR");
-            BufferedReader reader = new BufferedReader(tmp);
-            StringBuilder builder = new StringBuilder();
-            String str;
-            while ((str = reader.readLine()) != null) {
-                builder.append(str + "\n");
-            }
-
-            myResult = builder.toString();
-
-        } catch (MalformedURLException e) {
-            //
-        } catch (IOException e) {
-            //
-        } // try
-    } // HttpPostData
-
-
     private class PhpUpload extends AsyncTask<String, Integer, String> {
 
         public PhpUpload(){ super();}
@@ -820,6 +776,25 @@ public class Writing extends Activity implements OnClickListener {
 
         }
     }
+
+//    public void onStop(){
+//
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.dialog_push);
+//        dialog.show();
+//
+//        new CountDownTimer(3000, 1000){
+//                    public void onTick(long millisUntilFinished) {
+//                    }
+//                    public void onFinish() {
+//                        if(dialog != null){
+//                            if(dialog.isShowing()){
+//                                dialog.dismiss();
+//                            }
+//                        }
+//                    }
+//                }.start();
+//    }
 
     public void phpCreate(){
 
@@ -894,72 +869,75 @@ public class Writing extends Activity implements OnClickListener {
         }
         else
         {
-            new AlertDialog.Builder(this)
-                    .setTitle(title_message)
-                    .setMessage(message)
-                    .setIcon(R.drawable.handongi)
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
-                                    + "posting_id=" + carrier.getPost_id()
-                                    + "&kakao_id=" + carrier.getId()
-                                    + "&kakao_nick=" + kakao_nick
-                                    + "&big_category=" + carrier.getBig_category()
-                                    + "&category=" + carrier.getCategory()
-                                    + "&group_code=" + carrier.getGroup_code()
-                                    + "&group_name=" + carrier.getGroup_name()
-                                    + "&title=" + carrier.getTitle()
-                                    + "&content=" + carrier.getContent()
-                                    + "&link=" + carrier.getLink()
-                                    + "&posting_date=" + carrier.getPosting_date()
-                                    + "&start_date=" + carrier.getStart_date()
-                                    + "&end_date=" + carrier.getEnd_date()
-                                    + "&has_pic=" + has_pic
-                                    + "&edit_count=" + carrier.getEdit_count());
+            carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
+                    + "posting_id=" + carrier.getPost_id()
+                    + "&kakao_id=" + carrier.getId()
+                    + "&kakao_nick=" + kakao_nick
+                    + "&big_category=" + carrier.getBig_category()
+                    + "&category=" + carrier.getCategory()
+                    + "&group_code=" + carrier.getGroup_code()
+                    + "&group_name=" + carrier.getGroup_name()
+                    + "&title=" + carrier.getTitle()
+                    + "&content=" + carrier.getContent()
+                    + "&link=" + carrier.getLink()
+                    + "&posting_date=" + carrier.getPosting_date()
+                    + "&start_date=" + carrier.getStart_date()
+                    + "&end_date=" + carrier.getEnd_date()
+                    + "&has_pic=" + has_pic
+                    + "&edit_count=" + carrier.getEdit_count());
+            task = new PhpUpload();
+            task.execute(carrier.getUpload_url());
 
-                            Log.d("postingid", String.valueOf(carrier.getPost_id()));
-                            Log.d("kakao_id", carrier.getId());
-                            Log.d("kakao_nick", kakao_nick);
-                            Log.d("bigcategory", String.valueOf(carrier.getBig_category()));
-                            Log.d("category", carrier.getCategory());
-                            Log.d("group_code", carrier.getGroup_code());
-                            Log.d("group_name", carrier.getGroup_name());
-                            Log.d("title", carrier.getTitle());
-                            Log.d("content", carrier.getContent());
-                            Log.d("link", carrier.getLink());
-                            Log.d("posting date", carrier.getPosting_date());
-                            Log.d("startdate", carrier.getStart_date());
-                            Log.d("enddate", carrier.getEnd_date());
-                            Log.d("haspic", String.valueOf(carrier.getHas_pic()));
-                            Log.d("editcount", String.valueOf(carrier.getEdit_count()));
+//                final Timer t = new Timer();
+//                t.schedule(new TimerTask() {
+//                    public void run() {
+//                        dialog.dismiss(); // when the task active then close the dialog
+//                        t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+//                    }
+//                }, 2000);
+            //                new CountDownTimer(3000, 1000){
+//                    public void onTick(long millisUntilFinished) {
+//                    }
+//                    public void onFinish() {
+//                        if(dialog != null){
+//                            if(dialog.isShowing()){
+//                                dialog.dismiss();
+//                            }
+//                        }
+//                    }
+//                }.start();
+            Log.d("postingid", String.valueOf(carrier.getPost_id()));
+            Log.d("kakao_id", carrier.getId());
+            Log.d("kakao_nick", kakao_nick);
+            Log.d("bigcategory", String.valueOf(carrier.getBig_category()));
+            Log.d("category", carrier.getCategory());
+            Log.d("group_code", carrier.getGroup_code());
+            Log.d("group_name", carrier.getGroup_name());
+            Log.d("title", carrier.getTitle());
+            Log.d("content", carrier.getContent());
+            Log.d("link", carrier.getLink());
+            Log.d("posting date", carrier.getPosting_date());
+            Log.d("startdate", carrier.getStart_date());
+            Log.d("enddate", carrier.getEnd_date());
+            Log.d("haspic", String.valueOf(carrier.getHas_pic()));
+            Log.d("editcount", String.valueOf(carrier.getEdit_count()));
 
-                            task = new PhpUpload();
-                            task.execute(carrier.getUpload_url());
+//                Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+//                startActivity(intent);
+//                finish();
 
-
-
-
-                            Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
-                            startActivity(intent);
-                            finish();
-
-                            carrier.setFromPostDetail(0);
-                            carrier.setGroup_name("");
-                            carrier.setGroup_code("");
-                            carrier.setBig_category(null);
-                            carrier.setCategory(null);
-                            carrier.setTitle(null);
-                            carrier.setContent(null);
-                            carrier.setPosting_date(null);
-                            carrier.setStart_date(null);
-                            carrier.setEnd_date(null);
-                            carrier.setLink(null);
-                            carrier.setHas_pic(0);
-                        }
-                    })
-                    .setNegativeButton("취소", null)
-                    .show();
+            carrier.setFromPostDetail(0);
+            carrier.setGroup_name("");
+            carrier.setGroup_code("");
+            carrier.setBig_category(null);
+            carrier.setCategory(null);
+            carrier.setTitle(null);
+            carrier.setContent(null);
+            carrier.setPosting_date(null);
+            carrier.setStart_date(null);
+            carrier.setEnd_date(null);
+            carrier.setLink(null);
+            carrier.setHas_pic(0);
 
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
         }
@@ -1398,4 +1376,63 @@ public class Writing extends Activity implements OnClickListener {
 
         return sdate;
     }
+
+    private class SendPush extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loagindDialog = ProgressDialog.show(Writing.this, "키 등록 중입니다..",
+                    "Please wait..", true, false);
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            HttpPostData(carrier.getPost_id());
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            loagindDialog.dismiss();
+        }
+    }
+
+    public void HttpPostData(int posting_id ) {
+        try {
+            String posting_id1 = String.valueOf(posting_id);
+            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
+            //--------------------------
+            //   전송 모드 설정 - 기본적인 설정이다
+            //--------------------------
+            http.setDefaultUseCaches(false);
+            http.setDoInput(true);
+            http.setDoOutput(true);
+            http.setRequestMethod("POST");
+
+            http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
+            StringBuffer buffer = new StringBuffer();
+            buffer.append("posting_id").append("=").append(posting_id);                 // php 변수에 값 대입
+
+
+            OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "EUC-KR");
+            PrintWriter writer = new PrintWriter(outStream);
+            writer.write(buffer.toString());
+            writer.flush();
+            InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "EUC-KR");
+            BufferedReader reader = new BufferedReader(tmp);
+            StringBuilder builder = new StringBuilder();
+            String str;
+            while ((str = reader.readLine()) != null) {
+                builder.append(str + "\n");
+            }
+
+            myResult = builder.toString();
+
+        } catch (MalformedURLException e) {
+            //
+        } catch (IOException e) {
+            //
+        } // try
+    } // HttpPostData
 }
