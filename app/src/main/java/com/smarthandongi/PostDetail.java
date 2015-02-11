@@ -37,6 +37,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Joel on 2015-01-25.
@@ -49,8 +51,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private DeletePhp del_php;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
             type;
-    final Context context = this;
-    Dialog dialog_del, dialog_report;
+    final Context context = this, context_del = this;
+    Dialog dialog_del, dialog_report, dialog_delphp;
     Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm;
 
 
@@ -257,9 +259,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.pos_review_show_btn : {
-                Intent intent = new Intent(PostDetail.this, Review.class);
-                intent.putExtra("carrier", carrier);
-                intent.putExtra("post", post);
+                Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier", carrier);
+                intent.putExtra("posting_id", post.getId());
                 startActivity(intent);
                 break;
             }
@@ -299,7 +300,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 dialog_report.show();
 
                 dialog_report_cancel = (Button)dialog_report.findViewById(R.id.dialog_report_cancel);
-                dialog_report_cancel.setOnClickListener(new View.OnClickListener(){
+                dialog_report_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog_report.dismiss();
@@ -315,15 +316,11 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         //넘어갈 때 필요한 변수,   게시물 아이디,
                         carrier.setPost_id(post.getId());
                         carrier.setPosting_date(post.getPosting_date());
-                        Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
-                        startActivity(intent);
                     }
                 });
 
-
-
-
-
+                Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
+                startActivity(intent);
                 break;
             }
             case R.id.pos_scrap_btn : {
@@ -347,7 +344,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 });
 
                 dialog_delete_confirm = (Button)dialog_del.findViewById(R.id.dialog_delete_confirm);
-                dialog_delete_confirm.setOnClickListener(new View.OnClickListener(){
+                dialog_delete_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog_del.dismiss();
@@ -538,6 +535,23 @@ public class PostDetail extends Activity implements View.OnClickListener{
     public void delPhp(){
         del_php = new DeletePhp();
         del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
+
+        dialog_delphp = new Dialog(context_del);
+        dialog_delphp.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_delphp.setContentView(R.layout.dialog_after_delete);
+        dialog_delphp.show();
+
+        final Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                dialog_delphp.dismiss(); // when the task active then close the dialog
+                t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+                finish();
+            }
+        }, 2000);
+
+
+
     }
 
     public class DeletePhp extends AsyncTask<String, Integer, String>{
@@ -588,5 +602,11 @@ public class PostDetail extends Activity implements View.OnClickListener{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
         }
+    }
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        if ( dialog_del != null)
+            dialog_del.dismiss();
     }
 }
