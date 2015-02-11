@@ -147,22 +147,27 @@ public class PostAdapter extends BaseAdapter{
             if (getItem(position).getBig_category().equalsIgnoreCase("1"))
             {
                 holder.post_category.setImageResource(R.drawable.notice);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("2"))
             {
                 holder.post_category.setImageResource(R.drawable.outer);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("3"))
             {
                 holder.post_category.setImageResource(R.drawable.seminar);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("4"))
             {
                 holder.post_category.setImageResource(R.drawable.recruit);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("5"))
             {
                 holder.post_category.setImageResource(R.drawable.agora);
+                holder.post_category.setAlpha(1f);
             }
 
 
@@ -180,22 +185,27 @@ public class PostAdapter extends BaseAdapter{
             if (getItem(position).getBig_category().equalsIgnoreCase("1"))
             {
                 holder.post_category.setImageResource(R.drawable.notice);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("2"))
             {
                 holder.post_category.setImageResource(R.drawable.outer);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("3"))
             {
                 holder.post_category.setImageResource(R.drawable.seminar);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("4"))
             {
                 holder.post_category.setImageResource(R.drawable.recruit);
+                holder.post_category.setAlpha(1f);
             }
             else if (getItem(position).getBig_category().equalsIgnoreCase("5"))
             {
                 holder.post_category.setImageResource(R.drawable.agora);
+                holder.post_category.setAlpha(1f);
             }
 
         }

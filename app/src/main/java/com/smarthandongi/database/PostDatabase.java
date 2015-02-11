@@ -41,6 +41,7 @@ public class PostDatabase implements Serializable{
     private String has_pic;
     private int dday;
     private boolean first_day=false;
+    private boolean last_day=false;
     private String like="0";
     private String big_category;
     private int view_num;
@@ -48,7 +49,9 @@ public class PostDatabase implements Serializable{
     private String kakao_nick;
 
 
-
+    public boolean getLastDay(){return last_day;}
+    public void setLast_day_T(){this.last_day=true;}
+    public void setLast_day_F(){this.last_day=false;}
     public int getId(){return  id;}
     public void setId(int id){this.id = id;}
     public String getKakao_id(){return kakao_id;}

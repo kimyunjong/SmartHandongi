@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/post_item">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+   >
+<RelativeLayout
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+
+    android:id="@+id/post_item"
+    >
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_toRightOf="@+id/post_category_layout"
+    android:layout_toLeftOf="@+id/like_button"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:layout_marginLeft="25dp">
+    android:layout_marginLeft="22dp"
+
+    >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/post_title"
+        android:singleLine="true"
+        android:ellipsize="end"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -34,20 +50,23 @@
 </RelativeLayout>
 <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:id="@+id/post_category_layout"
     android:layout_marginLeft="10dp"
     android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true">
+    android:layout_centerVertical="true"
+
+    >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/post_id"
         android:layout_below="@+id/post_category"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
+        android:textSize="11sp"
+
         />
 
     <ImageView
@@ -55,17 +74,17 @@
         android:layout_height="25.5dp"
         android:id="@+id/post_category"
         android:layout_alignParentLeft="true"
-
-        android:layout_marginTop="5dp"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
+
 </RelativeLayout>
     <ImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/like_button"
         android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginRight="11dp"
         android:layout_marginTop="10dp"
         android:layout_alignTop="@+id/dday"/>
@@ -77,3 +96,4 @@
 
 
 </RelativeLayout>
+    </LinearLayout>

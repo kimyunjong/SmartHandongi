@@ -38,7 +38,7 @@ import java.util.ArrayList;
  */
 public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener,View.OnClickListener {
     Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn,write_btn_in_menu,scrap_menu,my_posting_btn,push_set_btn, show_group_btn,bustime_table_btn,report_btn, history_btn,other_handong_btn, logout_btn;
-    ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img,search_default_img;
+    ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img,write_btn_in_menu_img,scrap_menu_img,my_posting_btn_img,push_set_btn_img, show_group_btn_img,bustime_table_btn_img,report_btn_img, history_btn_img,other_handong_btn_img, logout_btn_img;
     ImageButton search_default_btn;
     RelativeLayout menu,search_layout, default_layout;
     Carrier carrier;
@@ -118,9 +118,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
          history_btn=(Button)findViewById(R.id.ourstory_btn);
         other_handong_btn=(Button)findViewById(R.id.other_handongi_btn);
         logout_btn=(Button)findViewById(R.id.logout_btn);
+        write_btn=(Button)findViewById(R.id.write_btn);
 
         search_layout=(RelativeLayout)findViewById(R.id.search_bar_layout);
         default_layout=(RelativeLayout)findViewById(R.id.default_layout);
+
         notice_img = (ImageView) findViewById(R.id.notice_img);
         outer_img = (ImageView) findViewById(R.id.outer_img);
         seminar_img = (ImageView) findViewById(R.id.seminar_img);
@@ -130,6 +132,17 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         timeline_img = (ImageView) findViewById(R.id.timeline_img);
         search_img = (ImageView) findViewById(R.id.search_img);
         menu_img = (ImageView) findViewById(R.id.menu_img);
+        write_btn_in_menu_img=(ImageView)findViewById(R.id.write_btn_in_menu_img);
+        scrap_menu_img=(ImageView)findViewById(R.id.scrap_img);
+        my_posting_btn_img=(ImageView)findViewById(R.id.my_posting_img);
+        push_set_btn_img=(ImageView)findViewById(R.id.push_set_img);
+        show_group_btn_img=(ImageView)findViewById(R.id.show_group_img);
+        bustime_table_btn_img=(ImageView)findViewById(R.id.bustime_table_img);
+        report_btn_img=(ImageView)findViewById(R.id.error_report_img);
+        history_btn_img=(ImageView)findViewById(R.id.ourstory_img);
+        other_handong_btn_img=(ImageView)findViewById(R.id.other_handongi_img);
+        logout_btn_img=(ImageView)findViewById(R.id.logout_img);
+        write_img=(ImageView)findViewById(R.id.write_btn_img);
 
         search_default_btn.setOnClickListener(this);
         notice_btn.setOnTouchListener(this);
@@ -142,16 +155,16 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         search_btn.setOnTouchListener(this);
         menu_btn.setOnTouchListener(this);
         write_btn.setOnTouchListener(this);
-        write_btn_in_menu.setOnClickListener(this);
-        scrap_menu.setOnClickListener(this);
-        my_posting_btn.setOnClickListener(this);
-        push_set_btn.setOnClickListener(this);
-         show_group_btn.setOnClickListener(this);
-        bustime_table_btn.setOnClickListener(this);
-        report_btn.setOnClickListener(this);
-        history_btn.setOnClickListener(this);
-        other_handong_btn.setOnClickListener(this);
-        logout_btn.setOnClickListener(this);
+        write_btn_in_menu.setOnTouchListener(this);
+        scrap_menu.setOnTouchListener(this);
+        my_posting_btn.setOnTouchListener(this);
+        push_set_btn.setOnTouchListener(this);
+         show_group_btn.setOnTouchListener(this);
+        bustime_table_btn.setOnTouchListener(this);
+        report_btn.setOnTouchListener(this);
+        history_btn.setOnTouchListener(this);
+        other_handong_btn.setOnTouchListener(this);
+        logout_btn.setOnTouchListener(this);
 
 
         timeline_listviewR.setVisibility(View.GONE);
@@ -183,18 +196,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                default_on=true;
                search_on=false;
                search_toggle();
-//               default_on=true;
-//               search_on=false;
-           }
-
-           case R.id.my_posting_btn:{
-               //돌아올곳
-               Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
-               intent.putExtra("carrier", carrier);
-               intent.putExtra("post_list",post_list);
-
-               startActivityForResult(intent, 0);
-               overridePendingTransition(0,0);
 
            }
 
@@ -215,8 +216,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     if(ca1==1&&ca2==1&&ca3==1&&ca4==1&&ca5==1){
 
                 }
-
-
                 else if(ca1==1)
                     {
                         notice_img.setImageResource(R.drawable.notice_btn_on);
@@ -525,14 +524,148 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             case R.id.write_btn: {
                 if (event.getAction() == 0) {
                     write_img.setImageResource(R.drawable.write_btn_on);
-                } else if (event.getAction() == 1) {
+                }
+                else if (event.getAction() == 1) {
                     write_img.setImageResource(R.drawable.write_btn);
+
+                    Intent intent = new Intent(yj_activity.this, Writing.class);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list",post_list);
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
                 }
                 break;
             }
-        }
+            case R.id.write_btn_in_menu: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu_on);
+                } else if (event.getAction() == 1) {
+                    write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
+                    Intent intent = new Intent(yj_activity.this, Writing.class);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list",post_list);
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
 
-        return false;
+                }
+                break;
+            }
+
+
+            case R.id.my_posting_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    my_posting_btn_img.setImageResource(R.drawable.my_post_on);
+                } else if (event.getAction() == 1) {
+                    my_posting_btn_img.setImageResource(R.drawable.my_post);
+                    Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list",post_list);
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+
+            case R.id.scrap_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    scrap_menu_img.setImageResource(R.drawable.scrap_menu_on);
+                } else if (event.getAction() == 1) {
+                    scrap_menu_img.setImageResource(R.drawable.scrap_menu);
+                    Intent intent = new Intent(yj_activity.this, My_scrap.class);
+                    intent.putExtra("carrier", carrier);
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+
+            case R.id.push_set_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    push_set_btn_img.setImageResource(R.drawable.alarm_menu_on);
+                } else if (event.getAction() == 1) {
+                    push_set_btn_img.setImageResource(R.drawable.alarm_menu);
+                    Intent intent = new Intent(yj_activity.this, PushSetup.class);
+                    intent.putExtra("carrier", carrier);
+
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+
+            case R.id.group_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    show_group_btn_img.setImageResource(R.drawable.group_menu_on);
+                } else if (event.getAction() == 1) {
+                    show_group_btn_img.setImageResource(R.drawable.group_menu);
+                    Intent intent = new Intent(yj_activity.this, group_info_list.class);
+                    intent.putExtra("carrier", carrier);
+
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+            case R.id.error_report_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    report_btn_img.setImageResource(R.drawable.error_report_on);
+                } else if (event.getAction() == 1) {
+                    report_btn_img.setImageResource(R.drawable.error_report);
+                    Intent intent = new Intent(yj_activity.this, BugReport.class);
+                    intent.putExtra("carrier", carrier);
+
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+            case R.id.ourstory_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    history_btn_img.setImageResource(R.drawable.our_history_on);
+                } else if (event.getAction() == 1) {
+                    history_btn_img.setImageResource(R.drawable.our_history);
+//                   Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+//                    intent.putExtra("carrier", carrier);
+//                    intent.putExtra("post_list",post_list);
+//                    startActivityForResult(intent, 0);
+//                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+            case R.id.logout_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    logout_btn_img.setImageResource(R.drawable.logout_menu_on);
+                } else if (event.getAction() == 1) {
+                    logout_btn_img.setImageResource(R.drawable.logout_menu);
+//                   Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+//                    intent.putExtra("carrier", carrier);
+//                    intent.putExtra("post_list",post_list);
+//                    startActivityForResult(intent, 0);
+//                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+
+
+
+            }
+
+       return false;
     }
 
 
@@ -815,6 +948,43 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
             before_dday=db.getDday();
         }
+//        //마지막 이벤트에 대한 정보주기
+//        int last_day_check=0;
+//        boolean day_turn_last=false;
+//        int before_dday_last=0;
+//
+//        for(PostDatabase db:temp_plist)
+//        {
+//            //날바뀐지 안바뀐지 설정
+//            if(temp_plist.indexOf(db)==0)
+//            {
+//                day_turn=true;
+//            }
+//            else
+//            {
+//                if (before_dday != db.getDday())
+//                {
+//
+//                    day_turn = true;
+//                }
+//                else
+//                {
+//                    day_turn = false;
+//                }
+//            }
+//
+//            if(day_turn)
+//            {
+//                db.setFirst_day_T();
+//                // 하루씩만 깎이면 안됨, 바뀌는 날에
+//            }
+//            else//디데이 바뀌지 않음.
+//            {
+//                System.out.println("바뀌지 않음."+first_day);
+//            }
+//            before_dday=db.getDday();
+//        }
+
 
 
         for(PostDatabase db:temp_plist){

@@ -170,8 +170,9 @@
     android:layout_height="match_parent"
     android:id="@+id/list"
     android:layout_below="@+id/upper_bar"
-        android:scrollbars="none"
-        android:layout_marginBottom="60dp"
+    android:scrollbars="none"
+    android:layout_marginBottom="60dp"
+
         >
 
     </ListView>
