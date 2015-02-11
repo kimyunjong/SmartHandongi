@@ -26,10 +26,10 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/backarrow"/>
                 <ImageView
-                    android:layout_width="34dp"
-                    android:layout_height="20.5dp"
+                    android:layout_width="126dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/report_post_main"/>
+                    android:background="@drawable/see_my_post"/>
 
             </RelativeLayout>
         </LinearLayout>
@@ -82,11 +82,24 @@
             android:alpha="0.5"
             android:layout_alignParentBottom="true"
             android:background="#ffffff"/>
-        <ListView
-            android:paddingLeft="8dp"
-            android:id="@+id/smp_listview"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent">
+            <ListView
+                android:paddingLeft="8dp"
+                android:id="@+id/smp_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                ></ListView>
+            <ListView
+                android:paddingLeft="8dp"
+                android:id="@+id/smp_comment_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                ></ListView>
+        </RelativeLayout>
 
     </LinearLayout>
 </RelativeLayout>

@@ -191,8 +191,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                //돌아올곳
                Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
                intent.putExtra("carrier", carrier);
-               intent.putExtra("post_list",timeline_list);
-               intent.putExtra("post", timeline_list);
+               intent.putExtra("post_list",post_list);
 
                startActivityForResult(intent, 0);
                overridePendingTransition(0,0);
