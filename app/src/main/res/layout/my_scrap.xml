@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_menu">
+    <LinearLayout
+        android:id="@+id/push_top_bar_scrap"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="#32000000">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/push_back_btn"
+                android:layout_width="50.5dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"/>
+            <ImageView
+                android:layout_width="50.5dp"
+                android:layout_height="52.5dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/backarrow"/>
+            <ImageView
+                android:layout_width="125.5dp"
+                android:layout_height="50.5dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/scrap_title"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_alignTop="@+id/push_top_bar_scrap">
+        
+    <!--<ImageView-->
+        <!--android:layout_width="47dp"-->
+        <!--android:layout_height="30.5dp"-->
+        <!--android:src="@drawable/scrap_num_img2"/>-->
+    </RelativeLayout>
+    
+    
+    
+    
+    
+</RelativeLayout>

@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class PostDatabase implements Serializable{
     public PostDatabase(String title, int id, String kakao_id, String big_category,String category, String group,
                         String content, String posting_date, String link, String start_date, String end_date,
-                        String has_pic,String like,int view_num)
+                        String has_pic,String like,int view_num, String group_name,String kakao_nick)
     {
 
         this.title=title;
@@ -25,7 +25,8 @@ public class PostDatabase implements Serializable{
         this.like=like;
         this.big_category=big_category;
         this.view_num=view_num;
-
+        this.group_name=group_name;
+        this.kakao_nick=kakao_nick;
 }
     private String title;
     private int id;
@@ -43,6 +44,8 @@ public class PostDatabase implements Serializable{
     private String like="0";
     private String big_category;
     private int view_num;
+    private String group_name;
+    private String kakao_nick;
 
 
 
@@ -70,5 +73,10 @@ public class PostDatabase implements Serializable{
     public boolean getFirst_day(){return first_day;}
     public void setDday(int dday){this.dday=dday;}
     public int getDday(){return dday;}
+    public String getGroup_name(){return group_name;}
+    public void setGroup_name(String group_name){this.group_name=group_name;}
+    public void setKakao_nic(String kakao_nic){this.kakao_nick=kakao_nic;}
+    public String getKakao_nic(){return kakao_nick;}
+
 
 }

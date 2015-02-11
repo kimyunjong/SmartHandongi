@@ -438,9 +438,10 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
             case R.id.search_btn: {
                 if (event.getAction() == 0) {
-                    search_img.setImageResource(R.drawable.search_btn);
+                    search_img.setImageResource(R.drawable.search_button);
                 } else if (event.getAction() == 1) {
                     search_img.setImageResource(R.drawable.search_btn);
+                    //토글시킨다.
                 }
                 break;
             }
@@ -568,7 +569,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     post_list.add(new PostDatabase(
                             jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                             jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
-                            jo.getString("like"), jo.getInt("view"))
+                            jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"))
                     );
 
                     System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));

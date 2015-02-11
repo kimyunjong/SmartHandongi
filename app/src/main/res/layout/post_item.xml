@@ -3,53 +3,70 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/post_item">
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/post_category_layout"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="25dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/post_title"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/post_category"
-        android:layout_marginLeft="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_dday"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_id"
-        android:layout_below="@+id/post_category"
-        android:layout_marginLeft="20dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/post_group"
-        android:layout_toRightOf="@+id/post_id"
+
         android:layout_below="@+id/post_title"
-        android:layout_marginLeft="30dp"
-        android:layout_alignParentBottom="true"
         />
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/post_dday"
+        android:layout_toRightOf="@+id/post_group"
+        android:layout_below="@+id/post_title"
+        android:layout_marginLeft="4dp"
+
+        />
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:id="@+id/post_category_layout"
+    android:layout_marginLeft="10dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/post_id"
+        android:layout_below="@+id/post_category"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        />
+
+    <ImageView
+        android:layout_width="25.5dp"
+        android:layout_height="25.5dp"
         android:id="@+id/post_category"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
+
+        android:layout_marginTop="5dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         />
+</RelativeLayout>
     <ImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/like_button"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="11dp"
         android:layout_marginTop="10dp"
         android:layout_alignTop="@+id/dday"/>
 

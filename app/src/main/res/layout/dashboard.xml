@@ -1,16 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"  tools:context=".MainActivity"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
+    >
 //상단바
     <LinearLayout
     android:layout_width="match_parent"
-        android:layout_height="76.4dp"
+        android:layout_height="66dp"
 
     android:layout_alignParentTop="true"
-    android:background="@drawable/upperbar_background"
+
     android:orientation="vertical"
-        android:id="@+id/upper_bar">
+        android:id="@+id/upper_bar"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -23,7 +25,7 @@
 
             <RelativeLayout
                 android:layout_width="63.5dp"
-                android:layout_height="52dp"
+                android:layout_height="66dp"
 
                 android:id="@+id/board_layout">
             <Button
@@ -32,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:background="@android:color/transparent"
                android:gravity="bottom"
+                android:layout_alignParentBottom="true"
                 />
             <ImageView
                 android:id="@+id/board_img"
@@ -42,8 +45,8 @@
             </RelativeLayout>
 
            <RelativeLayout
-               android:layout_width="63.5dp"
-               android:layout_height="52dp"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
                android:layout_toRightOf="@+id/board_layout"
               >
             <Button
@@ -53,6 +56,7 @@
                 android:layout_width="63.5dp"
                 android:layout_height="52dp"
                 android:background="@android:color/transparent"
+                android:layout_alignParentBottom="true"
 
                 />
             <ImageView
@@ -70,14 +74,14 @@
 
                 android:layout_toLeftOf="@+id/menu_btn"
                 android:background="@android:color/transparent"
-
+                android:layout_alignParentBottom="true"
                 />
             <ImageView
                 android:id="@+id/search_img"
                 android:layout_width="40.5dp"
                 android:layout_height="46dp"
                 android:layout_toLeftOf="@+id/menu_btn"
-
+                android:layout_alignParentBottom="true"
                 android:src="@drawable/search_button"/>
 
             <Button
@@ -115,6 +119,7 @@
     android:id="@+id/list"
     android:layout_below="@+id/upper_bar"
         android:scrollbars="none"
+        android:layout_marginBottom="60dp"
         >
 
     </ListView>
@@ -211,9 +216,8 @@
                     android:layout_height="44dp"
                     android:src="@drawable/notice_btn"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_centerVertical="true"/>
 
-                    />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="0dp"
@@ -312,13 +316,13 @@
     android:layout_below="@+id/upper_bar"
     android:background="@drawable/menu_bg"
     android:visibility="gone"
-    android:id="@+id/menu"
+    android:id="@+id/menu">
 
-    >
     <LinearLayout
         android:layout_width="152dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+
         >
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -327,8 +331,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/write_btn_in_menu"
-
-
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
@@ -344,6 +347,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/scrap_btn"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
@@ -359,6 +363,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/my_posting_btn"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
@@ -374,6 +379,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/push_set_btn"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
@@ -381,7 +387,13 @@
                 android:id="@+id/push_set_img"
                 android:src="@drawable/alarm_menu"/>
         </RelativeLayout>
+   </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -389,20 +401,24 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/show_group"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/show_group_img"
-                android:src="@drawable/alarm_menu"/>
+                android:src="@drawable/group_menu"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+
+            android:id="@+id/bustime_layout">
             <Button
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
+                android:background="@android:color/transparent"
                 android:id="@+id/bustime_table_btn"
                 />
             <ImageView
@@ -414,11 +430,15 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+
+            android:id="@+id/error_layout"
+            >
             <Button
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/error_report_btn"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
@@ -429,11 +449,14 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+
+            android:id="@+id/our_history_layout">
             <Button
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/ourstory_btn"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
@@ -444,33 +467,44 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+
+            android:id="@+id/other_handong_layout">
             <Button
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/other_handongi_btn"
+                android:background="@android:color/transparent"
                 />
             <ImageView
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/other_handongi_img"
-                android:src="@drawable/others"/>
+                android:src="@drawable/others"
+
+                />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/logout_layout"
+           >
             <Button
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/logout_btn"
+                android:background="@android:color/transparent"
+
                 />
             <ImageView
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/logout_img"
-                android:src="@drawable/logout_menu"/>
+                android:src="@drawable/logout_menu"
+                />
         </RelativeLayout>
 
     </LinearLayout>
+
 </RelativeLayout>
 </RelativeLayout>
