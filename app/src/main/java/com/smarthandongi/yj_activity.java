@@ -36,10 +36,10 @@ import java.util.ArrayList;
 /**
  * Created by Joel on 2015-01-21.
  */
-public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener {
+public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener,View.OnClickListener {
     Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn;
-    ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img;
-
+    ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img,search_default_img;
+    ImageButton search_default_btn;
     RelativeLayout menu,search_layout, default_layout;
     Carrier carrier;
     private Intent intent;
@@ -97,7 +97,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
 
         menu = (RelativeLayout) findViewById(R.id.menu);
-
+        search_default_btn=(ImageButton)findViewById(R.id.delete_search);
         notice_btn = (Button) findViewById(R.id.notice_btn);
         outer_btn = (Button) findViewById(R.id.outer_btn);
         seminar_btn = (Button) findViewById(R.id.seminar_btn);
@@ -109,7 +109,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         menu_btn = (Button) findViewById(R.id.menu_btn);
         write_btn = (Button) findViewById(R.id.write_btn);
 
-
+        search_layout=(RelativeLayout)findViewById(R.id.search_bar_layout);
+        default_layout=(RelativeLayout)findViewById(R.id.default_layout);
         notice_img = (ImageView) findViewById(R.id.notice_img);
         outer_img = (ImageView) findViewById(R.id.outer_img);
         seminar_img = (ImageView) findViewById(R.id.seminar_img);
@@ -120,7 +121,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         search_img = (ImageView) findViewById(R.id.search_img);
         menu_img = (ImageView) findViewById(R.id.menu_img);
 
-
+        search_default_btn.setOnClickListener(this);
         notice_btn.setOnTouchListener(this);
         outer_btn.setOnTouchListener(this);
         seminar_btn.setOnTouchListener(this);
@@ -131,6 +132,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         search_btn.setOnTouchListener(this);
         menu_btn.setOnTouchListener(this);
         write_btn.setOnTouchListener(this);
+
 
         timeline_listviewR.setVisibility(View.GONE);
 
@@ -153,7 +155,22 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public  void onClick(View v)
+    {
+       switch (v.getId())
+       {
+           case  R.id.delete_search:{
+               default_on=true;
+               search_on=false;
+               search_toggle();
+//               default_on=true;
+//               search_on=false;
+           }
+       }
+    }
+    @Override
+    public boolean onTouch(View v, MotionEvent event)
+    {
 
 
         switch (v.getId())
@@ -167,7 +184,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 }
 
 
-                else if(ca1==1) {
+                else if(ca1==1)
+                    {
                         notice_img.setImageResource(R.drawable.notice_btn_on);
                     }
                     else if(ca1==0) {
@@ -405,7 +423,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
                    if (event.getAction() == 0) {
                        board_img.setImageResource(R.drawable.board_btn);
-                   } else if (event.getAction() == 1) {
+                   } else if (event.getAction() == 1)
+                   {
                        board_img.setImageResource(R.drawable.board_btn_on);
                        timeline_img.setImageResource(R.drawable.timeline_btn);
                        board_on=true;
@@ -439,26 +458,32 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             case R.id.search_btn: {
                 if (event.getAction() == 0) {
 
-                } else if (event.getAction() == 1) {
-                   if(search_on)
+                } else if (event.getAction() == 1)
+                {
+                   if(search_on==true&&default_on==false)
                    {
                        search_on=false;
                        default_on=true;
                        search_toggle();
+
                    }
                    else
-                   {
-                       search_on=true;
+                   {   search_on=true;
                        default_on=false;
+                       search_toggle();
+
                    }
                 }
                 break;
             }
 
             case R.id.menu_btn: {
-                if (event.getAction() == 0) {
+                if (event.getAction() == 0)
+                {
                     menu_img.setImageResource(R.drawable.menu_btn_on);
-                } else if (event.getAction() == 1) {
+                }
+                else if (event.getAction() == 1)
+                {
                     menu_img.setImageResource(R.drawable.menu_btn);
                     menu_toggle();
                 }

@@ -36,13 +36,14 @@
                     android:id="@+id/search_on_img"
                     android:layout_marginBottom="4dp"/>
 
-                <ImageView
+                <ImageButton
                     android:layout_width="28.5dp"
                     android:layout_height="27.5dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:id="@+id/delete_search"
-                    android:src="@drawable/search_delete"
+
+                    android:background="@drawable/search_delete"
                     android:layout_marginBottom="4dp"
                     android:layout_marginRight="8dp"/>
                 <EditText
@@ -56,10 +57,12 @@
                     android:layout_marginBottom="4dp"/>
          <RelativeLayout
              android:layout_width="match_parent"
-             android:layout_height="10dp"
+             android:layout_height="0.5dp"
              android:layout_alignParentBottom="true"
              android:layout_marginBottom="3dp"
-             android:background="#00000000"
+             android:background="#000000"
+             android:layout_toRightOf="@+id/search_on_img"
+             android:layout_toLeftOf="@+id/delete_search"
              >
 
              </RelativeLayout>
@@ -68,7 +71,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
+
                 android:id="@+id/default_layout">
             <RelativeLayout
                 android:layout_width="63.5dp"
@@ -143,6 +146,7 @@
                 android:layout_width="45dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:src="@drawable/menu_btn"/>
 
         </RelativeLayout>
