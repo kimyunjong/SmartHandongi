@@ -50,8 +50,9 @@ public class PostDatabase implements Serializable{
 
 
     public int getId(){return  id;}
+    public void setId(int id){this.id = id;}
     public String getKakao_id(){return kakao_id;}
-    public String getCategory(){return  category;}
+    public String getCategory(){return category;}
     public String getGroup(){return group;}
     public String getTitle(){return title;}
     public String getContent(){return content;}

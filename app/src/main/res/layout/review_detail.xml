@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/kakao_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/kakao_nick"
+            android:paddingRight="20dp"/>
+
+        <Button
+            android:id = "@+id/notify_btn"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:onClick="onClick"
+            android:text="신고"
+            android:textSize="9dp"
+            android:layout_toRightOf="@+id/date"/>
+
+        <Button
+            android:id="@+id/del_btn"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:onClick="onClick"
+            android:text="Del"
+            android:textSize="10dp"
+            android:layout_toRightOf="@+id/notify_btn"/>
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"/>
+
+</LinearLayout>
