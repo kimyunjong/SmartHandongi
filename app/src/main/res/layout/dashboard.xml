@@ -17,12 +17,59 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
-
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/search_bar_layout"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="29dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/search_btn_on"
+                    android:id="@+id/search_on_img"
+                    android:layout_marginBottom="4dp"/>
 
+                <ImageView
+                    android:layout_width="28.5dp"
+                    android:layout_height="27.5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/delete_search"
+                    android:src="@drawable/search_delete"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="8dp"/>
+                <EditText
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_toRightOf="@+id/search_on_img"
+                  android:layout_toLeftOf="@+id/delete_search"
+                  android:layout_alignParentBottom="true"
+                  android:singleLine="true"
+                  android:background="#00000000"
+                    android:layout_marginBottom="4dp"/>
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="10dp"
+             android:layout_alignParentBottom="true"
+             android:layout_marginBottom="3dp"
+             android:background="#00000000"
+             >
+
+             </RelativeLayout>
+                </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:id="@+id/default_layout">
             <RelativeLayout
                 android:layout_width="63.5dp"
                 android:layout_height="66dp"
@@ -48,6 +95,7 @@
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:layout_toRightOf="@+id/board_layout"
+
               >
             <Button
 
@@ -98,7 +146,7 @@
                 android:src="@drawable/menu_btn"/>
 
         </RelativeLayout>
-
+        </RelativeLayout>
 
     </LinearLayout>
 

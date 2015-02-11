@@ -40,11 +40,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn;
     ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img;
 
-    RelativeLayout menu;
+    RelativeLayout menu,search_layout, default_layout;
     Carrier carrier;
     private Intent intent;
     int ca1=1,ca2=1,ca3=1, ca4=1, ca5=1;//켜진상태
-    boolean board_on=true,timeline_on=false;
+    boolean board_on=true,timeline_on=false, search_on=false,default_on=true;
 
 
     private ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>(),board_list = new ArrayList<PostDatabase>(), timeline_list = new ArrayList<PostDatabase>(), timeline_list_today = new ArrayList<PostDatabase>(),timeline_list_tomorrow = new ArrayList<PostDatabase>(),timeline_list_after_tomorrow = new ArrayList<PostDatabase>(), liked_list = new ArrayList<PostDatabase>(),temp_plist = new ArrayList<PostDatabase>();
@@ -153,11 +153,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     }
 
     @Override
-    public boolean onTouch(View v,
-                           MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event) {
 
 
-        switch (v.getId()) {
+        switch (v.getId())
+        {
 
 
             case R.id.notice_btn: {
@@ -438,10 +438,19 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
             case R.id.search_btn: {
                 if (event.getAction() == 0) {
-                    search_img.setImageResource(R.drawable.search_button);
+
                 } else if (event.getAction() == 1) {
-                    search_img.setImageResource(R.drawable.search_btn);
-                    //토글시킨다.
+                   if(search_on)
+                   {
+                       search_on=false;
+                       default_on=true;
+                       search_toggle();
+                   }
+                   else
+                   {
+                       search_on=true;
+                       default_on=false;
+                   }
                 }
                 break;
             }
@@ -469,13 +478,26 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     }
 
 
-    public void menu_toggle() {
+    public void menu_toggle()
+    {
         if (menu_on) {
             menu.setVisibility(View.GONE);
             menu_on = false;
         } else {
             menu.setVisibility(View.VISIBLE);
             menu_on = true;
+        }
+    }
+
+    public void search_toggle()
+    {
+        if(search_on) {
+            search_layout.setVisibility(View.VISIBLE);
+            default_layout.setVisibility(View.GONE);
+
+        }else{
+            search_layout.setVisibility(View.GONE);
+            default_layout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -490,13 +512,15 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         }
     }
 
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
 
         if (menu_on) {
             menu_toggle();
         } else {
 
-            if (thread_running == false) {
+            if (thread_running == false)
+            {
                 thread_running = true;
                 thread.start();
             }
@@ -512,7 +536,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         }
     }
 
-    public class PostDatabasePhp extends AsyncTask<String, integer, String> {
+    public class PostDatabasePhp extends AsyncTask<String, integer, String>
+    {
 
         private yj_activity context;
         private ArrayList<PostDatabase> post_list;
@@ -572,7 +597,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                             jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"))
                     );
 
-                    System.out.println(jo.getString("title")+"확인할 부분 입니다."+jo.getString("like"));
                 }
 
 

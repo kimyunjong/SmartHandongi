@@ -83,6 +83,7 @@
         <!--윤종이의 액티피티 시작-->
         <activity android:name=".PostDetail"
             />
+        <activity android:name=".My_scrap"/>
         <!--윤종이의 액티피티 끝-->
         <!-- 수영 다은 gcm -->
         <receiver
