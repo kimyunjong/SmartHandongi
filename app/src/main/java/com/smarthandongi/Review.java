@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.smarthandongi.adapter.ReviewAdapter;
-import com.smarthandongi.database.PostDatabase;
 import com.smarthandongi.database.ReviewDatabase;
 
 import org.json.JSONArray;
@@ -46,7 +45,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     PhpDownloadReview phpDownloadReview;
     //DeletePhp del_php;
 
-    PostDatabase post;
+
+    int posting_id;
     ReviewDatabase reviewDatabase;
     Context context;
     ReviewAdapter adapter;
@@ -60,7 +60,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         Intent intent=getIntent();
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
-        post=(PostDatabase)intent.getSerializableExtra("post");
+        posting_id =(int)intent.getSerializableExtra("posting_id");//posting_id로바꾸기
         review_write = (EditText)findViewById(R.id.review_write);
 
         reg_btn = (Button)findViewById(R.id.reg_btn);
@@ -96,7 +96,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
             }
             case R.id.back_btn: {
                 Intent intent = new Intent(Review.this, PostDetail.class);
-                intent.putExtra("post", post);
+                intent.putExtra("posting_id", posting_id);
                 intent.putExtra("carrier", carrier);
                 startActivity(intent);
 
@@ -124,14 +124,17 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                         })
                         .setNegativeButton("취소", null)
                         .show();*/
-                int pos = review_listview.getCheckedItemPosition();
-                Log.d("삭제", String.valueOf(pos));
-                if(pos != ListView.INVALID_POSITION) {
-                    review_list.remove(pos);
-                    Log.d("삭제", String.valueOf(pos));
-                    review_listview.clearChoices();
-                    adapter.notifyDataSetChanged();
-                }
+                //int pos = review_listview.getItemAtPosition();
+               // int pos = review_listview.getCheckedItemPosition();
+               // Log.d("삭제", String.valueOf(pos));
+               // if(pos != ListView.INVALID_POSITION) {
+               //     review_list.remove(pos);
+               //     Log.d("삭제", String.valueOf(pos));
+               //     review_listview.clearChoices();
+               //     adapter.notifyDataSetChanged();
+               // }else{
+               //     Log.d("삭제", "삭제 fail");
+               // }
                 break;
             }
             case R.id.notify_btn: {
@@ -150,11 +153,11 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
      public void php_uploadCreate(){
 
-         int posting_id;
+
          String kakao_id, kakao_nick;
          String content;
 
-         posting_id = post.getId();
+
          content = review_write.getText().toString();
          kakao_nick = carrier.getNickname();
          kakao_id = carrier.getId();
@@ -190,7 +193,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/review_upload.php?"
                                             + "kakao_id=" + carrier.getId()
                                             + "&kakao_nick=" + carrier.getNickname()
-                                            + "&posting_id=" + post.getId()
+                                            + "&posting_id=" + posting_id
                                             + "&content=" + carrier.getContent()
                             );
                             phpUploadReview = new PhpUploadReview();
@@ -268,7 +271,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     public void php_downloadCreate() {
         phpDownloadReview = new PhpDownloadReview(review_list, this);
         phpDownloadReview.execute("http://hungry.portfolio1000.com/smarthandongi/review_download.php?"+
-                                   "&posting_id=" + post.getId()
+                                   "&posting_id=" + posting_id
         );
     }
     public class PhpDownloadReview extends AsyncTask<String, android.R.integer, String> {
@@ -337,61 +340,6 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
             }
         }
     }
-    //------------------------------------------------------------------------------------------------------
-/*
-    public void delPhp(){
-        DeletePhp del_php = new DeletePhp();
-        del_php.execute("http://hungry.portfolio1000.com/smarthandongi/review_delete.php?review_id=" + reviewDatabase.getReview_id());
-    }
 
-    public class DeletePhp extends AsyncTask<String, Integer, String>{
-
-        protected String doInBackground(String... urls) {
-            StringBuilder jsonHtml = new StringBuilder();
-            String return_str = "";
-            String result = "";
-
-            while (return_str.equalsIgnoreCase("")) {
-                try {
-                    URL data_url = new URL(urls[0]);
-                    HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
-                    if (conn != null) {
-                        conn.setConnectTimeout(10000);
-                        conn.setUseCaches(false);
-                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                            for (; ; ) {
-                                String line = br.readLine();
-                                if (line == null) break;
-                                jsonHtml.append(line + "\n");
-                            }
-                            br.close();
-                        }
-                        conn.disconnect();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-                try {
-                    JSONObject root = new JSONObject(jsonHtml.toString());
-                    JSONArray ja = root.getJSONArray("results");
-                    JSONObject jo = ja.getJSONObject(0);
-                    result = jo.getString("result");                                                       //php를 통해서 업로드가 되었는지 확인하기 위해 $result의 값을 받아온다.
-                    Log.d("result", result);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                return_str = jsonHtml.toString();
-            }
-            Log.v("연결 시도", "연결되어라doinbackground$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
-            return jsonHtml.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }*/
 
 }

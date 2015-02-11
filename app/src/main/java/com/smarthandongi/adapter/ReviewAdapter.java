@@ -95,10 +95,14 @@ public class ReviewAdapter extends BaseAdapter {
         review_id = getItem(position).getReview_id();
         holder.del_btn.setOnTouchListener(new DeleteListener(review_id, holder.del_btn, getItem(position)));
 
+
          //holder.del_btn.setVisibility(View.VISIBLE);
             //holder.notify_btn.setVisibility(View.VISIBLE);
 
          return v;
+    }
+    public void remove(){
+
     }
 
     //-----------------------------------------
@@ -134,7 +138,6 @@ public class ReviewAdapter extends BaseAdapter {
             }
             return false;
         }
-
     }
     class DeletePhp extends AsyncTask {
 
