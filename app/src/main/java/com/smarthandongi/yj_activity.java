@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * Created by Joel on 2015-01-21.
  */
 public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener,View.OnClickListener {
-    Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn;
+    Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn,write_btn_in_menu,scrap_menu,my_posting_btn,push_set_btn, show_group_btn,bustime_table_btn,report_btn, history_btn,other_handong_btn, logout_btn;
     ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img,search_default_img;
     ImageButton search_default_btn;
     RelativeLayout menu,search_layout, default_layout;
@@ -108,6 +108,16 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         search_btn = (Button) findViewById(R.id.search_btn);
         menu_btn = (Button) findViewById(R.id.menu_btn);
         write_btn = (Button) findViewById(R.id.write_btn);
+        write_btn_in_menu=(Button)findViewById(R.id.write_btn_in_menu);
+        scrap_menu=(Button)findViewById(R.id.scrap_btn);
+        my_posting_btn=(Button)findViewById(R.id.my_posting_btn);
+        push_set_btn=(Button)findViewById(R.id.push_set_btn);
+        show_group_btn=(Button)findViewById(R.id.show_group);
+        bustime_table_btn=(Button)findViewById(R.id.bustime_table_btn);
+        report_btn=(Button)findViewById(R.id.error_report_btn);
+         history_btn=(Button)findViewById(R.id.ourstory_btn);
+        other_handong_btn=(Button)findViewById(R.id.other_handongi_btn);
+        logout_btn=(Button)findViewById(R.id.logout_btn);
 
         search_layout=(RelativeLayout)findViewById(R.id.search_bar_layout);
         default_layout=(RelativeLayout)findViewById(R.id.default_layout);
@@ -132,6 +142,16 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         search_btn.setOnTouchListener(this);
         menu_btn.setOnTouchListener(this);
         write_btn.setOnTouchListener(this);
+        write_btn_in_menu.setOnClickListener(this);
+        scrap_menu.setOnClickListener(this);
+        my_posting_btn.setOnClickListener(this);
+        push_set_btn.setOnClickListener(this);
+         show_group_btn.setOnClickListener(this);
+        bustime_table_btn.setOnClickListener(this);
+        report_btn.setOnClickListener(this);
+        history_btn.setOnClickListener(this);
+        other_handong_btn.setOnClickListener(this);
+        logout_btn.setOnClickListener(this);
 
 
         timeline_listviewR.setVisibility(View.GONE);
@@ -166,7 +186,21 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 //               default_on=true;
 //               search_on=false;
            }
+
+           case R.id.my_posting_btn:{
+               //돌아올곳
+               Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+               intent.putExtra("carrier", carrier);
+               intent.putExtra("post_list",timeline_list);
+               intent.putExtra("post", timeline_list);
+
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0,0);
+
+           }
+
        }
+
     }
     @Override
     public boolean onTouch(View v, MotionEvent event)

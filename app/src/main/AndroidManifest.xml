@@ -76,6 +76,7 @@
             />
         <activity android:name=".Review"
             />
+        <activity android:name=".SeeMyPost"/>
 
 
         <!-- 영민 유진 엑티비티 끝-->
