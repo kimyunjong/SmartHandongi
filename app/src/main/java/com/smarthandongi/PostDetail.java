@@ -61,7 +61,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     ImageButton pos_push;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
-    ArrayList<PostDatabase> posting_list;
+    ArrayList<PostDatabase> posting_list,all_posting_list;
 
     private int posting_id,position;
     int screen_width;
@@ -85,6 +85,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post=(PostDatabase)intent.getSerializableExtra("post");
         posting_list=(ArrayList)intent.getSerializableExtra("post_list");
         position=(int)intent.getSerializableExtra("position");
+        all_posting_list=(ArrayList)intent.getSerializableExtra("all_posting_list");
 
         setContentView(R.layout.post_detail);
 
@@ -607,5 +608,18 @@ public class PostDetail extends Activity implements View.OnClickListener{
         super.onStop();
         if ( dialog_del != null)
             dialog_del.dismiss();
+    }
+    public void onBackPressed() {
+        if(carrier.getFromSMP()==1) {
+            Intent intent = new Intent(PostDetail.this,SeeMyPost.class).putExtra("carrier",carrier);
+            intent.putExtra("post_list",posting_list);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
+            startActivity(intent);
+            finish();
+        }
     }
 }

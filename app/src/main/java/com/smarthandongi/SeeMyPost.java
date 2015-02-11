@@ -1,6 +1,7 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,9 +78,10 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                         posting_list.get(i).getStart_date(), posting_list.get(i).getEnd_date(), posting_list.get(i).getHas_pic(),
                         posting_list.get(i).getLike(), posting_list.get(i).getView_num(),posting_list.get(i).getGroup_name(),posting_list.get(i).getKakao_nic()));
 
-                post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list);
+                post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list,posting_list,carrier);
                 post_listview.setAdapter(post_adapter);
                 post_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
             }
         }
         Log.d("myPostLIst Size",String.valueOf(myPost_list.size()));
@@ -88,5 +90,12 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
 
     public void myCommentConstruction() {
 
+    }
+
+    public void onBackPressed() {
+        carrier.setFromSMP(0);
+        Intent intent = new Intent(SeeMyPost.this,yj_activity.class).putExtra("carrier",carrier);
+        startActivity(intent);
+        finish();
     }
 }

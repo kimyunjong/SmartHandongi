@@ -33,7 +33,11 @@ public class Carrier implements Serializable {
     private String upload_url=null;
     private int fromWriting=0;
     private int fromPostDetail =0;
+    private int fromSMP=0;
 
+    public void setFromSMP(int fromSMP) {this.fromSMP=fromSMP;}
+
+    public int getFromSMP() {return fromSMP; }
 
     public void setFromWriting(int fromWriting) {this.fromWriting=fromWriting;}
 
