@@ -5,13 +5,17 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.smarthandongi.database.Picture;
@@ -26,7 +30,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -41,12 +44,13 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private PostDatabase post;
     private PostDB_Php postdbphp;
     private DeletePhp del_php;
-    private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link,
+    private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
                      type;
 
 
     ImageView post_img;
-    private Button scrap_btn, del_btn, review_show_btn, edit_btn,writer_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn;
+    private Button scrap_btn, del_btn, review_show_btn, edit_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn;
+    ImageButton pos_push;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
     ArrayList<PostDatabase> posting_list;
@@ -54,7 +58,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private int posting_id,position;
     int screen_width;
     Picture poster = new Picture();
-
+    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report;
+    LinearLayout pos_dates, pos_linkbar;
+    String category = "", small_category = "";
 
    //수영 추가
     String myResult;
@@ -75,27 +81,29 @@ public class PostDetail extends Activity implements View.OnClickListener{
         setContentView(R.layout.post_detail);
 
         //버튼
-        writer_btn=(Button)findViewById(R.id.writer_name);
-        writer_btn.setShadowLayer(0,0,0,0);
+        writer_group_name =(TextView)findViewById(R.id.writer_group_name);
+        writer_name =(TextView)findViewById(R.id.writer_name);
+        writer_group_name.setShadowLayer(0, 0, 0, 0);
         scrap_btn=(Button)findViewById(R.id.pos_scrap_btn);
         report_btn=(Button)findViewById(R.id.pos_report_btn);
         edit_btn=(Button)findViewById(R.id.pos_edit_btn);
         del_btn=(Button)findViewById(R.id.pos_del_btn);
         review_show_btn=(Button)findViewById(R.id.pos_review_show_btn);
-        group_btn=(Button)findViewById(R.id.writer_name);
         forward_btn=(Button)findViewById(R.id.post_forward_btn);
         backward_btn=(Button)findViewById(R.id.post_backward_btn);
         home_btn=(Button)findViewById(R.id.post_detail_home);
+        pos_push = (ImageButton)findViewById(R.id.pos_push);
 
+        writer_group_name.setOnClickListener(this);
         review_show_btn.setOnClickListener(this);
         edit_btn.setOnClickListener(this);
         del_btn.setOnClickListener(this);
         scrap_btn.setOnClickListener(this);
         report_btn.setOnClickListener(this);
-        group_btn.setOnClickListener(this);
         forward_btn.setOnClickListener(this);
         backward_btn.setOnClickListener(this);
         home_btn.setOnClickListener(this);
+        pos_push.setOnClickListener(this);
 
         //텍스트뷰
         start_day=(TextView)findViewById(R.id.pos_start_day);
@@ -111,7 +119,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
         //이미지뷰
         post_img=(ImageView)findViewById(R.id.poster);
 
-
+        pos_delete = (RelativeLayout)findViewById(R.id.pos_delete);  //작성자
+        pos_edit = (RelativeLayout)findViewById(R.id.pos_edit);
+        pos_report = (RelativeLayout)findViewById(R.id.pos_report);  //비작성자
+        pos_scrap = (RelativeLayout)findViewById(R.id.pos_scrap);
+        pos_dates = (LinearLayout)findViewById(R.id.pos_dates);
+        pos_linkbar = (LinearLayout)findViewById(R.id.pos_linkbar);
 
 
         if(carrier.getFromWriting()==1) {
@@ -139,19 +152,83 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
 
             if(carrier.getId().compareTo(post.getKakao_id())==0) {
-                scrap_btn.setVisibility(View.GONE);
-                report_btn.setVisibility(View.INVISIBLE);
-                edit_btn.setVisibility(View.VISIBLE);
-                del_btn.setVisibility(View.VISIBLE);
+                pos_scrap.setVisibility(View.GONE);
+                pos_report.setVisibility(View.GONE);
+                pos_edit.setVisibility(View.VISIBLE);
+                pos_delete.setVisibility(View.VISIBLE);
+                pos_push.setVisibility(View.VISIBLE);
             }
-            start_day.setText(post.getStart_date());
-            end_day.setText(post.getEnd_date());
-            //link.setText(post.getLink());
-            type.setText(post.getCategory());
-            post_day.setText(post.getPosting_date());
-            title.setText(post.getTitle());
-            content.setText(post.getContent());
-            view_num.setText(post.getView_num()+1+" Views");
+            if(post.getGroup().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
+                //리스트 내부에 있는지 체크해서 있으면 clickable하게 바꿈
+                writer_name.setVisibility(View.GONE);
+                writer_group_name.setVisibility(View.VISIBLE);
+                writer_group_name.setText(post.getGroup_name());                     //그룹코드 말고 그룹 네임 받아와야 한다.
+                writer_group_name.setTextColor(Color.parseColor("#7CD752"));
+            }
+            else writer_name.setText(post.getKakao_nic());
+
+            if(post.getStart_date().length() < 4) {                                             //시작일
+                pos_dates.setVisibility(View.GONE);
+            } else {
+                pos_dates.setVisibility(View.VISIBLE);
+                start_day.setText(post.getStart_date());
+                end_day.setText(post.getEnd_date());                                            //종료일
+            }
+
+            if(post.getLink().length() == 0){
+                    pos_linkbar.setVisibility(View.GONE);                                       //링크
+            } else {
+                pos_linkbar.setVisibility(View.VISIBLE);
+                link.setText(post.getLink());
+            }
+
+            switch(post.getBig_category()){                                                     //대분류
+                case "1" : category = "일반공지"; break;
+                case "2" : category = "대외활동"; break;
+                case "3" : category = "공연/세미나"; break;
+                case "4" : category = "리쿠르팅"; break;
+                case "5" : category = "붙어라"; break;
+                default: break;
+            }
+            switch(post.getCategory()){
+                case "together_sports_1"        : small_category = "/운동경기"; break;          //소분류
+                case "together_game_2"          : small_category = "/게임"; break;
+                case "together_nightfood_3"     : small_category = "/야식"; break;
+                case "together_gonggu_4"        : small_category = "/공동구매"; break;
+                case "together_carpool_5"       : small_category = "/카풀"; break;
+                case "together_study_6"         : small_category = "/스터디"; break;
+                case "together_trading_7"       : small_category = "/사고팔기"; break;
+                case "together_lost_8"          : small_category = "/분실물"; break;
+                case "together_recruiting_9"    : small_category = "/구인구직"; break;
+                case "together_exchange_10"     : small_category = "/교환"; break;
+
+                case "outer_contest_21"     : small_category = "/공모전"; break;
+                case "outer_intern_22"      : small_category = "/인턴"; break;
+                case "outer_service_23"     : small_category = "/자원봉사"; break;
+
+                case "seminar_perf_41"          : small_category = "/공연"; break;
+                case "seminar_seminar_42"       : small_category = "/세미나"; break;
+                case "seminar_presentation_43"  : small_category = "/발표"; break;
+
+                case "recruiting_scholarship_61" : small_category = "/학술"; break;
+                case "recruiting_sports_62"      : small_category = "/운동"; break;
+                case "recruiting_perf_63"        : small_category = "/공연"; break;
+                case "recruiting_faith_64"       : small_category = "/신앙"; break;
+                case "recruiting_display_65"     : small_category = "/전시"; break;
+                case "recruiting_service_66"     : small_category = "/봉사"; break;
+            }
+            type.setText("[" + category + small_category + "]");                                // [대분류/소분류]
+
+            post_day.setText(post.getPosting_date());                                           //등록일
+
+            title.setText(post.getTitle());                                                     //제목
+
+
+            content.setText(post.getContent());                                                 //내용
+
+            view_num.setText(post.getView_num()+1+"");                                          //조회수
+
+            carrier.setEdit_count(0);
         }
     }
 
@@ -185,10 +262,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 carrier.setCategory(post.getCategory());
                 carrier.setTitle(post.getTitle());
                 carrier.setContent(post.getContent());
+                carrier.setPosting_date(post.getPosting_date());
                 carrier.setStart_date(post.getStart_date());
                 carrier.setEnd_date(post.getEnd_date());
                 carrier.setLink(post.getLink());
                 carrier.setHas_pic(Integer.parseInt(post.getHas_pic()));
+                carrier.setEdit_count(1);
 
                 Log.d("postingid", String.valueOf(carrier.getPost_id()));
                 Log.d("bigcategory", String.valueOf(carrier.getBig_category()));
@@ -198,8 +277,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 Log.d("startdate", carrier.getStart_date());
                 Log.d("enddate", carrier.getEnd_date());
                 Log.d("editcount", String.valueOf(carrier.getEdit_count()));
-
-                carrier.setEdit_count(1);
 
                 Intent intent = new Intent(PostDetail.this, Writing.class).putExtra("carrier", carrier);
                 startActivity(intent);
@@ -283,6 +360,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     finish();
                     break;
                 }
+            }
+            case R.id.pos_push : {
+                //푸시하는거.
             }
         }
     }
