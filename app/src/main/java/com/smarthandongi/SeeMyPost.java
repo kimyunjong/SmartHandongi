@@ -2,6 +2,7 @@ package com.smarthandongi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,9 +10,19 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.smarthandongi.adapter.GroupListAdapter;
+import com.smarthandongi.adapter.SMP_CommentAdapter;
 import com.smarthandongi.adapter.SMP_PostAdapter;
 import com.smarthandongi.database.PostDatabase;
+import com.smarthandongi.database.ReviewDatabase;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -21,8 +32,10 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
     Carrier carrier;
     ImageButton post_btn,comment_btn;
     ArrayList<PostDatabase> posting_list,myPost_list;
+    ArrayList<ReviewDatabase> comment_list;
     SMP_PostAdapter post_adapter;
-    private ListView post_listview;
+    SMP_CommentAdapter comment_adapter;
+    private ListView post_listview,comment_listview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +49,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         comment_btn=(ImageButton)findViewById(R.id.smp_comment);
 
         post_listview=(ListView)findViewById(R.id.smp_listview);
+        comment_listview=(ListView)findViewById(R.id.smp_comment_listview);
 
         post_btn.setOnClickListener(this);
         comment_btn.setOnClickListener(this);
@@ -50,12 +64,14 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.smp_post : {
                 post_listview.setVisibility(View.VISIBLE);
+                comment_listview.setVisibility(View.INVISIBLE);
                 comment_btn.setBackgroundResource(R.drawable.smp_comment);
                 post_btn.setBackgroundResource(R.drawable.smp_post_selected);
                 break;
             }
             case R.id.smp_comment : {
                 post_listview.setVisibility(View.INVISIBLE);
+                comment_listview.setVisibility(View.VISIBLE);
                 comment_btn.setBackgroundResource(R.drawable.smp_comment_selected);
                 post_btn.setBackgroundResource(R.drawable.smp_post);
 
@@ -89,8 +105,91 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
     }
 
     public void myCommentConstruction() {
+        comment_list=new ArrayList<ReviewDatabase>();
+        phpCreate();
 
     }
+
+    public void phpCreate() {
+        CommentDownloadPhp download = new CommentDownloadPhp(comment_list,this);
+        download.execute("http://hungry.portfolio1000.com/smarthandongi/comment.php");
+    }
+    public class CommentDownloadPhp extends AsyncTask<String, android.R.integer, String> {
+
+        private ArrayList<ReviewDatabase> comment_list;
+        private Activity activity;
+
+        public CommentDownloadPhp(ArrayList<ReviewDatabase> comment_list, Activity activity) {
+            super();
+            this.comment_list = comment_list;
+            this.activity = activity;
+        }
+
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str = "";
+
+            while (return_str.equalsIgnoreCase("")) {
+                try {
+                    URL data_url = new URL(urls[0]);
+                    HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                    if (conn != null) {
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                            for (; ; ) {
+                                String line = br.readLine();
+                                if (line == null) break;
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return_str = jsonHtml.toString();
+            }
+            Log.v("연결 시도", "연결되어라doinbackground$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
+            return jsonHtml.toString();
+        }
+
+        protected void onPostExecute(String str) {
+
+            try {
+                JSONObject root = new JSONObject(str);
+                JSONArray ja = root.getJSONArray("results");
+
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject jo = ja.getJSONObject(i);
+                    if(carrier.getId().compareTo(jo.getString("kakao_id"))==0) {
+                        comment_list.add(new ReviewDatabase(jo.getInt("posting_id"),
+                                jo.getInt("review_id"), jo.getString("kakao_id"), jo.getString("kakao_nick"),
+                                jo.getString("reply_date"), jo.getString("content")
+                        ));
+                        comment_adapter = new SMP_CommentAdapter(SeeMyPost.this,R.layout.my_comment_listview,comment_list,carrier,posting_list);
+                        comment_listview.setAdapter(comment_adapter);
+                        comment_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+                    }
+
+
+
+                }
+
+
+
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     public void onBackPressed() {
         carrier.setFromSMP(0);

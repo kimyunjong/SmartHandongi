@@ -6,33 +6,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_marginLeft="2.5dp"
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:orientation="vertical"
             android:gravity="center_vertical"
+            android:layout_marginRight="24dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/smp_category"
+                    android:id="@+id/smp_comment_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14.5dp"
-                    android:text="일반공지"
+                    android:text="2015-01-20"
                     />
                 <TextView
-                    android:id="@+id/smp_posting_date"
+                    android:id="@+id/smp_comment_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14.5dp"
-                    android:text="2015-01-30"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="제목이다다다다다다다다다다"
                     android:layout_marginLeft="8dp"
                     />
             </LinearLayout>
             <TextView
-                android:id="@+id/smp_title"
+                android:id="@+id/smp_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -47,14 +51,15 @@
             android:layout_width="50.5dp"
             android:layout_height="66dp">
             <Button
-                android:id="@+id/my_post_forward_btn"
+                android:id="@+id/my_comment_forward_btn"
                 android:layout_width="50.5dp"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <ImageView
+                android:layout_marginRight="7dp"
                 android:layout_width="16.5dp"
                 android:layout_height="43.5dp"
-                android:layout_centerHorizontal="true"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/rightarrow"/>
         </RelativeLayout>
     </RelativeLayout>

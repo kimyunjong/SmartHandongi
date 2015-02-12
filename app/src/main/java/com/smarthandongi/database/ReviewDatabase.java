@@ -5,7 +5,7 @@ package com.smarthandongi.database;
  */
 public class ReviewDatabase {
 
-        public ReviewDatabase(int review_id, String kakao_id, String kakao_nick, String reply_date ,String content) {
+        public ReviewDatabase(int posting_id,int review_id, String kakao_id, String kakao_nick, String reply_date ,String content) {
             super();
 
             this.review_id = review_id;
@@ -13,9 +13,11 @@ public class ReviewDatabase {
             this.kakao_nick = kakao_nick;
             this.reply_date = reply_date;
             this.content = content;
+            this.posting_id=posting_id;
            // this.last = last;
         }
 
+        private int posting_id;
         private int review_id;
         private String kakao_id;
         private String kakao_nick;
@@ -23,6 +25,9 @@ public class ReviewDatabase {
         private String content;
         private boolean last;
         private String notify;
+
+        public void setPosting_id(int posting_id) {this.posting_id=posting_id;}
+        public int getPosting_id() {return posting_id;}
 
         public void setContent(String content) {
             this.content = content;

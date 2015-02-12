@@ -210,7 +210,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             carrier.setFromWriting(1);
 
                             String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                            review_list.add(0, new ReviewDatabase(0 , temp_kakao_id, temp_kakao_nick , nowtime, temp_content ));//===
+                            review_list.add(0, new ReviewDatabase(posting_id,0 , temp_kakao_id, temp_kakao_nick , nowtime, temp_content ));//===
 
                             review_write.setText(null);
                             adapter.notifyDataSetChanged();
@@ -332,7 +332,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
-                    review_list.add(new ReviewDatabase(
+                    review_list.add(new ReviewDatabase(jo.getInt("posting_id"),
                              jo.getInt("review_id"),jo.getString("kakao_id"), jo.getString("kakao_nick"),
                              jo.getString("reply_date"), jo.getString("content")
                     ));
