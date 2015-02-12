@@ -1,6 +1,7 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,8 +33,8 @@ import java.util.ArrayList;
 public class SeeMyPost extends Activity implements View.OnClickListener{
     Carrier carrier;
     ImageButton post_btn,comment_btn;
-    ArrayList<PostDatabase> posting_list,myPost_list;
-    ArrayList<ReviewDatabase> comment_list;
+    ArrayList<PostDatabase> posting_list=new ArrayList<PostDatabase>(),myPost_list=new ArrayList<PostDatabase>();
+    ArrayList<ReviewDatabase> comment_list=new ArrayList<ReviewDatabase>();
     SMP_PostAdapter post_adapter;
     SMP_CommentAdapter comment_adapter;
     private ListView post_listview,comment_listview;
@@ -49,15 +50,11 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         post_btn=(ImageButton)findViewById(R.id.smp_post);
         comment_btn=(ImageButton)findViewById(R.id.smp_comment);
 
-        post_listview=(ListView)findViewById(R.id.smp_listview);
-        comment_listview=(ListView)findViewById(R.id.smp_comment_listview);
-
         post_btn.setOnClickListener(this);
         comment_btn.setOnClickListener(this);
 
-        myPostConstruction();
-        myCommentConstruction();
-
+        construction();
+        comment_listview.setVisibility(View.GONE);
     }
 
     @Override
@@ -71,8 +68,12 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.smp_comment : {
+                Log.d("내가눌렸다", "내가눌림");
+                carrier.setFromSMP(0);
                 post_listview.setVisibility(View.GONE);
+                post_listview.setFocusable(false);
                 comment_listview.setVisibility(View.VISIBLE);
+
                 comment_btn.setBackgroundResource(R.drawable.smp_comment_selected);
                 post_btn.setBackgroundResource(R.drawable.smp_post);
 
@@ -81,12 +82,18 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         }
     }
 
-    public void myPostConstruction() {
+    public void construction() {
+        post_listview=(ListView)findViewById(R.id.smp_listview);
+        comment_listview=(ListView)findViewById(R.id.smp_comment_listview);
+        phpCreate();
+    }
+    public void phpCreate() {
+        CommentDownloadPhp download = new CommentDownloadPhp(comment_list,this);
+        download.execute("http://hungry.portfolio1000.com/smarthandongi/comment.php");
+    }
 
-        myPost_list=new ArrayList<PostDatabase>();
+    public void postconstruction() {
 
-        Log.d("myPostLIst Size",String.valueOf(myPost_list.size()));
-        Log.d("myPostLIst Size",String.valueOf(posting_list.size()));
         for(int i=0; i<posting_list.size();i++) {
             if (posting_list.get(i).getKakao_id().compareTo(carrier.getId())==0) {
                 System.out.println("내가쓴글이있다고욧ㅇ");
@@ -94,37 +101,25 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                         posting_list.get(i).getCategory(), posting_list.get(i).getGroup(),posting_list.get(i).getContent(), posting_list.get(i).getPosting_date(), posting_list.get(i).getlink(),
                         posting_list.get(i).getStart_date(), posting_list.get(i).getEnd_date(), posting_list.get(i).getHas_pic(),
                         posting_list.get(i).getLike(), posting_list.get(i).getView_num(),posting_list.get(i).getGroup_name(),posting_list.get(i).getKakao_nic()));
-
-                post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list,posting_list,carrier);
-                post_listview.setAdapter(post_adapter);
-                post_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-                post_listview.setOnItemClickListener(postClickListener);
-
             }
         }
+        post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list,posting_list,carrier);
+        post_listview.setAdapter(post_adapter);
+
         Log.d("myPostLIst Size",String.valueOf(myPost_list.size()));
 
     }
 
-    public void myCommentConstruction() {
-        comment_list=new ArrayList<ReviewDatabase>();
-        phpCreate();
 
-    }
-
-    public void phpCreate() {
-        CommentDownloadPhp download = new CommentDownloadPhp(comment_list,this);
-        download.execute("http://hungry.portfolio1000.com/smarthandongi/comment.php");
-    }
     public class CommentDownloadPhp extends AsyncTask<String, android.R.integer, String> {
 
         private ArrayList<ReviewDatabase> comment_list;
-        private Activity activity;
+        private Context context;
 
-        public CommentDownloadPhp(ArrayList<ReviewDatabase> comment_list, Activity activity) {
+        public CommentDownloadPhp(ArrayList<ReviewDatabase> comment_list, Context context) {
             super();
             this.comment_list = comment_list;
-            this.activity = activity;
+            this.context = context;
         }
 
         protected String doInBackground(String... urls) {
@@ -176,14 +171,23 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
 
                     }
                 }
-                comment_adapter = new SMP_CommentAdapter(SeeMyPost.this,R.layout.my_comment_listview,comment_list,carrier,posting_list);
+                comment_adapter = new SMP_CommentAdapter(context,R.layout.my_comment_listview,comment_list,carrier,posting_list);
                 comment_listview.setAdapter(comment_adapter);
                 comment_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
                 comment_listview.setOnItemClickListener(commentClickListener);
-                Log.d("너되야해","너될거야??");
+                Log.d("니가먼저지?","내가멈ㄴ저야");
 
 
+                postconstruction();
 
+                post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list,posting_list,carrier);
+                post_listview.setAdapter(post_adapter);
+                post_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                post_listview.setOnItemClickListener(postClickListener);
+
+
+                Log.d("너되야해", "너될거야??");
 
             }
             catch (JSONException e)
@@ -194,7 +198,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
     }
 
     AdapterView.OnItemClickListener postClickListener = new AdapterView.OnItemClickListener() {
-        @Override
+
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             int pos=0;
             for(int i=0; i<posting_list.size(); i++) {

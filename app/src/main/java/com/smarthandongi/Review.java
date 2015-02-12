@@ -210,10 +210,12 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             carrier.setFromWriting(1);
 
                             String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                            review_list.add(0, new ReviewDatabase(posting_id,0 , temp_kakao_id, temp_kakao_nick , nowtime, temp_content ));//===
-
                             review_write.setText(null);
-                            adapter.notifyDataSetChanged();
+                            Intent intent = new Intent(Review.this,Review.class);
+                            intent.putExtra("carrier",carrier);
+                            intent.putExtra("posting_id",posting_id);
+                            startActivity(intent);
+                            finish();
                         }
                     }
 
@@ -259,6 +261,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 ex.printStackTrace();
             }
             try {
+
                 JSONObject root = new JSONObject(jsonHtml.toString());
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
