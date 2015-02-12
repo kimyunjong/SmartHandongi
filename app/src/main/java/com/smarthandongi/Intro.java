@@ -3,6 +3,7 @@ package com.smarthandongi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -20,9 +21,14 @@ import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
 public class Intro extends Activity {
     Carrier carrier;
     Intent get_intent;
+    Intent put_intent;
+
     RelativeLayout touch1, touch2;
     ImageView pic;
+
+    Handler handler;
     TextView blink;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

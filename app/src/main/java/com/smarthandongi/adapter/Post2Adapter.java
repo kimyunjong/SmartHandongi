@@ -92,9 +92,8 @@ public class Post2Adapter extends BaseAdapter{
 
         //나중에 이미지 추가되면 이미지 넣기
         if(getItem(position).getFirst_day())
-        {   holder.left_bar.setImageResource(R.drawable.timeline_line_img);
-            holder.firstday_check_img.setImageResource(R.drawable.time_line_firstday_img);
-            holder.firstday_check_img.setAlpha(1f);
+        {   holder.left_bar.setImageResource(R.drawable.timeline_first_img);
+
             if(getItem(position).getLastDay())
             {
                 holder.upperLine.setAlpha(0f);
@@ -126,7 +125,7 @@ public class Post2Adapter extends BaseAdapter{
                  s_month=temp/100;
                  temp=temp-s_month*100;
                  s_day=temp;
-                holder.first_date.setText(String.valueOf(s_month)+"."+String.valueOf(s_day)+" ");
+                holder.first_date.setText(String.valueOf(s_month)+"."+String.valueOf(s_day)+"");
 
                 Calendar calendar=Calendar.getInstance();
                 calendar.set(s_year,s_month-1,s_day);
@@ -163,9 +162,9 @@ public class Post2Adapter extends BaseAdapter{
         }
 
         else{
-            holder.left_bar.setImageResource(R.drawable.timeline_line_img);
-            holder.firstday_check_img.setImageResource(R.drawable.time_line_firstday_img);
-            holder.firstday_check_img.setAlpha(0f);
+            holder.left_bar.setImageResource(R.drawable.timeline_non_first_img);
+
+
             holder.first_date.setText("  ");
             holder.first_weekday.setText("");
             holder.upperLine.setAlpha(0f);

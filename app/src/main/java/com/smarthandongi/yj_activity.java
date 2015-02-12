@@ -835,7 +835,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         board_listview.setAdapter(adapter);
 
     }
-    public void filter_by_date(){
+    public void filter_by_date()
+    {
             int last_day=0;
 
 
@@ -843,49 +844,89 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         filter_by_category();
 
+
+
+
        //분류된 (카테고리별로) 타임라인 리스트에 디데이를 넣어준다
-        for(PostDatabase db:timeline_list){
-            String temp_date=db.getStart_date();
-            dday deadline=new dday();
+        for(PostDatabase db:timeline_list)
+        {
+           if(!db.getEnd_date().equalsIgnoreCase("0")&&!db.getStart_date().equalsIgnoreCase("0"))
+           {
+               String temp_date = db.getStart_date();
+               dday deadline = new dday();
 
-           int s_date=Integer.parseInt(temp_date);
-           int s_year;
-           int s_month;
-           int s_day;
-            s_year=s_date/10000;
-            s_date=s_date-(s_year*10000);
-            s_month=s_date/100;
-            s_date=s_date-s_month*100;
-            s_day=s_date;
+               int s_date = Integer.parseInt(temp_date);
+               int s_year;
+               int s_month;
+               int s_day;
+               s_year = s_date / 10000;
+               s_date = s_date - (s_year * 10000);
+               s_month = s_date / 100;
+               s_date = s_date - s_month * 100;
+               s_day = s_date;
 
-            String temp_date_e=db.getEnd_date();
-            int e_date=Integer.parseInt(temp_date_e);
+               String temp_date_e = db.getEnd_date();
+               int e_date = Integer.parseInt(temp_date_e);
 
-            int e_year=e_date/10000;
-            e_date=e_date-(s_year*10000);
-            int e_month=e_date/100;
-            e_date=e_date-e_month*100;
-            int e_day=e_date;
+               int e_year = e_date / 10000;
+               e_date = e_date - (s_year * 10000);
+               int e_month = e_date / 100;
+               e_date = e_date - e_month * 100;
+               int e_day = e_date;
 
-            int dday_s=deadline.caldate(s_year,s_month-1,s_day+1);
-            int dday_e=deadline.caldate(e_year,e_month-1,e_day+1);
+               int dday_s = deadline.caldate(s_year, s_month - 1, s_day + 1);
+               int dday_e = deadline.caldate(e_year, e_month - 1, e_day + 1);
 
-            if(dday_s<0) //아직기간이 남았으면
-            {
-                db.setDday(dday_s);
+               if (dday_s < 0) //아직기간이 남았으면
+               {
+                   db.setDday(dday_s);
 
-                 if(last_day>db.getDday()){
-                    last_day=db.getDday();
-                }
-            }
+                   if (last_day > db.getDday()) {
+                       last_day = db.getDday();
+                   }
+               } else if (dday_s >= 0 && dday_e <= 0) {
+                   db.setDday(0);
+               } else {
+                   db.setDday(9999); //기간이 이미 종료 됬으면 빼 준다.
+               }
+           }
+           else if(!db.getStart_date().equalsIgnoreCase("0")&&db.getEnd_date().equalsIgnoreCase("0")) //시작일만 있는 경우
+           {
+               String temp_date = db.getStart_date();
+               dday deadline = new dday();
 
-            else if(dday_s>=0&&dday_e<=0){
-                db.setDday(0);
-            }
-            else{
-                db.setDday(9999); //기간이 이미 종료 됬으면 빼 준다.
-            }
-            }
+               int s_date = Integer.parseInt(temp_date);
+               int s_year;
+               int s_month;
+               int s_day;
+               s_year = s_date / 10000;
+               s_date = s_date - (s_year * 10000);
+               s_month = s_date / 100;
+               s_date = s_date - s_month * 100;
+               s_day = s_date;
+
+               int dday_s = deadline.caldate(s_year, s_month - 1, s_day + 1);
+               int dday_e = deadline.caldate(s_year, s_month - 1, s_day + 1);
+
+               if (dday_s < 0) //아직기간이 남았으면
+               {
+                   db.setDday(dday_s);
+
+                   if (last_day > db.getDday()) {
+                       last_day = db.getDday();
+                   }
+               } else if (dday_s >= 0 && dday_e <= 0) {
+                   db.setDday(0);
+               } else {
+                   db.setDday(9999); //기간이 이미 종료 됬으면 빼 준다.
+               }
+           }
+            else if(db.getStart_date().equalsIgnoreCase("0")&&db.getEnd_date().equalsIgnoreCase("0"))//start없고 end 없는 경우
+           {
+               db.setDday(99999); //타임라인에는 보이지 않지만 대쉬보드에는 보인다 , 그리고 그것은 회색이 아니다.
+           }
+
+        }
 
         temp_plist.removeAll(temp_plist);
 
@@ -1019,6 +1060,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
             intent.putExtra("post_list",timeline_list);
+
             intent.putExtra("position",position);
             intent.putExtra("post", timeline_list.get(position));
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");

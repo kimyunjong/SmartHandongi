@@ -74,106 +74,88 @@ public class PostAdapter extends BaseAdapter{
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         ViewHolder holder;
         View v = convertView;
-        if (v == null)
-        {
-            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (v == null) {
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.post_item, null);
             holder = new ViewHolder();
 
-            holder.post_title = (TextView)v.findViewById(R.id.post_title);
-            holder.post_id = (TextView)v.findViewById(R.id.post_id);
-            holder.post_category = (ImageView)v.findViewById(R.id.post_category);
-            holder.post_dday = (TextView)v.findViewById(R.id.post_dday);
-            holder.post_group=(TextView)v.findViewById(R.id.post_group);
-            holder.like=(ImageButton)v.findViewById(R.id.like_button);
+            holder.post_title = (TextView) v.findViewById(R.id.post_title);
+            holder.post_id = (TextView) v.findViewById(R.id.post_id);
+            holder.post_category = (ImageView) v.findViewById(R.id.post_category);
+            holder.post_dday = (TextView) v.findViewById(R.id.post_dday);
+            holder.post_group = (TextView) v.findViewById(R.id.post_group);
+            holder.like = (ImageButton) v.findViewById(R.id.like_button);
             v.setTag(holder);
-        }
-        else
-        {
+        } else {
 
-            holder = (ViewHolder)v.getTag();
+            holder = (ViewHolder) v.getTag();
         }
 
         holder.like.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
         holder.like.setFocusable(false);
-        holder.like.setBackgroundResource( getItem(position).getLike().compareTo("0") ==0 ? R.drawable.not_like : R.drawable.like);
+        holder.like.setBackgroundResource(getItem(position).getLike().compareTo("0") == 0 ? R.drawable.not_like : R.drawable.like);
         holder.like.setOnTouchListener(new LikeListener(carrier.getId(), getItem(position).getId(), holder.like, getItem(position)));
 
-        holder.post_title.setText(getItem(position).getTitle()+ " ");
-        holder.post_id.setText(getItem(position).getId()+ " ");
-        if(getItem(position).getGroup().compareTo("")==0)
-        {
-            holder.post_group.setText("["+getItem(position).getKakao_nic()+"]"+" ");
-        }
-        else if(getItem(position).getGroup().compareTo("")!=0)
-        {
-            holder.post_group.setText("["+getItem(position).getGroup_name()+"]"+" ");
+        holder.post_title.setText(getItem(position).getTitle() + " ");
+        holder.post_id.setText(getItem(position).getId() + " ");
+        if (getItem(position).getGroup().compareTo("") == 0) {
+            holder.post_group.setText("[" + getItem(position).getKakao_nic() + "]" + " ");
+        } else if (getItem(position).getGroup().compareTo("") != 0) {
+            holder.post_group.setText("[" + getItem(position).getGroup_name() + "]" + " ");
         }
 
-
-        temp_date=getItem(position).getStart_date();
-        s_date=Integer.parseInt(temp_date);
-        s_year=s_date/10000;
-        s_date=s_date-(s_year*10000);
-        s_month=s_date/100;
-        s_date=s_date-s_month*100;
-        s_day=s_date;
-
-        temp_date_e=getItem(position).getEnd_date();
-        e_date=Integer.parseInt(temp_date_e);
-
-        e_year=e_date/10000;
-        e_date=e_date-(s_year*10000);
-        e_month=e_date/100;
-        e_date=e_date-e_month*100;
-        e_day=e_date;
-
-        int dday_s=deadline.caldate(s_year,s_month-1,s_day+1);
-        int dday_e=deadline.caldate(e_year,e_month-1,e_day+1);
-
-
-        if (dday_s < 0)
+         if(!getItem(position).getStart_date().equalsIgnoreCase("0")&&!getItem(position).getEnd_date().equalsIgnoreCase("0"))
         {
-            holder.post_dday.setText("D"+String.valueOf(dday_s));
+         temp_date = getItem(position).getStart_date();
+         s_date = Integer.parseInt(temp_date);
+         s_year = s_date / 10000;
+         s_date = s_date - (s_year * 10000);
+         s_month = s_date / 100;
+         s_date = s_date - s_month * 100;
+         s_day = s_date;
+
+        temp_date_e = getItem(position).getEnd_date();
+        e_date = Integer.parseInt(temp_date_e);
+
+        e_year = e_date / 10000;
+        e_date = e_date - (s_year * 10000);
+        e_month = e_date / 100;
+        e_date = e_date - e_month * 100;
+        e_day = e_date;
+
+        int dday_s = deadline.caldate(s_year, s_month - 1, s_day + 1);
+        int dday_e = deadline.caldate(e_year, e_month - 1, e_day + 1);
+
+
+        if (dday_s < 0) {
+            holder.post_dday.setText("D" + String.valueOf(dday_s));
             holder.post_group.setAlpha(1);
             holder.post_id.setAlpha(1);
             holder.post_title.setAlpha(1);
             holder.post_dday.setAlpha(1);
-            if (getItem(position).getBig_category().equalsIgnoreCase("1"))
-            {
+            if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
                 holder.post_category.setImageResource(R.drawable.notice);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("2"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
                 holder.post_category.setImageResource(R.drawable.outer);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("3"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
                 holder.post_category.setImageResource(R.drawable.seminar);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("4"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                 holder.post_category.setImageResource(R.drawable.recruit);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("5"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
                 holder.post_category.setImageResource(R.drawable.agora);
                 holder.post_category.setAlpha(1f);
             }
 
 
-        }
-        else if (dday_s >= 0 && dday_e <= 0)
-        {
+        } else if (dday_s >= 0 && dday_e <= 0) {
             holder.post_dday.setText("진행중");
             holder.post_group.setAlpha(1);
             holder.post_id.setAlpha(1);
@@ -181,68 +163,160 @@ public class PostAdapter extends BaseAdapter{
             holder.post_dday.setAlpha(1);
 
 
-
-            if (getItem(position).getBig_category().equalsIgnoreCase("1"))
-            {
+            if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
                 holder.post_category.setImageResource(R.drawable.notice);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("2"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
                 holder.post_category.setImageResource(R.drawable.outer);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("3"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
                 holder.post_category.setImageResource(R.drawable.seminar);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("4"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                 holder.post_category.setImageResource(R.drawable.recruit);
                 holder.post_category.setAlpha(1f);
-            }
-            else if (getItem(position).getBig_category().equalsIgnoreCase("5"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
                 holder.post_category.setImageResource(R.drawable.agora);
                 holder.post_category.setAlpha(1f);
             }
 
-        }
-        else if(dday_e>0) //지난 이벤트의 경우
+        } else if (dday_e > 0) //지난 이벤트의 경우
         {
             holder.post_dday.setText("");
             holder.post_title.setAlpha(0.3f);
             holder.post_id.setAlpha(0.3f);
             holder.post_group.setAlpha(0.3f);
 
-            if(getItem(position).getBig_category().equalsIgnoreCase("1"))
-            {
+            if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
                 holder.post_category.setImageResource(R.drawable.notice_passed);
                 holder.post_category.setAlpha(0.3f);
-            }
-            else if(getItem(position).getBig_category().equalsIgnoreCase("2"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
                 holder.post_category.setImageResource(R.drawable.outer_passed);
                 holder.post_category.setAlpha(0.3f);
-            }
-            else if(getItem(position).getBig_category().equalsIgnoreCase("3"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
                 holder.post_category.setImageResource(R.drawable.seminar_paseed);
                 holder.post_category.setAlpha(0.3f);
-            }
-            else if(getItem(position).getBig_category().equalsIgnoreCase("4"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                 holder.post_category.setImageResource(R.drawable.recruit_passed);
                 holder.post_category.setAlpha(0.3f);
-            }
-            else if(getItem(position).getBig_category().equalsIgnoreCase("5"))
-            {
+            } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
                 holder.post_category.setImageResource(R.drawable.agora_passed);
                 holder.post_category.setAlpha(0.3f);
             }
         }
+    }
+        if(!getItem(position).getStart_date().equalsIgnoreCase("0")&&getItem(position).getEnd_date().equalsIgnoreCase("0"))
+        {
+            temp_date = getItem(position).getStart_date();
+            s_date = Integer.parseInt(temp_date);
+            s_year = s_date / 10000;
+            s_date = s_date - (s_year * 10000);
+            s_month = s_date / 100;
+            s_date = s_date - s_month * 100;
+            s_day = s_date;
+            int dday_s = deadline.caldate(s_year, s_month - 1, s_day + 1);
+            int dday_e = deadline.caldate(s_year, s_month - 1, s_day + 1);
 
+            if (dday_s < 0) {
+                holder.post_dday.setText("D" + String.valueOf(dday_s));
+                holder.post_group.setAlpha(1);
+                holder.post_id.setAlpha(1);
+                holder.post_title.setAlpha(1);
+                holder.post_dday.setAlpha(1);
+                if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
+                    holder.post_category.setImageResource(R.drawable.notice);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
+                    holder.post_category.setImageResource(R.drawable.outer);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
+                    holder.post_category.setImageResource(R.drawable.seminar);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
+                    holder.post_category.setImageResource(R.drawable.recruit);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
+                    holder.post_category.setImageResource(R.drawable.agora);
+                    holder.post_category.setAlpha(1f);
+                }
+
+
+            } else if (dday_s >= 0 && dday_e <= 0) {
+                holder.post_dday.setText("진행중");
+                holder.post_group.setAlpha(1);
+                holder.post_id.setAlpha(1);
+                holder.post_title.setAlpha(1);
+                holder.post_dday.setAlpha(1);
+
+
+                if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
+                    holder.post_category.setImageResource(R.drawable.notice);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
+                    holder.post_category.setImageResource(R.drawable.outer);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
+                    holder.post_category.setImageResource(R.drawable.seminar);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
+                    holder.post_category.setImageResource(R.drawable.recruit);
+                    holder.post_category.setAlpha(1f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
+                    holder.post_category.setImageResource(R.drawable.agora);
+                    holder.post_category.setAlpha(1f);
+                }
+
+            } else if (dday_e > 0) //지난 이벤트의 경우
+            {
+                holder.post_dday.setText("");
+                holder.post_title.setAlpha(0.3f);
+                holder.post_id.setAlpha(0.3f);
+                holder.post_group.setAlpha(0.3f);
+
+                if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
+                    holder.post_category.setImageResource(R.drawable.notice_passed);
+                    holder.post_category.setAlpha(0.3f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
+                    holder.post_category.setImageResource(R.drawable.outer_passed);
+                    holder.post_category.setAlpha(0.3f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
+                    holder.post_category.setImageResource(R.drawable.seminar_paseed);
+                    holder.post_category.setAlpha(0.3f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
+                    holder.post_category.setImageResource(R.drawable.recruit_passed);
+                    holder.post_category.setAlpha(0.3f);
+                } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
+                    holder.post_category.setImageResource(R.drawable.agora_passed);
+                    holder.post_category.setAlpha(0.3f);
+                }
+            }
+            else if(getItem(position).getStart_date().equalsIgnoreCase("0")&&getItem(position).getEnd_date().equalsIgnoreCase("0"))
+            {
+
+                    holder.post_dday.setText("");
+                    holder.post_group.setAlpha(1);
+                    holder.post_id.setAlpha(1);
+                    holder.post_title.setAlpha(1);
+                    holder.post_dday.setAlpha(1);
+                    if (getItem(position).getBig_category().equalsIgnoreCase("1")) {
+                        holder.post_category.setImageResource(R.drawable.notice);
+                        holder.post_category.setAlpha(1f);
+                    } else if (getItem(position).getBig_category().equalsIgnoreCase("2")) {
+                        holder.post_category.setImageResource(R.drawable.outer);
+                        holder.post_category.setAlpha(1f);
+                    } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
+                        holder.post_category.setImageResource(R.drawable.seminar);
+                        holder.post_category.setAlpha(1f);
+                    } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
+                        holder.post_category.setImageResource(R.drawable.recruit);
+                        holder.post_category.setAlpha(1f);
+                    } else if (getItem(position).getBig_category().equalsIgnoreCase("5")) {
+                        holder.post_category.setImageResource(R.drawable.agora);
+                        holder.post_category.setAlpha(1f);
+                    }
+            }
+
+        }
 
         return v;
     }
