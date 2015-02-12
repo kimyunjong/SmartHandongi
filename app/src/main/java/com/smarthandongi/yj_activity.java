@@ -578,7 +578,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     intent.putExtra("carrier", carrier);
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
-
+                    finish();
                 }
                 break;
             }
@@ -922,6 +922,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             if(temp_plist.indexOf(db)==0)
             {
               day_turn=true;
+              db.setLast_day_T();
             }
             else
             {
@@ -947,42 +948,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
             before_dday=db.getDday();
         }
-//        //마지막 이벤트에 대한 정보주기
-//        int last_day_check=0;
-//        boolean day_turn_last=false;
-//        int before_dday_last=0;
-//
-//        for(PostDatabase db:temp_plist)
-//        {
-//            //날바뀐지 안바뀐지 설정
-//            if(temp_plist.indexOf(db)==0)
-//            {
-//                day_turn=true;
-//            }
-//            else
-//            {
-//                if (before_dday != db.getDday())
-//                {
-//
-//                    day_turn = true;
-//                }
-//                else
-//                {
-//                    day_turn = false;
-//                }
-//            }
-//
-//            if(day_turn)
-//            {
-//                db.setFirst_day_T();
-//                // 하루씩만 깎이면 안됨, 바뀌는 날에
-//            }
-//            else//디데이 바뀌지 않음.
-//            {
-//                System.out.println("바뀌지 않음."+first_day);
-//            }
-//            before_dday=db.getDday();
-//        }
+
 
 
 

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smarthandongi.adapter.Post2Adapter;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 public class My_scrap extends Activity implements  View.OnTouchListener,AbsListView.OnScrollListener{
 
 
-    Button go_back;
+
     Carrier carrier;
     private ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>(), scraped_list = new ArrayList<PostDatabase>();
     private Intent intent;
@@ -44,8 +45,9 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
     private AbsListView view;
     private int firstVisibleItem, visibleItemCount, totalItemCount;
     private PostDatabasePhp postDatabasePhp;
-
-
+    int countScrap=0;
+    TextView scrapNum;
+    Button go_back;
 
 
     public void construction() {
@@ -68,11 +70,14 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.my_scrap);
+        scrapNum=(TextView)findViewById(R.id.scrap_num);
 
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
         Log.v("연결 시도", "연결되어라@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&");
 
+        go_back=(Button)findViewById(R.id.push_back_btn);
+        go_back.setOnTouchListener(this);
     }
 
     @Override
@@ -86,12 +91,16 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
             {
                 if (event.getAction() == 0)
                 {
-
-
                 }
                 else if (event.getAction() == 1)
                 {
+                    Intent intent = new Intent(My_scrap.this, yj_activity.class);
+                    intent.putExtra("carrier", carrier);
+
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
                     finish();
+
                 }
 
 
@@ -106,7 +115,12 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
 
     public void onBackPressed()
     {
+        Intent intent = new Intent(My_scrap.this, yj_activity.class);
+        intent.putExtra("carrier", carrier);
 
+        startActivityForResult(intent, 0);
+        overridePendingTransition(0,0);
+        finish();
 
     }
 
@@ -204,8 +218,10 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
             if (db.getLike().equalsIgnoreCase("0")) continue;
 
            scraped_list.add(db);
+            countScrap++;
 
         }
+        scrapNum.setText(String.valueOf(countScrap));
     }
 
     @Override

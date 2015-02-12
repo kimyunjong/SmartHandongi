@@ -28,6 +28,7 @@ public class Post2Adapter extends BaseAdapter{
     private Context context;
     Calendar calendar;
 
+
     public Post2Adapter(Context context, List<PostDatabase> list){
         this.context=context;
         this.list=list;
@@ -67,6 +68,7 @@ public class Post2Adapter extends BaseAdapter{
             holder.post_group=(TextView)v.findViewById(R.id.group);
             holder.left_bar=(ImageView)v.findViewById(R.id.left_bar);
             holder.first_weekday=(TextView)v.findViewById(R.id.first_weekday);
+            holder.upperLine=(LinearLayout)v.findViewById(R.id.item_upperline);
             v.setTag(holder);
 
         }
@@ -93,6 +95,14 @@ public class Post2Adapter extends BaseAdapter{
         {   holder.left_bar.setImageResource(R.drawable.timeline_line_img);
             holder.firstday_check_img.setImageResource(R.drawable.time_line_firstday_img);
             holder.firstday_check_img.setAlpha(1f);
+            if(getItem(position).getLastDay())
+            {
+                holder.upperLine.setAlpha(0f);
+            }
+            else
+            {
+             holder.upperLine.setAlpha(1f);
+            }
             if(getItem(position).getDday()==0)
                 {holder.first_date.setText("오늘");
                     holder.first_weekday.setText("");}
@@ -158,7 +168,7 @@ public class Post2Adapter extends BaseAdapter{
             holder.firstday_check_img.setAlpha(0f);
             holder.first_date.setText("  ");
             holder.first_weekday.setText("");
-
+            holder.upperLine.setAlpha(0f);
         }
 
 
@@ -168,7 +178,7 @@ public class Post2Adapter extends BaseAdapter{
     static class ViewHolder{
         TextView post_title, post_group,first_date,first_weekday;
         ImageView left_bar,firstday_check_img;
-
+        LinearLayout upperLine;
     }
 }
 

@@ -91,6 +91,7 @@
                 android:layout_height="45.5dp"
                 android:layout_width="63.5dp"
                 android:src="@drawable/board_btn"
+
                 android:layout_alignParentBottom="true"/>
             </RelativeLayout>
 
@@ -114,6 +115,7 @@
                 android:id="@+id/timeline_img"
                 android:layout_width="63.5dp"
                 android:layout_height="45.5dp"
+
                 android:layout_alignParentBottom="true"
                 android:src="@drawable/timeline_btn"/>
            </RelativeLayout>
@@ -140,11 +142,13 @@
                 android:layout_width="45dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginLeft="12dp"
                 android:background="@android:color/transparent"/>
             <ImageView
                 android:id="@+id/menu_img"
                 android:layout_width="45dp"
                 android:layout_height="60dp"
+
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:src="@drawable/menu_btn"/>
@@ -172,6 +176,8 @@
     android:layout_below="@+id/upper_bar"
     android:scrollbars="none"
     android:layout_marginBottom="60dp"
+        android:dividerHeight="0dp"
+        android:divider="#ffffff"
 
         >
 

@@ -52,8 +52,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scrap_num"
-            android:text="임시입니다."
+            android:layout_alignBottom="@+id/scrap_num1"
             android:layout_toRightOf="@+id/scrap_num1"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="8dp"
             />
         <ImageView
             android:layout_width="47dp"
@@ -62,11 +64,13 @@
             android:src="@drawable/scrap_num_img2"
             android:layout_toRightOf="@+id/scrap_num"/>
         </RelativeLayout>
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="6.5dp"
-            android:src="@drawable/line"
-            android:layout_below="@+id/scrap_num_layout"/>
+            android:layout_height="0.5dp"
+            android:background="#ffffeded"
+            android:layout_below="@+id/scrap_num_layout">
+
+            </RelativeLayout>
 
     </RelativeLayout>
     <ListView
