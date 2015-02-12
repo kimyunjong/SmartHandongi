@@ -61,7 +61,12 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/search_relative">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -85,35 +90,40 @@
                     android:background="#00000000"
                     android:singleLine="true"
                     />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="33.5dp"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/search_glass_img"
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="23dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/black_glass"
-                    android:visibility="visible"
-                    />
+                    android:layout_toRightOf="@id/search_relative" >
+                    <ImageView
+                        android:id="@+id/search_glass_img"
+                        android:layout_width="23dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/black_glass"
+                        android:visibility="visible"
 
-                <Button
-                    android:id="@+id/search_cancel_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:background="@android:color/transparent"
-                    />
-                <ImageView
-                    android:id="@+id/search_cancel_img"
-                    android:layout_width="23dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/black_cancel"
-                    android:visibility="invisible"
+                        />
 
-                    /><ImageView
+                    <Button
+                        android:id="@+id/search_cancel_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@android:color/transparent"
+                        />
+                    <ImageView
+                        android:id="@+id/search_cancel_img"
+                        android:layout_width="23dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/black_cancel"
+                        android:visibility="invisible"
 
-                android:layout_width="23dp"
+                        />
+
+                </RelativeLayout>
+            <ImageView
+
+                android:layout_width="16.5dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/black_p_right"
 
@@ -121,12 +131,10 @@
                 />
 
             </RelativeLayout>
-
-
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1"/>
+                android:layout_weight="0.3"/>
         </LinearLayout>
         </LinearLayout>
 
