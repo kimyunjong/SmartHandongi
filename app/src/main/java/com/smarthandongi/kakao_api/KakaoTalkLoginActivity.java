@@ -330,7 +330,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
         }
 
         protected void onPostExecute(Void result) {
-            //loagindDialog.dismiss();
+  //          loagindDialog.dismiss();
         }
     }
 
