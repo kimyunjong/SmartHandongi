@@ -66,7 +66,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/search_relative">
+                    android:id="@+id/search_please_area">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -94,12 +94,13 @@
                 <RelativeLayout
                     android:layout_width="23dp"
                     android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/search_relative" >
+                    android:layout_alignRight="@+id/search_please_area"
+                    >
                     <ImageView
                         android:id="@+id/search_glass_img"
                         android:layout_width="23dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/black_glass"
+                        android:background="@drawable/black_glass1"
                         android:visibility="visible"
 
                         />
@@ -119,7 +120,7 @@
                         android:visibility="invisible"
 
                         />
-
+                </RelativeLayout>
                 </RelativeLayout>
             <ImageView
 
@@ -127,15 +128,14 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/black_p_right"
 
-
                 />
 
-            </RelativeLayout>
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"/>
         </LinearLayout>
+
         </LinearLayout>
 
 

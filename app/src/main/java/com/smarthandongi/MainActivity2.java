@@ -69,8 +69,9 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
                             carrier.setNickname("not_logged_in");
                             carrier.setId("000000");
                             // 수영추가
-                            /*RegIDDeleteTask regIDDeleteTask= new RegIDDeleteTask();
-                            regIDDeleteTask.execute(regid);*/
+                            carrier.setIsLogout_regid(2);
+                            RegIDDeleteTask regIDDeleteTask= new RegIDDeleteTask();
+                            regIDDeleteTask.execute(regid);
                             // 수영 추가 끝
                             Intent intent = new Intent(MainActivity2.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
                             startActivity(intent);
@@ -165,7 +166,7 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
         }
 
         protected void onPostExecute(Void result) {
-            loagindDialog.dismiss();
+//            loagindDialog.dismiss();
         }
     }
 

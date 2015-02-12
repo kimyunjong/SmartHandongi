@@ -263,7 +263,9 @@ public class ds_activity extends Activity {
         }
 
         protected void onPostExecute(Void result) {
-            loagindDialog.dismiss();
+            if (loagindDialog.isShowing()) {
+                loagindDialog.dismiss();
+            }
         }
     }
 

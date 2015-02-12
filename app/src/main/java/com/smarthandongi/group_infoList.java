@@ -53,7 +53,7 @@ public class group_infoList extends Activity {
     GroupPhp group_Php;
     Carrier carrier;
     GroupDatabase1 group;
-
+    String regid=null;
     private ArrayList<GroupDatabase1> temp_list = new ArrayList<GroupDatabase1>();
     private ArrayList<GroupDatabase1> filtered_list = new ArrayList<GroupDatabase1>();
     EditText group_search;
@@ -77,7 +77,9 @@ public class group_infoList extends Activity {
         setContentView(R.layout.group_lifo_list);
         group_list_view = (ListView)findViewById(R.id.group_list);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
-        carrier.getRegid();
+        regid=carrier.getRegid();
+        Log.d("regid g infolist",carrier.getRegid());
+        carrier.setRegid(regid);
         construction();
         //group_list_view.setOnItemClickListener(mItemClickListener);
 

@@ -71,6 +71,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
     public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private int isLogout_regid=1;
 
     String SENDER_ID = "651406894161";
     String myResult;
@@ -128,8 +129,13 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
 
         }
         carrier.setRegid(regid);
-        RegIDInsertTask regIDInsertTask  = new RegIDInsertTask();
-        regIDInsertTask.execute(regid);
+        carrier.getIsLogout_regid();
+
+
+
+            RegIDInsertTask regIDInsertTask = new RegIDInsertTask();
+            regIDInsertTask.execute(regid);
+
         // regIDInsertTaske= new regIDInsertTask.execute(regid);
         // sendAPIkey();
     }
@@ -319,8 +325,8 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            loagindDialog = ProgressDialog.show(KakaoTalkLoginActivity.this, "키 등록 중입니다..",
-                    "Please wait..", true, false);
+          /*  loagindDialog = ProgressDialog.show(KakaoTalkLoginActivity.this, "키 등록 중입니다..",
+                    "Please wait..", true, false);*/
         }
 
         @Override
@@ -330,7 +336,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
         }
 
         protected void onPostExecute(Void result) {
-          loagindDialog.dismiss();
+         // loagindDialog.dismiss();
         }
     }
 

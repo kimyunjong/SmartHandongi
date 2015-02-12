@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -61,10 +62,11 @@ public class group_info extends Activity {
         String group_name1 =intent.getStringExtra("group_name");
         String group_category1 = intent.getStringExtra("group_category");
         String introduce1 = intent.getStringExtra("introduce");
-
+        String regid=null;
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
-        carrier.getRegid();
-
+        regid=carrier.getRegid();
+        Log.d("regid g infolist", carrier.getRegid());
+        carrier.setRegid(regid);
         back_btn=(Button)findViewById(R.id.back);// 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

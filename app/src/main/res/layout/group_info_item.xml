@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         >
         <LinearLayout
-            android:layout_marginLeft="2.5dp"
+            android:layout_marginLeft="10.5dp"
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:orientation="vertical"
@@ -45,13 +45,26 @@
          />
 
         </LinearLayout>
-
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="50.5dp"
+            android:layout_height="66dp">
+            <ImageView
+                android:layout_marginRight="7dp"
+                android:layout_width="16.5dp"
+                android:layout_height="43.5dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/rightarrow"/>
+        </RelativeLayout>
     </RelativeLayout>
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#ffffff"
         android:alpha="0.5"
+        android:layout_marginLeft="5dp"
         >
     </LinearLayout>
 </LinearLayout>
