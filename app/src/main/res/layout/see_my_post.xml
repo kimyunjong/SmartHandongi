@@ -103,7 +103,7 @@
                 android:id="@+id/smp_comment_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
+                android:visibility="gone"
                 ></ListView>
         </RelativeLayout>
 

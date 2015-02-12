@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -64,13 +65,13 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.smp_post : {
                 post_listview.setVisibility(View.VISIBLE);
-                comment_listview.setVisibility(View.INVISIBLE);
+                comment_listview.setVisibility(View.GONE);
                 comment_btn.setBackgroundResource(R.drawable.smp_comment);
                 post_btn.setBackgroundResource(R.drawable.smp_post_selected);
                 break;
             }
             case R.id.smp_comment : {
-                post_listview.setVisibility(View.INVISIBLE);
+                post_listview.setVisibility(View.GONE);
                 comment_listview.setVisibility(View.VISIBLE);
                 comment_btn.setBackgroundResource(R.drawable.smp_comment_selected);
                 post_btn.setBackgroundResource(R.drawable.smp_post);
@@ -97,6 +98,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                 post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list,posting_list,carrier);
                 post_listview.setAdapter(post_adapter);
                 post_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                post_listview.setOnItemClickListener(postClickListener);
 
             }
         }
@@ -169,15 +171,17 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                                 jo.getInt("review_id"), jo.getString("kakao_id"), jo.getString("kakao_nick"),
                                 jo.getString("reply_date"), jo.getString("content")
                         ));
-                        comment_adapter = new SMP_CommentAdapter(SeeMyPost.this,R.layout.my_comment_listview,comment_list,carrier,posting_list);
-                        comment_listview.setAdapter(comment_adapter);
-                        comment_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+                        Log.d("이거되야하는데","왜안되는거지?");
 
                     }
-
-
-
                 }
+                comment_adapter = new SMP_CommentAdapter(SeeMyPost.this,R.layout.my_comment_listview,comment_list,carrier,posting_list);
+                comment_listview.setAdapter(comment_adapter);
+                comment_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                comment_listview.setOnItemClickListener(commentClickListener);
+                Log.d("너되야해","너될거야??");
+
 
 
 
@@ -189,7 +193,39 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         }
     }
 
+    AdapterView.OnItemClickListener postClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int pos=0;
+            for(int i=0; i<posting_list.size(); i++) {
+                if(myPost_list.get(position).getId()==posting_list.get(i).getId()) {
+                    pos=i;
+                    break;
+                }
+            }
+            carrier.setFromSMP(1);
+            Intent intent = new Intent(SeeMyPost.this,PostDetail.class);
+            intent.putExtra("post_list",posting_list);
+            intent.putExtra("position",pos);
+            intent.putExtra("post",myPost_list.get(position));
+            intent.putExtra("carrier",carrier);
+            startActivity(intent);
+            finish();
+        }
+    };
 
+    AdapterView.OnItemClickListener commentClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent (SeeMyPost.this,Review.class);
+            intent.putExtra("carrier",carrier);
+            intent.putExtra("posting_id",comment_list.get(position).getPosting_id());
+            System.out.println("너는되야지");
+            startActivity(intent);
+
+            finish();
+        }
+    };
 
     public void onBackPressed() {
         carrier.setFromSMP(0);

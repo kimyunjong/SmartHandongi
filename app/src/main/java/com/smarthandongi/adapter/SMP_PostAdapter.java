@@ -58,6 +58,7 @@ public class SMP_PostAdapter extends BaseAdapter {
         TextView title = (TextView)convert_view.findViewById(R.id.smp_title);
         title.setText(post_list.get(position).getTitle());
 
+        /*
         Button smp_forward_btn=(Button)convert_view.findViewById(R.id.my_post_forward_btn);
         smp_forward_btn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -80,6 +81,7 @@ public class SMP_PostAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+        */
 
         return convert_view;
     }
