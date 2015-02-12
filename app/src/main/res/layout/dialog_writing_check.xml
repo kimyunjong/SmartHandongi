@@ -4,21 +4,15 @@
     android:layout_width="263.5dp"
     android:layout_height="154dp">
     <LinearLayout
+        android:id="@+id/dialog_check_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/dialog_delete_post">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="bottom">
             <Button
-                android:id="@+id/dialog_delete_cancel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"/>
-            <Button
-                android:id="@+id/dialog_delete_confirm"
+                android:id="@+id/dialog_okay"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"

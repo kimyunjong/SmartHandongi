@@ -19,8 +19,6 @@
         android:layout_centerInParent="true"
         android:layout_below="@id/dialog_push_title"
         android:textSize="14.5dp"
-        android:lineSpacingMultiplier="1"
-        android:text="'소분류'항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다."
         />
 
     <LinearLayout

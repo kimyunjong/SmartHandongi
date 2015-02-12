@@ -53,10 +53,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private PostDB_Php postdbphp;
     private DeletePhp del_php;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
-            type;
+            type, pos_between_days, dialog_push_title, dialog_push_text;
     final Context context = this;
     Dialog dialog_del, dialog_report, dialog_push;
-    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm;;
+    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm;
 
 
     ImageView post_img;
@@ -69,7 +69,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private int posting_id,position;
     int screen_width;
     Picture poster = new Picture();
-    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report, popup_delete_1, popup_delete_2, popup_delete_3, popup_push_confirm;
+    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report, popup_delete_1, popup_delete_2, popup_delete_3, popup_push_confirm, popup_cancel;
     LinearLayout pos_dates, pos_linkbar;
     String category = "", small_category = "";
     Typeface typeface;
@@ -119,6 +119,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         pos_push.setOnClickListener(this);
 
         //텍스트뷰
+        pos_between_days=(TextView)findViewById(R.id.pos_between_days);
         start_day=(TextView)findViewById(R.id.pos_start_day);
         end_day=(TextView)findViewById(R.id.pos_end_day);
         link=(TextView)findViewById(R.id.pos_link);
@@ -128,6 +129,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         content=(TextView)findViewById(R.id.pos_content);
         view_num=(TextView)findViewById(R.id.pos_view_num);
         review_num=(TextView)findViewById(R.id.pos_review_num);
+
 
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
@@ -143,6 +145,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         review_num.setTypeface(typeface);
         writer_name.setTypeface(typeface);
         writer_group_name.setTypeface(typeface);
+        pos_between_days.setTypeface(typeface);
 
         //이미지뷰
         post_img=(ImageView)findViewById(R.id.poster);
@@ -158,6 +161,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         popup_delete_2 = (RelativeLayout)findViewById(R.id.popup_delete_2);
         popup_delete_3 = (RelativeLayout)findViewById(R.id.popup_delete_3);
         popup_push_confirm = (RelativeLayout)findViewById(R.id.popup_push);
+        popup_cancel = (RelativeLayout)findViewById(R.id.popup_cancel);
 
         if(carrier.getFromWriting()==1) {
 
@@ -217,39 +221,39 @@ public class PostDetail extends Activity implements View.OnClickListener{
             switch(post.getBig_category()){                                                     //대분류
                 case "1" : category = "일반공지"; break;
                 case "2" : category = "대외활동"; break;
-                case "3" : category = "공연/세미나"; break;
+                case "3" : category = "공연·세미나"; break;
                 case "4" : category = "리쿠르팅"; break;
                 case "5" : category = "붙어라"; break;
                 default: break;
             }
             switch(post.getCategory()){
-                case "together_sports_1"        : small_category = "/운동경기"; break;          //소분류
-                case "together_game_2"          : small_category = "/게임"; break;
-                case "together_nightfood_3"     : small_category = "/야식"; break;
-                case "together_gonggu_4"        : small_category = "/공동구매"; break;
-                case "together_carpool_5"       : small_category = "/카풀"; break;
-                case "together_study_6"         : small_category = "/스터디"; break;
-                case "together_trading_7"       : small_category = "/사고팔기"; break;
-                case "together_lost_8"          : small_category = "/분실물"; break;
-                case "together_recruiting_9"    : small_category = "/구인구직"; break;
-                case "together_exchange_10"     : small_category = "/교환"; break;
+                case "together_sports_1"        : small_category = "운동경기"; break;          //소분류
+                case "together_game_2"          : small_category = "게임"; break;
+                case "together_nightfood_3"     : small_category = "야식"; break;
+                case "together_gonggu_4"        : small_category = "공동구매"; break;
+                case "together_carpool_5"       : small_category = "카풀"; break;
+                case "together_study_6"         : small_category = "스터디"; break;
+                case "together_trading_7"       : small_category = "사고팔기"; break;
+                case "together_lost_8"          : small_category = "분실물"; break;
+                case "together_recruiting_9"    : small_category = "구인구직"; break;
+                case "together_exchange_10"     : small_category = "교환"; break;
 
-                case "outer_contest_21"     : small_category = "/공모전"; break;
-                case "outer_intern_22"      : small_category = "/인턴"; break;
-                case "outer_service_23"     : small_category = "/자원봉사"; break;
+                case "outer_contest_21"     : small_category = "공모전"; break;
+                case "outer_intern_22"      : small_category = "인턴"; break;
+                case "outer_service_23"     : small_category = "자원봉사"; break;
 
-                case "seminar_perf_41"          : small_category = "/공연"; break;
-                case "seminar_seminar_42"       : small_category = "/세미나"; break;
-                case "seminar_presentation_43"  : small_category = "/발표"; break;
+                case "seminar_perf_41"          : small_category = "공연"; break;
+                case "seminar_seminar_42"       : small_category = "세미나"; break;
+                case "seminar_presentation_43"  : small_category = "발표"; break;
 
-                case "recruiting_scholarship_61" : small_category = "/학술"; break;
-                case "recruiting_sports_62"      : small_category = "/운동"; break;
-                case "recruiting_perf_63"        : small_category = "/공연"; break;
-                case "recruiting_faith_64"       : small_category = "/신앙"; break;
-                case "recruiting_display_65"     : small_category = "/전시"; break;
-                case "recruiting_service_66"     : small_category = "/봉사"; break;
+                case "recruiting_scholarship_61" : small_category = "학술"; break;
+                case "recruiting_sports_62"      : small_category = "운동"; break;
+                case "recruiting_perf_63"        : small_category = "공연"; break;
+                case "recruiting_faith_64"       : small_category = "신앙"; break;
+                case "recruiting_display_65"     : small_category = "전시"; break;
+                case "recruiting_service_66"     : small_category = "봉사"; break;
             }
-            type.setText("[" + category + small_category + "]");                                // [대분류/소분류]
+            type.setText("[" + category + "/" + small_category + "]");                                // [대분류/소분류]
 
             post_day.setText(post.getPosting_date());                                           //등록일
 
@@ -444,16 +448,42 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 }
             }
             case R.id.pos_push : {
+                String popup_message;
+                popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";
+
                 dialog_push = new Dialog(context);
                 dialog_push.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog_push.setContentView(R.layout.dialog_push);
                 dialog_push.show();
+
+                dialog_push_title = (TextView)dialog_push.findViewById(R.id.dialog_push_title);
+                dialog_push_title.setText("알람을 보내시겠습니까?");
+                dialog_push_title.setTypeface(typeface);
+
+                dialog_push_text = (TextView)dialog_push.findViewById(R.id.dialog_push_text);
+                dialog_push_text.setText("'" + small_category + "' "+ popup_message);
+                dialog_push_text.setTypeface(typeface);
 
                 dialog_push_cancel = (Button)dialog_push.findViewById(R.id.dialog_push_cancel);
                 dialog_push_cancel.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                         dialog_push.dismiss();
+
+                        new CountDownTimer(1500, 300) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                popup_delete_1.setVisibility(VISIBLE);
+                                popup_delete_2.setVisibility(VISIBLE);
+                                popup_cancel.setVisibility(VISIBLE);
+                            }
+                            @Override
+                            public void onFinish() {
+                                popup_delete_1.setVisibility(GONE);
+                                popup_delete_2.setVisibility(GONE);
+                                popup_cancel.setVisibility(GONE);
+                            }
+                        }.start();
                     }
                 });
 
@@ -462,7 +492,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     @Override
                     public void onClick(View v) {
                         dialog_push.dismiss();
+                        pos_push.setVisibility(GONE);
                         //푸시보내는거
+                        //푸시카운트 0으로 초기화
 
                         new CountDownTimer(1500, 300) {
                             @Override

@@ -71,7 +71,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="10dp"
                 android:scrollbars="none">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,6 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         >
                         <!--새로 추가-->
@@ -115,6 +115,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp">
                         <TextView
                             android:id="@+id/pos_title"
@@ -149,6 +150,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp">
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -177,6 +180,7 @@
                         android:id="@+id/pos_dates"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginRight="10dp">
                         <ImageView
                             android:layout_width="70.5dp"
@@ -187,17 +191,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
+                            android:layout_gravity="bottom"
                             android:text="2015-01-07"/>
                         <TextView
+                            android:id="@+id/pos_between_days"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
+                            android:layout_gravity="bottom"
                             android:text=" ~ "/>
                         <TextView
                             android:id="@+id/pos_end_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
+                            android:layout_gravity="bottom"
                             android:text="2015-01-30"
                             />
                     </LinearLayout>
@@ -205,6 +213,7 @@
                         android:id="@+id/pos_linkbar"
                         android:layout_width="match_parent"
                         android:layout_height="14.5dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginRight="10dp">
                         <ImageView
                             android:layout_width="47.5dp"
@@ -230,6 +239,7 @@
 
                     <TextView
                         android:id="@+id/pos_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="30dp"
                         android:layout_marginRight="10dp"
                         android:layout_width="match_parent"
@@ -257,6 +267,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
+                            android:layout_marginTop="2dp"
                             android:layout_centerVertical="true"
                             android:textSize="15dp"
                             android:text="167"/>
@@ -423,6 +434,14 @@
         android:visibility="gone"
         android:layout_centerInParent="true"
         android:background="@drawable/dialog_push_confirm">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_cancel"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_cancel">
     </RelativeLayout>
 
 

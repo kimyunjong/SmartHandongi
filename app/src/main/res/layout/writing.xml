@@ -150,6 +150,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="#ffffff"
+                                android:textSize="14.5dp"
                                 android:background="@android:color/transparent"/>
                             <ImageView
                                 android:id="@+id/big_category_img"
@@ -168,6 +169,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="#ffffff"
+                                android:textSize="14.5dp"
                                 android:background="@android:color/transparent"/>
                             <ImageView
                                 android:id="@+id/small_category_img"
@@ -210,7 +212,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:gravity="left"
                         android:layout_marginRight="15dp"
                         android:hint="제목"
@@ -246,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#00000000"
-                        android:textSize="18dp"
+                        android:textSize="14.5dp"
                         android:textColor="#ffffff"
                         android:hint="내용"
                         android:textColorHint="#ffffff"
@@ -493,7 +495,7 @@
             <ImageView
                 android:id="@+id/writing_edit_confirm"
                 android:layout_width="68.5dp"
-                android:layout_height="33.5dp"
+                android:layout_height="38.5dp"
                 android:layout_centerInParent="true"
                 android:visibility="gone"
                 android:background="@drawable/writing_edit_confirm"/>

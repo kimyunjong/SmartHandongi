@@ -6,19 +6,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/dialog_delete_post">
+        android:background="@drawable/dialog_writing_cancel">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="bottom">
             <Button
-                android:id="@+id/dialog_delete_cancel"
+                android:id="@+id/dialog_writing_cancel"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <Button
-                android:id="@+id/dialog_delete_confirm"
+                android:id="@+id/dialog_writing_confirm"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
