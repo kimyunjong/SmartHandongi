@@ -4,10 +4,13 @@ import android.app.Activity;
 
 import android.content.Intent;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,10 +29,11 @@ public class group_info extends Activity {
 
     ImageView group_image;
     TextView group_name,group_category, introduce, slash;
-    int screen_width,temp=2;
+    int screen_width,temp=2,screen_height;
     Picture small_image = new Picture();
     GroupDatabase1 group;
-    Button back_btn;
+    Button back_btn,register_group;
+    Carrier carrier;
 
 
 
@@ -39,6 +43,8 @@ public class group_info extends Activity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_width = metrics.widthPixels;
+
+        screen_height = metrics.heightPixels;
 
         PostImageTask postImageTask = new PostImageTask(small_image,group_id,group_image,screen_width,temp);
         postImageTask.execute(0);
@@ -56,10 +62,13 @@ public class group_info extends Activity {
         String group_category1 = intent.getStringExtra("group_category");
         String introduce1 = intent.getStringExtra("introduce");
 
+        carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+        carrier.getRegid();
+
         back_btn=(Button)findViewById(R.id.back);// 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(group_info.this, group_infoList.class);
+                Intent intent = new Intent(group_info.this, yj_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
             }
         });
@@ -72,13 +81,26 @@ public class group_info extends Activity {
         introduce=(TextView) findViewById(R.id.intro);
         introduce.setText(introduce1);
 
-
-
-
         group_image=(ImageView)findViewById(R.id.small_image);
+        register_group = (Button)findViewById(R.id.writing_confirm_btn);
 
+        register_group.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://me2.do/FY0wtxRF");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
         construction(group_id1);
-
+        StringBuffer buf = null;
+        WindowManager wm = null;
+        Display display = null;
+        wm = getWindowManager();
+        display = wm.getDefaultDisplay();
+        buf = new StringBuffer();
+        buf.append("Window height: " + display.getHeight() + "\n");
     }
 
 

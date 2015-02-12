@@ -37,40 +37,61 @@
 
         </LinearLayout>
 
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp">
                 <ImageView
-                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="wrap_content"
+
                     android:id="@+id/small_image"
+
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="70.5dp"
-                        android:layout_gravity="center_vertical"
-                        />
+
+
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+
+
+                        >
+                        <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="70.5dp"
+                        android:background="@drawable/group_name_background"
+                        android:alpha="0.5"
+                        android:layout_centerInParent="true"
+
+                        />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_centerInParent="true">
                             <TextView
 
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/group_category"
+                                android:layout_gravity="center_horizontal"
+
                                 android:textSize="25dp"
                                 android:text="category"
-                               />
+                                />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -78,21 +99,33 @@
                                 android:id="@+id/group_name"
                                 android:textSize="25dp"
                                 android:text="group_name"
+                                android:layout_gravity="center_horizontal"
                                 android:layout_below="@id/group_category" />
-                </RelativeLayout>
+
+                         </LinearLayout>
+
+                    </RelativeLayout>
+
+                </FrameLayout>
 
 
-            </RelativeLayout>
+
 
         </RelativeLayout>
 
          </LinearLayout>
-
+        </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

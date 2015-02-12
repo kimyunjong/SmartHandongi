@@ -51,7 +51,7 @@ public class group_infoList extends Activity {
 
     ArrayList<GroupDatabase1> group_list = new ArrayList<GroupDatabase1>();
     GroupPhp group_Php;
-
+    Carrier carrier;
     GroupDatabase1 group;
 
     private ArrayList<GroupDatabase1> temp_list = new ArrayList<GroupDatabase1>();
@@ -76,14 +76,15 @@ public class group_infoList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_lifo_list);
         group_list_view = (ListView)findViewById(R.id.group_list);
-
+        carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+        carrier.getRegid();
         construction();
         //group_list_view.setOnItemClickListener(mItemClickListener);
 
         backward_btn=(Button)findViewById(R.id.back_btn);// 뒤로가기
         backward_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(group_infoList.this, ds_activity.class);
+                Intent intent = new Intent(group_infoList.this, yj_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
             }
         });
@@ -141,7 +142,7 @@ public class group_infoList extends Activity {
 
 
 
-
+        groupinfoAdapter= new GroupinfoAdapter(this, group_list,R.layout.group_lifo_list );
         group_list_view.setAdapter(groupinfoAdapter);
         group_list_view.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         group_list_view.setOnItemClickListener(groupListClickListener);
@@ -178,8 +179,8 @@ public class group_infoList extends Activity {
                 Log.d("test", Integer.toString(temp_list.size()));
 
                 for (int i = 0; i < temp_list.size(); i++) {
-                        if (temp_list.get(i).getGroup_name().contains(str)) {
-                        filtered_list.add(new GroupDatabase1(temp_list.get(i).getGroup_id(), temp_list.get(i).getGroup_name(),
+                        if (temp_list.get(i).getNickname_list().contains(str)) {
+                        filtered_list.add(new GroupDatabase1(temp_list.get(i).getGroup_id(), temp_list.get(i).getGroup_name(),temp_list.get(i).getNickname_list(),
                                 temp_list.get(i).getGroup_category(),temp_list.get(i).getIntroduce()
                         ));
 
@@ -197,7 +198,7 @@ public class group_infoList extends Activity {
                     background_hidden.setVisibility(View.GONE);
                     unresistered_background.setVisibility(View.VISIBLE);
                     unresistered_screen.setVisibility(View.VISIBLE);
-                    unresistered.setText("\""+str+"\"");
+                   // unresistered.setText("\""+str+"\"");
 
                 }
                 else
@@ -351,12 +352,12 @@ public class group_infoList extends Activity {
                 for(int i=0; i<ja.length();i++) {
                     JSONObject jo = ja.getJSONObject(i);
 
-                    group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("group_category"), jo.getString("introduce")));
-                    temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("group_category"), jo.getString("introduce")));
+                    group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"),jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
+                    temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"),jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
 
                 }
 
-                groupinfoAdapter= new GroupinfoAdapter(group_infoList.this, group_list,R.layout.group_lifo_list );
+                //groupinfoAdapter= new GroupinfoAdapter(group_infoList.this, group_list,R.layout.group_lifo_list );
                 group_list_view.setAdapter(groupinfoAdapter);
                 //group_list_view.setOnScrollListener(context);
                 //group_list_view.setOnItemClickListener(context);

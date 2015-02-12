@@ -605,7 +605,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     show_group_btn_img.setImageResource(R.drawable.group_menu_on);
                 } else if (event.getAction() == 1) {
                     show_group_btn_img.setImageResource(R.drawable.group_menu);
-                    Intent intent = new Intent(yj_activity.this, group_info_list.class);
+                    Intent intent = new Intent(yj_activity.this, group_infoList.class);
                     intent.putExtra("carrier", carrier);
 
                     startActivityForResult(intent, 0);

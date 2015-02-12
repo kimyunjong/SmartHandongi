@@ -92,7 +92,7 @@ public class ds_activity extends Activity {
         group_info1 = (Button)findViewById(R.id.group_info);
         group_info1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ds_activity.this, group_infoList.class);
+                Intent intent = new Intent(ds_activity.this, group_infoList.class).putExtra("carrier",carrier);
                 startActivity(intent);
             }
         });
@@ -174,21 +174,14 @@ public class ds_activity extends Activity {
                     msg = "Device registered, registration ID=" +regid;
                     sendRegistrationIdToBackend();
 
-                    // For this demo: we don't need to send it because the device
-                    // will send upstream messages to a server that echo back the
-                    // message using the 'from' address in the message.
 
-                    // Persist the regID - no need to register again.
                     storeRegistrationId(context,regid);
-                    //HttpPostData(regid);
-                    //return null;
+
                 }
                 catch (IOException ex)
                 {
                     msg = "Error :" + ex.getMessage();
-                    // If there is an error, don't just keep trying to register.
-                    // Require the user to click a button again, or perform
-                    // exponential back-off.
+
                 }
 
                 return msg;
@@ -198,7 +191,7 @@ public class ds_activity extends Activity {
             @Override
             protected void onPostExecute(String msg)
             {
-                //loagindDialog.dismiss();
+
                 Log.i("ds_activity.java | onPostExecute", "|" + msg + "|");
                 mDisplay.append(msg);
             }
@@ -217,8 +210,9 @@ public class ds_activity extends Activity {
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
     }
+
     public void onClick(final View view) {
-        if (view == findViewById(R.id.button_registId)) {
+       /* if (view == findViewById(R.id.button_registId)) {
             new AsyncTask() {
                 @Override
                 protected String doInBackground(Object... params) {
@@ -264,7 +258,7 @@ public class ds_activity extends Activity {
 
         @Override
         protected Void doInBackground(String... params) {
-            HttpPostData(regid );
+            HttpPostData(regid);
             return null;
         }
 
@@ -272,11 +266,7 @@ public class ds_activity extends Activity {
             loagindDialog.dismiss();
         }
     }
-    /*   private void sendAPIkey() {
 
-       regIDInsertTask  = new regIDInsertTask().execute(regid);
-
-   }*/
     public void HttpPostData(String reg_id ) {
         try {
             URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_reg_insert.php?reg_id="+regid);       // URL 설정
