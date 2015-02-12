@@ -528,9 +528,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 else if (event.getAction() == 1) {
                     write_img.setImageResource(R.drawable.write_btn);
 
-                    Intent intent = new Intent(yj_activity.this, Writing.class);
+                    Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
                     intent.putExtra("carrier", carrier);
-                    intent.putExtra("post_list",post_list);
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
                 }
@@ -542,9 +541,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu_on);
                 } else if (event.getAction() == 1) {
                     write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
-                    Intent intent = new Intent(yj_activity.this, Writing.class);
+                    Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
                     intent.putExtra("carrier", carrier);
-                    intent.putExtra("post_list",post_list);
+
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
 

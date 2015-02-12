@@ -6,6 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_marginLeft="2.5dp"
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:orientation="vertical"
@@ -52,9 +53,10 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <ImageView
+                android:layout_marginRight="7dp"
                 android:layout_width="16.5dp"
                 android:layout_height="43.5dp"
-                android:layout_centerHorizontal="true"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/rightarrow"/>
         </RelativeLayout>
     </RelativeLayout>

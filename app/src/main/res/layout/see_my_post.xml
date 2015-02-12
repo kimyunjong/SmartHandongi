@@ -16,7 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Button
-                    android:id="@+id/report_post_back_btn"
+                    android:id="@+id/smp_back_btn"
                     android:layout_width="50.5dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"/>
@@ -86,14 +86,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ListView
-                android:paddingLeft="8dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/smp_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="visible"
                 ></ListView>
             <ListView
-                android:paddingLeft="8dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
                 android:id="@+id/smp_comment_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
