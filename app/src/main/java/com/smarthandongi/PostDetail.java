@@ -286,7 +286,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.pos_review_show_btn : {
-                Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier", carrier);
+                Intent intent = new Intent(PostDetail.this, Review.class);
+                carrier.setFromSMP(0);
+                intent.putExtra("carrier", carrier);
                 intent.putExtra("posting_id", post.getId());
                 intent.putExtra("kakao_id", post.getKakao_id());
                 intent.putExtra("post",post);

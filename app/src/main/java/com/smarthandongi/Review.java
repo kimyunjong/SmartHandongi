@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.smarthandongi.adapter.ReviewAdapter;
+import com.smarthandongi.adapter.SMP_CommentAdapter;
 import com.smarthandongi.database.PostDatabase;
 import com.smarthandongi.database.ReviewDatabase;
 
@@ -73,8 +74,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
         if(carrier.getFromSMP()==0) {
             post = (PostDatabase) intent.getSerializableExtra("post");
+            Log.d("yes I can","Yes we Can");
             position = (int) intent.getSerializableExtra("position");
-
         }
        // kakao_id =(String)intent.getSerializableExtra("kakao_id");
 
@@ -99,15 +100,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         reg_btn.setOnClickListener(this);
         //del_btn.setOnClickListener(this);
         back_btn.setOnClickListener(this);
-/*
-        if(reviewDatabase.getKakao_id().compareTo(kakao_id)==0) {
-            notify_btn.setVisibility(View.GONE);
-            del_btn.setVisibility(View.VISIBLE);
-        }else{
-            notify_btn.setVisibility(View.VISIBLE);
-            del_btn.setVisibility(View.GONE);
-        }
-*/
+
         review_listview = (ListView) findViewById(R.id.review_list);
         review_listview.setSelector(new PaintDrawable(0x00000000));
 
@@ -149,6 +142,16 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
             case R.id.del_btn: {
                 Toast.makeText(this, "삭제버튼", Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(Review.this,Review.class);
+                intent.putExtra("carrier",carrier);
+                intent.putExtra("posting_id",posting_id);
+                if(carrier.getFromSMP()==0) {
+                    intent.putExtra("post",post);
+                    intent.putExtra("position",position);
+                }
+                startActivity(intent);
+                finish();
+
 
                 // delPhp();
 
@@ -170,17 +173,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                         .setNegativeButton("취소", null)
                         .show();*/
 
-                //int pos = review_listview.getItemAtPosition();
-               // int pos = review_listview.getCheckedItemPosition();
-               // Log.d("삭제", String.valueOf(pos));
-               // if(pos != ListView.INVALID_POSITION) {
-               //     review_list.remove(pos);
-               //     Log.d("삭제", String.valueOf(pos));
-               //     review_listview.clearChoices();
-               //     adapter.notifyDataSetChanged();
-               // }else{
-               //     Log.d("삭제", "삭제 fail");
-               // }
+
                 break;
             }
             case R.id.notify_btn: {
@@ -201,6 +194,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
 
          String kakao_id, kakao_nick;
+         final String reset_kakao_nick;
          String content;
 
 
@@ -209,9 +203,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
          kakao_id = carrier.getId();
          carrier.setContent(content);
 
-         final String temp_kakao_id = kakao_id;
-         final String temp_kakao_nick = kakao_nick;
-         final String temp_content = content;
+         reset_kakao_nick = kakao_nick;
+
 
          Log.d("TAG", content);
          Log.d("TAG", kakao_nick);
@@ -225,6 +218,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         }
         carrier.setNickname(kakao_nick);
         carrier.setContent(content);
+
 
 
         new AlertDialog.Builder(this)
@@ -245,12 +239,17 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             phpUploadReview = new PhpUploadReview();
                             phpUploadReview.execute(carrier.getUpload_url());
                             carrier.setFromWriting(1);
+                            carrier.setNickname(reset_kakao_nick);
 
                             String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
                             review_write.setText(null);
                             Intent intent = new Intent(Review.this,Review.class);
                             intent.putExtra("carrier",carrier);
                             intent.putExtra("posting_id",posting_id);
+                            if(carrier.getFromSMP()==0) {
+                                intent.putExtra("post",post);
+                                intent.putExtra("position",position);
+                            }
                             startActivity(intent);
                             finish();
                         }
