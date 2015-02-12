@@ -9,7 +9,10 @@ import android.graphics.drawable.PaintDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.smarthandongi.adapter.ReviewAdapter;
+import com.smarthandongi.database.PostDatabase;
 import com.smarthandongi.database.ReviewDatabase;
 
 import org.json.JSONArray;
@@ -46,12 +50,14 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     PhpUploadReview phpUploadReview;
     PhpDownloadReview phpDownloadReview;
 
-    int posting_id;
+    int posting_id,position;
     String kakao_id;
     ReviewDatabase reviewDatabase;
     Context context;
     ReviewAdapter adapter;
+    private PostDatabase post;
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
+    ArrayList<PostDatabase> post_list,all_posting_list;
     private ListView review_listview;
 
     long time1;
@@ -63,6 +69,11 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         posting_id =(int)intent.getSerializableExtra("posting_id");
+        post=(PostDatabase)intent.getSerializableExtra("post");
+        post_list=(ArrayList)intent.getSerializableExtra("post_list");
+        position=(int)intent.getSerializableExtra("position");
+        all_posting_list=(ArrayList)intent.getSerializableExtra("all_posting_list");
+
        // kakao_id =(String)intent.getSerializableExtra("kakao_id");
 
         review_write = (EditText)findViewById(R.id.review_write);
@@ -72,6 +83,15 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         notify_btn = (Button)findViewById(R.id.notify_btn);
         new_img = (ImageView)findViewById(R.id.new_img);
 
+        review_write.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                review_write.setCursorVisible(true);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(review_write, 0);
+                return true;
+            }
+        });
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //reg_btn.setBackgroundResource( getItem(position).getLike().compareTo("0") ==0 ? R.drawable.like : R.drawable.not_like);
         reg_btn.setOnClickListener(this);
@@ -105,7 +125,12 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 Intent intent = new Intent(Review.this, PostDetail.class);
                 intent.putExtra("posting_id", posting_id);
                 intent.putExtra("carrier", carrier);
+                intent.putExtra("post_list",post_list);
+                intent.putExtra("position",position);
+                intent.putExtra("post", post);
+
                 startActivity(intent);
+                finish();
 
                 break;
             }

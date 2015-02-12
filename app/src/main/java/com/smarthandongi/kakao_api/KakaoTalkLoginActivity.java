@@ -129,7 +129,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
 
         }
         carrier.setRegid(regid);
-        carrier.getIsLogout_regid();
+
 
 
 

@@ -289,7 +289,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier", carrier);
                 intent.putExtra("posting_id", post.getId());
                 intent.putExtra("kakao_id", post.getKakao_id());
+                intent.putExtra("post",post);
+                intent.putExtra("post_list",posting_list);
+                intent.putExtra("position",position);
+                intent.putExtra("all_posting_list",all_posting_list);
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.pos_edit_btn : {

@@ -69,7 +69,7 @@ public class MainActivity2 extends ActionBarActivity implements View.OnClickList
                             carrier.setNickname("not_logged_in");
                             carrier.setId("000000");
                             // 수영추가
-                            carrier.setIsLogout_regid(2);
+
                             RegIDDeleteTask regIDDeleteTask= new RegIDDeleteTask();
                             regIDDeleteTask.execute(regid);
                             // 수영 추가 끝
