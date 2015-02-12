@@ -13,7 +13,7 @@
         <LinearLayout
             android:id="@+id/writing_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="66dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -26,11 +26,12 @@
                     android:layout_width="28.5dp"
                     android:layout_height="38dp"
                     android:layout_marginLeft="7dp"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/backarrow"/>
                 <ImageView
                     android:layout_width="119.5dp"
                     android:layout_height="49dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
                     android:background="@drawable/writing_group_search"/>
                 <ImageView
                     android:layout_marginLeft="15dp"
