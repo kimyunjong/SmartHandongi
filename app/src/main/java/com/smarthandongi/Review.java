@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,19 +41,20 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
     EditText review_write;
     Button reg_btn, back_btn, del_btn, notify_btn;
+    ImageView new_img;
 
     PhpUploadReview phpUploadReview;
     PhpDownloadReview phpDownloadReview;
-    //DeletePhp del_php;
-
 
     int posting_id;
+    String kakao_id;
     ReviewDatabase reviewDatabase;
     Context context;
     ReviewAdapter adapter;
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
     private ListView review_listview;
 
+    long time1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,37 +62,42 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         Intent intent=getIntent();
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
-        posting_id =(int)intent.getSerializableExtra("posting_id");//posting_id로바꾸기
-        review_write = (EditText)findViewById(R.id.review_write);
+        posting_id =(int)intent.getSerializableExtra("posting_id");
+       // kakao_id =(String)intent.getSerializableExtra("kakao_id");
 
+        review_write = (EditText)findViewById(R.id.review_write);
         reg_btn = (Button)findViewById(R.id.reg_btn);
         del_btn = (Button)findViewById(R.id.del_btn);
         back_btn = (Button)findViewById(R.id.back_btn);
         notify_btn = (Button)findViewById(R.id.notify_btn);
+        new_img = (ImageView)findViewById(R.id.new_img);
+
 
         //reg_btn.setBackgroundResource( getItem(position).getLike().compareTo("0") ==0 ? R.drawable.like : R.drawable.not_like);
         reg_btn.setOnClickListener(this);
         //del_btn.setOnClickListener(this);
         back_btn.setOnClickListener(this);
-
-        /*if(carrier.getId().compareTo(post.getKakao_id())==0) {
-            scrap_btn.setVisibility(View.GONE);
-            report_btn.setVisibility(View.INVISIBLE);
-            edit_btn.setVisibility(View.VISIBLE);
+/*
+        if(reviewDatabase.getKakao_id().compareTo(kakao_id)==0) {
+            notify_btn.setVisibility(View.GONE);
             del_btn.setVisibility(View.VISIBLE);
+        }else{
+            notify_btn.setVisibility(View.VISIBLE);
+            del_btn.setVisibility(View.GONE);
         }
-        */
+*/
         review_listview = (ListView) findViewById(R.id.review_list);
         review_listview.setSelector(new PaintDrawable(0x00000000));
 
         php_downloadCreate();
+
+
     }
     @Override
     //등록버튼을 눌렀을 경우
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reg_btn: {
-
                 php_uploadCreate();
                 break;
             }
@@ -104,6 +111,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
             }
             case R.id.del_btn: {
                 Toast.makeText(this, "삭제버튼", Toast.LENGTH_SHORT).show();
+
 
                 // delPhp();
 
@@ -124,6 +132,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                         })
                         .setNegativeButton("취소", null)
                         .show();*/
+
                 //int pos = review_listview.getItemAtPosition();
                // int pos = review_listview.getCheckedItemPosition();
                // Log.d("삭제", String.valueOf(pos));
@@ -201,7 +210,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             carrier.setFromWriting(1);
 
                             String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                            review_list.add(0, new ReviewDatabase(0 , temp_kakao_nick , nowtime, temp_content ));//===
+                            review_list.add(0, new ReviewDatabase(0 , temp_kakao_id, temp_kakao_nick , nowtime, temp_content ));//===
 
                             review_write.setText(null);
                             adapter.notifyDataSetChanged();
@@ -324,7 +333,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
                     review_list.add(new ReviewDatabase(
-                             jo.getInt("review_id"),jo.getString("kakao_nick"), jo.getString("reply_date"), jo.getString("content")
+                             jo.getInt("review_id"),jo.getString("kakao_id"), jo.getString("kakao_nick"),
+                             jo.getString("reply_date"), jo.getString("content")
                     ));
                 }
 

@@ -261,6 +261,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             case R.id.pos_review_show_btn : {
                 Intent intent = new Intent(PostDetail.this, Review.class).putExtra("carrier", carrier);
                 intent.putExtra("posting_id", post.getId());
+                intent.putExtra("kakao_id", post.getKakao_id());
                 startActivity(intent);
                 break;
             }

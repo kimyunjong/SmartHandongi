@@ -5,7 +5,7 @@ package com.smarthandongi.database;
  */
 public class ReviewDatabase {
 
-        public ReviewDatabase(int review_id, String kakao_nick, String reply_date ,String content) {
+        public ReviewDatabase(int review_id, String kakao_id, String kakao_nick, String reply_date ,String content) {
             super();
 
             this.review_id = review_id;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,8 +32,6 @@ public class ReviewAdapter extends BaseAdapter {
     private List<ReviewDatabase> list;
     private Context context;
     private Carrier carrier;
-
-    DeletePhp del_php;
     ReviewDatabase reviewDatabase;
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
 
@@ -77,6 +76,7 @@ public class ReviewAdapter extends BaseAdapter {
             holder.content = (TextView) v.findViewById(R.id.content);
             holder.notify_btn = (Button) v.findViewById(R.id.notify_btn);
             holder.del_btn = (Button) v.findViewById(R.id.del_btn);
+            holder.new_img = (ImageView) v.findViewById(R.id.new_img);
 
             v.setTag(holder);
         } else {
@@ -86,23 +86,29 @@ public class ReviewAdapter extends BaseAdapter {
         holder.date.setText(getItem(position).getReply_date() + " ");
         holder.kakao_nick.setText(getItem(position).getKakao_nick() + " ");
         holder.content.setText(getItem(position).getContent() + " ");
-
-        holder.del_btn.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
-
+/*
+        if(reviewDatabase.getKakao_id().compareTo(carrier.getKakao_id())==0) {
+            holder.notify_btn.setVisibility(View.GONE);
+            holder.del_btn.setVisibility(View.VISIBLE);
+        }else{
+            holder.notify_btn.setVisibility(View.VISIBLE);
+            holder.del_btn.setVisibility(View.GONE);
+        }
+*/
+        //  holder.del_btn.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
         holder.del_btn.setFocusable(true);
-        holder.del_btn.setBackgroundResource(true ? R.drawable.like : R.drawable.not_like);
+        // holder.del_btn.setBackgroundResource(true ? R.drawable.like : R.drawable.not_like);
         int review_id;
         review_id = getItem(position).getReview_id();
-        holder.del_btn.setOnTouchListener(new DeleteListener(review_id, holder.del_btn, getItem(position)));
+        ReviewDatabase touch_position;
+        touch_position = getItem(position);
+        holder.del_btn.setOnTouchListener(new DeleteListener(review_id, touch_position ,holder.del_btn, getItem(position)));
 
 
          //holder.del_btn.setVisibility(View.VISIBLE);
             //holder.notify_btn.setVisibility(View.VISIBLE);
 
          return v;
-    }
-    public void remove(){
-
     }
 
     //-----------------------------------------
@@ -112,12 +118,14 @@ public class ReviewAdapter extends BaseAdapter {
         ReviewDatabase reviewDatabase;
         ListView review_listview;
         ReviewAdapter adapter;
+        ReviewDatabase touch_position;
         private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
 
 
 
-        public DeleteListener(int review_id, View view, ReviewDatabase reviewDatabase) {
+        public DeleteListener(int review_id, ReviewDatabase touch_position, View view, ReviewDatabase reviewDatabase) {
             this.review_id = review_id;
+            this.touch_position = touch_position;
             this.view = view;
             this.reviewDatabase = reviewDatabase;
         }
@@ -131,7 +139,16 @@ public class ReviewAdapter extends BaseAdapter {
 
                     Log.d("아이디", String.valueOf(review_id));
                     deletePhp.execute("http://hungry.portfolio1000.com/smarthandongi/review_delete.php?review_id=" + review_id);
-
+/*
+                    if(touch_position==null) {
+                        Log.d("위치", "널이에요");
+                    }else{
+                        Log.d("위치", "널아니에요");
+                    }
+                    review_list.remove(touch_position);
+                   // review_listview.clearChoices();
+                    adapter.notifyDataSetChanged();
+*/
 
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 }
@@ -204,7 +221,7 @@ public class ReviewAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView kakao_nick, content;
         TextView date;
-        //ImageView new;
+        ImageView new_img;
         Button notify_btn;
         Button del_btn;
     }
