@@ -64,7 +64,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     ImageButton pos_push;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
-    ArrayList<PostDatabase> posting_list,all_posting_list;
+    ArrayList<PostDatabase> posting_list;
 
     private int posting_id,position;
     int screen_width;
@@ -89,7 +89,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post=(PostDatabase)intent.getSerializableExtra("post");
         posting_list=(ArrayList)intent.getSerializableExtra("post_list");
         position=(int)intent.getSerializableExtra("position");
-        all_posting_list=(ArrayList)intent.getSerializableExtra("all_posting_list");
+
 
         setContentView(R.layout.post_detail);
 
@@ -292,7 +292,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 intent.putExtra("post",post);
                 intent.putExtra("post_list",posting_list);
                 intent.putExtra("position",position);
-                intent.putExtra("all_posting_list",all_posting_list);
+
                 startActivity(intent);
                 finish();
                 break;

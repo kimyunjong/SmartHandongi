@@ -69,11 +69,13 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         posting_id =(int)intent.getSerializableExtra("posting_id");
-        post=(PostDatabase)intent.getSerializableExtra("post");
-        post_list=(ArrayList)intent.getSerializableExtra("post_list");
-        position=(int)intent.getSerializableExtra("position");
-        all_posting_list=(ArrayList)intent.getSerializableExtra("all_posting_list");
+        post_list = (ArrayList) intent.getSerializableExtra("post_list");
 
+        if(carrier.getFromSMP()==0) {
+            post = (PostDatabase) intent.getSerializableExtra("post");
+            position = (int) intent.getSerializableExtra("position");
+
+        }
        // kakao_id =(String)intent.getSerializableExtra("kakao_id");
 
         review_write = (EditText)findViewById(R.id.review_write);
@@ -122,17 +124,27 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 break;
             }
             case R.id.back_btn: {
-                Intent intent = new Intent(Review.this, PostDetail.class);
-                intent.putExtra("posting_id", posting_id);
-                intent.putExtra("carrier", carrier);
-                intent.putExtra("post_list",post_list);
-                intent.putExtra("position",position);
-                intent.putExtra("post", post);
+                if(carrier.getFromSMP()==1) {
+                    Intent intent=new Intent(Review.this,SeeMyPost.class);
+                    intent.putExtra("post_list",post_list);
+                    intent.putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                    break;
+                }
+                else {
+                    Intent intent = new Intent(Review.this, PostDetail.class);
+                    intent.putExtra("posting_id", posting_id);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list", post_list);
+                    intent.putExtra("position", position);
+                    intent.putExtra("post", post);
 
-                startActivity(intent);
-                finish();
+                    startActivity(intent);
+                    finish();
 
-                break;
+                    break;
+                }
             }
             case R.id.del_btn: {
                 Toast.makeText(this, "삭제버튼", Toast.LENGTH_SHORT).show();

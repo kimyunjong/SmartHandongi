@@ -54,6 +54,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         comment_btn.setOnClickListener(this);
 
         construction();
+
         comment_listview.setVisibility(View.GONE);
     }
 
@@ -221,9 +222,12 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
     AdapterView.OnItemClickListener commentClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int pos=0;
             Intent intent = new Intent (SeeMyPost.this,Review.class);
+            carrier.setFromSMP(1);
             intent.putExtra("carrier",carrier);
             intent.putExtra("posting_id",comment_list.get(position).getPosting_id());
+            intent.putExtra("post_list",posting_list);
             System.out.println("너는되야지");
             startActivity(intent);
 
