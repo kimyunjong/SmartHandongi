@@ -90,20 +90,21 @@ public class SelectGroupOrNot extends Activity implements View.OnTouchListener, 
                 break;
             }
             case R.id.sel_back_btn : {
-                Intent intent = new Intent(SelectGroupOrNot.this, yy_activity.class).putExtra("carrier", carrier);
+                Intent intent = new Intent(SelectGroupOrNot.this, yj_activity.class).putExtra("carrier", carrier);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 finish();
+                startActivity(intent);
                 break;
             }
         }
     }
 
     public void onBackPressed(){
-        Intent intent = new Intent(SelectGroupOrNot.this, yy_activity.class).putExtra("carrier", carrier);
+        Intent intent = new Intent(SelectGroupOrNot.this, yj_activity.class).putExtra("carrier", carrier);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
         finish();
+        startActivity(intent);
+
 
     }
 }

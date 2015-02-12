@@ -108,4 +108,38 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/popup_report_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#000000"
+        android:alpha="0.6">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_report_2"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:visibility="gone"
+        android:background="#ff000000"
+        android:layout_centerVertical="true"
+        android:alpha="0.3">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_report_3"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_report_confirm">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_report_4"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_cancel">
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -27,6 +27,7 @@ public class Carrier implements Serializable {
     private int selector = 0;
     private int edit_count = 0;
     private int has_pic = 0;
+    private int push = 0;
     //youngmin variable ends
 
     private String Group_pw = null;
@@ -133,5 +134,8 @@ public class Carrier implements Serializable {
 
     public void setFromPostDetail(int fromPostDetail) { this.fromPostDetail = fromPostDetail;}
 
+    public int getPush() { return push;}
+
+    public void setPush(int push) { this.push = push;}
 
 }

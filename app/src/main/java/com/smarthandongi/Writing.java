@@ -15,6 +15,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -36,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,8 +75,6 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static android.view.View.GONE;
 import static android.view.View.OnClickListener;
@@ -97,6 +97,7 @@ public class Writing extends Activity implements OnClickListener {
     ProgressDialog loagindDialog;
 
 
+
     Picture poster = new Picture();
     Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
     Button dialog_push_cancel, dialog_push_confirm;
@@ -108,8 +109,10 @@ public class Writing extends Activity implements OnClickListener {
     LinearLayout writing_additional, linear, entire_layout;
     ScrollView scroll;
     Dialog dialog, dialogout;
+    RelativeLayout popup_1, popup_2, popup_3, popup_4, popup_5;
 
     PhpUpload task;
+    Typeface typeface;
 
     //날짜관련 변수
     int year, month, day; //날짜 받기위해
@@ -184,6 +187,8 @@ public class Writing extends Activity implements OnClickListener {
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -199,6 +204,7 @@ public class Writing extends Activity implements OnClickListener {
         writing_title =     (EditText)findViewById(R.id.writing_title);
         writing_content  =  (EditText)findViewById(R.id.writing_content);
         writing_link = (EditText)findViewById(R.id.writing_link);
+        writing_content.setTypeface(typeface);
 
         writing_content.setHeight((int)(screen_height*0.4));
         scroll = (ScrollView)findViewById(R.id.scroll);
@@ -242,8 +248,11 @@ public class Writing extends Activity implements OnClickListener {
         startDate_btn.setOnClickListener(this);
         endDate_btn.setOnClickListener(this);
 
-
-
+        popup_1 = (RelativeLayout)findViewById(R.id.popup_1);
+        popup_2 = (RelativeLayout)findViewById(R.id.popup_2);
+        popup_3 = (RelativeLayout)findViewById(R.id.popup_3);
+        popup_4 = (RelativeLayout)findViewById(R.id.popup_4);
+        popup_5 = (RelativeLayout)findViewById(R.id.popup_5);
 
         entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
         entire_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -268,6 +277,12 @@ public class Writing extends Activity implements OnClickListener {
         else {
             preset();
         }
+
+        //폰트설정
+        big_category_btn.setTypeface(typeface);
+        small_category_btn.setTypeface(typeface);
+        writing_title.setTypeface(typeface);
+        writing_content.setTypeface(typeface);
     }
 
     public void preset(){
@@ -344,53 +359,86 @@ public class Writing extends Activity implements OnClickListener {
 
                 phpCreate();
 
-                dialog = new Dialog(context);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog_writing);
-                dialog.show();
-
-                final Timer t = new Timer();
-                t.schedule(new TimerTask() {
-                    public void run() {
-                        dialog.dismiss(); // when the task active then close the dialog
-                        t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
-                        Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
-                        startActivity(intent);
-                        finish();
+                new CountDownTimer(1500, 300) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        // do something after 1s
+                        popup_1.setVisibility(VISIBLE);
+                        popup_2.setVisibility(VISIBLE);
+                        popup_3.setVisibility(VISIBLE);
                     }
-                }, 2000);
+                    @Override
+                    public void onFinish() {
+                        // do something end times 5s
+                        popup_1.setVisibility(GONE);
+                        popup_2.setVisibility(GONE);
+                        popup_3.setVisibility(GONE);
+                    }
+                }.start();
 
-//                dialogout = new Dialog(context);
-//                dialogout.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                dialogout.setContentView(R.layout.dialog_push);
-//                dialogout.show();
-//
-//                new CountDownTimer(3000, 1000){
-//                    public void onTick(long millisUntilFinished) {
-//                    }
-//                    public void onFinish() {
-//                        if(dialogout != null){
-//                            if(dialogout.isShowing()){
-//                                dialogout.dismiss();
-//                            }
-//                        }
-//                    }
-//                }.start();
-//                new CountDownTimer(3000, 1000){
-//                    public void onTick(long millisUntilFinished) {
-//                    }
-//                    public void onFinish() {
-//                        if(dialog != null){
-//                            if(dialog.isShowing()){
-//                                dialog.dismiss();
-//                            }
-//                        }
-//                    }
-//                }.start();
+                //대분류가 일반공지가 아닌 경우 알람 진행
+                if(carrier.getBig_category().compareTo("1") == 0) {
+                    carrier.setBig_category(null);
+                    new CountDownTimer(1500, 1500) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            String popup_message;
+//                        SendPush sendPush = new SendPush();                               나중에 추가하자
+//                        sendPush.execute();
+                            popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";
 
 
+                            dialog = new Dialog(context);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_push);
+                            dialog.show();
 
+                            dialog_push_confirm = (Button) dialog.findViewById(R.id.dialog_push_confirm);
+                            dialog_push_confirm.setTypeface(typeface);
+                            dialog_push_confirm.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
 
+                                    new CountDownTimer(1500, 300) {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {
+                                            popup_1.setVisibility(VISIBLE);
+                                            popup_2.setVisibility(VISIBLE);
+                                            popup_4.setVisibility(VISIBLE);
+                                        }
+
+                                        @Override
+                                        public void onFinish() {
+                                            popup_1.setVisibility(GONE);
+                                            popup_2.setVisibility(GONE);
+                                            popup_4.setVisibility(GONE);
+
+                                            Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }.start();
+                                }
+                            });
+
+                            dialog_push_cancel = (Button) dialog.findViewById(R.id.dialog_push_cancel);
+                            dialog_push_cancel.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                        }
+                    }.start();
+                }
 
 //                carrier.setFromWriting(0);
 //                carrier.setFromPostDetail(0);
@@ -406,6 +454,7 @@ public class Writing extends Activity implements OnClickListener {
 //                carrier.setEnd_date(null);
 //                carrier.setLink(null);
                 break;
+
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
 
             case R.id.writing_image_btn:{                                                                                                    //이미지업로드btn
@@ -487,10 +536,22 @@ public class Writing extends Activity implements OnClickListener {
                 break;
             }
             case R.id.writing_cancel_btn :{                                                                                                 //취소btn
-                Intent intent = new Intent(Writing.this, MainActivity2.class).putExtra("carrier", carrier);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);                          //모두 종료하고 메인으로
-                startActivity(intent);
-                finish();
+                new CountDownTimer(1500, 300) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        popup_1.setVisibility(VISIBLE);
+                        popup_2.setVisibility(VISIBLE);
+                        popup_5.setVisibility(VISIBLE);
+                    }
+                    @Override
+                    public void onFinish() {
+                        popup_1.setVisibility(GONE);
+                        popup_2.setVisibility(GONE);
+                        popup_5.setVisibility(GONE);
+                        finish();
+                    }
+                }.start();
+
                 break;
             }
             case R.id.startdate_choose : {                                                                                                  //시작일btn
@@ -650,65 +711,44 @@ public class Writing extends Activity implements OnClickListener {
         title_temp = writing_title.getText().toString();
         content_temp = writing_content.getText().toString();
 
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_writing);
-        dialog.show();
-        new CountDownTimer(1500, 1000){
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // TODO Auto-generated method stub
+        if(title_temp.compareTo("") != 0 || content_temp.compareTo("") != 0) {                          //제목이랑 내용이 있을 때 뒤로가기 하면 메시지 뜸
+            new AlertDialog.Builder(this)
+                    .setTitle("뒤로가기")
+                    .setMessage("확인 누르면 내용 다 없어지는데 괜춘?")
+                    .setIcon(R.drawable.handongi)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+                                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                                startActivity(intent);
+                                finish();
+
+                            } else {
+                                carrier.setGroup_name("");
+                                Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    })
+                    .setNegativeButton("취소", null)
+                    .show();
+        }
+
+        else {
+            if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
+                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                startActivity(intent);
+                finish();
+
+            } else {
+                carrier.setGroup_name("");
+                Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                startActivity(intent);
+                finish();
             }
-            @Override
-            public void onFinish() {
-                // TODO Auto-generated method stub
-                dialog.dismiss();
-            }
-        }.start();
-
-        SendPush sendPush = new SendPush();
-        sendPush.execute();
-
-
-
-//        if(title_temp.compareTo("") != 0 || content_temp.compareTo("") != 0) {                          //제목이랑 내용이 있을 때 뒤로가기 하면 메시지 뜸
-//            new AlertDialog.Builder(this)
-//                    .setTitle("뒤로가기")
-//                    .setMessage("확인 누르면 내용 다 없어지는데 괜춘?")
-//                    .setIcon(R.drawable.handongi)
-//                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
-//                                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-//                                startActivity(intent);
-//                                finish();
-//
-//                            } else {
-//                                carrier.setGroup_name("");
-//                                Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
-//                                startActivity(intent);
-//                                finish();
-//                            }
-//                        }
-//                    })
-//                    .setNegativeButton("취소", null)
-//                    .show();
-//        }
-//
-//        else {
-//            if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
-//                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-//                startActivity(intent);
-//                finish();
-//
-//            } else {
-//                carrier.setGroup_name("");
-//                Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }
+        }
     }
 
     private class PhpUpload extends AsyncTask<String, Integer, String> {
@@ -777,25 +817,6 @@ public class Writing extends Activity implements OnClickListener {
         }
     }
 
-//    public void onStop(){
-//
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(R.layout.dialog_push);
-//        dialog.show();
-//
-//        new CountDownTimer(3000, 1000){
-//                    public void onTick(long millisUntilFinished) {
-//                    }
-//                    public void onFinish() {
-//                        if(dialog != null){
-//                            if(dialog.isShowing()){
-//                                dialog.dismiss();
-//                            }
-//                        }
-//                    }
-//                }.start();
-//    }
-
     public void phpCreate(){
 
         int possible; // 날짜계산한게 맞나 안맞나 체크
@@ -855,6 +876,7 @@ public class Writing extends Activity implements OnClickListener {
         carrier.setLink(link);
         carrier.setGroup_name(group_name);
         carrier.setGroup_code(group_code);
+        carrier.setContent(carrier.getContent().replace("%27", "%60"));
 
         if(carrier.getTitle().length()==0 ||carrier.getContent().length()==0 || carrier.getBig_category().compareTo("0") == 0 )
         {
@@ -888,24 +910,6 @@ public class Writing extends Activity implements OnClickListener {
             task = new PhpUpload();
             task.execute(carrier.getUpload_url());
 
-//                final Timer t = new Timer();
-//                t.schedule(new TimerTask() {
-//                    public void run() {
-//                        dialog.dismiss(); // when the task active then close the dialog
-//                        t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
-//                    }
-//                }, 2000);
-            //                new CountDownTimer(3000, 1000){
-//                    public void onTick(long millisUntilFinished) {
-//                    }
-//                    public void onFinish() {
-//                        if(dialog != null){
-//                            if(dialog.isShowing()){
-//                                dialog.dismiss();
-//                            }
-//                        }
-//                    }
-//                }.start();
             Log.d("postingid", String.valueOf(carrier.getPost_id()));
             Log.d("kakao_id", carrier.getId());
             Log.d("kakao_nick", kakao_nick);
@@ -922,14 +926,9 @@ public class Writing extends Activity implements OnClickListener {
             Log.d("haspic", String.valueOf(carrier.getHas_pic()));
             Log.d("editcount", String.valueOf(carrier.getEdit_count()));
 
-//                Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
-//                startActivity(intent);
-//                finish();
-
             carrier.setFromPostDetail(0);
             carrier.setGroup_name("");
             carrier.setGroup_code("");
-            carrier.setBig_category(null);
             carrier.setCategory(null);
             carrier.setTitle(null);
             carrier.setContent(null);

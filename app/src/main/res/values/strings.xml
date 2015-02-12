@@ -67,11 +67,11 @@
         <item>seminar_presentation_43</item>
 
         <item>recruiting_scholarship_61</item>
-        <item>recruiting_r_sports_62</item>
-        <item>recruiting_r_perf_63</item>
+        <item>recruiting_sports_62</item>
+        <item>recruiting_perf_63</item>
         <item>recruiting_faith_64</item>
         <item>recruiting_display_65</item>
-        <item>recruiting_r_service_66</item>
+        <item>recruiting_service_66</item>
     </string-array>
     <string-array name="push_name">
         <item>sports</item>

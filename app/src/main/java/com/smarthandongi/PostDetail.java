@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -37,8 +39,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Created by Joel on 2015-01-25.
@@ -51,9 +54,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private DeletePhp del_php;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
             type;
-    final Context context = this, context_del = this;
-    Dialog dialog_del, dialog_report, dialog_delphp;
-    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm;
+    final Context context = this;
+    Dialog dialog_del, dialog_report, dialog_push;
+    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm;;
 
 
     ImageView post_img;
@@ -66,9 +69,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private int posting_id,position;
     int screen_width;
     Picture poster = new Picture();
-    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report;
+    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report, popup_delete_1, popup_delete_2, popup_delete_3, popup_push_confirm;
     LinearLayout pos_dates, pos_linkbar;
     String category = "", small_category = "";
+    Typeface typeface;
 
     //수영 추가
     String myResult;
@@ -125,6 +129,21 @@ public class PostDetail extends Activity implements View.OnClickListener{
         view_num=(TextView)findViewById(R.id.pos_view_num);
         review_num=(TextView)findViewById(R.id.pos_review_num);
 
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+
+        //폰트설정
+        start_day.setTypeface(typeface);
+        end_day.setTypeface(typeface);
+        link.setTypeface(typeface);
+        type.setTypeface(typeface);
+        post_day.setTypeface(typeface);
+        title.setTypeface(typeface);
+        content.setTypeface(typeface);
+        view_num.setTypeface(typeface);
+        review_num.setTypeface(typeface);
+        writer_name.setTypeface(typeface);
+        writer_group_name.setTypeface(typeface);
+
         //이미지뷰
         post_img=(ImageView)findViewById(R.id.poster);
 
@@ -135,6 +154,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
         pos_dates = (LinearLayout)findViewById(R.id.pos_dates);
         pos_linkbar = (LinearLayout)findViewById(R.id.pos_linkbar);
 
+        popup_delete_1 = (RelativeLayout)findViewById(R.id.popup_delete_1);
+        popup_delete_2 = (RelativeLayout)findViewById(R.id.popup_delete_2);
+        popup_delete_3 = (RelativeLayout)findViewById(R.id.popup_delete_3);
+        popup_push_confirm = (RelativeLayout)findViewById(R.id.popup_push);
 
         if(carrier.getFromWriting()==1) {
 
@@ -317,11 +340,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         //넘어갈 때 필요한 변수,   게시물 아이디,
                         carrier.setPost_id(post.getId());
                         carrier.setPosting_date(post.getPosting_date());
+                        Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
+                        startActivity(intent);
                     }
                 });
-
-                Intent intent = new Intent(PostDetail.this, ReportPost.class).putExtra("carrier", carrier);
-                startActivity(intent);
                 break;
             }
             case R.id.pos_scrap_btn : {
@@ -350,9 +372,25 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     public void onClick(View v) {
                         dialog_del.dismiss();
                         delPhp();
-                        Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
-                        startActivity(intent);
-                        finish();
+                        new CountDownTimer(1500, 300) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                popup_delete_1.setVisibility(VISIBLE);
+                                popup_delete_2.setVisibility(VISIBLE);
+                                popup_delete_3.setVisibility(VISIBLE);
+                            }
+                            @Override
+                            public void onFinish() {
+                                popup_delete_1.setVisibility(GONE);
+                                popup_delete_2.setVisibility(GONE);
+                                popup_delete_3.setVisibility(GONE);
+
+                                Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }.start();
+
                     }
                 });
                 break;
@@ -406,7 +444,44 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 }
             }
             case R.id.pos_push : {
-                //푸시하는거.
+                dialog_push = new Dialog(context);
+                dialog_push.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_push.setContentView(R.layout.dialog_push);
+                dialog_push.show();
+
+                dialog_push_cancel = (Button)dialog_push.findViewById(R.id.dialog_push_cancel);
+                dialog_push_cancel.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        dialog_push.dismiss();
+                    }
+                });
+
+                dialog_push_confirm = (Button)dialog_push.findViewById(R.id.dialog_push_confirm);
+                dialog_push_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_push.dismiss();
+                        //푸시보내는거
+
+                        new CountDownTimer(1500, 300) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                popup_delete_1.setVisibility(VISIBLE);
+                                popup_delete_2.setVisibility(VISIBLE);
+                                popup_push_confirm.setVisibility(VISIBLE);
+                            }
+                            @Override
+                            public void onFinish() {
+                                popup_delete_1.setVisibility(GONE);
+                                popup_delete_2.setVisibility(GONE);
+                                popup_push_confirm.setVisibility(GONE);
+                            }
+                        }.start();
+
+                    }
+                });
+                break;
             }
         }
     }
@@ -536,23 +611,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
     public void delPhp(){
         del_php = new DeletePhp();
         del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
-
-        dialog_delphp = new Dialog(context_del);
-        dialog_delphp.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_delphp.setContentView(R.layout.dialog_after_delete);
-        dialog_delphp.show();
-
-        final Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            public void run() {
-                dialog_delphp.dismiss(); // when the task active then close the dialog
-                t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
-                finish();
-            }
-        }, 2000);
-
-
-
     }
 
     public class DeletePhp extends AsyncTask<String, Integer, String>{

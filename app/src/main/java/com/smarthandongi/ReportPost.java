@@ -3,9 +3,11 @@ package com.smarthandongi;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,14 +16,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 /**
  * Created by LEWIS on 2015-02-09.
  */
 public class ReportPost extends Activity implements View.OnClickListener{
     Carrier carrier;
-    Button report_post_cancel_btn, report_post_confirm_btn;
+    Button report_post_cancel_btn, report_post_confirm_btn, report_post_back_btn;
     EditText report_post_content;
     ReportPostPhp report_post_php;
+    RelativeLayout popup_report_1, popup_report_2, popup_report_3, popup_report_4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +37,84 @@ public class ReportPost extends Activity implements View.OnClickListener{
 
         report_post_confirm_btn = (Button)findViewById(R.id.report_post_confirm_btn);
         report_post_cancel_btn = (Button)findViewById(R.id.report_post_cancel_btn);
+        report_post_back_btn = (Button)findViewById(R.id.report_post_back_btn);
         report_post_content = (EditText)findViewById(R.id.repost_post_content);
 
         report_post_confirm_btn.setOnClickListener(this);
         report_post_cancel_btn.setOnClickListener(this);
+        report_post_back_btn.setOnClickListener(this);
+
+        popup_report_1 = (RelativeLayout)findViewById(R.id.popup_report_1);
+        popup_report_2 = (RelativeLayout)findViewById(R.id.popup_report_2);
+        popup_report_3 = (RelativeLayout)findViewById(R.id.popup_report_3);
 
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.report_post_back_btn : {
+                new CountDownTimer(1500, 300) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        // do something after 1s
+                        popup_report_1.setVisibility(VISIBLE);
+                        popup_report_2.setVisibility(VISIBLE);
+                        popup_report_4.setVisibility(VISIBLE);
+                    }
+                    @Override
+                    public void onFinish() {
+                        // do something end times 5s
+                        popup_report_1.setVisibility(GONE);
+                        popup_report_2.setVisibility(GONE);
+                        popup_report_4.setVisibility(GONE);
+                        finish();
+                    }
+                }.start();
+                break;
+            }
+
             case R.id.report_post_confirm_btn : {
-                //등록하시겠습니까
                 phpCreate();
-                //등록되었습니다
-                finish();
+
+                new CountDownTimer(1500, 300) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        // do something after 1s
+                        popup_report_1.setVisibility(VISIBLE);
+                        popup_report_2.setVisibility(VISIBLE);
+                        popup_report_3.setVisibility(VISIBLE);
+                    }
+                    @Override
+                    public void onFinish() {
+                        // do something end times 5s
+                        popup_report_1.setVisibility(GONE);
+                        popup_report_2.setVisibility(GONE);
+                        popup_report_3.setVisibility(GONE);
+                        finish();
+                    }
+                }.start();
                 break;
             }
 
             case R.id.report_post_cancel_btn : {
-                //취소하시겠습니까 메시지.
-                finish();
+                new CountDownTimer(1500, 300) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        // do something after 1s
+                        popup_report_1.setVisibility(VISIBLE);
+                        popup_report_2.setVisibility(VISIBLE);
+                        popup_report_4.setVisibility(VISIBLE);
+                    }
+                    @Override
+                    public void onFinish() {
+                        // do something end times 5s
+                        popup_report_1.setVisibility(GONE);
+                        popup_report_2.setVisibility(GONE);
+                        popup_report_4.setVisibility(GONE);
+                        finish();
+                    }
+                }.start();
                 break;
             }
         }

@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="263.5dp"
-    android:layout_height="154dp"
+    android:layout_height="166.5dp"
     android:background="@drawable/dialog_push">
+    <TextView
+        android:id="@+id/dialog_push_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14.5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:text="알람을 보내시겠습니까?"/>
+    <TextView
+        android:id="@+id/dialog_push_text"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/dialog_push_title"
+        android:textSize="14.5dp"
+        android:lineSpacingMultiplier="1"
+        android:text="'소분류'항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다."
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_gravity="bottom">
+        android:layout_alignParentBottom="true">
         <Button
             android:id="@+id/dialog_push_cancel"
             android:layout_width="0dp"
@@ -22,4 +41,4 @@
             android:background="@android:color/transparent"/>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

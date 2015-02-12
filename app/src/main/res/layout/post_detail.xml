@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@drawable/background">
     <LinearLayout
@@ -107,14 +110,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"/>
-
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp">
-
                         <TextView
                             android:id="@+id/pos_title"
                             android:layout_width="wrap_content"
@@ -159,7 +160,7 @@
                                 android:gravity="center"
                                 android:text="작성자"
                                 android:textColor="#ffffff"
-                                android:textSize="17dp"
+                                android:textSize="14.5dp"
                                 android:background="@android:color/transparent"/>
                             <TextView
                                 android:id="@+id/writer_group_name"
@@ -233,6 +234,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_width="match_parent"
                         android:textColor="#ffffff"
+                        android:textSize="14.5dp"
                         android:layout_height="wrap_content"
                         android:text="이게내글이다아"/>
                 </LinearLayout>
@@ -256,13 +258,13 @@
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
                             android:layout_centerVertical="true"
-                            android:textSize="20dp"
+                            android:textSize="15dp"
                             android:text="167"/>
                         <ImageView
                             android:layout_width="56.5dp"
                             android:layout_height="25.5dp"
                             android:layout_toRightOf="@id/pos_view_num"
-                            android:layout_alignParentBottom="true"
+                            android:layout_centerVertical="true"
                             android:background="@drawable/post_view"/>
                     </RelativeLayout>
                     <ImageView
@@ -285,15 +287,16 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
+                            android:layout_centerVertical="true"
                             android:textColor="#ffffff"
-                            android:textSize="20dp"
+                            android:textSize="15dp"
                             android:text="7"/>
                         <ImageView
                             android:layout_toLeftOf="@id/pos_review_num"
                             android:layout_marginRight="5dp"
                             android:layout_width="25.5dp"
                             android:layout_height="25.5dp"
-                            android:layout_alignParentBottom="true"
+                            android:layout_centerVertical="true"
                             android:background="@drawable/post_reply_img"/>
                     </RelativeLayout>
                 </LinearLayout>
@@ -302,7 +305,7 @@
                     android:layout_height="34dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="30dp">
+                        android:layout_height="match_parent">
                         <!--작성자-->
                         <RelativeLayout
                             android:id="@+id/pos_edit"
@@ -318,6 +321,7 @@
                             <ImageView
                                 android:layout_width="56.5dp"
                                 android:layout_height="25.5dp"
+                                android:layout_centerVertical="true"
                                 android:background="@drawable/pos_edit_img"/>
                         </RelativeLayout>
 
@@ -336,25 +340,27 @@
                             <ImageView
                                 android:layout_width="56.5dp"
                                 android:layout_height="25.5dp"
+                                android:layout_centerVertical="true"
                                 android:background="@drawable/pos_del_img"/>
                         </RelativeLayout>
 
                         <!--비작성자-->
                         <RelativeLayout
                             android:id="@+id/pos_scrap"
-                            android:layout_width="60dp"
+                            android:layout_width="69dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
                             android:visibility="visible">
                             <Button
                                 android:id="@+id/pos_scrap_btn"
-                                android:layout_width="60dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"/>
                             <ImageView
                                 android:id="@+id/pos_scrap_img"
                                 android:layout_width="69dp"
                                 android:layout_height="25.5dp"
+                                android:layout_centerVertical="true"
                                 android:background="@drawable/pos_scrap_img"/>
                         </RelativeLayout>
 
@@ -373,6 +379,7 @@
                             <ImageView
                                 android:layout_width="56.5dp"
                                 android:layout_height="25.5dp"
+                                android:layout_centerVertical="true"
                                 android:background="@drawable/pos_report_img"/>
                         </RelativeLayout>
                     </RelativeLayout>
@@ -383,5 +390,40 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/popup_delete_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#000000"
+        android:alpha="0.6">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_delete_2"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:visibility="gone"
+        android:background="#ff000000"
+        android:layout_centerVertical="true"
+        android:alpha="0.3">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_delete_3"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_delete_confirm">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_push"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_push_confirm">
+    </RelativeLayout>
+
 
 </RelativeLayout>
