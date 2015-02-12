@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.smarthandongi.adapter.Post2Adapter;
 import com.smarthandongi.adapter.PostAdapter;
+import com.smarthandongi.adapter.postAdapterScrap;
 import com.smarthandongi.database.PostDatabase;
 
 import org.json.JSONArray;
@@ -41,7 +42,7 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
     private ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>(), scraped_list = new ArrayList<PostDatabase>();
     private Intent intent;
     private  ListView scraped_listview;
-    private PostAdapter postAdapter;
+    private postAdapterScrap postAdapter;
     private AbsListView view;
     private int firstVisibleItem, visibleItemCount, totalItemCount;
     private PostDatabasePhp postDatabasePhp;
@@ -194,10 +195,10 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
                 //필터 카테고리 호출, 넣어준다.
                 //filter_by_category();                         나중에 필터할때 손봐주기
                 filter_by_Like();
-                postAdapter = new PostAdapter(My_scrap.this, scraped_list, carrier);
+                postAdapter = new postAdapterScrap(My_scrap.this, scraped_list, carrier);
                 Log.v("연결 시도", "연결되어라@*********************************************");
 
-                scraped_listview.setAdapter( postAdapter);
+                scraped_listview.setAdapter(postAdapter);
                 scraped_listview.setOnScrollListener(context);
                 scraped_listview.setOnItemClickListener(boardItemClickListener);
               }

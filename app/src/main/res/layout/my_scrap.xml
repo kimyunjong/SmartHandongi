@@ -68,7 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#ffffeded"
-            android:layout_below="@+id/scrap_num_layout">
+            android:layout_below="@+id/scrap_num_layout"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
 
             </RelativeLayout>
 
@@ -77,6 +79,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/scrap_num_layout_outmost"
+        android:dividerHeight="0dp"
+        android:divider="#ffffff"
         android:scrollbars="none"
         android:id="@+id/scrap_list">
 

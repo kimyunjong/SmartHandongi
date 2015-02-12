@@ -21,7 +21,8 @@
         android:background="#ff807f7c"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:id="@+id/line_item">
 
     </LinearLayout>
 <RelativeLayout
