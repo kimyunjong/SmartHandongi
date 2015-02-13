@@ -786,7 +786,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     post_list.add(new PostDatabase(
                             jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                             jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
-                            jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"))
+                            jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"),jo.getInt("push"))
                     );
 
                 }

@@ -39,6 +39,7 @@ import com.kakao.UserProfile;
 import com.smarthandongi.Carrier;
 import com.smarthandongi.MainActivity2;
 import com.smarthandongi.R;
+import com.smarthandongi.yj_activity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,7 +105,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
     protected void onCreate(Bundle savedInstanceState) {
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         super.onCreate(savedInstanceState);
-        setBackground(getResources().getDrawable(R.drawable.kakaotalk_sample_login_background));
+        setBackground(getResources().getDrawable(R.drawable.kakaotalk_sample_login_background)); //image 바꿀수 있다
         Log.d("kakaoTalkLogin activity","Oncreate");
         getAppkeyHash();
 
@@ -163,7 +164,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
     @Override
     public void onBackPressed() {
         Intent intent;
-        intent = new Intent(KakaoTalkLoginActivity.this, MainActivity2.class);
+        intent = new Intent(KakaoTalkLoginActivity.this, yj_activity.class);
         intent.putExtra("carrier", carrier);
         startActivity(intent);
         overridePendingTransition(0,0);
