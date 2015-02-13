@@ -26,6 +26,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
+import com.smarthandongi.kakao_api.KakaoTalkSignupActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;

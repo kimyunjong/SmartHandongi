@@ -60,6 +60,7 @@ public class KakaoTalkSignupActivity extends SampleSignupActivity {
         carrier.setId(String.valueOf(userProfile.getId()));
         carrier.setNickname(userProfile.getNickname());
 
+
         final Intent intent = new Intent(this, yj_activity.class);
         intent.putExtra("carrier", carrier);
 

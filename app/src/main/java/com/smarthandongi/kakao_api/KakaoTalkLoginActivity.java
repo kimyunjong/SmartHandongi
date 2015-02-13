@@ -99,6 +99,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
 
         overridePendingTransition(0, 0);
         finish();
+
     }
 
     @Override

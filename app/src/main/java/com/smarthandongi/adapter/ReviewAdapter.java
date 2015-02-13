@@ -16,12 +16,14 @@ import android.widget.TextView;
 import com.smarthandongi.Carrier;
 import com.smarthandongi.R;
 import com.smarthandongi.database.ReviewDatabase;
+import com.smarthandongi.dday;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -83,6 +85,39 @@ public class ReviewAdapter extends BaseAdapter {
             holder = (ViewHolder) v.getTag();
         }
 
+        Calendar today = Calendar.getInstance();
+        int dd=today.get(Calendar.DAY_OF_MONTH);
+        int mm=today.get(Calendar.MONTH);
+        int yy=today.get(Calendar.YEAR);
+
+
+        dday dday;
+
+        System.out.println(getItem(position).getReply_date()+"오늘 날짜를 확인합니다. "+Integer.valueOf(yy)+"-"+Integer.valueOf(mm+1)+"-"+Integer.valueOf(dd));
+        //if(getItem(position).getReply_date().equalsIgnoreCase())
+
+        if(mm+1<10)
+        {
+            if(getItem(position).getReply_date().equalsIgnoreCase(Integer.valueOf(yy)+"-0"+Integer.valueOf(mm+1)+"-"+Integer.valueOf(dd)))
+            {
+                holder.new_img.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                holder.new_img.setVisibility(View.GONE);
+            }
+        }
+        else if(mm+1>=10)
+        {
+            if(getItem(position).getReply_date().equalsIgnoreCase(Integer.valueOf(yy)+"-"+Integer.valueOf(mm+1)+"-"+Integer.valueOf(dd)))
+            {
+                holder.new_img.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                holder.new_img.setVisibility(View.GONE);
+            }
+        }
         holder.date.setText(getItem(position).getReply_date() + " ");
         holder.kakao_nick.setText(getItem(position).getKakao_nick() + " ");
         holder.content.setText(getItem(position).getContent() + " ");
