@@ -50,6 +50,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private PostDatabase post;
     private PostDB_Php postdbphp;
     private DeletePhp del_php;
+  //  PhpReviewNum phpReviewNum;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
             type, pos_between_days, dialog_push_title, dialog_push_text;
     final Context context = this;
@@ -250,6 +251,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         content.setText(post.getContent());                                                 //내용
 
         view_num.setText(post.getView_num()+1+"");                                          //조회수
+
+     //   reviewNum(review_num); //댓글수
 
         carrier.setEdit_count(0);
 
@@ -695,4 +698,61 @@ public class PostDetail extends Activity implements View.OnClickListener{
             finish();
         }
     }
+    /*
+    public void reviewNum(TextView review_num) {
+        phpReviewNum = new PhpReviewNum(review_num);
+        phpReviewNum.execute("http://hungry.portfolio1000.com/smarthandongi/review_push.php");
+    }
+    private class PhpReviewNum extends AsyncTask<String, Integer, String> {
+        int review_num = 0;
+        public PhpReviewNum(TextView review_num){
+            super();
+        }
+        @Override
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String review_id = null;
+            try {
+                //연결 URL설정
+                URL url = new URL(urls[0]);
+                //커넥션 객체 생성
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                //연결되었으면
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        for(;;){
+                            String line = br.readLine();
+
+                            if(line == null) break;
+                            jsonHtml.append(line + "\n");
+                        }
+                        br.close();
+                    }
+                    conn.disconnect();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                JSONObject root = new JSONObject(jsonHtml.toString());
+                JSONArray ja = root.getJSONArray("results");
+                JSONObject jo = ja.getJSONObject(0);
+                review_id = jo.getString("review_id");
+                Log.d("review_id",review_id);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return review_id;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+    }*/
 }
+

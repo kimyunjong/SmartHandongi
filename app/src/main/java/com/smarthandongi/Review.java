@@ -1,9 +1,8 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
 import android.os.AsyncTask;
@@ -18,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.smarthandongi.adapter.ReviewAdapter;
 import com.smarthandongi.database.PostDatabase;
@@ -48,6 +48,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
     PhpUploadReview phpUploadReview;
     PhpDownloadReview phpDownloadReview;
+    PhpPushReview phpPushReview;
 
     int posting_id,position;
     String kakao_id;
@@ -104,7 +105,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
         php_downloadCreate();
 
-
+        Log.d("size",String.valueOf(review_list.size()));
     }
     @Override
     //등록버튼을 눌렀을 경우
@@ -172,9 +173,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     }
 
 //============================================================================================================
-
      public void php_uploadCreate(){
-
 
          String kakao_id, kakao_nick;
          final String reset_kakao_nick;
@@ -200,52 +199,47 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         carrier.setNickname(kakao_nick);
         carrier.setContent(content);
 
+         String reply_date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+         Log.d("날짜", reply_date);
 
+         if(carrier.getContent()=="")
+         {
+             Log.d("con","내용이 빔");
+             Toast.makeText(this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+             carrier.setNickname(reset_kakao_nick);
+         }
+         else
+         {
+             Log.d("con",carrier.getContent());
+             phpUploadReview = new PhpUploadReview();
+             phpUploadReview.execute("http://hungry.portfolio1000.com/smarthandongi/review_upload.php?"
+                     + "kakao_id=" + carrier.getId()
+                     + "&reply_date=" + reply_date
+                     + "&kakao_nick=" + carrier.getNickname()
+                     + "&posting_id=" + posting_id
+                     + "&content=" + carrier.getContent());
 
-        new AlertDialog.Builder(this)
-                .setTitle("댓글 등록")
-                .setMessage("댓글을 등록하시겠습니까?")
-                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(carrier.getContent() ==""){
+             phpPushReview = new PhpPushReview();
+             phpPushReview.execute("http://hungry.portfolio1000.com/smarthandongi/review_push.php" );
 
-                        }else {
-                            carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/review_upload.php?"
-                                            + "kakao_id=" + carrier.getId()
-                                            + "&kakao_nick=" + carrier.getNickname()
-                                            + "&posting_id=" + posting_id
-                                            + "&content=" + carrier.getContent()
-                            );
-                            phpUploadReview = new PhpUploadReview();
-                            phpUploadReview.execute(carrier.getUpload_url());
+             carrier.setNickname(reset_kakao_nick);
 
-                            Log.d("kakao_nick_get전", carrier.getNickname());
-                            carrier.setNickname(reset_kakao_nick);
+             review_write.setText(null);
+             Intent intent = new Intent(Review.this,Review.class);
+             intent.putExtra("carrier",carrier);
+             intent.putExtra("posting_id",posting_id);
+             intent.putExtra("post_list",post_list);
+             if(carrier.getFromSMP()==1) {
+                 carrier.setFromSMPcomment(1);
+             }
+             if(carrier.getFromSMP()==0) {
+                 intent.putExtra("post",post);
+                 intent.putExtra("position",position);
+             }
+             startActivity(intent);
+             finish();
+         }
 
-                            Log.d("kakao_nick_get후", carrier.getNickname());
-
-                            String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                            review_write.setText(null);
-                            Intent intent = new Intent(Review.this,Review.class);
-                            intent.putExtra("carrier",carrier);
-                            intent.putExtra("posting_id",posting_id);
-                            intent.putExtra("post_list",post_list);
-                            if(carrier.getFromSMP()==1) {
-                                carrier.setFromSMPcomment(1);
-                            }
-                            if(carrier.getFromSMP()==0) {
-                                intent.putExtra("post",post);
-                                intent.putExtra("position",position);
-                            }
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-
-                })
-                .setNegativeButton("취소", null)
-                .show();
     }
 
     @Override
@@ -259,7 +253,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
-            String posting_id = null;
+            String review_id = null;
             try {
                 //연결 URL설정
                 URL url = new URL(urls[0]);
@@ -285,15 +279,15 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 ex.printStackTrace();
             }
             try {
-
                 JSONObject root = new JSONObject(jsonHtml.toString());
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
-                posting_id = jo.getString("id");
+                review_id = jo.getString("review_id");
+                Log.d("review_id",review_id);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return posting_id;
+            return review_id;
         }
 
         @Override
@@ -356,8 +350,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 JSONArray ja = root.getJSONArray("results");
 
                 review_list.removeAll(review_list);
-
-                for (int i = 0; i < ja.length(); i++) {
+                int i;
+                for ( i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
                     review_list.add(new ReviewDatabase(jo.getInt("posting_id"),
                              jo.getInt("review_id"),jo.getString("kakao_id"), jo.getString("kakao_nick"),
@@ -368,6 +362,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 adapter = new ReviewAdapter(Review.this ,review_list, carrier);
 
                 review_listview.setAdapter(adapter);
+                Log.d("size down",String.valueOf(review_list.size()));
+                Log.d("size i",String.valueOf(i));
                 review_listview.setOnScrollListener(context);
 
             }
@@ -377,6 +373,46 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
             }
         }
     }
+    //================================================================
+    public class PhpPushReview extends AsyncTask<String, android.R.integer, String> {
 
+        public PhpPushReview() {
+            super();
+        }
 
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str = "";
+
+            while (return_str.equalsIgnoreCase("")) {
+                try {
+                    URL data_url = new URL(urls[0]);
+                    HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                    if (conn != null) {
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                            for (; ; ) {
+                                String line = br.readLine();
+                                if (line == null) break;
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return_str = jsonHtml.toString();
+            }
+            return jsonHtml.toString();
+        }
+
+        protected void onPostExecute(String str) {
+            super.onPostExecute(str);
+
+        }
+    }
 }
