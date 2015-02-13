@@ -149,6 +149,7 @@
                         android:layout_alignParentBottom="true"
                         />
                     <ImageView
+                        android:id="@+id/comment_register_off"
                         android:layout_marginRight="16.5dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
@@ -158,6 +159,7 @@
                         android:background="@drawable/comment_register_off"
                         />
                         <ImageView
+                            android:id ="@+id/comment_register_on"
                             android:layout_marginRight="16.5dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"

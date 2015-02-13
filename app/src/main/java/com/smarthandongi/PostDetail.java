@@ -50,7 +50,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private PostDatabase post;
     private PostDB_Php postdbphp;
     private DeletePhp del_php;
-  //  PhpReviewNum phpReviewNum;
+    PhpReviewNum phpReviewNum;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
             type, pos_between_days, dialog_push_title, dialog_push_text;
     final Context context = this;
@@ -89,9 +89,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post=(PostDatabase)intent.getSerializableExtra("post");
         posting_list=(ArrayList)intent.getSerializableExtra("post_list");
         position=(int)intent.getSerializableExtra("position");
-
-
-
 
         setContentView(R.layout.post_detail);
 
@@ -169,8 +166,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
         popup_delete_3 = (RelativeLayout)findViewById(R.id.popup_delete_3);
         popup_push_confirm = (RelativeLayout)findViewById(R.id.popup_push);
         popup_cancel = (RelativeLayout)findViewById(R.id.popup_cancel);
-
-
 
         if(post.getHas_pic().compareTo("1")==0) {
             construction();
@@ -252,7 +247,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
         view_num.setText(post.getView_num()+1+"");                                          //조회수
 
-     //   reviewNum(review_num); //댓글수
+        reviewNum(); //댓글수
 
         carrier.setEdit_count(0);
 
@@ -706,20 +701,21 @@ public class PostDetail extends Activity implements View.OnClickListener{
             finish();
         }
     }
-    /*
-    public void reviewNum(TextView review_num) {
-        phpReviewNum = new PhpReviewNum(review_num);
-        phpReviewNum.execute("http://hungry.portfolio1000.com/smarthandongi/review_push.php");
+
+    public void reviewNum() {
+        Log.d("review==",String.valueOf(post.getId()));
+        phpReviewNum = new PhpReviewNum();
+        phpReviewNum.execute("http://hungry.portfolio1000.com/smarthandongi/review_number.php?" +
+                "posting_id="+ post.getId());
     }
     private class PhpReviewNum extends AsyncTask<String, Integer, String> {
-        int review_num = 0;
-        public PhpReviewNum(TextView review_num){
+        public PhpReviewNum(){
             super();
         }
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
-            String review_id = null;
+            String review_num = null;
             try {
                 //연결 URL설정
                 URL url = new URL(urls[0]);
@@ -748,19 +744,21 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 JSONObject root = new JSONObject(jsonHtml.toString());
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
-                review_id = jo.getString("review_id");
-                Log.d("review_id",review_id);
+                review_num = jo.getString("review_num");
+       //         postDatabase.setView_num(jo.getInt("view_num"));
+                Log.d("review==",review_num);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return review_id;
+            return review_num;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            review_num.setText(s);
         }
-    }*/
+    }
 }
 

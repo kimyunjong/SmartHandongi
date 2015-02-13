@@ -1,12 +1,13 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,7 +46,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
     EditText review_write;
     Button reg_btn, back_btn, del_btn, notify_btn;
-    ImageView new_img;
+    ImageView new_img, comment_register_on, comment_register_off;
 
     PhpUploadReview phpUploadReview;
     PhpDownloadReview phpDownloadReview;
@@ -58,7 +59,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     ReviewAdapter adapter;
     private PostDatabase post;
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
-    ArrayList<PostDatabase> post_list,all_posting_list;
+    ArrayList<PostDatabase> post_list, all_posting_list;
     private ListView review_listview;
     ScrollView scrollview;
 
@@ -87,6 +88,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         notify_btn = (Button)findViewById(R.id.notify_btn);
         new_img = (ImageView)findViewById(R.id.new_img);
         scrollview=(ScrollView)findViewById(R.id.scrollview);
+        comment_register_off=(ImageView)findViewById(R.id.comment_register_off);
+        comment_register_on=(ImageView)findViewById(R.id.comment_register_on);
 
         review_write.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -120,13 +123,43 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
         php_downloadCreate();
 
-        Log.d("size",String.valueOf(review_list.size()));
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charsequence, int i, int j, int k) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charsequence, int i, int j, int k) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // TODO Auto-generated method stub
+                comment_register_off.setVisibility(View.INVISIBLE);
+                comment_register_on.setVisibility(View.VISIBLE);
+            }
+        };
+        review_write.addTextChangedListener(watcher);
+        //   search_cancel_btn=(Button)findViewById(R.id.search_cancel_btn);
+        //   search_cancel_btn.setVisibility(View.VISIBLE);
+        //   search_cancel_btn.setOnClickListener(new Button.OnClickListener () {
+        //       public void onClick(View v) {
+        //           group_search.setText("");
+        //           search_cancel_img.setVisibility(View.INVISIBLE);
+        //           search_glass_img.setVisibility(View.VISIBLE);
+        //       }
+        //   })
+
+
     }
     @Override
     //등록버튼을 눌렀을 경우
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reg_btn: {
+
                 php_uploadCreate();
                 break;
             }
@@ -146,7 +179,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                     intent.putExtra("post_list", post_list);
                     intent.putExtra("position", position);
                     intent.putExtra("post", post);
-                    Log.d("dkssbd","dkjl;");
+            //        Log.d("dkssbd","d kjl;");
                     startActivity(intent);
                     finish();
 
@@ -170,8 +203,6 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
                 startActivity(intent);
                 finish();
-
-
 
                 break;
             }
