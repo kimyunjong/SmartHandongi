@@ -158,7 +158,7 @@ public class ReviewAdapter extends BaseAdapter {
             // TODO Auto-generated method stub
             StringBuilder jsonHtml = new StringBuilder();
             String return_str = "";
-
+            Log.d("djlk","dkfj;a");
             while (return_str.equalsIgnoreCase("")) {
                 try {
                     URL data_url = new URL((String) params[0]);

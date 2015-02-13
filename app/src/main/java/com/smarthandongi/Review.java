@@ -130,7 +130,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                     intent.putExtra("post_list", post_list);
                     intent.putExtra("position", position);
                     intent.putExtra("post", post);
-
+                    Log.d("dkssbd","dkjl;");
                     startActivity(intent);
                     finish();
 
