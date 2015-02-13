@@ -23,6 +23,7 @@ import android.os.Bundle;
 import com.kakao.UserProfile;
 import com.smarthandongi.Carrier;
 import com.smarthandongi.MainActivity2;
+import com.smarthandongi.yj_activity;
 
 /**
  * 유효한 세션이 있다는 검증 후
@@ -59,7 +60,7 @@ public class KakaoTalkSignupActivity extends SampleSignupActivity {
         carrier.setId(String.valueOf(userProfile.getId()));
         carrier.setNickname(userProfile.getNickname());
 
-        final Intent intent = new Intent(this, MainActivity2.class);
+        final Intent intent = new Intent(this, yj_activity.class);
         intent.putExtra("carrier", carrier);
 
         startActivity(intent);

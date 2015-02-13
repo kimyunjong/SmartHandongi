@@ -18,17 +18,25 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.R.integer;
 
+import com.kakao.APIErrorResult;
+import com.kakao.LogoutResponseCallback;
+import com.kakao.UserManagement;
 import com.smarthandongi.adapter.Post2Adapter;
 import com.smarthandongi.adapter.PostAdapter;
 import com.smarthandongi.database.PostDatabase;
+import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -46,7 +54,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     int ca1=1,ca2=1,ca3=1, ca4=1, ca5=1;//켜진상태
     boolean board_on=true,timeline_on=false, search_on=false,default_on=true;
 
-
+    String regid=null;
     private ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>(),board_list = new ArrayList<PostDatabase>(), timeline_list = new ArrayList<PostDatabase>(), timeline_list_today = new ArrayList<PostDatabase>(),timeline_list_tomorrow = new ArrayList<PostDatabase>(),timeline_list_after_tomorrow = new ArrayList<PostDatabase>(), liked_list = new ArrayList<PostDatabase>(),temp_plist = new ArrayList<PostDatabase>();
     private ListView board_listview,timeline_listview;
     private RelativeLayout timeline_listviewR;
@@ -57,7 +65,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private PostDatabasePhp postDatabasePhp;
     private PostAdapter adapter;
     private Post2Adapter adapter2;
-
+    String myResult;
 
     private Thread thread;
     private Boolean thread_running = false;
@@ -650,11 +658,35 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     logout_btn_img.setImageResource(R.drawable.logout_menu_on);
                 } else if (event.getAction() == 1) {
                     logout_btn_img.setImageResource(R.drawable.logout_menu);
-//                   Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
-//                    intent.putExtra("carrier", carrier);
-//                    intent.putExtra("post_list",post_list);
-//                    startActivityForResult(intent, 0);
-//                    overridePendingTransition(0,0);
+                    if (carrier.isLogged_in()) {
+
+                        UserManagement.requestLogout(new LogoutResponseCallback() {
+                            @Override
+                            protected void onSuccess(long l) {
+                                carrier.setLogged_in(false);
+                                carrier.setNickname("not_logged_in");
+                                carrier.setId("000000");
+                                // 수영추가
+                                // carrier.setIsLogout_regid(2);
+                                RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
+                                regIDDeleteTask.execute(regid);
+                                // 수영 추가 끝
+                                Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            @Override
+                            protected void onFailure(APIErrorResult apiErrorResult) {
+
+                            }
+                        });
+                    }
+                    else {
+                        Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
+                        startActivity(intent);
+                        finish();
+                    }
 
                 }
                 break;
@@ -1071,6 +1103,63 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         }
     };
 
+    private class RegIDDeleteTask extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            regid = carrier.getRegid();
+            Log.d("regid는요","regid");
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            DeleteData(regid);
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+//            loagindDialog.dismiss();
+        }
+    }
+
+    public void DeleteData(String reg_id ) {
+        try {
+            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_delete_regid.php?reg_id="+regid);       // URL 설정
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
+            Log.d("php실행 ", "성공");
+            //--------------------------
+            //   전송 모드 설정 - 기본적인 설정이다
+            //--------------------------
+            http.setDefaultUseCaches(false);
+            http.setDoInput(true);
+            http.setDoOutput(true);
+            http.setRequestMethod("POST");
+
+            http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
+            StringBuffer buffer = new StringBuffer();
+            buffer.append("reg_id").append("=").append(reg_id);                 // php 변수에 값 대입
+
+
+            OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "EUC-KR");
+            PrintWriter writer = new PrintWriter(outStream);
+            writer.write(buffer.toString());
+            writer.flush();
+            InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "EUC-KR");
+            BufferedReader reader = new BufferedReader(tmp);
+            StringBuilder builder = new StringBuilder();
+            String str;
+            while ((str = reader.readLine()) != null) {
+                builder.append(str + "\n");
+            }
+
+            myResult = builder.toString();
+
+        } catch (MalformedURLException e) {
+            //
+        } catch (IOException e) {
+            //
+        } // try
+    } // HttpPostData
 
 }
 

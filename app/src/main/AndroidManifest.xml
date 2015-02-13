@@ -91,6 +91,7 @@
 
         <activity android:name=".My_scrap"/>
         <activity android:name=".Intro"/>
+        <activity android:name=".kakao_api.SampleSignupActivity"/>
         <!--윤종이의 액티피티 끝-->
         <!-- 수영 다은 gcm -->
         <receiver

@@ -29,7 +29,7 @@ public class FirstPage extends Activity {
                 // TODO Auto-generated method stub
                 while (true) {
                     timer++;
-                    if (timer == 300) {
+                    if (timer == 200) {
                         Intent intent = new Intent(FirstPage.this, Intro.class);
 
                         startActivityForResult(intent, 0);

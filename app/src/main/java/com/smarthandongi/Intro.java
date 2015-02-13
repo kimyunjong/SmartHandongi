@@ -147,9 +147,9 @@ public class Intro extends Activity {
 
 
     }
-        public void onBackPressed(){
-            finish();
-            System.exit(0);
+    public void onBackPressed(){
+        finish();
+        System.exit(0);
     }
 
     private class ImageTask extends AsyncTask<String, Integer, Bitmap> {
@@ -276,7 +276,7 @@ public class Intro extends Activity {
             {
 
                 Log.i("ds_activity.java | onPostExecute", "|" + msg + "|");
-                 mDisplay.append(msg);
+                mDisplay.append(msg);
             }
         }.execute(null, null, null);
     }
