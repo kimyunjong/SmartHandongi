@@ -156,26 +156,6 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 finish();
 
 
-                // delPhp();
-
-               /* new AlertDialog.Builder(this)
-                        .setTitle("삭제")
-                        .setMessage("삭제하시겠습니까?")
-                        .setIcon(R.drawable.handongi)
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                               // delPhp();
-                               // Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
-                               // startActivity(intent);
-                               // finish();
-                                Log.d("delete_review", String.valueOf(reviewDatabase.getReview_id()));
-
-                            }
-                        })
-                        .setNegativeButton("취소", null)
-                        .show();*/
-
 
                 break;
             }
