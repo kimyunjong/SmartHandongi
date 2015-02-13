@@ -191,7 +191,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                                 jo.getString("reply_date"), jo.getString("content")
                         ));
 
-                        Log.d("이거되야하는데","왜안되는거지?");
+                        //Log.d("이거되야하는데","왜안되는거지?");
 
                     }
                 }
@@ -200,7 +200,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                 comment_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
                 comment_listview.setOnItemClickListener(commentClickListener);
-                Log.d("니가먼저지?","내가멈ㄴ저야");
+                //Log.d("니가먼저지?","내가멈ㄴ저야");
 
 
                 postconstruction();
@@ -211,7 +211,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                 post_listview.setOnItemClickListener(postClickListener);
 
 
-                Log.d("너되야해", "너될거야??");
+                //Log.d("너되야해", "너될거야??");
 
             }
             catch (JSONException e)
