@@ -211,8 +211,7 @@ public class postAdapterScrap extends BaseAdapter {
                 }
             }
         }
-        if(!getItem(position).getStart_date().equalsIgnoreCase("0")&&getItem(position).getEnd_date().equalsIgnoreCase("0"))
-        {
+        else if(!getItem(position).getStart_date().equalsIgnoreCase("0")&&getItem(position).getEnd_date().equalsIgnoreCase("0")) {
             temp_date = getItem(position).getStart_date();
             s_date = Integer.parseInt(temp_date);
             s_year = s_date / 10000;
@@ -296,6 +295,7 @@ public class postAdapterScrap extends BaseAdapter {
 
                 }
             }
+        }
             else if(getItem(position).getStart_date().equalsIgnoreCase("0")&&getItem(position).getEnd_date().equalsIgnoreCase("0"))
             {
 
@@ -322,7 +322,7 @@ public class postAdapterScrap extends BaseAdapter {
                 }
             }
 
-        }
+
 
         return v;
     }
