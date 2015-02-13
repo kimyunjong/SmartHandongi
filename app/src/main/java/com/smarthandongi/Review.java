@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.smarthandongi.adapter.ReviewAdapter;
@@ -59,6 +60,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
     ArrayList<PostDatabase> post_list,all_posting_list;
     private ListView review_listview;
+    ScrollView scrollview;
 
     long time1;
     @Override
@@ -84,15 +86,19 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         back_btn = (Button)findViewById(R.id.back_btn);
         notify_btn = (Button)findViewById(R.id.notify_btn);
         new_img = (ImageView)findViewById(R.id.new_img);
+        scrollview=(ScrollView)findViewById(R.id.scrollview);
 
         review_write.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 review_write.setCursorVisible(true);
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.showSoftInput(review_write, 0);
+                scrollview.setVerticalScrollBarEnabled(false);
                 return true;
             }
         });
+
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //reg_btn.setBackgroundResource( getItem(position).getLike().compareTo("0") ==0 ? R.drawable.like : R.drawable.not_like);
@@ -101,6 +107,15 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         back_btn.setOnClickListener(this);
 
         review_listview = (ListView) findViewById(R.id.review_list);
+        review_listview.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
         review_listview.setSelector(new PaintDrawable(0x00000000));
 
         php_downloadCreate();
@@ -363,7 +378,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
                 review_listview.setAdapter(adapter);
                 Log.d("size down",String.valueOf(review_list.size()));
-                Log.d("size i",String.valueOf(i));
+                Log.d("size i", String.valueOf(i));
                 review_listview.setOnScrollListener(context);
 
             }

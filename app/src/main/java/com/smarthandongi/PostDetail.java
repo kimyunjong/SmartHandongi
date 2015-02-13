@@ -412,25 +412,32 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.post_forward_btn : {
-                if(position==posting_list.size()-1)
+                System.out.println(position);
+                System.out.println(posting_list.size());
+                if(position==posting_list.size()-1) {
                     break;
+                }
                 else {
-                    Intent intent=new Intent(this,PostDetail.class);
-                    intent.putExtra("carrier", carrier);
-                    intent.putExtra("post_list",posting_list);
-                    intent.putExtra("position",position+1);
-                    intent.putExtra("post", posting_list.get(position+1));
-                    startActivity(intent);
+                    Log.d("니가실행해야지?","니가되야하는거아니니?");
+                    Intent toPD=new Intent(PostDetail.this,PostDetail.class);
+                    toPD.putExtra("carrier", carrier);
+                    toPD.putExtra("post_list",posting_list);
+                    toPD.putExtra("position",position+1);
+                    toPD.putExtra("post", posting_list.get(position+1));
+                    Log.d("니가될거지?","니가된다고해쎵");
+                    startActivity(toPD);
+
                     finish();
                     break;
                 }
             }
 
             case R.id.post_backward_btn : {
+                System.out.println(position);
                 if(position==0)
                     break;
                 else {
-                    Intent intent=new Intent(this,PostDetail.class);
+                    Intent intent=new Intent(PostDetail.this,PostDetail.class);
                     intent.putExtra("carrier", carrier);
                     intent.putExtra("post_list",posting_list);
                     intent.putExtra("position",position-1);
