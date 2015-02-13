@@ -2,6 +2,7 @@ package com.smarthandongi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,7 +45,7 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
     int countScrap=0;
     TextView scrapNum;
     Button go_back;
-
+    Typeface typeface;
 
     public void construction() {
         scraped_listview = (ListView) findViewById(R.id.scrap_list);
@@ -65,8 +66,10 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         setContentView(R.layout.my_scrap);
         scrapNum=(TextView)findViewById(R.id.scrap_num);
+        scrapNum.setTypeface(typeface);
 
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();

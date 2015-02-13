@@ -97,13 +97,11 @@ public class postAdapterScrap extends BaseAdapter {
             holder.post_group = (TextView) v.findViewById(R.id.post_group);
             holder.like = (ImageButton) v.findViewById(R.id.like_button);
             holder.line_item=(LinearLayout)v.findViewById(R.id.line_item);
-            holder.scrap_num = (TextView)v.findViewById(R.id.scrap_num);
             //폰트작업
             holder.post_title.setTypeface(typeface);
             holder.post_id.setTypeface(typeface);
             holder.post_dday.setTypeface(typeface);
             holder.post_group.setTypeface(typeface);
-            holder.scrap_num.setTypeface(typeface);
 
 
             v.setTag(holder);
@@ -433,7 +431,7 @@ public class postAdapterScrap extends BaseAdapter {
 
 
     static class ViewHolder{
-        TextView post_title, post_id, post_group, post_dday, scrap_num;
+        TextView post_title, post_id, post_group, post_dday;
         ImageView post_category;
         ImageButton like;
         LinearLayout line_item;

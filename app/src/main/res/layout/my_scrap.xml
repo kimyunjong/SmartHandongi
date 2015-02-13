@@ -47,7 +47,6 @@
         <ImageView
             android:layout_width="41.5dp"
             android:layout_height="15dp"
-            android:layout_marginTop="2dp"
             android:src="@drawable/scrap_num_img"
             android:id="@+id/scrap_num1"/>
 
@@ -66,7 +65,6 @@
                 android:layout_width="13dp"
                 android:layout_height="15dp"
                 android:id="@+id/scrap_num2"
-                android:layout_marginTop="2dp"
                 android:src="@drawable/scrap_num_img2"
                 android:layout_toRightOf="@+id/scrap_num"/>
 
