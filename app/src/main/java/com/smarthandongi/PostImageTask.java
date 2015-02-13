@@ -44,7 +44,7 @@ public class PostImageTask extends AsyncTask<Integer, Integer,Integer> {
         super.onPostExecute(result);
         post_img.setImageBitmap(picture.getPicture());
         post_img.getLayoutParams().height=picture.getPicture().getHeight()*pic_width/picture.getPicture().getWidth();
-        Log.d("이거는되라", "재바라랄라라라ㅏ라라랄");
+
 
     }
 
