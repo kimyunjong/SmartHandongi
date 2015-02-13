@@ -1,6 +1,7 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -28,12 +29,14 @@ public class ReportPost extends Activity implements View.OnClickListener{
     EditText report_post_content;
     ReportPostPhp report_post_php;
     RelativeLayout popup_report_1, popup_report_2, popup_report_3, popup_report_4;
+    Typeface typeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_post);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         report_post_confirm_btn = (Button)findViewById(R.id.report_post_confirm_btn);
         report_post_cancel_btn = (Button)findViewById(R.id.report_post_cancel_btn);
@@ -47,6 +50,9 @@ public class ReportPost extends Activity implements View.OnClickListener{
         popup_report_1 = (RelativeLayout)findViewById(R.id.popup_report_1);
         popup_report_2 = (RelativeLayout)findViewById(R.id.popup_report_2);
         popup_report_3 = (RelativeLayout)findViewById(R.id.popup_report_3);
+
+        // 폰트
+        report_post_content.setTypeface(typeface);
 
     }
 

@@ -10,14 +10,9 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.smarthandongi.adapter.Post2Adapter;
-import com.smarthandongi.adapter.PostAdapter;
 import com.smarthandongi.adapter.postAdapterScrap;
 import com.smarthandongi.database.PostDatabase;
 
@@ -186,7 +181,7 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
                     post_list.add(new PostDatabase(
                                     jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                                     jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
-                                    jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"),jo.getInt("push"))
+                                    jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"),jo.getInt("push"),jo.getString("regid"))
                     );
 
                 }

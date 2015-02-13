@@ -71,6 +71,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     LinearLayout pos_dates, pos_linkbar;
     String category = "", small_category = "";
     Typeface typeface;
+    int screen_height = 0;
 
     //수영 추가
     String myResult;
@@ -87,6 +88,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post=(PostDatabase)intent.getSerializableExtra("post");
         posting_list=(ArrayList)intent.getSerializableExtra("post_list");
         position=(int)intent.getSerializableExtra("position");
+
+
 
 
         setContentView(R.layout.post_detail);
@@ -146,6 +149,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
         //이미지뷰
         post_img=(ImageView)findViewById(R.id.poster);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        screen_height = metrics.heightPixels;
+        post_img.getLayoutParams().height = ((int)(screen_height*0.4));
+        post_img.requestLayout();
 
         pos_delete = (RelativeLayout)findViewById(R.id.pos_delete);  //작성자
         pos_edit = (RelativeLayout)findViewById(R.id.pos_edit);

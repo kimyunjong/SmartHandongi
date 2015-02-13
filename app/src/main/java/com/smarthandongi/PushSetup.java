@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +21,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Created by LEWIS on 2015-01-28.
@@ -39,6 +44,8 @@ public class PushSetup extends Activity implements View.OnClickListener {
     ImageButton push_contest_btn, push_intern_btn, push_service_btn, push_perf_btn, push_seminar_btn, push_presentation_btn;
     ImageButton push_scholarship_btn, push_r_sports_btn, push_r_perf_btn, push_faith_btn, push_display_btn, push_r_service_btn;
     Button push_save_btn;
+    RelativeLayout popup_pushsetup_1, popup_pushsetup_2, popup_pushsetup_3;
+
     CollectPushInfoPhp push_php;
     SendPushInfoPhp send_php;
 //    PushDatabase push_list;   //한 줄의 정보만 빼올 것이기 때문에 어레이리스트로 안 해도 될 것 같지만 일단..
@@ -122,6 +129,10 @@ public class PushSetup extends Activity implements View.OnClickListener {
 
         push_save_btn = (Button) findViewById(R.id.push_save_btn);
         push_save_btn.setOnClickListener(this);
+
+        popup_pushsetup_1 = (RelativeLayout)findViewById(R.id.popup_pushsetup_1);
+        popup_pushsetup_2 = (RelativeLayout)findViewById(R.id.popup_pushsetup_2);
+        popup_pushsetup_3 = (RelativeLayout)findViewById(R.id.popup_pushsetup_3);
 
         phpCreate();
     }
@@ -650,12 +661,6 @@ public class PushSetup extends Activity implements View.OnClickListener {
 
     public void onBackPressed() {     ///////여기서는 저장 ㄴㄴ?
         Log.d("","onBackPressed");
-
-        phpCreateSend();
-
-        Intent intent = new Intent(PushSetup.this, yy_activity.class).putExtra("carrier", carrier);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
         finish();
     }
 
@@ -774,9 +779,25 @@ public class PushSetup extends Activity implements View.OnClickListener {
         if(r_service_in == 1 && r_service == 0) r_service_in = 0;
         if(r_service_in == 0 && r_service == 1) r_service_in = 1;
 
-
         send_php = new SendPushInfoPhp();
         send_php.execute(task);
+
+        new CountDownTimer(1500, 300) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                popup_pushsetup_1.setVisibility(VISIBLE);
+                popup_pushsetup_2.setVisibility(VISIBLE);
+                popup_pushsetup_3.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onFinish() {
+                popup_pushsetup_1.setVisibility(GONE);
+                popup_pushsetup_2.setVisibility(GONE);
+                popup_pushsetup_3.setVisibility(GONE);
+                finish();
+            }
+        }.start();
     }
 }
 

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import com.smarthandongi.adapter.GroupListAdapter;
 import com.smarthandongi.adapter.SMP_CommentAdapter;
 import com.smarthandongi.adapter.SMP_PostAdapter;
 import com.smarthandongi.database.PostDatabase;
@@ -124,7 +123,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                 myPost_list.add(new PostDatabase  ( posting_list.get(i).getTitle(),posting_list.get(i).getId(), posting_list.get(i).getKakao_id(), posting_list.get(i).getBig_category(),
                         posting_list.get(i).getCategory(), posting_list.get(i).getGroup(),posting_list.get(i).getContent(), posting_list.get(i).getPosting_date(), posting_list.get(i).getlink(),
                         posting_list.get(i).getStart_date(), posting_list.get(i).getEnd_date(), posting_list.get(i).getHas_pic(),
-                        posting_list.get(i).getLike(), posting_list.get(i).getView_num(),posting_list.get(i).getGroup_name(),posting_list.get(i).getKakao_nic(),posting_list.get(i).getPush()));
+                        posting_list.get(i).getLike(), posting_list.get(i).getView_num(),posting_list.get(i).getGroup_name(),posting_list.get(i).getKakao_nic(),posting_list.get(i).getPush(),posting_list.get(i).getRegid()));
             }
         }
         post_adapter = new SMP_PostAdapter(SeeMyPost.this,R.layout.my_post_listview,myPost_list,posting_list,carrier);

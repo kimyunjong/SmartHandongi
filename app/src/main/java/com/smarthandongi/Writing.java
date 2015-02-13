@@ -579,6 +579,29 @@ public class Writing extends Activity implements OnClickListener {
                         }
                     });
                 }
+                if (carrier.getEdit_count() == 0) {
+                    //개인으로 들어왔을 때
+                    if (carrier.getSelector() == 0) {
+                        dialog_back.dismiss();
+
+                        Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                        startActivity(intent);
+                        finish();
+                    }
+                    //단체로 들어왔을 때
+                    else if (carrier.getSelector() == 1) {
+                        dialog_back.dismiss();
+
+                        Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+                //수정에서 왔을 때
+                else if (carrier.getEdit_count() == 1) {
+                    dialog_back.dismiss();
+                    finish();
+                }
 
                 break;
             }
@@ -829,6 +852,26 @@ public class Writing extends Activity implements OnClickListener {
                     }
                 }
             });
+        }
+        else {
+            if (carrier.getEdit_count() == 0) {
+                //개인으로 들어왔을 때
+                if (carrier.getSelector() == 0) {
+                    Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
+                //단체로 들어왔을 때
+                else if (carrier.getSelector() == 1) {
+                    Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+            //수정에서 왔을 때
+            else if (carrier.getEdit_count() == 1) {
+                finish();
+            }
         }
     }
 

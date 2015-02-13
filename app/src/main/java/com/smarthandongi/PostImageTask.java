@@ -1,11 +1,9 @@
 package com.smarthandongi;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.smarthandongi.database.Picture;
