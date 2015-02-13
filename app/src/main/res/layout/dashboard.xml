@@ -119,39 +119,47 @@
                 android:layout_alignParentBottom="true"
                 android:src="@drawable/timeline_btn"/>
            </RelativeLayout>
+           <RelativeLayout
+               android:layout_width="40.5dp"
+               android:layout_height="match_parent"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="40dp">
+                <Button
+                    android:id="@+id/search_btn"
+                    android:layout_width="40.5dp"
+                    android:layout_height="46dp"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentBottom="true"
+                    />
+                <ImageView
+                    android:id="@+id/search_img"
+                    android:layout_width="28.5dp"
+                    android:layout_height="35.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/search_button"/>
+           </RelativeLayout>
 
-            <Button
-                android:id="@+id/search_btn"
-                android:layout_width="40.5dp"
-                android:layout_height="46dp"
+            <RelativeLayout
+                android:id="@+id/menu_rel"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+                <Button
+                    android:id="@+id/menu_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"/>
+                <ImageView
+                    android:id="@+id/menu_img"
+                    android:layout_width="6.5dp"
+                    android:layout_height="35.5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/menu_btn"/>
+            </RelativeLayout>
 
-                android:layout_toLeftOf="@+id/menu_btn"
-                android:background="@android:color/transparent"
-                android:layout_alignParentBottom="true"
-                />
-            <ImageView
-                android:id="@+id/search_img"
-                android:layout_width="40.5dp"
-                android:layout_height="46dp"
-                android:layout_toLeftOf="@+id/menu_btn"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/search_button"/>
-
-            <Button
-                android:id="@+id/menu_btn"
-                android:layout_width="45dp"
-                android:layout_height="60dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="12dp"
-                android:background="@android:color/transparent"/>
-            <ImageView
-                android:id="@+id/menu_img"
-                android:layout_width="45dp"
-                android:layout_height="60dp"
-
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/menu_btn"/>
 
         </RelativeLayout>
         </RelativeLayout>
@@ -265,7 +273,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    />
+                />
                 <ImageView
                     android:id="@+id/notice_img"
                     android:layout_width="63.5dp"

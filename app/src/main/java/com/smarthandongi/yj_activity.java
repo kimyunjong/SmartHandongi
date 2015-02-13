@@ -672,9 +672,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     {
         if (menu_on) {
             menu.setVisibility(View.GONE);
+            menu_img.setImageResource(R.drawable.menu_btn);
             menu_on = false;
         } else {
             menu.setVisibility(View.VISIBLE);
+            menu_img.setImageResource(R.drawable.menu_btn_on);
             menu_on = true;
         }
     }
