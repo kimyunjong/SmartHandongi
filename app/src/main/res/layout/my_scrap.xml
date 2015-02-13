@@ -36,36 +36,39 @@
         android:layout_height="66dp"
         android:id="@+id/scrap_num_layout_outmost"
         android:layout_below="@+id/push_top_bar_scrap">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="15.922dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginTop="30dp"
             android:id="@+id/scrap_num_layout">
         <ImageView
-        android:layout_width="47dp"
-        android:layout_height="30.5dp"
+        android:layout_width="41.5dp"
+        android:layout_height="15dp"
         android:src="@drawable/scrap_num_img"
             android:id="@+id/scrap_num1"/>
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:text="임시입니다."
+            android:layout_height="15dp"
             android:id="@+id/scrap_num"
-            android:textSize="16.5sp"
+            android:textSize="13sp"
             android:textColor="#ff6868"
-            android:layout_alignBottom="@+id/scrap_num1"
-            android:layout_toRightOf="@+id/scrap_num1"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="7.126dp"
+            android:layout_marginRight="1.367dp"
+
             />
-        <ImageView
-            android:layout_width="47dp"
-            android:layout_height="30.5dp"
-            android:id="@+id/scrap_num2"
-            android:src="@drawable/scrap_num_img2"
-            android:layout_toRightOf="@+id/scrap_num"/>
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="15dp"
+                android:id="@+id/scrap_num2"
+                android:src="@drawable/scrap_num_img2"
+                android:layout_toRightOf="@+id/scrap_num"/>
+
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
