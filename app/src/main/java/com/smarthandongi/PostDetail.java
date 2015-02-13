@@ -420,6 +420,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 else {
                     Log.d("니가실행해야지?","니가되야하는거아니니?");
                     Intent toPD=new Intent(PostDetail.this,PostDetail.class);
+                    toPD.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     toPD.putExtra("carrier", carrier);
                     toPD.putExtra("post_list",posting_list);
                     toPD.putExtra("position",position+1);
