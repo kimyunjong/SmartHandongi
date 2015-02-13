@@ -78,7 +78,7 @@ public class group_infoList extends Activity {
         group_list_view = (ListView)findViewById(R.id.group_list);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         regid=carrier.getRegid();
-        Log.d("regid g infolist",carrier.getRegid());
+        //Log.d("regid g infolist",carrier.getRegid());
         carrier.setRegid(regid);
         construction();
         //group_list_view.setOnItemClickListener(mItemClickListener);
@@ -265,6 +265,7 @@ public class group_infoList extends Activity {
                 intent.putExtra("group_name",filtered_list.get(pos).getGroup_name());
                 intent.putExtra("group_category",filtered_list.get(pos).getGroup_category());
                 intent.putExtra("introduce",filtered_list.get(pos).getIntroduce());
+                intent.putExtra("carrier",carrier);
 
                 startActivity(intent);
                 finish();
@@ -278,7 +279,7 @@ public class group_infoList extends Activity {
                 intent.putExtra("group_name",group_list.get(pos).getGroup_name());
                 intent.putExtra("group_category",group_list.get(pos).getGroup_category());
                 intent.putExtra("introduce",group_list.get(pos).getIntroduce());
-
+                intent.putExtra("carrier",carrier);
                 startActivity(intent);
                 finish();
             }

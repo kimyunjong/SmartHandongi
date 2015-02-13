@@ -96,6 +96,7 @@ public class Writing extends Activity implements OnClickListener {
     String kakao_nick, myResult, category_push_string = "";
     ProgressDialog loagindDialog;
     int check_count = 0;
+    String push_temp;
 
 
     Picture poster = new Picture();
@@ -914,6 +915,7 @@ public class Writing extends Activity implements OnClickListener {
                     JSONArray ja = root.getJSONArray("results");
                     JSONObject jo = ja.getJSONObject(0);
                     posting_id = jo.getString("id");
+                    push_temp = posting_id;
 //                aa = jo.getInt("id");
 //                Log.d("이건 안 나와?", String.valueOf(aa));
                     Log.d("??", posting_id);
@@ -1143,8 +1145,6 @@ public class Writing extends Activity implements OnClickListener {
                         @Override
                         public void onFinish() {
                             String popup_message;
-//                        SendPush sendPush = new SendPush();                               나중에 추가하자
-//                        sendPush.execute();
                             popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";
 
 
@@ -1168,6 +1168,8 @@ public class Writing extends Activity implements OnClickListener {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
+                                    SendPush sendPush = new SendPush();                              // 나중에 추가하자
+                                    sendPush.execute();
 
                                     new CountDownTimer(1500, 300) {
                                         @Override
@@ -1690,24 +1692,26 @@ public class Writing extends Activity implements OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            loagindDialog = ProgressDialog.show(Writing.this, "키 등록 중입니다..",
-                    "Please wait..", true, false);
+           /* loagindDialog = ProgressDialog.show(Writing.this, "키 등록 중입니다..",
+                    "Please wait..", true, false);*/
         }
 
         @Override
         protected Void doInBackground(String... params) {
-            HttpPostData(carrier.getPost_id());
+            HttpPostData(push_temp);
+
             return null;
         }
 
         protected void onPostExecute(Void result) {
-            loagindDialog.dismiss();
+        //    loagindDialog.dismiss();
         }
     }
 
-    public void HttpPostData(int posting_id ) {
+    public void HttpPostData(String posting_id ) {
         try {
-            String posting_id1 = String.valueOf(posting_id);
+            String posting_id1 = posting_id;
+            Log.d("포스팅 아이디를 보자",posting_id1);
             URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
             HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
             //--------------------------

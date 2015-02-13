@@ -171,87 +171,87 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
 
 
-            if(post.getHas_pic().compareTo("1")==0) {
-                construction();
-            }
+        if(post.getHas_pic().compareTo("1")==0) {
+            construction();
+        }
 
-            if(carrier.getId().compareTo(post.getKakao_id())==0) {
-                pos_scrap.setVisibility(View.GONE);
-                pos_report.setVisibility(View.GONE);
-                pos_edit.setVisibility(View.VISIBLE);
-                pos_delete.setVisibility(View.VISIBLE);
-                pos_push.setVisibility(View.VISIBLE);
-            }
-            if(post.getGroup().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
-                //리스트 내부에 있는지 체크해서 있으면 clickable하게 바꿈
-                writer_name.setVisibility(View.GONE);
-                writer_group_name.setVisibility(View.VISIBLE);
-                writer_group_name.setText(post.getGroup_name());                     //그룹코드 말고 그룹 네임 받아와야 한다.
-                writer_group_name.setTextColor(Color.parseColor("#7CD752"));
-            }
-            else writer_name.setText(post.getKakao_nic());
+        if(carrier.getId().compareTo(post.getKakao_id())==0) {
+            pos_scrap.setVisibility(View.GONE);
+            pos_report.setVisibility(View.GONE);
+            pos_edit.setVisibility(View.VISIBLE);
+            pos_delete.setVisibility(View.VISIBLE);
+            pos_push.setVisibility(View.VISIBLE);
+        }
+        if(post.getGroup().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
+            //리스트 내부에 있는지 체크해서 있으면 clickable하게 바꿈
+            writer_name.setVisibility(View.GONE);
+            writer_group_name.setVisibility(View.VISIBLE);
+            writer_group_name.setText(post.getGroup_name());                     //그룹코드 말고 그룹 네임 받아와야 한다.
+            writer_group_name.setTextColor(Color.parseColor("#7CD752"));
+        }
+        else writer_name.setText(post.getKakao_nic());
 
-            if(post.getStart_date().length() < 4) {                                             //시작일
-                pos_dates.setVisibility(View.GONE);
-            } else {
-                pos_dates.setVisibility(View.VISIBLE);
-                start_day.setText(post.getStart_date());
-                end_day.setText(post.getEnd_date());                                            //종료일
-            }
+        if(post.getStart_date().length() < 4) {                                             //시작일
+            pos_dates.setVisibility(View.GONE);
+        } else {
+            pos_dates.setVisibility(View.VISIBLE);
+            start_day.setText(post.getStart_date());
+            end_day.setText(post.getEnd_date());                                            //종료일
+        }
 
-            if(post.getLink().length() == 0){
-                pos_linkbar.setVisibility(View.GONE);                                       //링크
-            } else {
-                pos_linkbar.setVisibility(View.VISIBLE);
-                link.setText(post.getLink());
-            }
+        if(post.getLink().length() == 0){
+            pos_linkbar.setVisibility(View.GONE);                                       //링크
+        } else {
+            pos_linkbar.setVisibility(View.VISIBLE);
+            link.setText(post.getLink());
+        }
 
-            switch(post.getBig_category()){                                                     //대분류
-                case "1" : category = "일반공지"; break;
-                case "2" : category = "대외활동"; break;
-                case "3" : category = "공연·세미나"; break;
-                case "4" : category = "리쿠르팅"; break;
-                case "5" : category = "붙어라"; break;
-                default: break;
-            }
-            switch(post.getCategory()){
-                case "together_sports_1"        : small_category = "운동경기"; break;          //소분류
-                case "together_game_2"          : small_category = "게임"; break;
-                case "together_nightfood_3"     : small_category = "야식"; break;
-                case "together_gonggu_4"        : small_category = "공동구매"; break;
-                case "together_carpool_5"       : small_category = "카풀"; break;
-                case "together_study_6"         : small_category = "스터디"; break;
-                case "together_trading_7"       : small_category = "사고팔기"; break;
-                case "together_lost_8"          : small_category = "분실물"; break;
-                case "together_recruiting_9"    : small_category = "구인구직"; break;
-                case "together_exchange_10"     : small_category = "교환"; break;
+        switch(post.getBig_category()){                                                     //대분류
+            case "1" : category = "일반공지"; break;
+            case "2" : category = "대외활동"; break;
+            case "3" : category = "공연•세미나"; break;
+            case "4" : category = "리쿠르팅"; break;
+            case "5" : category = "붙어라"; break;
+            default: break;
+        }
+        switch(post.getCategory()){
+            case "together_sports_1"        : small_category = "운동경기"; break;          //소분류
+            case "together_game_2"          : small_category = "게임"; break;
+            case "together_nightfood_3"     : small_category = "야식"; break;
+            case "together_gonggu_4"        : small_category = "공동구매"; break;
+            case "together_carpool_5"       : small_category = "카풀"; break;
+            case "together_study_6"         : small_category = "스터디"; break;
+            case "together_trading_7"       : small_category = "사고팔기"; break;
+            case "together_lost_8"          : small_category = "분실물"; break;
+            case "together_recruiting_9"    : small_category = "구인구직"; break;
+            case "together_exchange_10"     : small_category = "교환"; break;
 
-                case "outer_contest_21"     : small_category = "공모전"; break;
-                case "outer_intern_22"      : small_category = "인턴"; break;
-                case "outer_service_23"     : small_category = "자원봉사"; break;
+            case "outer_contest_21"     : small_category = "공모전"; break;
+            case "outer_intern_22"      : small_category = "인턴"; break;
+            case "outer_service_23"     : small_category = "자원봉사"; break;
 
-                case "seminar_perf_41"          : small_category = "공연"; break;
-                case "seminar_seminar_42"       : small_category = "세미나"; break;
-                case "seminar_presentation_43"  : small_category = "발표"; break;
+            case "seminar_perf_41"          : small_category = "공연"; break;
+            case "seminar_seminar_42"       : small_category = "세미나"; break;
+            case "seminar_presentation_43"  : small_category = "발표"; break;
 
-                case "recruiting_scholarship_61" : small_category = "학술"; break;
-                case "recruiting_sports_62"      : small_category = "운동"; break;
-                case "recruiting_perf_63"        : small_category = "공연"; break;
-                case "recruiting_faith_64"       : small_category = "신앙"; break;
-                case "recruiting_display_65"     : small_category = "전시"; break;
-                case "recruiting_service_66"     : small_category = "봉사"; break;
-            }
-            type.setText("[" + category + "/" + small_category + "]");                                // [대분류/소분류]
+            case "recruiting_scholarship_61" : small_category = "학술"; break;
+            case "recruiting_sports_62"      : small_category = "운동"; break;
+            case "recruiting_perf_63"        : small_category = "공연"; break;
+            case "recruiting_faith_64"       : small_category = "신앙"; break;
+            case "recruiting_display_65"     : small_category = "전시"; break;
+            case "recruiting_service_66"     : small_category = "봉사"; break;
+        }
+        type.setText("[" + category + "/" + small_category + "]");                                // [대분류/소분류]
 
-            post_day.setText(post.getPosting_date());                                           //등록일
+        post_day.setText(post.getPosting_date());                                           //등록일
 
-            title.setText(post.getTitle());                                                     //제목
+        title.setText(post.getTitle());                                                     //제목
 
-            content.setText(post.getContent());                                                 //내용
+        content.setText(post.getContent());                                                 //내용
 
-            view_num.setText(post.getView_num()+1+"");                                          //조회수
+        view_num.setText(post.getView_num()+1+"");                                          //조회수
 
-            carrier.setEdit_count(0);
+        carrier.setEdit_count(0);
 
     }
 
@@ -471,7 +471,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         pos_push.setVisibility(GONE);
                         //푸시보내는거
                         //푸시카운트 0으로 초기화
-
+                        Log.d("내가쓴 글 푸시 가랏","푸시푸시");
+                        SendPush sendpush = new SendPush();
+                        sendpush.execute();
                         new CountDownTimer(1500, 300) {
                             @Override
                             public void onTick(long millisUntilFinished) {
@@ -564,25 +566,29 @@ public class PostDetail extends Activity implements View.OnClickListener{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            loagindDialog = ProgressDialog.show(PostDetail.this, "키 등록 중입니다..",
-                    "Please wait..", true, false);
+          /*  loagindDialog = ProgressDialog.show(PostDetail.this, "키 등록 중입니다..",
+                    "Please wait..", true, false);*/
         }
 
         @Override
         protected Void doInBackground(String... params) {
-            HttpPostData(posting_id);
+            HttpPostData(post.getId());
+
             return null;
         }
 
         protected void onPostExecute(Void result) {
-            loagindDialog.dismiss();
+            // loagindDialog.dismiss();
         }
     }
     public void HttpPostData(int posting_id ) {
         try {
             String posting_id1 = String.valueOf(posting_id);
+            Log.d("posting_id",posting_id1);
             URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
             HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
+
+            Log.d("푸시 중입니다.","푸시푸시");
             //--------------------------
             //   전송 모드 설정 - 기본적인 설정이다
             //--------------------------

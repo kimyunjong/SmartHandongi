@@ -21,7 +21,7 @@ import com.google.android.gcm.GCMRegistrar;
 public class GcmIntentService extends GCMBaseIntentService {
 
     static String re_message = null;
-
+    static Carrier carrier;
     private static void generateNotifiaction(Context context, String message){
         int icon =R.drawable.recruit;
         long when = System.currentTimeMillis();
@@ -29,13 +29,16 @@ public class GcmIntentService extends GCMBaseIntentService {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(icon, message, when);
 
-        String title = context.getString(R.string.app_name);
-            Intent notificationIntent = new Intent(context, ds_activity.class);
-            re_message = message;
+        String title = "모여라 한동이";
+            Intent notificationIntent = new Intent(context, PostDetail.class).putExtra("carrier",carrier);
+           // notificationIntent.setAction(PostDetail.CustomInternalMessageAction);
+           // notificationIntent.putExtra(PostDetail.ReceiveTestMessage, re_message);
 
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(context,0,notificationIntent,0);
-
+        /*getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);*/
         notification.setLatestEventInfo(context,title,message,intent);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0,notification);

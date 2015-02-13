@@ -83,7 +83,9 @@
 
         <!--윤종이의 액티피티 시작-->
         <activity android:name=".PostDetail"
-            />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop" android:multiprocess="true"/>
+
         <activity android:name=".My_scrap"/>
         <activity android:name=".Intro"/>
         <!--윤종이의 액티피티 끝-->
