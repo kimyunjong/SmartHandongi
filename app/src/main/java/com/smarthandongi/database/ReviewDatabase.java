@@ -14,7 +14,7 @@ public class ReviewDatabase {
             this.reply_date = reply_date;
             this.content = content;
             this.posting_id=posting_id;
-           // this.last = last;
+
         }
 
         private int posting_id;

@@ -18,10 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.smarthandongi.adapter.ReviewAdapter;
-import com.smarthandongi.adapter.SMP_CommentAdapter;
 import com.smarthandongi.database.PostDatabase;
 import com.smarthandongi.database.ReviewDatabase;
 
@@ -182,7 +180,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 break;
             }
             case R.id.notify_btn: {
-                Toast.makeText(this, "신고버튼",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "신고버튼",Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Review.this, ReportPost.class);
                 intent.putExtra("carrier", carrier);
@@ -202,7 +200,6 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
          final String reset_kakao_nick;
          String content;
 
-
          content = review_write.getText().toString();
          kakao_nick = carrier.getNickname();
          kakao_id = carrier.getId();
@@ -210,9 +207,8 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
 
          reset_kakao_nick = kakao_nick;
 
-
-         Log.d("TAG", content);
-         Log.d("TAG", kakao_nick);
+         Log.d("kakao_nick_get", carrier.getNickname());
+         Log.d("reset_kakao_nick", reset_kakao_nick);
 
         try {
             kakao_id = URLEncoder.encode(kakao_id, "UTF-8");
@@ -244,7 +240,10 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             phpUploadReview = new PhpUploadReview();
                             phpUploadReview.execute(carrier.getUpload_url());
 
+                            Log.d("kakao_nick_get전", carrier.getNickname());
                             carrier.setNickname(reset_kakao_nick);
+
+                            Log.d("kakao_nick_get후", carrier.getNickname());
 
                             String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
                             review_write.setText(null);

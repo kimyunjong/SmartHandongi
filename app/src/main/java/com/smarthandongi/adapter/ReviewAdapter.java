@@ -86,15 +86,15 @@ public class ReviewAdapter extends BaseAdapter {
         holder.date.setText(getItem(position).getReply_date() + " ");
         holder.kakao_nick.setText(getItem(position).getKakao_nick() + " ");
         holder.content.setText(getItem(position).getContent() + " ");
-/*
-        if(reviewDatabase.getKakao_id().compareTo(carrier.getKakao_id())==0) {
+
+        if(getItem(position).getKakao_id().compareTo(carrier.getId())==0) {
             holder.notify_btn.setVisibility(View.GONE);
             holder.del_btn.setVisibility(View.VISIBLE);
         }else{
             holder.notify_btn.setVisibility(View.VISIBLE);
             holder.del_btn.setVisibility(View.GONE);
         }
-*/
+
         //  holder.del_btn.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
         holder.del_btn.setFocusable(true);
         // holder.del_btn.setBackgroundResource(true ? R.drawable.like : R.drawable.not_like);
@@ -102,8 +102,7 @@ public class ReviewAdapter extends BaseAdapter {
         review_id = getItem(position).getReview_id();
         ReviewDatabase touch_position;
         touch_position = getItem(position);
-        holder.del_btn.setOnTouchListener(new DeleteListener(review_id, touch_position ,holder.del_btn, getItem(position)));
-
+        holder.del_btn.setOnTouchListener(new DeleteListener(review_id, position ,touch_position ,holder.del_btn, getItem(position)));
 
          //holder.del_btn.setVisibility(View.VISIBLE);
             //holder.notify_btn.setVisibility(View.VISIBLE);
@@ -119,15 +118,17 @@ public class ReviewAdapter extends BaseAdapter {
         ListView review_listview;
         ReviewAdapter adapter;
         ReviewDatabase touch_position;
+        int position;
         private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
 
 
 
-        public DeleteListener(int review_id, ReviewDatabase touch_position, View view, ReviewDatabase reviewDatabase) {
+        public DeleteListener(int review_id,int position, ReviewDatabase touch_position, View view, ReviewDatabase reviewDatabase) {
             this.review_id = review_id;
             this.touch_position = touch_position;
             this.view = view;
             this.reviewDatabase = reviewDatabase;
+            this.position = position;
         }
 
         @Override
@@ -139,35 +140,18 @@ public class ReviewAdapter extends BaseAdapter {
 
                     Log.d("아이디", String.valueOf(review_id));
                     deletePhp.execute("http://hungry.portfolio1000.com/smarthandongi/review_delete.php?review_id=" + review_id);
-/*
-                    if(touch_position==null) {
-                        Log.d("위치", "널이에요");
-                    }else{
-                        Log.d("위치", "널아니에요");
-                    }
-                    review_list.remove(touch_position);
-                   // review_listview.clearChoices();
-                    adapter.notifyDataSetChanged();
-*/
+
 
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 }
             }
             return false;
         }
+
     }
     class DeletePhp extends AsyncTask {
 
-        private View view;
-        private ReviewDatabase database;
-        ListView review_listview;
-        ReviewAdapter adapter;
-        private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
-
-
-        public DeletePhp() {
-
-        }
+        public DeletePhp() {        }
 
         @Override
         protected Object doInBackground(Object... params) {
@@ -205,16 +189,7 @@ public class ReviewAdapter extends BaseAdapter {
         protected void onPostExecute(Object result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
-            //remove();
 
-        }
-        public void remove(){
-            int pos = review_listview.getCheckedItemPosition();
-            if (pos != ListView.INVALID_POSITION) {
-                review_list.remove(pos);
-                review_listview.clearChoices();
-                adapter.notifyDataSetChanged();
-            }
         }
     }
 

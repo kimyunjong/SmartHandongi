@@ -34,7 +34,8 @@
             android:layout_height="30dp"
             android:onClick="onClick"
             android:text="신고"
-            android:textSize="9dp"
+            android:textSize="10dp"
+            android:background="#00ff0000"
             android:layout_toRightOf="@+id/new_img"/>
 
         <Button
@@ -43,6 +44,7 @@
             android:layout_height="30dp"
             android:onClick="onClick"
             android:text="Del"
+            android:background="#00ff0000"
             android:textSize="10dp"
             android:layout_toRightOf="@+id/notify_btn"/>
 
