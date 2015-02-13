@@ -23,7 +23,7 @@ public class GcmIntentService extends GCMBaseIntentService {
     static String re_message = null;
     static Carrier carrier;
     private static void generateNotifiaction(Context context, String message){
-        int icon =R.drawable.recruit;
+        int icon =R.drawable.push_image_origin;
         long when = System.currentTimeMillis();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -38,7 +38,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         PendingIntent intent = PendingIntent.getActivity(context,0,notificationIntent,0);
         /*getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);*/
+                | Windowanager.LayoutParams.FLAG_TURN_SCREEN_ON);*/
         notification.setLatestEventInfo(context,title,message,intent);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0,notification);
