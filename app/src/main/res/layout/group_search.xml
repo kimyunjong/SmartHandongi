@@ -270,6 +270,7 @@
                                 android:layout_height="match_parent"
                                 android:listSelector="@android:color/darker_gray"
                                 android:visibility="visible"
+                                android:scrollbars="none"
                                 android:divider="@null"
                                 android:dividerHeight="0dp"
                                 > </ListView>

@@ -252,12 +252,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_width = metrics.widthPixels;
         PostImageTask postImageTask;
-        if(carrier.getFromWriting()==1) {
-            postImageTask = new PostImageTask(poster,posting_id,post_img,screen_width,temp);
-        }
-        else {
-            postImageTask = new PostImageTask(poster, post.getId(), post_img, screen_width, temp);//수영 수정, temp 추가
-        }
+        postImageTask = new PostImageTask(poster, post.getId(), post_img, screen_width, temp);//수영 수정, temp 추가
         postImageTask.execute(0);
     }
 
@@ -386,7 +381,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.post_detail_home : {
-                carrier.setFromWriting(0);
+
                 carrier.setFromPostDetail(0);
                 carrier.setEdit_count(0);
                 carrier.setGroup_name("");

@@ -473,7 +473,7 @@ public class Writing extends Activity implements OnClickListener {
                         }.start();
                     }
 
-//                carrier.setFromWriting(0);
+//
 //                carrier.setFromPostDetail(0);
 //                carrier.setEdit_count(0);
 //                carrier.setGroup_name("");
@@ -1182,7 +1182,7 @@ public class Writing extends Activity implements OnClickListener {
                     }.start();
                 }
 
-//                carrier.setFromWriting(0);
+//
 //                carrier.setFromPostDetail(0);
 //                carrier.setEdit_count(0);
 //                carrier.setGroup_name("");

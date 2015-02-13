@@ -32,17 +32,17 @@ public class Carrier implements Serializable {
 
     private String Group_pw = null;
     private String upload_url=null;
-    private int fromWriting=0;
     private int fromPostDetail =0;
+    private int fromSMPcomment=0;
     private int fromSMP=0;
+
+    public void setFromSMPcomment(int fromSMP) {this.fromSMPcomment = fromSMP;}
+
+    public int getFromSMPcomment() {return fromSMPcomment;}
 
     public void setFromSMP(int fromSMP) {this.fromSMP=fromSMP;}
 
     public int getFromSMP() {return fromSMP; }
-
-    public void setFromWriting(int fromWriting) {this.fromWriting=fromWriting;}
-
-    public int getFromWriting() {return fromWriting;}
 
     public void setUpload_url(String url) {upload_url=url;}
 

@@ -127,7 +127,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 }
                 else {
                     Intent intent = new Intent(Review.this, PostDetail.class);
-                    intent.putExtra("posting_id", posting_id);
+                    //intent.putExtra("posting_id", posting_id);
                     intent.putExtra("carrier", carrier);
                     intent.putExtra("post_list", post_list);
                     intent.putExtra("position", position);
@@ -140,15 +140,20 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 }
             }
             case R.id.del_btn: {
-                Toast.makeText(this, "삭제버튼", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(Review.this,Review.class);
-                intent.putExtra("carrier",carrier);
-                intent.putExtra("posting_id",posting_id);
+
                 if(carrier.getFromSMP()==0) {
                     intent.putExtra("post",post);
                     intent.putExtra("position",position);
                 }
+                else if(carrier.getFromSMP()==1) {//내가쓴글에서 댓글을 추가하고 엑스를 눌리라고할때를 위해서
+                    carrier.setFromSMP(1);
+                    carrier.setFromSMPcomment(1);
+                    intent.putExtra("post_list",post_list);
+                }
+                intent.putExtra("carrier",carrier);
+                intent.putExtra("posting_id",posting_id);
+
                 startActivity(intent);
                 finish();
 
@@ -238,7 +243,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             );
                             phpUploadReview = new PhpUploadReview();
                             phpUploadReview.execute(carrier.getUpload_url());
-                            carrier.setFromWriting(1);
+
                             carrier.setNickname(reset_kakao_nick);
 
                             String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -246,6 +251,10 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                             Intent intent = new Intent(Review.this,Review.class);
                             intent.putExtra("carrier",carrier);
                             intent.putExtra("posting_id",posting_id);
+                            intent.putExtra("post_list",post_list);
+                            if(carrier.getFromSMP()==1) {
+                                carrier.setFromSMPcomment(1);
+                            }
                             if(carrier.getFromSMP()==0) {
                                 intent.putExtra("post",post);
                                 intent.putExtra("position",position);

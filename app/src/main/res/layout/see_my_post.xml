@@ -96,8 +96,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="visible"
+                android:scrollbars="none"
                 ></ListView>
             <ListView
+                android:scrollbars="none"
                 android:divider="@null"
                 android:dividerHeight="0dp"
                 android:layout_marginLeft="10dp"

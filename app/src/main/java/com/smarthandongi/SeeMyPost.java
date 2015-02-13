@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 public class SeeMyPost extends Activity implements View.OnClickListener{
     Carrier carrier;
     ImageButton post_btn,comment_btn;
+    Button SMP_back_btn;
     ArrayList<PostDatabase> posting_list=new ArrayList<PostDatabase>(),myPost_list=new ArrayList<PostDatabase>();
     ArrayList<ReviewDatabase> comment_list=new ArrayList<ReviewDatabase>();
     SMP_PostAdapter post_adapter;
@@ -49,13 +51,25 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         Log.d("글은제대로받아온것인가?",posting_list.get(3).getTitle());
         post_btn=(ImageButton)findViewById(R.id.smp_post);
         comment_btn=(ImageButton)findViewById(R.id.smp_comment);
+        SMP_back_btn=(Button)findViewById(R.id.smp_back_btn);
 
         post_btn.setOnClickListener(this);
         comment_btn.setOnClickListener(this);
+        SMP_back_btn.setOnClickListener(this);
 
         construction();
+        if(carrier.getFromSMPcomment()==1) {
+            carrier.setFromSMPcomment(0);
+            post_listview.setVisibility(View.GONE);
+            post_listview.setFocusable(false);
+            comment_listview.setVisibility(View.VISIBLE);
 
-        comment_listview.setVisibility(View.GONE);
+            comment_btn.setBackgroundResource(R.drawable.smp_comment_selected);
+            post_btn.setBackgroundResource(R.drawable.smp_post);
+        }
+        else {
+            comment_listview.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -71,6 +85,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
             case R.id.smp_comment : {
                 Log.d("내가눌렸다", "내가눌림");
                 carrier.setFromSMP(0);
+                carrier.setFromSMPcomment(1);
                 post_listview.setVisibility(View.GONE);
                 post_listview.setFocusable(false);
                 comment_listview.setVisibility(View.VISIBLE);
@@ -78,6 +93,14 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
                 comment_btn.setBackgroundResource(R.drawable.smp_comment_selected);
                 post_btn.setBackgroundResource(R.drawable.smp_post);
 
+                break;
+            }
+            case R.id.smp_back_btn : {
+                carrier.setFromSMP(0);
+                Intent intent = new Intent (SeeMyPost.this,yj_activity.class);
+                intent.putExtra("carrier",carrier);
+                startActivity(intent);
+                finish();
                 break;
             }
         }
