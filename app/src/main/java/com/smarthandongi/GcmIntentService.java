@@ -31,10 +31,12 @@ public class GcmIntentService extends GCMBaseIntentService {
 
         String title = "모여라 한동이";
             Intent notificationIntent = new Intent(context, PostDetail.class).putExtra("carrier",carrier);
+
            // notificationIntent.setAction(PostDetail.CustomInternalMessageAction);
            // notificationIntent.putExtra(PostDetail.ReceiveTestMessage, re_message);
 
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
         PendingIntent intent = PendingIntent.getActivity(context,0,notificationIntent,0);
         /*getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD

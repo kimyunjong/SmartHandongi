@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,6 +50,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img,write_btn_in_menu_img,scrap_menu_img,my_posting_btn_img,push_set_btn_img, show_group_btn_img,bustime_table_btn_img,report_btn_img, history_btn_img,other_handong_btn_img, logout_btn_img;
     ImageButton search_default_btn;
     RelativeLayout menu,search_layout, default_layout;
+    EditText post_search;
     Carrier carrier;
     private Intent intent;
     int ca1=1,ca2=1,ca3=1, ca4=1, ca5=1;//켜진상태
@@ -174,6 +176,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         other_handong_btn.setOnTouchListener(this);
         logout_btn.setOnTouchListener(this);
 
+        post_search=(EditText)findViewById(R.id.post_search);
 
         timeline_listviewR.setVisibility(View.GONE);
 
@@ -1081,6 +1084,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
+            finish();
         }
     };
 
@@ -1100,6 +1104,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
+            finish();
         }
     };
 

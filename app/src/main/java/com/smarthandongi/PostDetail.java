@@ -413,15 +413,15 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 }
                 else {
                     Log.d("니가실행해야지?","니가되야하는거아니니?");
-                    Intent toPD=new Intent(PostDetail.this,PostDetail.class);
-                    toPD.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Intent toPD=new Intent(PostDetail.this,ReportPost.class);
+                    toPD.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     toPD.putExtra("carrier", carrier);
                     toPD.putExtra("post_list",posting_list);
                     toPD.putExtra("position",position+1);
                     toPD.putExtra("post", posting_list.get(position+1));
                     Log.d("니가될거지?","니가된다고해쎵");
                     startActivity(toPD);
-
+                    Log.d("dkjhkj","djkj;kj;a");
                     finish();
                     break;
                 }
@@ -432,13 +432,17 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 if(position==0)
                     break;
                 else {
-                    Intent intent=new Intent(PostDetail.this,PostDetail.class);
+                    Intent intent=new Intent(this,PostDetail.class);
+
                     intent.putExtra("carrier", carrier);
                     intent.putExtra("post_list",posting_list);
                     intent.putExtra("position",position-1);
-                    intent.putExtra("post", posting_list.get(position-1));
+                    System.out.println(position - 1);
+                    intent.putExtra("post", posting_list.get(position - 1));
+                    System.out.println(posting_list.get(position - 1).getId());
                     startActivity(intent);
                     finish();
+
                     break;
                 }
             }
@@ -477,8 +481,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         //푸시보내는거
                         //푸시카운트 0으로 초기화
                         Log.d("내가쓴 글 푸시 가랏","푸시푸시");
-                        SendPush sendpush = new SendPush();
-                        sendpush.execute();
+                        //SendPush sendpush = new SendPush();
+                        //sendpush.execute();
                         new CountDownTimer(1500, 300) {
                             @Override
                             public void onTick(long millisUntilFinished) {
@@ -566,67 +570,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         }
     }
     //수영 추가
-    private class SendPush extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-          /*  loagindDialog = ProgressDialog.show(PostDetail.this, "키 등록 중입니다..",
-                    "Please wait..", true, false);*/
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-            HttpPostData(post.getId());
-
-            return null;
-        }
-
-        protected void onPostExecute(Void result) {
-            // loagindDialog.dismiss();
-        }
-    }
-    public void HttpPostData(int posting_id ) {
-        try {
-            String posting_id1 = String.valueOf(posting_id);
-            Log.d("posting_id",posting_id1);
-            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
-
-            Log.d("푸시 중입니다.","푸시푸시");
-            //--------------------------
-            //   전송 모드 설정 - 기본적인 설정이다
-            //--------------------------
-            http.setDefaultUseCaches(false);
-            http.setDoInput(true);
-            http.setDoOutput(true);
-            http.setRequestMethod("POST");
-
-            http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
-            StringBuffer buffer = new StringBuffer();
-            buffer.append("posting_id").append("=").append(posting_id);                 // php 변수에 값 대입
 
 
-            OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "EUC-KR");
-            PrintWriter writer = new PrintWriter(outStream);
-            writer.write(buffer.toString());
-            writer.flush();
-            InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "EUC-KR");
-            BufferedReader reader = new BufferedReader(tmp);
-            StringBuilder builder = new StringBuilder();
-            String str;
-            while ((str = reader.readLine()) != null) {
-                builder.append(str + "\n");
-            }
-
-            myResult = builder.toString();
-
-        } catch (MalformedURLException e) {
-            //
-        } catch (IOException e) {
-            //
-        } // try
-    } // HttpPostData
     public void delPhp(){
         del_php = new DeletePhp();
         del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
