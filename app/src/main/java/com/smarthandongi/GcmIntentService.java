@@ -23,9 +23,9 @@ public class GcmIntentService extends GCMBaseIntentService {
     static String re_message = null;
     static Carrier carrier;
     private static void generateNotifiaction(Context context, String message){
-        int icon =R.drawable.push_image_origin;
-        long when = System.currentTimeMillis();
 
+        long when = System.currentTimeMillis();
+        int icon =R.drawable.push_image_origin;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(icon, message, when);
 
