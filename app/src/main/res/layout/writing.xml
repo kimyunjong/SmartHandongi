@@ -49,7 +49,7 @@
                     android:layout_height="1dp"
                     android:alpha="0.5"
                     android:layout_alignParentBottom="true"
-                    android:background="#ffffff"/>
+                    android:background="#f1f2f2"/>
             </RelativeLayout>
 
 
@@ -149,7 +149,7 @@
                                 android:id="@+id/big_category_btn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textColor="#ffffff"
+                                android:textColor="#f1f2f2"
                                 android:textSize="14.5dp"
                                 android:background="@android:color/transparent"/>
                             <ImageView
@@ -168,7 +168,7 @@
                                 android:id="@+id/small_category_btn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textColor="#ffffff"
+                                android:textColor="#f1f2f2"
                                 android:textSize="14.5dp"
                                 android:background="@android:color/transparent"/>
                             <ImageView
@@ -194,7 +194,7 @@
                     android:layout_height="1dp"
                     android:alpha="0.5"
                     android:layout_alignParentBottom="true"
-                    android:background="#ffffff"/>
+                    android:background="#f1f2f2"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -216,8 +216,8 @@
                         android:gravity="left"
                         android:layout_marginRight="15dp"
                         android:hint="제목"
-                        android:textColor="#ffffff"
-                        android:textColorHint="#ffffff"
+                        android:textColor="#f1f2f2"
+                        android:textColorHint="#f1f2f2"
                         android:background="#00000000"/>
 
                 </RelativeLayout>
@@ -229,7 +229,7 @@
                     android:layout_height="1dp"
                     android:alpha="0.5"
                     android:layout_alignParentBottom="true"
-                    android:background="#ffffff"/>
+                    android:background="#f1f2f2"/>
 
                 <RelativeLayout
                     android:id="@+id/body"
@@ -249,9 +249,9 @@
                         android:layout_height="wrap_content"
                         android:background="#00000000"
                         android:textSize="14.5dp"
-                        android:textColor="#ffffff"
+                        android:textColor="#f1f2f2"
                         android:hint="내용"
-                        android:textColorHint="#ffffff"
+                        android:textColorHint="#f1f2f2"
                         android:gravity="top|left"/>
                 </RelativeLayout>
 
@@ -262,7 +262,7 @@
                     android:layout_height="1dp"
                     android:alpha="0.5"
                     android:layout_alignParentBottom="true"
-                    android:background="#ffffff"/>
+                    android:background="#f1f2f2"/>
                 <RelativeLayout
                     android:layout_width="83.5dp"
                     android:layout_height="22.5dp"
@@ -294,7 +294,7 @@
                         android:layout_height="1dp"
                         android:alpha="0.5"
                         android:layout_alignParentBottom="true"
-                        android:background="#ffffff"/>
+                        android:background="#f1f2f2"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -321,7 +321,7 @@
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:textSize="14.5dp"
-                            android:textColor="#ffffff"
+                            android:textColor="#f1f2f2"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="5dp"
@@ -335,7 +335,7 @@
                         android:layout_height="1dp"
                         android:alpha="0.5"
                         android:layout_alignParentBottom="true"
-                        android:background="#ffffff"/>
+                        android:background="#f1f2f2"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -362,7 +362,7 @@
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:textSize="14.5dp"
-                            android:textColor="#ffffff"
+                            android:textColor="#f1f2f2"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="5dp"
@@ -376,7 +376,7 @@
                         android:layout_height="1dp"
                         android:alpha="0.5"
                         android:layout_alignParentBottom="true"
-                        android:background="#ffffff"/>
+                        android:background="#f1f2f2"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -394,7 +394,7 @@
                             android:layout_toRightOf="@id/writing_link_pic"
                             android:textSize="18dp"
                             android:layout_marginLeft="17dp"
-                            android:textColor="#ffffff"
+                            android:textColor="#f1f2f2"
                             android:layout_marginRight="15dp"
                             android:background="#00000000"/>
                     </RelativeLayout>
@@ -409,7 +409,7 @@
                             android:layout_height="1dp"
                             android:alpha="0.5"
                             android:layout_alignParentTop="true"
-                            android:background="#ffffff"/>
+                            android:background="#f1f2f2"/>
                         <ImageView
                             android:id="@+id/writing_addpic"
                             android:layout_width="66.5dp"
@@ -448,7 +448,7 @@
                             android:layout_height="1dp"
                             android:alpha="0.5"
                             android:layout_alignParentBottom="true"
-                            android:background="#ffffff"/>
+                            android:background="#f1f2f2"/>
 
                     </RelativeLayout>
 

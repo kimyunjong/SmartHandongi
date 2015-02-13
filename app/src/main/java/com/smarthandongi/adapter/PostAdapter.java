@@ -1,6 +1,7 @@
 package com.smarthandongi.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -47,12 +48,14 @@ public class PostAdapter extends BaseAdapter{
     int e_month;
     int e_day;
     private Carrier carrier;
+    Typeface typeface;
 
     public PostAdapter(Context context, List<PostDatabase> list, Carrier carrier){
         this.context=context;
         this.list=list;
         this.carrier=carrier;
     }
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
@@ -78,6 +81,8 @@ public class PostAdapter extends BaseAdapter{
         // TODO Auto-generated method stub
         ViewHolder holder;
         View v = convertView;
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        
         if (v == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.post_item, null);
@@ -89,6 +94,13 @@ public class PostAdapter extends BaseAdapter{
             holder.post_dday = (TextView) v.findViewById(R.id.post_dday);
             holder.post_group = (TextView) v.findViewById(R.id.post_group);
             holder.like = (ImageButton) v.findViewById(R.id.like_button);
+
+            //폰트
+            holder.post_title.setTypeface(typeface);
+            holder.post_id.setTypeface(typeface);
+            holder.post_dday.setTypeface(typeface);
+            holder.post_group.setTypeface(typeface);
+
             v.setTag(holder);
         } else {
 
@@ -101,7 +113,7 @@ public class PostAdapter extends BaseAdapter{
         holder.like.setOnTouchListener(new LikeListener(carrier.getId(), getItem(position).getId(), holder.like, getItem(position)));
 
         holder.post_title.setText(getItem(position).getTitle() + " ");
-        holder.post_id.setText(getItem(position).getId() + " ");
+        holder.post_id.setText(getItem(position).getId() + "");
         if (getItem(position).getGroup().compareTo("") == 0) {
             holder.post_group.setText("[" + getItem(position).getKakao_nic() + "]" + " ");
         } else if (getItem(position).getGroup().compareTo("") != 0) {
@@ -194,7 +206,7 @@ public class PostAdapter extends BaseAdapter{
                 holder.post_category.setImageResource(R.drawable.outer_passed);
 
             } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
-                holder.post_category.setImageResource(R.drawable.seminar_paseed);
+                holder.post_category.setImageResource(R.drawable.seminar_passed);
 
             } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                 holder.post_category.setImageResource(R.drawable.recruit_passed);
@@ -282,7 +294,7 @@ public class PostAdapter extends BaseAdapter{
                     holder.post_category.setImageResource(R.drawable.outer_passed);
 
                 } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
-                    holder.post_category.setImageResource(R.drawable.seminar_paseed);
+                    holder.post_category.setImageResource(R.drawable.seminar_passed);
 
                 } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                     holder.post_category.setImageResource(R.drawable.recruit_passed);

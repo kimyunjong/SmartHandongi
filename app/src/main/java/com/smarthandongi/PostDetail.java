@@ -1,11 +1,9 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -130,7 +128,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
         view_num=(TextView)findViewById(R.id.pos_view_num);
         review_num=(TextView)findViewById(R.id.pos_review_num);
 
-
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         //폰트설정
@@ -163,26 +160,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         popup_push_confirm = (RelativeLayout)findViewById(R.id.popup_push);
         popup_cancel = (RelativeLayout)findViewById(R.id.popup_cancel);
 
-        if(carrier.getFromWriting()==1) {
 
-            phpCreate();
 
-            new AlertDialog.Builder(this)
-                    .setTitle("푸시알람설정")
-                    .setMessage("바로 푸시를 보내시겠습니까?")
-                    .setIcon(R.drawable.handongi)
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            SendPush sendPush = new SendPush();
-                            sendPush.execute();
-                        }
-                    })
-                    .setNegativeButton("취소", null)
-                    .show();
-        }
-        else
-        {
             if(post.getHas_pic().compareTo("1")==0) {
                 construction();
             }
@@ -264,7 +243,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             view_num.setText(post.getView_num()+1+"");                                          //조회수
 
             carrier.setEdit_count(0);
-        }
+
     }
 
     public void construction() {
@@ -477,20 +456,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     public void onClick(View v) {
                         dialog_push.dismiss();
 
-                        new CountDownTimer(1500, 300) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                popup_delete_1.setVisibility(VISIBLE);
-                                popup_delete_2.setVisibility(VISIBLE);
-                                popup_cancel.setVisibility(VISIBLE);
-                            }
-                            @Override
-                            public void onFinish() {
-                                popup_delete_1.setVisibility(GONE);
-                                popup_delete_2.setVisibility(GONE);
-                                popup_cancel.setVisibility(GONE);
-                            }
-                        }.start();
                     }
                 });
 

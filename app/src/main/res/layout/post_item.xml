@@ -17,8 +17,8 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ff807f7c"
+        android:layout_height="0.25dp"
+        android:background="#414042"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -34,21 +34,23 @@
     android:id="@+id/standard"
     android:layout_marginTop="13.5dp"
     android:layout_marginLeft="12dp"
+    android:layout_marginRight="10dp"
 
     >
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="22.5dp"
         android:id="@+id/post_title"
         android:singleLine="true"
+        android:text="리쿠르팅"
         android:ellipsize="end"
-        android:textSize="15sp"
+        android:textSize="15dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/post_group"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:layout_below="@+id/post_title"
         />
     <TextView
@@ -58,46 +60,41 @@
         android:layout_toRightOf="@+id/post_group"
         android:layout_below="@+id/post_title"
         android:layout_marginLeft="4dp"
-        android:textSize="14sp"
+        android:textSize="14dp"
         />
 </RelativeLayout>
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
     android:id="@+id/post_category_layout"
     android:layout_marginLeft="10dp"
-    android:layout_centerHorizontal="true"
-    android:layout_alignTop="@+id/standard"
+    android:layout_marginTop="13.5dp">
 
-    >
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/post_id"
-        android:layout_below="@+id/post_category"
-        android:layout_centerHorizontal="true"
-        android:textSize="12sp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="23.5dp"
+            android:layout_height="23.5dp"
+            android:id="@+id/post_category"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_id"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:textSize="12dp"/>
 
-        />
-
-    <ImageView
-        android:layout_width="25.5dp"
-        android:layout_height="25.5dp"
-        android:id="@+id/post_category"
-        android:layout_alignParentLeft="true"
-        android:layout_centerHorizontal="true"
-        />
+    </LinearLayout>
 
 </RelativeLayout>
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="19dp"
+        android:layout_height="16.5dp"
         android:id="@+id/like_button"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-
         android:layout_marginRight="11dp"
         android:layout_marginTop="13.5dp"
         android:layout_alignTop="@+id/dday"/>

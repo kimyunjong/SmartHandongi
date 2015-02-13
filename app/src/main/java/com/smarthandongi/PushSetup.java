@@ -557,6 +557,11 @@ public class PushSetup extends Activity implements View.OnClickListener {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            //붙어라 전체 선택버튼
+            if(sports == 1 && game == 1 && nightfood == 1 && gonggu == 1 & carpool == 1 & study == 1 & trading == 1 & lost == 1 & recruiting == 1 & exchange == 1){
+                together_btn.setBackgroundResource(R.drawable.push_together_on);
+            }
+            //붙어라 개별 선택버튼
             if (sports == 0) {
                 push_sports_btn.setBackgroundResource(R.drawable.push_together_sports);        //읽어들일 때 1이면 체크 표시
             } else push_sports_btn.setBackgroundResource(R.drawable.push_together_sports_on);
@@ -588,6 +593,11 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange);
             } else push_exchange_btn.setBackgroundResource(R.drawable.push_together_exchange_on);
 
+            //대외활동 전체선택버튼
+            if(contest == 1 & intern == 1 & service == 1){
+                outer_btn.setBackgroundResource(R.drawable.push_outer_on);
+            }
+            //대외활동 개별선택버튼
             if (contest == 0) {
                 push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest);
             } else push_contest_btn.setBackgroundResource(R.drawable.push_outer_contest_on);
@@ -597,6 +607,12 @@ public class PushSetup extends Activity implements View.OnClickListener {
             if (service == 0) {
                 push_service_btn.setBackgroundResource(R.drawable.push_outer_service);
             } else push_service_btn.setBackgroundResource(R.drawable.push_outer_service_on);
+
+            //공연세미나 전체선택버튼
+            if(perf == 1 & seminar == 1 & presentation == 1){
+                seminar_btn.setBackgroundResource(R.drawable.push_seminar_on);
+            }
+            //공연세미나 개별선택버튼
             if (perf == 0) {
                 push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf);
             } else push_perf_btn.setBackgroundResource(R.drawable.push_seminar_perf_on);
@@ -607,6 +623,9 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation);
             } else push_presentation_btn.setBackgroundResource(R.drawable.push_seminar_presentation_on);
 
+            if(scholarship == 1 & r_sports == 1 & r_perf == 1 & faith == 1 & display == 1 & r_service == 1){
+                recruiting_btn.setBackgroundResource(R.drawable.push_recruiting_on);
+            }
             if (scholarship == 0) {
                 push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship);
             } else push_scholarship_btn.setBackgroundResource(R.drawable.push_recruiting_scholarship_on);

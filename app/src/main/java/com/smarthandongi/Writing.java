@@ -100,7 +100,7 @@ public class Writing extends Activity implements OnClickListener {
 
     Picture poster = new Picture();
     Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
-    Button dialog_push_cancel, dialog_push_confirm, dialog_writing_confirm, dialog_writing_cancel, dialog_okay;
+    Button dialog_push_cancel, dialog_push_confirm, dialog_writing_confirm, dialog_writing_cancel, dialog_okay, dialog_back_cancel, dialog_back_confirm;
     ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img, writing_edit_title;
     ImageView writing_startdate_img, writing_enddate_img, writing_title_message, writing_confirm_img, writing_edit_confirm;
     Button big_category_btn, small_category_btn;
@@ -108,7 +108,7 @@ public class Writing extends Activity implements OnClickListener {
     ImageButton writing_additional_btn, writing_additional_hide_btn, writing_remove_pic_btn;
     LinearLayout writing_additional, linear, entire_layout, dialog_check_background;
     ScrollView scroll;
-    Dialog dialog, dialog_cancel, dialog_check;
+    Dialog dialog, dialog_cancel, dialog_check, dialog_back;
     RelativeLayout popup_1, popup_2, popup_3, popup_4, popup_5;
     TextView dialog_push_text, dialog_push_title;
 
@@ -255,9 +255,6 @@ public class Writing extends Activity implements OnClickListener {
         popup_4 = (RelativeLayout)findViewById(R.id.popup_4);
         popup_5 = (RelativeLayout)findViewById(R.id.popup_5);
 
-        carrier.setBig_category("0");
-        carrier.setCategory("");
-
         entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
         entire_layout.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -297,6 +294,9 @@ public class Writing extends Activity implements OnClickListener {
 
         writing_confirm_img.setVisibility(GONE);
         writing_edit_confirm.setVisibility(VISIBLE);
+
+        Log.d("bcate", carrier.getBig_category());
+        Log.d("scate", carrier.getCategory());
 
         switch(carrier.getBig_category()) {                                         //대분류
             case "1" : { big_category_btn.setText("일반공지"); break;}
@@ -517,57 +517,69 @@ public class Writing extends Activity implements OnClickListener {
                 break;
             }
             case R.id.writing_back_btn :{               //TODO 뒤로 가기를 눌렀을 때 이미 작성된 내용은 저장되지 않는다는 경고팝업 띄우기               //뒤로가기btn
-
                 String title_temp, content_temp;
-                carrier.setBig_category(null);
-                carrier.setCategory(null);
-                carrier.setTitle(null);
-                carrier.setContent(null);
-                carrier.setPosting_date(null);
-                carrier.setStart_date(null);
-                carrier.setEnd_date(null);
-                carrier.setLink(null);
-                carrier.setGroup_code("");
+
                 title_temp = writing_title.getText().toString();
                 content_temp = writing_content.getText().toString();
 
-                if(title_temp.compareTo("") != 0 || content_temp.compareTo("") != 0) {                          //제목이랑 내용이 있을 때 뒤로가기 하면 메시지 뜸
-                    new AlertDialog.Builder(this)
-                            .setTitle("뒤로가기")
-                            .setMessage("확인 누르면 내용 다 없어지는데 괜춘?")
-                            .setIcon(R.drawable.handongi)
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
-                                        Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        carrier.setGroup_name("");
-                                        Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
-                                        startActivity(intent);
-                                        finish();
+                //dialog_back 이라는 변수를 주고 진행
+                if(title_temp.length() > 0 || content_temp.length() > 0) {
 
-                                    }
+                    dialog_back = new Dialog(context);
+                    dialog_back.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_back.setContentView(R.layout.dialog_back);
+                    dialog_back.show();
+
+                    dialog_back_confirm = (Button) dialog_back.findViewById(R.id.dialog_back_confirm);
+                    dialog_back_cancel = (Button) dialog_back.findViewById(R.id.dialog_back_cancel);
+                    dialog_back_cancel.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog_back.dismiss();
+                        }
+                    });
+
+                    dialog_back_confirm.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //일반적인 경로도 들어왔을 때
+                            carrier.setBig_category("");
+                            carrier.setCategory("");
+                            carrier.setTitle(null);
+                            carrier.setContent(null);
+                            carrier.setPosting_date(null);
+                            carrier.setStart_date(null);
+                            carrier.setEnd_date(null);
+                            carrier.setLink(null);
+                            carrier.setGroup_code("");
+
+                            if (carrier.getEdit_count() == 0) {
+                                //개인으로 들어왔을 때
+                                if (carrier.getSelector() == 0) {
+                                    dialog_back.dismiss();
+
+                                    Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                                    startActivity(intent);
+                                    finish();
                                 }
-                            })
-                            .setNegativeButton("취소", null)
-                            .show();
-                    break;
+                                //단체로 들어왔을 때
+                                else if (carrier.getSelector() == 1) {
+                                    dialog_back.dismiss();
+
+                                    Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                            //수정에서 왔을 때
+                            else if (carrier.getEdit_count() == 1) {
+                                dialog_back.dismiss();
+                                finish();
+                            }
+                        }
+                    });
                 }
 
-                if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
-                    Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    carrier.setGroup_name("");
-                    Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
-                    startActivity(intent);
-                    finish();
-                }
                 break;
             }
             case R.id.writing_cancel_btn :{                                                                                                 //취소btn
@@ -758,90 +770,65 @@ public class Writing extends Activity implements OnClickListener {
     public void onBackPressed(){
         String title_temp, content_temp;
 
-
-
         title_temp = writing_title.getText().toString();
         content_temp = writing_content.getText().toString();
 
-
-
         //dialog_back 이라는 변수를 주고 진행
+        if(title_temp.length() > 0 || content_temp.length() > 0) {
 
-        dialog_cancel = new Dialog(context);
-        dialog_cancel.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_cancel.setContentView(R.layout.dialog_cancel);
-        dialog_cancel.show();
+            dialog_back = new Dialog(context);
+            dialog_back.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_back.setContentView(R.layout.dialog_back);
+            dialog_back.show();
 
-        dialog_writing_confirm = (Button)dialog_cancel.findViewById(R.id.dialog_writing_confirm);
-        dialog_writing_confirm.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog_cancel.dismiss();
-                new CountDownTimer(1500, 300) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        popup_1.setVisibility(VISIBLE);
-                        popup_2.setVisibility(VISIBLE);
-                        popup_5.setVisibility(VISIBLE);
+            dialog_back_confirm = (Button) dialog_back.findViewById(R.id.dialog_back_confirm);
+            dialog_back_cancel = (Button) dialog_back.findViewById(R.id.dialog_back_cancel);
+            dialog_back_cancel.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog_back.dismiss();
+                }
+            });
+
+            dialog_back_confirm.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //일반적인 경로도 들어왔을 때
+                    carrier.setBig_category("");
+                    carrier.setCategory("");
+                    carrier.setTitle(null);
+                    carrier.setContent(null);
+                    carrier.setPosting_date(null);
+                    carrier.setStart_date(null);
+                    carrier.setEnd_date(null);
+                    carrier.setLink(null);
+                    carrier.setGroup_code("");
+
+                    if (carrier.getEdit_count() == 0) {
+                        //개인으로 들어왔을 때
+                        if (carrier.getSelector() == 0) {
+                            dialog_back.dismiss();
+
+                            Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
+                            startActivity(intent);
+                            finish();
+                        }
+                        //단체로 들어왔을 때
+                        else if (carrier.getSelector() == 1) {
+                            dialog_back.dismiss();
+
+                            Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
-                    @Override
-                    public void onFinish() {
-                        popup_1.setVisibility(GONE);
-                        popup_2.setVisibility(GONE);
-                        popup_5.setVisibility(GONE);
-                        carrier.setBig_category(null);
-                        carrier.setCategory(null);
-                        carrier.setTitle(null);
-                        carrier.setContent(null);
-                        carrier.setPosting_date(null);
-                        carrier.setStart_date(null);
-                        carrier.setEnd_date(null);
-                        carrier.setLink(null);
-                        carrier.setGroup_code("");
+                    //수정에서 왔을 때
+                    else if (carrier.getEdit_count() == 1) {
+                        dialog_back.dismiss();
                         finish();
                     }
-                }.start();
-
-            }
-        });
-
-        if(title_temp.compareTo("") != 0 || content_temp.compareTo("") != 0) {                          //제목이랑 내용이 있을 때 뒤로가기 하면 메시지 뜸
-            new AlertDialog.Builder(this)
-                    .setTitle("뒤로가기")
-                    .setMessage("확인 누르면 내용 다 없어지는데 괜춘?")
-                    .setIcon(R.drawable.handongi)
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
-                                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-                                startActivity(intent);
-                                finish();
-
-                            } else {
-                                carrier.setGroup_name("");
-                                Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    })
-                    .setNegativeButton("취소", null)
-                    .show();
-        }
-
-        else {
-            if (carrier.getSelector() == 0) {                //개인인 경우 그룹이름이 존재하지 않는다.
-                Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
-                startActivity(intent);
-                finish();
-
-            } else {
-                carrier.setGroup_name("");
-                Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
-                startActivity(intent);
-                finish();
-            }
+                }
+            });
         }
     }
 
@@ -973,6 +960,7 @@ public class Writing extends Activity implements OnClickListener {
         carrier.setContent(carrier.getContent().replace("%27", "%60"));
 
         if(carrier.getBig_category().compareTo("0") == 0){
+            check_count = 1;
             dialog_check = new Dialog(context);
             dialog_check.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog_check.setContentView(R.layout.dialog_writing_check);
@@ -986,13 +974,13 @@ public class Writing extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     dialog_check.dismiss();
-                    check_count = 1;
 
                 }
             });
         }
         else if(carrier.getBig_category().compareTo("1") != 0 && carrier.getCategory().compareTo("") == 0){
             //소분류
+            check_count = 1;
             dialog_check = new Dialog(context);
             dialog_check.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog_check.setContentView(R.layout.dialog_writing_check);
@@ -1006,12 +994,12 @@ public class Writing extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     dialog_check.dismiss();
-                    check_count = 1;
                 }
             });
         }
         else if(carrier.getTitle().length() == 0){
             //제목
+            check_count = 1;
             dialog_check = new Dialog(context);
             dialog_check.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog_check.setContentView(R.layout.dialog_writing_check);
@@ -1025,12 +1013,12 @@ public class Writing extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     dialog_check.dismiss();
-                    check_count = 1;
                 }
             });
         }
         else if(carrier.getContent().length() == 0){
             //내용
+            check_count = 1;
             dialog_check = new Dialog(context);
             dialog_check.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog_check.setContentView(R.layout.dialog_writing_check);
@@ -1044,12 +1032,11 @@ public class Writing extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     dialog_check.dismiss();
-                    check_count = 1;
+
                 }
             });
         }
-        else
-        {
+        else {
             carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
                     + "posting_id=" + carrier.getPost_id()
                     + "&kakao_id=" + carrier.getId()
@@ -1085,6 +1072,130 @@ public class Writing extends Activity implements OnClickListener {
             Log.d("enddate", carrier.getEnd_date());
             Log.d("haspic", String.valueOf(carrier.getHas_pic()));
             Log.d("editcount", String.valueOf(carrier.getEdit_count()));
+
+                new CountDownTimer(1500, 300) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        // do something after 1s
+                        popup_1.setVisibility(VISIBLE);
+                        popup_2.setVisibility(VISIBLE);
+                        popup_3.setVisibility(VISIBLE);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        // do something end times 5s
+                        popup_1.setVisibility(GONE);
+                        popup_2.setVisibility(GONE);
+                        popup_3.setVisibility(GONE);
+                        if (carrier.getBig_category().compareTo("1") == 0) {
+                            Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                }.start();
+
+                //대분류가 일반공지가 아닌 경우 알람 진행
+                if (carrier.getBig_category().compareTo("1") != 0) {
+//
+                    new CountDownTimer(1500, 1500) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            String popup_message;
+//                        SendPush sendPush = new SendPush();                               나중에 추가하자
+//                        sendPush.execute();
+                            popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";
+
+
+                            dialog = new Dialog(context);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_push);
+                            dialog.show();
+
+
+                            dialog_push_title = (TextView) dialog.findViewById(R.id.dialog_push_title);
+                            dialog_push_title.setText("알람을 보내시겠습니까?");
+                            dialog_push_title.setTypeface(typeface);
+
+                            dialog_push_text = (TextView) dialog.findViewById(R.id.dialog_push_text);
+                            dialog_push_text.setText("'" + category_push_string + "' " + popup_message);
+                            dialog_push_text.setTypeface(typeface);
+
+                            dialog_push_confirm = (Button) dialog.findViewById(R.id.dialog_push_confirm);
+                            dialog_push_confirm.setTypeface(typeface);
+                            dialog_push_confirm.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+
+                                    new CountDownTimer(1500, 300) {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {
+                                            popup_1.setVisibility(VISIBLE);
+                                            popup_2.setVisibility(VISIBLE);
+                                            popup_4.setVisibility(VISIBLE);
+                                        }
+
+                                        @Override
+                                        public void onFinish() {
+                                            popup_1.setVisibility(GONE);
+                                            popup_2.setVisibility(GONE);
+                                            popup_4.setVisibility(GONE);
+
+                                            Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }.start();
+                                }
+                            });
+
+                            dialog_push_cancel = (Button) dialog.findViewById(R.id.dialog_push_cancel);
+                            dialog_push_cancel.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+
+//                                    new CountDownTimer(1500, 300) {
+//                                        @Override
+//                                        public void onTick(long millisUntilFinished) {
+//                                            popup_1.setVisibility(VISIBLE);
+//                                            popup_2.setVisibility(VISIBLE);
+//                                            popup_5.setVisibility(VISIBLE);
+//                                        }
+//
+//                                        @Override
+//                                        public void onFinish() {
+//                                            popup_1.setVisibility(GONE);
+//                                            popup_2.setVisibility(GONE);
+//                                            popup_5.setVisibility(GONE);
+//                                        }
+//                                    }.start();
+                                }
+                            });
+                        }
+                    }.start();
+                }
+
+//                carrier.setFromWriting(0);
+//                carrier.setFromPostDetail(0);
+//                carrier.setEdit_count(0);
+//                carrier.setGroup_name("");
+//                carrier.setGroup_code("");
+//                carrier.setBig_category(null);
+//                carrier.setCategory(null);
+//                carrier.setTitle(null);
+//                carrier.setContent(null);
+//                carrier.setPosting_date(null);
+//                carrier.setStart_date(null);
+//                carrier.setEnd_date(null);
+//                carrier.setLink(null);
+
 
             carrier.setFromPostDetail(0);
             carrier.setGroup_name("");

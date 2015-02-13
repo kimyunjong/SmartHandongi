@@ -200,7 +200,7 @@ public class postAdapterScrap extends BaseAdapter {
                     holder.post_category.setImageResource(R.drawable.outer_passed);
 
                 } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
-                    holder.post_category.setImageResource(R.drawable.seminar_paseed);
+                    holder.post_category.setImageResource(R.drawable.seminar_passed);
 
                 } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                     holder.post_category.setImageResource(R.drawable.recruit_passed);
@@ -286,7 +286,7 @@ public class postAdapterScrap extends BaseAdapter {
                     holder.post_category.setImageResource(R.drawable.outer_passed);
 
                 } else if (getItem(position).getBig_category().equalsIgnoreCase("3")) {
-                    holder.post_category.setImageResource(R.drawable.seminar_paseed);
+                    holder.post_category.setImageResource(R.drawable.seminar_passed);
 
                 } else if (getItem(position).getBig_category().equalsIgnoreCase("4")) {
                     holder.post_category.setImageResource(R.drawable.recruit_passed);
