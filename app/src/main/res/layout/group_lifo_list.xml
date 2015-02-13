@@ -260,7 +260,7 @@
                 android:layout_width="126dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:background="@drawable/modification_request"/>
+                android:background="@drawable/new_register_request"/>
         </RelativeLayout>
     </LinearLayout>
 
