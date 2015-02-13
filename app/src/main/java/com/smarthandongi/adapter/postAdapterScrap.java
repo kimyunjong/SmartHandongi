@@ -1,32 +1,33 @@
 package com.smarthandongi.adapter;
 
-        import android.content.Context;
-        import android.graphics.Color;
-        import android.os.AsyncTask;
-        import android.view.LayoutInflater;
-        import android.view.MotionEvent;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.BaseAdapter;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-        import com.smarthandongi.Carrier;
-        import com.smarthandongi.R;
-        import com.smarthandongi.database.PostDatabase;
-        import com.smarthandongi.dday;
+import com.smarthandongi.Carrier;
+import com.smarthandongi.R;
+import com.smarthandongi.database.PostDatabase;
+import com.smarthandongi.dday;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.io.BufferedReader;
-        import java.io.InputStreamReader;
-        import java.net.HttpURLConnection;
-        import java.net.URL;
-        import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
 
 /**
  * Created by Joel on 2015-01-23.
@@ -36,6 +37,7 @@ public class postAdapterScrap extends BaseAdapter {
     private LayoutInflater inflater;
     private List<PostDatabase> list;
     private Context context;
+    Typeface typeface;
 
     dday deadline=new dday();
 
@@ -83,6 +85,8 @@ public class postAdapterScrap extends BaseAdapter {
         View v = convertView;
         if (v == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+
             v = inflater.inflate(R.layout.post_item, null);
             holder = new ViewHolder();
 
@@ -93,6 +97,15 @@ public class postAdapterScrap extends BaseAdapter {
             holder.post_group = (TextView) v.findViewById(R.id.post_group);
             holder.like = (ImageButton) v.findViewById(R.id.like_button);
             holder.line_item=(LinearLayout)v.findViewById(R.id.line_item);
+            holder.scrap_num = (TextView)v.findViewById(R.id.scrap_num);
+            //폰트작업
+            holder.post_title.setTypeface(typeface);
+            holder.post_id.setTypeface(typeface);
+            holder.post_dday.setTypeface(typeface);
+            holder.post_group.setTypeface(typeface);
+            holder.scrap_num.setTypeface(typeface);
+
+
             v.setTag(holder);
         } else {
 
@@ -107,7 +120,7 @@ public class postAdapterScrap extends BaseAdapter {
         holder.line_item.setBackgroundColor(Color.parseColor(strColor));
 
         holder.post_title.setText(getItem(position).getTitle() + " ");
-        holder.post_id.setText(getItem(position).getId() + " ");
+        holder.post_id.setText(getItem(position).getId() + "");
         if (getItem(position).getGroup().compareTo("") == 0) {
             holder.post_group.setText("[" + getItem(position).getKakao_nic() + "]" + " ");
         } else if (getItem(position).getGroup().compareTo("") != 0) {
@@ -420,7 +433,7 @@ public class postAdapterScrap extends BaseAdapter {
 
 
     static class ViewHolder{
-        TextView post_title, post_id, post_group, post_dday;
+        TextView post_title, post_id, post_group, post_dday, scrap_num;
         ImageView post_category;
         ImageButton like;
         LinearLayout line_item;

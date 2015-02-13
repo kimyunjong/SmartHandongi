@@ -305,7 +305,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
                 Intent intent = new Intent(PostDetail.this, Writing.class).putExtra("carrier", carrier);
                 startActivity(intent);
-                finish();
                 break;
             }
             case R.id.pos_report_btn : {

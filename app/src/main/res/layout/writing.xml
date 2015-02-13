@@ -200,19 +200,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/writing_title_img"
-                        android:layout_width="35.5dp"
-                        android:layout_height="24dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"/>
-                    <!--android:background="@drawable/writing_title"-->
                     <EditText
                         android:id="@+id/writing_title"
                         android:layout_marginLeft="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="16dp"
+                        android:textSize="14.5dp"
                         android:gravity="left"
                         android:layout_marginRight="15dp"
                         android:hint="제목"
@@ -237,12 +230,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp">
-                    <ImageView
-                        android:id="@+id/writing_body_img"
-                        android:layout_width="37dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentTop="true"/>
-                    <!--android:background="@drawable/writing_body"-->
                     <EditText
                         android:id="@+id/writing_content"
                         android:layout_width="match_parent"

@@ -1,20 +1,15 @@
 package com.smarthandongi.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.smarthandongi.Carrier;
-import com.smarthandongi.PostDetail;
 import com.smarthandongi.R;
-import com.smarthandongi.SeeMyPost;
 import com.smarthandongi.database.PostDatabase;
 
 import java.util.ArrayList;
@@ -29,6 +24,7 @@ public class SMP_PostAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private Carrier carrier;
+    Typeface typeface;
 
     public  SMP_PostAdapter(Context context, int alayout, ArrayList<PostDatabase> post_list,ArrayList<PostDatabase> all_posting_list, Carrier carrier) {
         this.context=context;
@@ -45,17 +41,21 @@ public class SMP_PostAdapter extends BaseAdapter {
 
     public View getView(final int position, View convert_view, ViewGroup parent) {
 
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         if(convert_view==null) {
             convert_view=inflater.inflate(layout,parent,false);
         }
 
         TextView category = (TextView)convert_view.findViewById(R.id.smp_category);
+        category.setTypeface(typeface);
         category.setText(post_list.get(position).getBig_category());
 
         TextView posting_date = (TextView)convert_view.findViewById(R.id.smp_posting_date);
+        posting_date.setTypeface(typeface);
         posting_date.setText(post_list.get(position).getPosting_date());
 
         TextView title = (TextView)convert_view.findViewById(R.id.smp_title);
+        title.setTypeface(typeface);
         title.setText(post_list.get(position).getTitle());
 
         /*

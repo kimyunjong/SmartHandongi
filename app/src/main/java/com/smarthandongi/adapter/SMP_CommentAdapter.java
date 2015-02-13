@@ -1,6 +1,7 @@
 package com.smarthandongi.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import com.smarthandongi.R;
 import com.smarthandongi.database.PostDatabase;
 import com.smarthandongi.database.ReviewDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +26,7 @@ public class SMP_CommentAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private Carrier carrier;
+    Typeface typeface;
 
     public  SMP_CommentAdapter(Context context, int alayout, ArrayList<ReviewDatabase> comment_list, Carrier carrier,ArrayList<PostDatabase> posting_list) {
         this.context=context;
@@ -42,19 +43,23 @@ public class SMP_CommentAdapter extends BaseAdapter {
 
     public View getView(final int position, View convert_view, ViewGroup parent) {
         String title;
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         if (convert_view == null) {
             convert_view = inflater.inflate(layout, parent, false);
         }
 
         TextView posting_date = (TextView)convert_view.findViewById(R.id.smp_comment_date);
+        posting_date.setTypeface(typeface);
         posting_date.setText(comment_list.get(position).getReply_date());
 
         TextView comment_title =(TextView)convert_view.findViewById(R.id.smp_comment_title);
+        comment_title.setTypeface(typeface);
         title=checkTitle(posting_list,comment_list.get(position).getPosting_id());
         comment_title.setText(title);
 
         TextView comment=(TextView)convert_view.findViewById(R.id.smp_comment);
+        comment.setTypeface(typeface);
         comment.setText(comment_list.get(position).getContent());
         return convert_view;
     }
