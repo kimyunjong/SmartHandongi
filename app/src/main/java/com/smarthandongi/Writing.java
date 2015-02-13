@@ -1086,7 +1086,9 @@ public class Writing extends Activity implements OnClickListener {
                     + "&start_date=" + carrier.getStart_date()
                     + "&end_date=" + carrier.getEnd_date()
                     + "&has_pic=" + has_pic
-                    + "&edit_count=" + carrier.getEdit_count());
+                    + "&edit_count=" + carrier.getEdit_count()
+                    + "&push=1"
+                    + "&regid=" + carrier.getRegid());
             //TODO 푸시카운트 1로 초기화
             task = new PhpUpload();
             task.execute(carrier.getUpload_url());
