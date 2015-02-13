@@ -363,130 +363,130 @@ public class Writing extends Activity implements OnClickListener {
 
                 phpCreate();
 
-                if(check_count == 0) {
-                    new CountDownTimer(1500, 300) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            // do something after 1s
-                            popup_1.setVisibility(VISIBLE);
-                            popup_2.setVisibility(VISIBLE);
-                            popup_3.setVisibility(VISIBLE);
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            // do something end times 5s
-                            popup_1.setVisibility(GONE);
-                            popup_2.setVisibility(GONE);
-                            popup_3.setVisibility(GONE);
-                            if (carrier.getBig_category().compareTo("1") == 0) {
-                                Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    }.start();
-
-                    //대분류가 일반공지가 아닌 경우 알람 진행
-                    if (carrier.getBig_category().compareTo("1") != 0) {
+//                if(check_count == 0) {
+//                    new CountDownTimer(1500, 300) {
+//                        @Override
+//                        public void onTick(long millisUntilFinished) {
+//                            // do something after 1s
+//                            popup_1.setVisibility(VISIBLE);
+//                            popup_2.setVisibility(VISIBLE);
+//                            popup_3.setVisibility(VISIBLE);
+//                        }
 //
-                        new CountDownTimer(1500, 1500) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                String popup_message;
-//                        SendPush sendPush = new SendPush();                               나중에 추가하자
-//                        sendPush.execute();
-                                popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";
-
-
-                                dialog = new Dialog(context);
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                dialog.setContentView(R.layout.dialog_push);
-                                dialog.show();
-
-
-                                dialog_push_title = (TextView) dialog.findViewById(R.id.dialog_push_title);
-                                dialog_push_title.setText("알람을 보내시겠습니까?");
-                                dialog_push_title.setTypeface(typeface);
-
-                                dialog_push_text = (TextView) dialog.findViewById(R.id.dialog_push_text);
-                                dialog_push_text.setText("'" + category_push_string + "' " + popup_message);
-                                dialog_push_text.setTypeface(typeface);
-
-                                dialog_push_confirm = (Button) dialog.findViewById(R.id.dialog_push_confirm);
-                                dialog_push_confirm.setTypeface(typeface);
-                                dialog_push_confirm.setOnClickListener(new OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog.dismiss();
-
-                                        new CountDownTimer(1500, 300) {
-                                            @Override
-                                            public void onTick(long millisUntilFinished) {
-                                                popup_1.setVisibility(VISIBLE);
-                                                popup_2.setVisibility(VISIBLE);
-                                                popup_4.setVisibility(VISIBLE);
-                                            }
-
-                                            @Override
-                                            public void onFinish() {
-                                                popup_1.setVisibility(GONE);
-                                                popup_2.setVisibility(GONE);
-                                                popup_4.setVisibility(GONE);
-
-                                                Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }.start();
-                                    }
-                                });
-
-                                dialog_push_cancel = (Button) dialog.findViewById(R.id.dialog_push_cancel);
-                                dialog_push_cancel.setOnClickListener(new OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog.dismiss();
-
-//                                    new CountDownTimer(1500, 300) {
-//                                        @Override
-//                                        public void onTick(long millisUntilFinished) {
-//                                            popup_1.setVisibility(VISIBLE);
-//                                            popup_2.setVisibility(VISIBLE);
-//                                            popup_5.setVisibility(VISIBLE);
-//                                        }
+//                        @Override
+//                        public void onFinish() {
+//                            // do something end times 5s
+//                            popup_1.setVisibility(GONE);
+//                            popup_2.setVisibility(GONE);
+//                            popup_3.setVisibility(GONE);
+//                            if (carrier.getBig_category().compareTo("1") == 0) {
+//                                Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//                    }.start();
 //
-//                                        @Override
-//                                        public void onFinish() {
-//                                            popup_1.setVisibility(GONE);
-//                                            popup_2.setVisibility(GONE);
-//                                            popup_5.setVisibility(GONE);
-//                                        }
-//                                    }.start();
-                                    }
-                                });
-                            }
-                        }.start();
-                    }
-
+//                    //대분류가 일반공지가 아닌 경우 알람 진행
+//                    if (carrier.getBig_category().compareTo("1") != 0) {
+////
+//                        new CountDownTimer(1500, 1500) {
+//                            @Override
+//                            public void onTick(long millisUntilFinished) {
+//                            }
 //
-//                carrier.setFromPostDetail(0);
-//                carrier.setEdit_count(0);
-//                carrier.setGroup_name("");
-//                carrier.setGroup_code("");
-//                carrier.setBig_category(null);
-//                carrier.setCategory(null);
-//                carrier.setTitle(null);
-//                carrier.setContent(null);
-//                carrier.setPosting_date(null);
-//                carrier.setStart_date(null);
-//                carrier.setEnd_date(null);
-//                carrier.setLink(null);
-                }
+//                            @Override
+//                            public void onFinish() {
+//                                String popup_message;
+////                        SendPush sendPush = new SendPush();                               나중에 추가하자
+////                        sendPush.execute();
+//                                popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";
+//
+//
+//                                dialog = new Dialog(context);
+//                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                                dialog.setContentView(R.layout.dialog_push);
+//                                dialog.show();
+//
+//
+//                                dialog_push_title = (TextView) dialog.findViewById(R.id.dialog_push_title);
+//                                dialog_push_title.setText("알람을 보내시겠습니까?");
+//                                dialog_push_title.setTypeface(typeface);
+//
+//                                dialog_push_text = (TextView) dialog.findViewById(R.id.dialog_push_text);
+//                                dialog_push_text.setText("'" + category_push_string + "' " + popup_message);
+//                                dialog_push_text.setTypeface(typeface);
+//
+//                                dialog_push_confirm = (Button) dialog.findViewById(R.id.dialog_push_confirm);
+//                                dialog_push_confirm.setTypeface(typeface);
+//                                dialog_push_confirm.setOnClickListener(new OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        dialog.dismiss();
+//
+//                                        new CountDownTimer(1500, 300) {
+//                                            @Override
+//                                            public void onTick(long millisUntilFinished) {
+//                                                popup_1.setVisibility(VISIBLE);
+//                                                popup_2.setVisibility(VISIBLE);
+//                                                popup_4.setVisibility(VISIBLE);
+//                                            }
+//
+//                                            @Override
+//                                            public void onFinish() {
+//                                                popup_1.setVisibility(GONE);
+//                                                popup_2.setVisibility(GONE);
+//                                                popup_4.setVisibility(GONE);
+//
+//                                                Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                        }.start();
+//                                    }
+//                                });
+//
+//                                dialog_push_cancel = (Button) dialog.findViewById(R.id.dialog_push_cancel);
+//                                dialog_push_cancel.setOnClickListener(new OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        dialog.dismiss();
+//
+////                                    new CountDownTimer(1500, 300) {
+////                                        @Override
+////                                        public void onTick(long millisUntilFinished) {
+////                                            popup_1.setVisibility(VISIBLE);
+////                                            popup_2.setVisibility(VISIBLE);
+////                                            popup_5.setVisibility(VISIBLE);
+////                                        }
+////
+////                                        @Override
+////                                        public void onFinish() {
+////                                            popup_1.setVisibility(GONE);
+////                                            popup_2.setVisibility(GONE);
+////                                            popup_5.setVisibility(GONE);
+////                                        }
+////                                    }.start();
+//                                    }
+//                                });
+//                            }
+//                        }.start();
+//                    }
+//
+////
+////                carrier.setFromPostDetail(0);
+////                carrier.setEdit_count(0);
+////                carrier.setGroup_name("");
+////                carrier.setGroup_code("");
+////                carrier.setBig_category(null);
+////                carrier.setCategory(null);
+////                carrier.setTitle(null);
+////                carrier.setContent(null);
+////                carrier.setPosting_date(null);
+////                carrier.setStart_date(null);
+////                carrier.setEnd_date(null);
+////                carrier.setLink(null);
+//                }
                 break;
 
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
@@ -943,15 +943,6 @@ public class Writing extends Activity implements OnClickListener {
             e.printStackTrace();
         }
 
-        if(carrier.getEdit_count() == 1){
-            message = "글을 수정하시겠습니까?";
-            title_message = "게시물 수정";
-        }
-        else {
-            message = "글을 등록하시겠습니까?";
-            title_message = "게시물 등록";
-        }
-
         carrier.setTitle(title);
         carrier.setContent(content);
         carrier.setLink(link);
@@ -1160,7 +1151,9 @@ public class Writing extends Activity implements OnClickListener {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-
+                                    Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                                    startActivity(intent);
+                                    finish();
 //                                    new CountDownTimer(1500, 300) {
 //                                        @Override
 //                                        public void onTick(long millisUntilFinished) {

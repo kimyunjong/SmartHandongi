@@ -1,20 +1,18 @@
 package com.smarthandongi.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.smarthandongi.R;
 import com.smarthandongi.database.PostDatabase;
 
-
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,6 +26,7 @@ public class Post2Adapter extends BaseAdapter{
     private Context context;
     Calendar calendar;
 
+    Typeface typeface;
 
     public Post2Adapter(Context context, List<PostDatabase> list){
         this.context=context;
@@ -61,6 +60,7 @@ public class Post2Adapter extends BaseAdapter{
         if (v == null) {
             inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.post_item2, null);
+
             holder = new ViewHolder();
             holder.firstday_check_img=(ImageView)v.findViewById(R.id.first_date_img);
             holder.post_title = (TextView)v.findViewById(R.id.title);
@@ -70,6 +70,14 @@ public class Post2Adapter extends BaseAdapter{
             holder.first_weekday=(TextView)v.findViewById(R.id.first_weekday);
             holder.upperLine=(LinearLayout)v.findViewById(R.id.item_upperline);
             v.setTag(holder);
+
+
+            //폰트
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+            holder.post_title.setTypeface(typeface);
+            holder.first_date.setTypeface(typeface);
+            holder.post_group.setTypeface(typeface);
+            holder.first_weekday.setTypeface(typeface);
 
         }
         else {
