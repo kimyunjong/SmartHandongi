@@ -88,7 +88,7 @@
         <activity android:name=".PostDetail"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop" android:multiprocess="true"/>
-
+        <activity android:name=".Bus_Schedule"/>
         <activity android:name=".My_scrap"/>
         <activity android:name=".Intro"/>
         <activity android:name=".kakao_api.SampleSignupActivity"/>

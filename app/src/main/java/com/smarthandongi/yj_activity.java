@@ -610,13 +610,33 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 break;
             }
 
-            case R.id.group_btn: {
+            case R.id.show_group: {
                 //돌아올곳
                 if (event.getAction() == 0) {
+
                     show_group_btn_img.setImageResource(R.drawable.group_menu_on);
                 } else if (event.getAction() == 1) {
                     show_group_btn_img.setImageResource(R.drawable.group_menu);
                     Intent intent = new Intent(yj_activity.this, group_infoList.class);
+                    intent.putExtra("carrier", carrier);
+
+
+
+                    startActivity(intent);
+                    finish();
+
+                    overridePendingTransition(0,0);
+
+                }
+                break;
+            }
+            case R.id.bustime_table_btn: {
+                //돌아올곳
+                if (event.getAction() == 0) {
+                    bustime_table_btn_img.setImageResource(R.drawable.bustime_table_on);
+                } else if (event.getAction() == 1) {
+                    bustime_table_btn_img.setImageResource(R.drawable.bustime_table_menu);
+                    Intent intent = new Intent(yj_activity.this, Bus_Schedule.class);
                     intent.putExtra("carrier", carrier);
 
                     startActivityForResult(intent, 0);

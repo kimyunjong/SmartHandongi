@@ -116,7 +116,7 @@ public class ReviewAdapter extends BaseAdapter {
             else
             {
                 holder.new_img.setVisibility(View.GONE);
-            }
+                            }
         }
         holder.date.setText(getItem(position).getReply_date() + " ");
         holder.kakao_nick.setText(getItem(position).getKakao_nick() + " ");
