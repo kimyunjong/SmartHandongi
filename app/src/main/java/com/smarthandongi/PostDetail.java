@@ -29,12 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -52,14 +48,14 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private DeletePhp del_php;
     PhpReviewNum phpReviewNum;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
-            type, pos_between_days, dialog_push_title, dialog_push_text;
+            type, pos_between_days, dialog_push_title, dialog_push_text, dialog_link;
     final Context context = this;
-    Dialog dialog_del, dialog_report, dialog_push;
+    Dialog dialog_del, dialog_report, dialog_push, dialog_link_message;
     Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm;
 
 
     ImageView post_img;
-    private Button scrap_btn, del_btn, review_show_btn, edit_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn;
+    private Button scrap_btn, del_btn, review_show_btn, edit_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn, dialog_link_confirm, dialog_link_cancel;
     ImageButton pos_push;
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
@@ -128,6 +124,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         content=(TextView)findViewById(R.id.pos_content);
         view_num=(TextView)findViewById(R.id.pos_view_num);
         review_num=(TextView)findViewById(R.id.pos_review_num);
+        dialog_link = (TextView)findViewById(R.id.pos_link);
+
+        dialog_link.setOnClickListener(this);
 
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
@@ -498,6 +497,41 @@ public class PostDetail extends Activity implements View.OnClickListener{
                             }
                         }.start();
 
+                    }
+                });
+                break;
+            }
+            case R.id.writer_group_name : {
+                Intent intent = new Intent(PostDetail.this,yj_activity.class).putExtra("carrier",carrier);          //TODO 단체정보 페이지로 넘어가도록 해야함
+                startActivity(intent);
+                finish();
+                break;
+
+            }
+            case R.id.pos_link : {
+
+                //링크 정보 받아오기
+                dialog_link_message = new Dialog(context);
+                dialog_link_message.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_link_message.setContentView(R.layout.dialog_link);
+                dialog_link_message.show();
+
+                dialog_link_cancel = (Button)dialog_link_message.findViewById(R.id.dialog_link_cancel);
+                dialog_link_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_link_message.dismiss();
+                    }
+                });
+
+                dialog_link_confirm = (Button)dialog_link_message.findViewById(R.id.dialog_link_confirm);
+                dialog_link_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_link_message.dismiss();
+                        Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier",carrier);   //링크페이지로 가야함
+                        startActivity(intent);
+                        finish();
                     }
                 });
                 break;

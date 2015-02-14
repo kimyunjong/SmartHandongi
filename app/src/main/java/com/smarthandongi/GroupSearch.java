@@ -1,28 +1,18 @@
 package com.smarthandongi;
+
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-
-
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,7 +21,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.smarthandongi.adapter.GroupListAdapter;
 
@@ -54,7 +43,8 @@ public class GroupSearch extends Activity {
     String str=null;
     Button backward_btn,unresistered_btn,search_cancel_btn;
     ImageView search_cancel_img,search_glass_img,search_please,unresistered_background,background_hidden;
-    TextView unresistered;
+    TextView unresistered, group_nomatch_1, group_nomatch_2, group_nomatch_3, group_nomatch_4;
+    Typeface typeface;
 
 
     @Override
@@ -63,6 +53,7 @@ public class GroupSearch extends Activity {
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_search);
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         group_php = new GroupPhp(group_list,temp_list,this);
         group_php.execute("http://hungry.portfolio1000.com/smarthandongi/group.php");
 
@@ -75,8 +66,19 @@ public class GroupSearch extends Activity {
         unresistered_screen=(RelativeLayout)findViewById(R.id.unresistered_screen);
 
         unresistered=(TextView)findViewById(R.id.unresistered);
+        group_nomatch_1 = (TextView)findViewById(R.id.group_nomatch_1);
+        group_nomatch_2 = (TextView)findViewById(R.id.group_nomatch_2);
+        group_nomatch_3 = (TextView)findViewById(R.id.group_nomatch_3);
+        group_nomatch_4 = (TextView)findViewById(R.id.group_nomatch_4);
+
+        unresistered.setTypeface(typeface);
+        group_nomatch_1.setTypeface(typeface);
+        group_nomatch_2.setTypeface(typeface);
+        group_nomatch_3.setTypeface(typeface);
+        group_nomatch_4.setTypeface(typeface);
 
         group_search = (EditText)findViewById(R.id.groupsearch);
+        group_search.setTypeface(typeface);
         group_search.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 group_search.setCursorVisible(true);

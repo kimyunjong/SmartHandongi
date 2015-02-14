@@ -35,7 +35,7 @@ public class ReportPost extends Activity implements View.OnClickListener{
     RelativeLayout popup_report_1, popup_report_2, popup_report_3, popup_report_4;
     LinearLayout dialog_check_background;
     Typeface typeface;
-    Dialog dialog_register, dialog_cancel;
+    Dialog dialog_register, dialog_back, dialog_cancel;
     final Context context = this;
 
     @Override
@@ -70,41 +70,25 @@ public class ReportPost extends Activity implements View.OnClickListener{
             case R.id.report_post_back_btn : {
                 if(report_post_content.getText().toString().length() > 0) {
 
-                    dialog_cancel = new Dialog(context);
-                    dialog_cancel.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog_cancel.setContentView(R.layout.dialog_cancel);
-                    dialog_cancel.show();
+                    dialog_back = new Dialog(context);
+                    dialog_back.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_back.setContentView(R.layout.dialog_back);
+                    dialog_back.show();
 
-                    dialog_cancel_okay = (Button) dialog_cancel.findViewById(R.id.dialog_writing_confirm);
+                    dialog_cancel_okay = (Button) dialog_back.findViewById(R.id.dialog_back_confirm);
                     dialog_cancel_okay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            new CountDownTimer(1500, 300) {
-                                @Override
-                                public void onTick(long millisUntilFinished) {
-                                    // do something after 1s
-                                    popup_report_1.setVisibility(VISIBLE);
-                                    popup_report_2.setVisibility(VISIBLE);
-                                    popup_report_4.setVisibility(VISIBLE);
-                                }
-
-                                @Override
-                                public void onFinish() {
-                                    // do something end times 5s
-                                    popup_report_1.setVisibility(GONE);
-                                    popup_report_2.setVisibility(GONE);
-                                    popup_report_4.setVisibility(GONE);
-                                    finish();
-                                }
-                            }.start();
+                            dialog_back.dismiss();
+                            finish();
                         }
                     });
 
-                    dialog_cancel_no = (Button) dialog_cancel.findViewById(R.id.dialog_writing_cancel);
+                    dialog_cancel_no = (Button) dialog_back.findViewById(R.id.dialog_back_cancel);
                     dialog_cancel_no.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog_cancel.dismiss();
+                            dialog_back.dismiss();
                         }
                     });
                 }
@@ -172,6 +156,8 @@ public class ReportPost extends Activity implements View.OnClickListener{
                     dialog_cancel_okay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            dialog_cancel.dismiss();
+
                             new CountDownTimer(1500, 300) {
                                 @Override
                                 public void onTick(long millisUntilFinished) {
@@ -212,8 +198,33 @@ public class ReportPost extends Activity implements View.OnClickListener{
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if(report_post_content.getText().toString().length() > 0) {
+
+            dialog_back = new Dialog(context);
+            dialog_back.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_back.setContentView(R.layout.dialog_back);
+            dialog_back.show();
+
+            dialog_cancel_okay = (Button) dialog_back.findViewById(R.id.dialog_back_confirm);
+            dialog_cancel_okay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog_back.dismiss();
+                    finish();
+                }
+            });
+
+            dialog_cancel_no = (Button) dialog_back.findViewById(R.id.dialog_back_cancel);
+            dialog_cancel_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog_back.dismiss();
+                }
+            });
+        }
+        else {
+            finish();
+        }
     }
 
     public void phpCreate(){

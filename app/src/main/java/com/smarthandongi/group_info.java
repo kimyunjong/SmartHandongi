@@ -1,13 +1,11 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-
 import android.content.Intent;
-
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smarthandongi.database.Picture;
+
 import java.util.ArrayList;
 
 /**
@@ -35,7 +34,7 @@ public class group_info extends Activity {
     GroupDatabase1 group;
     Button back_btn,register_group;
     Carrier carrier;
-
+    Typeface typeface;
 
 
     public void construction(int group_id){
@@ -57,6 +56,7 @@ public class group_info extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_info);
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         Intent intent=getIntent();
         int group_id1= intent.getIntExtra("group_id",0);
         String group_name1 =intent.getStringExtra("group_name");
@@ -76,11 +76,14 @@ public class group_info extends Activity {
         });
 
         group_name=(TextView) findViewById(R.id.group_name);
+        group_name.setTypeface(typeface);
         group_name.setText(group_name1);
         group_category=(TextView) findViewById(R.id.group_category);
+        group_category.setTypeface(typeface);
         group_category.setText(group_category1);
 
         introduce=(TextView) findViewById(R.id.intro);
+        introduce.setTypeface(typeface);
         introduce.setText(introduce1);
 
         group_image=(ImageView)findViewById(R.id.small_image);

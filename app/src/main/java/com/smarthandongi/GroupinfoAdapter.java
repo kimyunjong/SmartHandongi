@@ -1,13 +1,12 @@
 package com.smarthandongi;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ public class GroupinfoAdapter extends BaseAdapter {
     private ArrayList<GroupDatabase1> group_list;
     private Context context;
     private int layout ;
+    Typeface typeface;
 
     public  GroupinfoAdapter(Context context, ArrayList<GroupDatabase1>group_list, int layout){
         this.context = context;
@@ -44,6 +44,7 @@ public class GroupinfoAdapter extends BaseAdapter {
     }
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         if (convertView == null) {
 
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,9 +52,11 @@ public class GroupinfoAdapter extends BaseAdapter {
 
         }
         TextView name = (TextView)convertView.findViewById(R.id.group_category);
+        name.setTypeface(typeface);
         name.setText(group_list.get(position).getGroup_category());
 
         TextView local = (TextView)convertView.findViewById(R.id.group_name);
+        local.setTypeface(typeface);
         local.setText( group_list.get(position).getGroup_name());
 
 

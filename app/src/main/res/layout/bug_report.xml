@@ -63,8 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:textColor="#ffffff"
+            android:textColor="#32111111"
             android:textColorHint="#32111111"
             android:background="#00000000"
             android:gravity="top"
@@ -102,7 +103,7 @@
                 android:id="@+id/bug_preview_img"
                 android:layout_width="78dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginRight="15dp"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/bug_picture"
@@ -158,4 +159,38 @@
         </RelativeLayout>
     </LinearLayout>
     <!-- bottom_bar end-->
+
+    <RelativeLayout
+        android:id="@+id/popup_report_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#000000"
+        android:alpha="0.6">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_report_2"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:visibility="gone"
+        android:background="#ff000000"
+        android:layout_centerVertical="true"
+        android:alpha="0.3">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_report_3"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_report_confirm">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/popup_report_4"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_cancel">
+    </RelativeLayout>
 </RelativeLayout>

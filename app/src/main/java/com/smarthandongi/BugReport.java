@@ -2,7 +2,9 @@ package com.smarthandongi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,18 +12,23 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -51,6 +58,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
@@ -61,11 +69,16 @@ public class BugReport extends Activity implements View.OnClickListener {
     private final int REQ_CODE_PICK_GALLERY = 900001;
     private final int REQ_CODE_PICK_CAMERA = 900002;
     private final int REQ_CODE_PICK_CROP = 900003;
-    Button bug_back_btn, bug_image_btn, bug_cancel_btn, bug_confirm_btn;
+    Button bug_back_btn, bug_image_btn, bug_cancel_btn, bug_confirm_btn, dialog_okay, dialog_cancel_okay, dialog_cancel_no;
     EditText bug_content;
     ImageView bug_preview_img;
     ImageButton bug_remove_pic_btn;
     BugUpload task;
+    Typeface typeface;
+    Dialog dialog_register, dialog_cancel, dialog_back;
+    final Context context = this;
+    LinearLayout dialog_check_background;
+    RelativeLayout popup_report_1, popup_report_2, popup_report_3, popup_report_4;
 
     int has_pic;
     String content, kakao_nick, date, time;
@@ -75,6 +88,7 @@ public class BugReport extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bug_report);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         bug_back_btn    = (Button)findViewById(R.id.bug_back_btn);
         bug_image_btn   = (Button)findViewById(R.id.bug_image_btn);
@@ -86,18 +100,49 @@ public class BugReport extends Activity implements View.OnClickListener {
         bug_confirm_btn.setOnClickListener(this);
 
         bug_content = (EditText)findViewById(R.id.bug_content);
+        bug_content.setTypeface(typeface);
         bug_preview_img = (ImageView)findViewById(R.id.bug_preview_img);
         bug_remove_pic_btn = (ImageButton)findViewById(R.id.bug_remove_pic_btn);
         bug_remove_pic_btn.setOnClickListener(this);
+
+        popup_report_1 = (RelativeLayout)findViewById(R.id.popup_report_1);
+        popup_report_2 = (RelativeLayout)findViewById(R.id.popup_report_2);
+        popup_report_3 = (RelativeLayout)findViewById(R.id.popup_report_3);
+        popup_report_4 = (RelativeLayout)findViewById(R.id.popup_report_4);
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bug_back_btn : {                                                                              //뒤로가기
-                Intent intent = new Intent(BugReport.this, yy_activity.class).putExtra("Carrier", carrier);
-                startActivity(intent);
-                finish();
+                if(bug_content.getText().toString().length() > 0) {
+
+                    dialog_back = new Dialog(context);
+                    dialog_back.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_back.setContentView(R.layout.dialog_back);
+                    dialog_back.show();
+
+                    dialog_cancel_okay = (Button) dialog_back.findViewById(R.id.dialog_back_confirm);
+                    dialog_cancel_okay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog_back.dismiss();
+                            finish();
+                        }
+                    });
+
+                    dialog_cancel_no = (Button) dialog_back.findViewById(R.id.dialog_back_cancel);
+                    dialog_cancel_no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog_back.dismiss();
+                        }
+                    });
+                }
+                else {
+                    finish();
+                }
+
                 break;
             }
             case R.id.bug_image_btn : {                                                                             //이미지버튼
@@ -108,14 +153,125 @@ public class BugReport extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.bug_cancel_btn : {                                                                            //취소버튼
-                //모든 값을 초기화 시키고 뒤로 가기
-                //취소하시겠습니까?
+                if(bug_content.getText().toString().length() > 0) {
+
+                    dialog_cancel = new Dialog(context);
+                    dialog_cancel.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_cancel.setContentView(R.layout.dialog_cancel);
+                    dialog_cancel.show();
+
+                    dialog_cancel_okay = (Button) dialog_cancel.findViewById(R.id.dialog_writing_confirm);
+                    dialog_cancel_okay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new CountDownTimer(1500, 300) {
+                                @Override
+                                public void onTick(long millisUntilFinished) {
+                                    // do something after 1s
+                                    popup_report_1.setVisibility(VISIBLE);
+                                    popup_report_2.setVisibility(VISIBLE);
+                                    popup_report_4.setVisibility(VISIBLE);
+                                }
+
+                                @Override
+                                public void onFinish() {
+                                    // do something end times 5s
+                                    popup_report_1.setVisibility(GONE);
+                                    popup_report_2.setVisibility(GONE);
+                                    popup_report_4.setVisibility(GONE);
+                                    finish();
+                                }
+                            }.start();
+                        }
+                    });
+
+                    dialog_cancel_no = (Button) dialog_cancel.findViewById(R.id.dialog_writing_cancel);
+                    dialog_cancel_no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog_cancel.dismiss();
+                        }
+                    });
+                }
+                else {
+                    finish();
+                }
+
                 break;
             }
             case R.id.bug_confirm_btn : {                                                                           //등록버튼
-                phpCreate();
+                if(bug_content.getText().toString().length() < 1) {
+
+                    dialog_register = new Dialog(context);
+                    dialog_register.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_register.setContentView(R.layout.dialog_writing_check);
+                    dialog_register.show();
+
+                    dialog_check_background = (LinearLayout) dialog_register.findViewById(R.id.dialog_check_background);
+                    dialog_check_background.setBackgroundResource(R.drawable.dialog_check_content);
+                    dialog_okay = (Button)dialog_register.findViewById(R.id.dialog_okay);
+                    dialog_okay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog_register.dismiss();
+                        }
+                    });
+                }
+                else {
+
+                    phpCreate();
+
+                    new CountDownTimer(1500, 300) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            // do something after 1s
+                            popup_report_1.setVisibility(VISIBLE);
+                            popup_report_2.setVisibility(VISIBLE);
+                            popup_report_3.setVisibility(VISIBLE);
+                        }
+                        @Override
+                        public void onFinish() {
+                            // do something end times 5s
+                            popup_report_1.setVisibility(GONE);
+                            popup_report_2.setVisibility(GONE);
+                            popup_report_3.setVisibility(GONE);
+                            finish();
+                        }
+                    }.start();
+                }
                 break;
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(bug_content.getText().toString().length() > 0) {
+
+            dialog_back = new Dialog(context);
+            dialog_back.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_back.setContentView(R.layout.dialog_back);
+            dialog_back.show();
+
+            dialog_cancel_okay = (Button) dialog_back.findViewById(R.id.dialog_back_confirm);
+            dialog_cancel_okay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog_back.dismiss();
+                    finish();
+                }
+            });
+
+            dialog_cancel_no = (Button) dialog_back.findViewById(R.id.dialog_back_cancel);
+            dialog_cancel_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog_back.dismiss();
+                }
+            });
+        }
+        else {
+            finish();
         }
     }
 

@@ -1,27 +1,20 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-
 import android.content.Context;
 import android.content.Intent;
-
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,8 +23,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.smarthandongi.adapter.GroupListAdapter;
-import com.smarthandongi.database.Picture;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,6 +53,7 @@ public class group_infoList extends Activity {
     Button backward_btn,unresistered_btn,search_cancel_btn, register_group;
     TextView unresistered;
     RelativeLayout layoutView,unresistered_screen;
+    Typeface typeface;
 
     public void construction(){
         phpCreate();
@@ -78,6 +70,7 @@ public class group_infoList extends Activity {
         group_list_view = (ListView)findViewById(R.id.group_list);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         regid=carrier.getRegid();
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         //Log.d("regid g infolist",carrier.getRegid());
         carrier.setRegid(regid);
         construction();

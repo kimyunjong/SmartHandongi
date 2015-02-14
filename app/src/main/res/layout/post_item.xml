@@ -43,6 +43,7 @@
         android:id="@+id/post_title"
         android:singleLine="true"
         android:ellipsize="end"
+        android:text="2222"
         android:textSize="15dp"
         />
     <TextView
@@ -95,7 +96,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="11dp"
-        android:layout_marginTop="13.5dp"
+        android:layout_marginTop="11.5dp"
         android:layout_alignTop="@+id/dday"/>
 
 

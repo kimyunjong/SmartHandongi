@@ -207,7 +207,7 @@ public class Writing extends Activity implements OnClickListener {
         writing_title =     (EditText)findViewById(R.id.writing_title);
         writing_content  =  (EditText)findViewById(R.id.writing_content);
         writing_link = (EditText)findViewById(R.id.writing_link);
-        writing_content.setTypeface(typeface);
+
 
         writing_content.setHeight((int)(screen_height*0.4));
         scroll = (ScrollView)findViewById(R.id.scroll);
@@ -251,6 +251,9 @@ public class Writing extends Activity implements OnClickListener {
         startDate_btn.setOnClickListener(this);
         endDate_btn.setOnClickListener(this);
 
+
+
+
         popup_1 = (RelativeLayout)findViewById(R.id.popup_1);
         popup_2 = (RelativeLayout)findViewById(R.id.popup_2);
         popup_3 = (RelativeLayout)findViewById(R.id.popup_3);
@@ -286,6 +289,9 @@ public class Writing extends Activity implements OnClickListener {
         small_category_btn.setTypeface(typeface);
         writing_title.setTypeface(typeface);
         writing_content.setTypeface(typeface);
+        writing_link.setTypeface(typeface);
+        start_dateLabel.setTypeface(typeface);
+        end_dateLabel.setTypeface(typeface);
     }
 
     public void preset(){
@@ -584,14 +590,12 @@ public class Writing extends Activity implements OnClickListener {
                     else {
                         //개인
                         if(carrier.getSelector() == 0){
-                            dialog_back.dismiss();
                             Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
                             startActivity(intent);
                             finish();
                         }
                         //단체
                         else if(carrier.getSelector() == 1){
-                            dialog_back.dismiss();
                             Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
                             startActivity(intent);
                             finish();
@@ -936,14 +940,12 @@ public class Writing extends Activity implements OnClickListener {
             else {
                 //개인
                 if(carrier.getSelector() == 0){
-                    dialog_back.dismiss();
                     Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
                     startActivity(intent);
                     finish();
                 }
                 //단체
                 else if(carrier.getSelector() == 1){
-                    dialog_back.dismiss();
                     Intent intent = new Intent(Writing.this, GroupSearch.class).putExtra("carrier", carrier);
                     startActivity(intent);
                     finish();
