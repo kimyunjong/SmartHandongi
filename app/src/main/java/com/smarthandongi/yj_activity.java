@@ -1104,7 +1104,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
-            finish();
+
         }
     };
 
@@ -1124,7 +1124,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
-            finish();
+
         }
     };
 

@@ -674,8 +674,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
             finish();
         }
         else {
-            Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
-            startActivity(intent);
+//            Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
+//            startActivity(intent);
             finish();
         }
     }
