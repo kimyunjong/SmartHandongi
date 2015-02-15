@@ -63,6 +63,7 @@ public class group_infoList extends Activity {
     public void phpCreate(){
         group_Php = new GroupPhp(group_list,temp_list, this);
         group_Php.execute("http://hungry.portfolio1000.com/smarthandongi/group_info.php?");
+
     }
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

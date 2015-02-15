@@ -100,7 +100,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.dashboard);
-
+        regid = carrier.getRegid();
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
         Log.v("연결 시도", "연결되어라@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&");
@@ -690,7 +690,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                                 carrier.setNickname("not_logged_in");
                                 carrier.setId("000000");
                                 // 수영추가
-                                // carrier.setIsLogout_regid(2);
+
                                 RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
                                 regIDDeleteTask.execute(regid);
                                 // 수영 추가 끝

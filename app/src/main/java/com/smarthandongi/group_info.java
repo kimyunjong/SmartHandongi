@@ -70,7 +70,7 @@ public class group_info extends Activity {
         back_btn=(Button)findViewById(R.id.back);// 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(group_info.this, yj_activity.class).putExtra("carrier",carrier);
+                Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
                 startActivity(intent);
             }
         });
