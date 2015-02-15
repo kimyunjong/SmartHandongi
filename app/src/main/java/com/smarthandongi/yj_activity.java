@@ -1105,6 +1105,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             intent.putExtra("position",position);
             intent.putExtra("post", board_list.get(position));
             Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
+
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
 
@@ -1188,6 +1189,21 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             //
         } // try
     } // HttpPostData
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        if (resultCode == RESULT_OK) {
+            PostDatabase db = (PostDatabase)data.getSerializableExtra("post");
+            Carrier carrier=(Carrier)data.getSerializableExtra("carrier");
+            System.out.println("확인합니다 확인이요"+carrier.getPost_position_num()+"해당것의 스크랩여부"+db.getLike());
+             board_list.get(carrier.getPost_position_num()).setLike(db.getLike());
+
+             adapter.notifyDataSetChanged();
+
+        }
+    }
 
 }
 

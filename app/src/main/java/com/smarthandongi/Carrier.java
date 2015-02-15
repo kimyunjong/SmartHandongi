@@ -35,6 +35,7 @@ public class Carrier implements Serializable {
     private int fromPostDetail =0;
     private int fromSMPcomment=0;
     private int fromSMP=0;
+    private int post_position_num;
 
     public void setFromSMPcomment(int fromSMP) {this.fromSMPcomment = fromSMP;}
 
@@ -132,10 +133,14 @@ public class Carrier implements Serializable {
 
     public int getFromPostDetail() { return fromPostDetail;}
 
+
     public void setFromPostDetail(int fromPostDetail) { this.fromPostDetail = fromPostDetail;}
 
     public int getPush() { return push;}
 
     public void setPush(int push) { this.push = push;}
+
+    public void setPost_position(int num){this.post_position_num=num;}
+    public int getPost_position_num(){return post_position_num;}
 
 }

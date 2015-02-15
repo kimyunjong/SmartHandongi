@@ -89,7 +89,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post=(PostDatabase)intent.getSerializableExtra("post");
         posting_list=(ArrayList)intent.getSerializableExtra("post_list");
         position=(int)intent.getSerializableExtra("position");
-
+        carrier.setPost_position(position);
         setContentView(R.layout.post_detail);
 
         //버튼
@@ -350,6 +350,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
             case R.id.pos_scrap_btn : {
                 //스크랩 동작
+                LikeTask like_task = new LikeTask(v, post);
+                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/scrap.php?post_id=" + post.getId() + "&kakao_id=" + String.valueOf(carrier.getId()));
                 break;
             }
 
@@ -699,6 +701,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
         else {
 //            Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier", carrier);
 //            startActivity(intent);
+            Intent return_intent = new Intent();
+            return_intent.putExtra("carrier",carrier);
+            return_intent.putExtra("post", post);
+            System.out.println("가기전에 확인해보자"+carrier.getPost_position_num());
+            setResult(RESULT_OK, return_intent);
+            overridePendingTransition(0,0);
             finish();
         }
     }
@@ -759,6 +767,65 @@ public class PostDetail extends Activity implements View.OnClickListener{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             review_num.setText(s);
+        }
+    }
+
+    class LikeTask extends AsyncTask {
+
+        private View view;
+        private PostDatabase database;
+        public LikeTask(View view, PostDatabase database) {
+            this.view = view;
+            this.database = database;
+        }
+
+        @Override
+        protected Object doInBackground(Object... params) {
+            // TODO Auto-generated method stub
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str="";
+
+            while (return_str.equalsIgnoreCase("")) {
+                try{
+                    URL data_url = new URL((String)params[0]);
+                    HttpURLConnection conn = (HttpURLConnection)data_url.openConnection();
+                    if(conn != null){
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                            for(;;){
+                                String line = br.readLine();
+                                if(line == null) break;
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                return_str = jsonHtml.toString();
+            }
+
+            return jsonHtml.toString();
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            try{
+                JSONObject root = new JSONObject((String)result);
+                JSONArray ja = root.getJSONArray("results");
+                JSONObject jo = ja.getJSONObject(0);
+
+                database.setLike(jo.getString("result"));
+            }
+            catch(JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

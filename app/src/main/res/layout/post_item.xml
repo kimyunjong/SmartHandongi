@@ -29,7 +29,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_toRightOf="@+id/post_category_layout"
-    android:layout_toLeftOf="@+id/like_button"
+    android:layout_toLeftOf="@+id/like_btn_view"
     android:layout_centerHorizontal="true"
     android:id="@+id/standard"
     android:layout_marginTop="13.5dp"
@@ -99,6 +99,32 @@
         android:layout_marginTop="11.5dp"
         android:layout_alignTop="@+id/dday"/>
 
+    <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/like_btn_view"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!-->-->
+        <!--<Button-->
+            <!--android:layout_width="24dp"-->
+            <!--android:layout_height="19dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginRight="17dp"-->
+            <!--android:layout_marginTop="11.5dp"-->
+            <!--android:id="@+id/like_btn"-->
+            <!--android:background="@android:color/transparent"/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="19dp"-->
+            <!--android:layout_height="16.5dp"-->
+            <!--android:id="@+id/like_btn_img"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginRight="17dp"-->
+            <!--android:layout_marginTop="11.5dp"/>-->
+
+
+        <!--</RelativeLayout>-->
 
 
 
