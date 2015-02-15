@@ -69,12 +69,16 @@ public class PostDetail extends Activity implements View.OnClickListener{
     String category = "", small_category = "";
     Typeface typeface;
     int screen_height = 0;
+    int push_count = 0;
 
     //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
     int temp=1;
     //수영 추가 끝
+
+    //자동개행 관련
+    CTextView textView;
 
 
     @Override
@@ -166,6 +170,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         popup_push_confirm = (RelativeLayout)findViewById(R.id.popup_push);
         popup_cancel = (RelativeLayout)findViewById(R.id.popup_cancel);
 
+        //자동개행관련
+
+
         if(post.getHas_pic().compareTo("1")==0) {
             construction();
         }
@@ -175,9 +182,14 @@ public class PostDetail extends Activity implements View.OnClickListener{
             pos_report.setVisibility(View.GONE);
             pos_edit.setVisibility(View.VISIBLE);
             pos_delete.setVisibility(View.VISIBLE);
-            pos_push.setVisibility(View.VISIBLE);
+            if(post.getPush() == 1){
+                pos_push.setVisibility(VISIBLE);
+            }
+            else {
+                pos_push.setVisibility(GONE);
+            }
         }
-        if(post.getGroup().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
+        if(post.getGroup_name().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
             //리스트 내부에 있는지 체크해서 있으면 clickable하게 바꿈
             writer_name.setVisibility(View.GONE);
             writer_group_name.setVisibility(View.VISIBLE);
@@ -482,6 +494,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         Log.d("내가쓴 글 푸시 가랏","푸시푸시");
                         //SendPush sendpush = new SendPush();
                         //sendpush.execute();
+                        push_count = 1;
+                        delPhp();
+
                         new CountDownTimer(1500, 300) {
                             @Override
                             public void onTick(long millisUntilFinished) {
@@ -608,7 +623,15 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
     public void delPhp(){
         del_php = new DeletePhp();
-        del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
+
+        if(push_count == 1){
+            del_php.execute();
+            push_count = 0 ;
+
+        }
+        else {
+            del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
+        }
     }
 
     public class DeletePhp extends AsyncTask<String, Integer, String>{
@@ -738,5 +761,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             review_num.setText(s);
         }
     }
+
+
 }
 

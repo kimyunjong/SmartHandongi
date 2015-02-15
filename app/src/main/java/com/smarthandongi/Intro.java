@@ -9,9 +9,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +28,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.smarthandongi.kakao_api.KakaoTalkLoginActivity;
-import com.smarthandongi.kakao_api.KakaoTalkSignupActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -61,6 +62,7 @@ public class Intro extends Activity {
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private int isLogout_regid=1;
+    int screen_height = 0, screen_width = 0;
 
     String SENDER_ID = "651406894161";
     String myResult;
@@ -74,6 +76,8 @@ public class Intro extends Activity {
     SharedPreferences prefs;
     Context context;
     String regid;
+    Typeface typeface;
+
     //수영 추가 끝
 
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,13 @@ public class Intro extends Activity {
         get_intent = getIntent();
         carrier = new Carrier();
         setContentView(R.layout.intro);
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        screen_height = metrics.heightPixels;
+        screen_width = metrics.widthPixels;
+
 
         //수영추가
         mDisplay = (TextView) findViewById(R.id.display);
@@ -117,6 +128,7 @@ public class Intro extends Activity {
         //수영추가
 
         blink = (TextView) findViewById(R.id.blink);
+        blink.setTypeface(typeface);
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(300); //You can manage the blinking time with this parameter
         anim.setStartOffset(0);
@@ -124,6 +136,11 @@ public class Intro extends Activity {
         anim.setRepeatCount(Animation.INFINITE);
         blink.startAnimation(anim);
         pic=(ImageView)findViewById(R.id.Intro_background);
+        pic.getLayoutParams().width = ((int)(screen_width*0.9));
+        pic.getLayoutParams().height = ((int)(screen_height*0.9));
+        pic.requestLayout();
+
+
         ImageTask it = new ImageTask(pic);
         it.execute("http://hungry.portfolio1000.com/smarthandongi/photo/infomation" + String.valueOf((int)(Math.random()*100)%3+1) + ".png");
 

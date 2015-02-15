@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
         android:text="알람을 보내시겠습니까?"/>
-    <TextView
+    <com.smarthandongi.CTextView
         android:id="@+id/dialog_push_text"
         android:layout_width="235dp"
         android:layout_height="wrap_content"

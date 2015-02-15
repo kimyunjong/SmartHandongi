@@ -96,7 +96,7 @@ public class Writing extends Activity implements OnClickListener {
     String kakao_nick, myResult, category_push_string = "";
     ProgressDialog loagindDialog;
     int check_count = 0;
-    String push_temp;
+    String push_temp, any_query;
 
 
     Picture poster = new Picture();
@@ -116,6 +116,7 @@ public class Writing extends Activity implements OnClickListener {
 
     PhpUpload task;
     Typeface typeface;
+    AnyQuery anywork;
 
     //날짜관련 변수
     int year, month, day; //날짜 받기위해
@@ -1262,7 +1263,7 @@ public class Writing extends Activity implements OnClickListener {
                 }.start();
 
                 //대분류가 일반공지가 아닌 경우 알람 진행
-                if (carrier.getBig_category().compareTo("1") != 0) {
+                if (carrier.getBig_category().compareTo("1") != 0 && carrier.getEdit_count() == 0) {
 //
                     new CountDownTimer(1500, 1500) {
                         @Override
@@ -1297,7 +1298,11 @@ public class Writing extends Activity implements OnClickListener {
                                     dialog.dismiss();
                                     SendPush sendPush = new SendPush();                              // 나중에 추가하자
                                     sendPush.execute();
+                                    any_query = "UPDATE posting SET push = 0 WHERE id=" + push_temp;
+                                    anywork = new AnyQuery();
+                                    anywork.phpCreate(any_query);
 
+                                    //여기서 푸시 조절 하면 됨
                                     new CountDownTimer(1500, 300) {
                                         @Override
                                         public void onTick(long millisUntilFinished) {
@@ -1379,6 +1384,8 @@ public class Writing extends Activity implements OnClickListener {
             //TODO 개인일 때와 단체 일 때를 구분하여 다른 케이스를 준다.
         }
     }
+
+
 
     private void DoPhotoUpLoad(String fileName, String posting_id){
         Log.d("photoupload", posting_id);

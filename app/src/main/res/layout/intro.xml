@@ -2,24 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
-	
-    <LinearLayout
+    android:background="@drawable/background_intro">
+
+    <RelativeLayout
         android:layout_width="match_parent"
     	android:layout_height="match_parent"
-    	android:orientation="vertical"
         android:layout_marginBottom="40dp"
     	>
 
 
     	<ImageView
+            android:layout_centerInParent="true"
         	android:layout_width="match_parent"
 	        android:layout_height="match_parent"
     	    android:id="@+id/Intro_background"
 
 	        />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,10 +1,11 @@
 package com.smarthandongi;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.R.integer;
 
 import com.kakao.APIErrorResult;
 import com.kakao.LogoutResponseCallback;
@@ -68,6 +68,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private PostAdapter adapter;
     private Post2Adapter adapter2;
     String myResult;
+    Typeface typeface;
 
     private Thread thread;
     private Boolean thread_running = false;
@@ -100,7 +101,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.dashboard);
-        regid = carrier.getRegid();
+
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
         Log.v("연결 시도", "연결되어라@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&");
@@ -177,6 +179,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         logout_btn.setOnTouchListener(this);
 
         post_search=(EditText)findViewById(R.id.post_search);
+        post_search.setTypeface(typeface);
 
         timeline_listviewR.setVisibility(View.GONE);
 
@@ -690,7 +693,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                                 carrier.setNickname("not_logged_in");
                                 carrier.setId("000000");
                                 // 수영추가
-
+                                // carrier.setIsLogout_regid(2);
                                 RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
                                 regIDDeleteTask.execute(regid);
                                 // 수영 추가 끝

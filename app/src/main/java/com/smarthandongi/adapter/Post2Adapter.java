@@ -85,11 +85,11 @@ public class Post2Adapter extends BaseAdapter{
         }
 
         holder.post_title.setText(getItem(position).getTitle()+ " ");
-        if(getItem(position).getGroup().compareTo("")==0)
+        if(getItem(position).getGroup_name().compareTo("")==0)
         {
             holder.post_group.setText("["+getItem(position).getKakao_nic()+"]"+" ");
         }
-        else if(getItem(position).getGroup().compareTo("")!=0)
+        else if(getItem(position).getGroup_name().compareTo("")!=0)
         {
             holder.post_group.setText("["+getItem(position).getGroup_name()+"]"+" ");
         }

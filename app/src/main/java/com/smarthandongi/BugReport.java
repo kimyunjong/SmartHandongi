@@ -1,11 +1,9 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -199,6 +197,13 @@ public class BugReport extends Activity implements View.OnClickListener {
 
                 break;
             }
+            case R.id.bug_remove_pic_btn : {                                                                                                        //사진삭제btn
+                has_pic = 0;
+                ((ImageView) findViewById(R.id.bug_preview_img)).setImageBitmap(null);
+                bug_preview_img.setBackgroundResource(R.drawable.writing_picture);
+                bug_remove_pic_btn.setVisibility(GONE);
+                break;
+            }
             case R.id.bug_confirm_btn : {                                                                           //등록버튼
                 if(bug_content.getText().toString().length() < 1) {
 
@@ -333,7 +338,7 @@ public class BugReport extends Activity implements View.OnClickListener {
 
         content = bug_content.getText().toString();
         kakao_nick = carrier.getNickname();
-        date = "150510";
+        date = "150510";                                //유진아 여기 오늘 날짜만 구해줘, 시간도 구해줄 수 있으면 좋지만 일단 날짜가 우선!
         time = "111111";
 
         try {
@@ -343,32 +348,21 @@ public class BugReport extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle("오류제보")
-                .setMessage("글을 등록하시겠습니까?")
-                .setIcon(R.drawable.handongi)
-                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String bug_task;
-                        bug_task = "http://hungry.portfolio1000.com/smarthandongi/bug_upload.php?"
-                                + "kakao_id=" + carrier.getId()
-                                + "&kakao_nick=" + kakao_nick
-                                + "&content=" + content
-                                + "&date=" + date
-                                + "&time=" + time
-                                + "&has_pic=" + has_pic;
 
-                        task = new BugUpload();
-                        task.execute(bug_task);
-                        Intent intent = new Intent(BugReport.this, yy_activity.class).putExtra("carrier", carrier);
-                        finish();
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("취소", null)
-                .show();
-    }
+            String bug_task;
+            bug_task = "http://hungry.portfolio1000.com/smarthandongi/bug_upload.php?"
+                    + "kakao_id=" + carrier.getId()
+                    + "&kakao_nick=" + kakao_nick
+                    + "&content=" + content
+                    + "&date=" + date
+                    + "&time=" + time
+                    + "&has_pic=" + has_pic;
+
+            task = new BugUpload();
+            task.execute(bug_task);
+        }
+
+
     private void DoPhotoUpLoad(String fileName, String posting_id){
         HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/bug_photo/upload.php?id=" + posting_id, posting_id, fileName);
 //        HttpPhotoUpload("http://hungry.portfolio1000.com/smarthandongi/upload.php?id=" + posting_id, posting_id, fileName);
