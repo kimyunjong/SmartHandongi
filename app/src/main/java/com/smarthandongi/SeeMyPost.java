@@ -47,7 +47,7 @@ public class SeeMyPost extends Activity implements View.OnClickListener{
         carrier = (Carrier) getIntent().getSerializableExtra("carrier");
         posting_list=(ArrayList)getIntent().getSerializableExtra("post_list");
 
-        Log.d("글은제대로받아온것인가?",posting_list.get(3).getTitle());
+//        Log.d("글은제대로받아온것인가?",posting_list.get(3).getTitle());
         post_btn=(ImageButton)findViewById(R.id.smp_post);
         comment_btn=(ImageButton)findViewById(R.id.smp_comment);
         SMP_back_btn=(Button)findViewById(R.id.smp_back_btn);

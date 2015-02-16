@@ -275,8 +275,8 @@ public class Writing extends Activity implements OnClickListener {
             //날짜표시
             start_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));
             String str=convertDateToString(dateAndtime.get(Calendar.YEAR),dateAndtime.get(Calendar.MONTH),dateAndtime.get(Calendar.DAY_OF_MONTH));
-            carrier.setStart_date(str);
-            carrier.setEnd_date(str);
+            carrier.setStart_date("0");
+            carrier.setEnd_date("0");
             carrier.setPosting_date(str);
 
             end_dateLabel.setText(fmDateAndTime.format(dateAndtime.getTime()));

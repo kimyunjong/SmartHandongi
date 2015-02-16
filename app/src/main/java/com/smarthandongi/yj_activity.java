@@ -2,13 +2,18 @@ package com.smarthandongi;
 
 import android.R.integer;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -59,7 +64,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     boolean board_on=true,timeline_on=false, search_on=false,default_on=true;
 
     String regid=null;
-    private ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>(),board_list = new ArrayList<PostDatabase>(), timeline_list = new ArrayList<PostDatabase>(), timeline_list_today = new ArrayList<PostDatabase>(),timeline_list_tomorrow = new ArrayList<PostDatabase>(),timeline_list_after_tomorrow = new ArrayList<PostDatabase>(), liked_list = new ArrayList<PostDatabase>(),temp_plist = new ArrayList<PostDatabase>();
+    private ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>(),board_list = new ArrayList<PostDatabase>(),
+            timeline_list = new ArrayList<PostDatabase>(), timeline_list_today = new ArrayList<PostDatabase>(),
+            timeline_list_tomorrow = new ArrayList<PostDatabase>(),timeline_list_after_tomorrow = new ArrayList<PostDatabase>(),
+            liked_list = new ArrayList<PostDatabase>(),temp_plist = new ArrayList<PostDatabase>(),
+            temp_list = new ArrayList<PostDatabase>(), filtered_list = new ArrayList<PostDatabase>();
     private ListView board_listview,timeline_listview;
     private RelativeLayout timeline_listviewR;
     private PostAdapter postAdapter;
@@ -69,7 +78,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private PostDatabasePhp postDatabasePhp;
     private PostAdapter adapter;
     private Post2Adapter adapter2;
-    String myResult;
+    String myResult,str;
     Typeface typeface;
 
     private Thread thread;
@@ -91,7 +100,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     }
 
     public void phpCreate() {
-        postDatabasePhp = new PostDatabasePhp(post_list, this);
+        postDatabasePhp = new PostDatabasePhp(post_list,temp_list, this);
         postDatabasePhp.execute("http://hungry.portfolio1000.com/smarthandongi/posting_php.php?kakao_id="+carrier.getId());
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
@@ -183,8 +192,54 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         login_menu_btn.setOnTouchListener(this);
         logout_btn.setOnTouchListener(this);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         post_search=(EditText)findViewById(R.id.post_search);
+        post_search.setOnTouchListener(this);
         post_search.setTypeface(typeface);
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charsequence, int i, int j, int k) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charsequence, int i, int j,  int k) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // TODO Auto-generated method stub
+                str = post_search.getText().toString();
+                filtered_list.removeAll(filtered_list);
+                Log.d("test", Integer.toString(temp_list.size()));
+
+                for (int i = 0; i < temp_list.size(); i++) {
+                    if (temp_list.get(i).getTitle().contains(str)) {
+                        filtered_list.add(new PostDatabase(
+                                        temp_list.get(i).getTitle(),temp_list.get(i).getId(),temp_list.get(i).getKakao_id(),
+                                        temp_list.get(i).getBig_category(), temp_list.get(i).getCategory(),temp_list.get(i).getGroup(),
+                                        temp_list.get(i).getContent(),temp_list.get(i).getPosting_date(),temp_list.get(i).getLink(),
+                                        temp_list.get(i).getStart_date(),temp_list.get(i).getEnd_date(), temp_list.get(i).getHas_pic()
+                                        , temp_list.get(i).getLike(), temp_list.get(i).getView_num(),temp_list.get(i).getGroup_name(),
+                                        temp_list.get(i).getKakao_nic(), temp_list.get(i).getPush(), temp_list.get(i).getRegid()));
+                        adapter = new PostAdapter(yj_activity.this, filtered_list,carrier);
+                        adapter2= new Post2Adapter(yj_activity.this, filtered_list );
+                        Log.v("연결 시도", "연결되어라@*********************************************");
+
+                        board_listview.setAdapter(adapter);
+                        board_listview.setOnScrollListener(yj_activity.this);
+                        board_listview.setOnItemClickListener(boardItemClickListener);
+
+                        timeline_listview.setAdapter(adapter2);
+                        timeline_listview.setOnScrollListener(yj_activity.this);
+                        timeline_listview.setOnItemClickListener(timelineItemClickListener);
+
+                    }
+                }
+            }
+        };
+        post_search.addTextChangedListener(watcher);
 
         timeline_listviewR.setVisibility(View.GONE);
 
@@ -215,6 +270,17 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
        switch (v.getId())
        {
            case  R.id.delete_search:{
+               adapter = new PostAdapter(yj_activity.this, board_list,carrier);
+               adapter2= new Post2Adapter(yj_activity.this, timeline_list );
+               Log.v("연결 시도", "연결되어라@*********************************************");
+
+               board_listview.setAdapter(adapter);
+               board_listview.setOnScrollListener(yj_activity.this);
+               board_listview.setOnItemClickListener(boardItemClickListener);
+
+               timeline_listview.setAdapter(adapter2);
+               timeline_listview.setOnScrollListener(yj_activity.this);
+               timeline_listview.setOnItemClickListener(timelineItemClickListener);
                default_on=true;
                search_on=false;
                search_toggle();
@@ -740,6 +806,13 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 break;
             }
 
+            case R.id.post_search : {
+                post_search.setCursorVisible(true);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(post_search,0);
+                break;
+            }
+
 
 
             }
@@ -832,13 +905,14 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     {
 
         private yj_activity context;
-        private ArrayList<PostDatabase> post_list;
+        private ArrayList<PostDatabase> post_list,temp_list;
 
 
-        public PostDatabasePhp(ArrayList<PostDatabase> post_list, yj_activity context) {
+        public PostDatabasePhp(ArrayList<PostDatabase> post_list,ArrayList<PostDatabase> temp_list, yj_activity context) {
             super();
             this.post_list = post_list;
             this.context = context;
+            this.temp_list=temp_list;
         }
 
 
@@ -879,6 +953,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 JSONArray ja = root.getJSONArray("results");
 
                 post_list.removeAll(post_list);
+                temp_list.removeAll(temp_list);
 
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
@@ -887,6 +962,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                             jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                             jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
                             jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"),jo.getInt("push"),jo.getString("regid"))
+                    );
+                    temp_list.add(new PostDatabase(
+                                    jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
+                                    jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
+                                    jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"),jo.getInt("push"),jo.getString("regid"))
                     );
 
                 }
