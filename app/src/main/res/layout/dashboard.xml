@@ -388,6 +388,30 @@
         >
         <RelativeLayout
             android:layout_width="wrap_content"
+            android:layout_height="68dp">
+            <ImageView
+                android:id="@+id/login_img_info"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="21dp"
+                android:src="@drawable/login_bg_img"/>
+            <TextView
+                android:id="@+id/login_txt_info"
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:textColor="#ffffffff"
+                android:textSize="15sp"
+                />
+
+            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <Button
                 android:layout_width="152dp"
@@ -527,25 +551,7 @@
                 android:src="@drawable/our_history"/>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:id="@+id/other_handong_layout">
-            <Button
-                android:layout_width="152dp"
-                android:layout_height="41.5dp"
-                android:id="@+id/other_handongi_btn"
-                android:background="@android:color/transparent"
-                />
-            <ImageView
-                android:layout_width="152dp"
-                android:layout_height="41.5dp"
-                android:id="@+id/other_handongi_img"
-                android:src="@drawable/others"
-
-                />
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -563,6 +569,21 @@
                 android:layout_height="41.5dp"
                 android:id="@+id/logout_img"
                 android:src="@drawable/logout_menu"
+                />
+            <Button
+                android:layout_width="152dp"
+                android:layout_height="41.5dp"
+                android:id="@+id/login_btn"
+                android:background="@android:color/transparent"
+
+
+                />
+            <ImageView
+                android:layout_width="152dp"
+                android:layout_height="41.5dp"
+                android:id="@+id/login_img"
+                android:src="@drawable/login_img"
+
                 />
         </RelativeLayout>
 
