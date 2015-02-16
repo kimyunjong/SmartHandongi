@@ -3,9 +3,11 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/entire_layout_rel"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@drawable/background">
     <LinearLayout
+        android:id="@+id/entire_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,15 +80,25 @@
                     android:orientation="vertical">
 
                     <!--사진 나오는 부분-->
-                    <ImageView
-                        android:id="@+id/poster"
-                        android:layout_width="match_parent"
+                    <RelativeLayout
+                        android:id="@+id/poster_image"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone">
+                        <Button
+                            android:id="@+id/enlarge_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"/>
+                        <ImageView
+                            android:id="@+id/poster"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="5dp"
+                            />
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -101,14 +113,15 @@
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
                             android:text="학술"
-                            android:textSize="20dp"/>
+                            android:textSize="16.5dp"/>
                         <TextView
                             android:id="@+id/posting_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#f1f2f2"
-                            android:textSize="20dp"
-                            android:text="  2015-01-30"/>
+                            android:textSize="16.5dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="2015-01-30"/>
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -120,11 +133,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp">
-                        <TextView
+                        <com.smarthandongi.CTextView2
                             android:id="@+id/pos_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
+                            android:textSize="16.5dp"
                             android:textColor="#f1f2f2"
                             android:text="UX / UI 학회 : THE ANSWER 세미나 및 리쿠르팅"/>
                     </LinearLayout>
@@ -165,6 +178,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="작성자"
+                                android:singleLine="true"
                                 android:textColor="#f1f2f2"
                                 android:textSize="14.5dp"
                                 android:background="@android:color/transparent"/>
@@ -449,5 +463,24 @@
         android:background="@drawable/dialog_cancel">
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/test"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66000000"
+            >
+            <ImageView
+                android:id="@+id/image_large"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
 
+                />
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

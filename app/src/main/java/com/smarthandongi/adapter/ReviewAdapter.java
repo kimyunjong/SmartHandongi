@@ -1,6 +1,7 @@
 package com.smarthandongi.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class ReviewAdapter extends BaseAdapter {
     private Carrier carrier;
     ReviewDatabase reviewDatabase;
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
+    Typeface typeface;
 
     public ReviewAdapter(Context context, List<ReviewDatabase> list, Carrier carrier) {
         this.context = context;
@@ -71,6 +73,7 @@ public class ReviewAdapter extends BaseAdapter {
         if (v == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.review_detail, null);
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
             holder = new ViewHolder();
 
             holder.kakao_nick = (TextView) v.findViewById(R.id.kakao_nick);
@@ -79,6 +82,12 @@ public class ReviewAdapter extends BaseAdapter {
             holder.notify_btn = (Button) v.findViewById(R.id.notify_btn);
             holder.del_btn = (Button) v.findViewById(R.id.del_btn);
             holder.new_img = (ImageView) v.findViewById(R.id.new_img);
+
+            holder.kakao_nick.setTypeface(typeface);
+            holder.date.setTypeface(typeface);
+            holder.content.setTypeface(typeface);
+            holder.del_btn.setTypeface(typeface);
+            holder.notify_btn.setTypeface(typeface);
 
             v.setTag(holder);
         } else {

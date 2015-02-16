@@ -26,6 +26,7 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="14.5dp"
             android:layout_toRightOf="@+id/kakao_nick"
             android:paddingRight="20dp"/>
         <ImageView

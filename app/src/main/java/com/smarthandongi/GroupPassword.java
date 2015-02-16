@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -165,11 +163,21 @@ public class GroupPassword extends Activity {
             });
         }
 
-        if(str.compareTo(carrier.getGroup_pw())!=0) {
-            Toast toastView =Toast.makeText(this, "패스워드가 일치하지 않습니다", Toast.LENGTH_SHORT);
-            toastView.setGravity(Gravity.CENTER,0,0);
-            toastView.show();
-            Log.d("토스트 확인", "잘됨");
+        else if(str.compareTo(carrier.getGroup_pw())!=0) {
+            dialog_input_pw = new Dialog(context);
+            dialog_input_pw.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_input_pw.setContentView(R.layout.dialog_writing_check);
+            dialog_input_pw.show();
+
+            dialog_check_background = (LinearLayout)dialog_input_pw.findViewById(R.id.dialog_check_background);
+            dialog_check_background.setBackgroundResource(R.drawable.dialog_pw_nomatch);
+            dialog_okay = (Button)dialog_input_pw.findViewById(R.id.dialog_okay);
+            dialog_okay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog_input_pw.dismiss();
+                }
+            });
         }
         else if(str.compareTo(carrier.getGroup_pw())==0) {
             Intent intent = new Intent(GroupPassword.this,Writing.class).putExtra("carrier",carrier);

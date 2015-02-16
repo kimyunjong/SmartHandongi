@@ -36,13 +36,14 @@
         android:layout_height="66dp"
         android:id="@+id/scrap_num_layout_outmost"
         android:layout_below="@+id/push_top_bar_scrap">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15.922dp"
             android:layout_marginBottom="3dp"
-            android:layout_marginTop="30dp"
+            android:layout_alignParentBottom="true"
             android:id="@+id/scrap_num_layout">
         <ImageView
             android:layout_width="41.5dp"
@@ -69,15 +70,14 @@
                 android:layout_toRightOf="@+id/scrap_num"/>
 
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#ffffeded"
-            android:layout_below="@+id/scrap_num_layout"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
 
-            </RelativeLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/scrap_num_layout_outmost"
+        android:background="#ffffeded">
 
     </RelativeLayout>
     <ListView

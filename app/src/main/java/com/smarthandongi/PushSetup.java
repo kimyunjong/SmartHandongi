@@ -1,7 +1,6 @@
 package com.smarthandongi;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -43,7 +42,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
     ImageButton push_sports_btn, push_game_btn, push_nightfood_btn, push_gonggu_btn, push_carpool_btn, push_study_btn, push_trading_btn, push_lost_btn, push_recruiting_btn, push_exchange_btn;
     ImageButton push_contest_btn, push_intern_btn, push_service_btn, push_perf_btn, push_seminar_btn, push_presentation_btn;
     ImageButton push_scholarship_btn, push_r_sports_btn, push_r_perf_btn, push_faith_btn, push_display_btn, push_r_service_btn;
-    Button push_save_btn;
+    Button push_save_btn, push_back_btn;
     RelativeLayout popup_pushsetup_1, popup_pushsetup_2, popup_pushsetup_3;
 
     CollectPushInfoPhp push_php;
@@ -129,6 +128,8 @@ public class PushSetup extends Activity implements View.OnClickListener {
 
         push_save_btn = (Button) findViewById(R.id.push_save_btn);
         push_save_btn.setOnClickListener(this);
+        push_back_btn = (Button) findViewById(R.id.push_back_btn);
+        push_back_btn.setOnClickListener(this);
 
         popup_pushsetup_1 = (RelativeLayout)findViewById(R.id.popup_pushsetup_1);
         popup_pushsetup_2 = (RelativeLayout)findViewById(R.id.popup_pushsetup_2);
@@ -465,12 +466,12 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.push_back_btn:{
-                phpCreateSend();
+                //phpCreateSend();
                 //저장하시겠습니까해서 예 하면 저장하고 나가게
 
-                Intent intent = new Intent(PushSetup.this, yy_activity.class).putExtra("carrier", carrier);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                //Intent intent = new Intent(PushSetup.this, yj_activity.class).putExtra("carrier", carrier);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(intent);
                 finish();
             }
 

@@ -1245,6 +1245,9 @@ public class Writing extends Activity implements OnClickListener {
                         // do something after 1s
                         popup_1.setVisibility(VISIBLE);
                         popup_2.setVisibility(VISIBLE);
+//                        if(carrier.getEdit_count() == 1){
+//                            popup_3.setBackgroundResource(R.drawable.수정된거);
+//                        }
                         popup_3.setVisibility(VISIBLE);
                     }
 
@@ -1254,8 +1257,9 @@ public class Writing extends Activity implements OnClickListener {
                         popup_1.setVisibility(GONE);
                         popup_2.setVisibility(GONE);
                         popup_3.setVisibility(GONE);
-                        if (carrier.getBig_category().compareTo("1") == 0) {
+                        if (carrier.getBig_category().compareTo("1") == 0 || carrier.getEdit_count() == 1) {
                             Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
                         }
@@ -1298,7 +1302,8 @@ public class Writing extends Activity implements OnClickListener {
                                     dialog.dismiss();
                                     SendPush sendPush = new SendPush();                              // 나중에 추가하자
                                     sendPush.execute();
-                                    any_query = "UPDATE posting SET push = 0 WHERE id=" + push_temp;
+                                    any_query = "update posting set push = 0 where id=" + push_temp;
+                                    Log.d("push temp", String.valueOf(push_temp));
                                     anywork = new AnyQuery();
                                     anywork.phpCreate(any_query);
 
@@ -1318,6 +1323,7 @@ public class Writing extends Activity implements OnClickListener {
                                             popup_4.setVisibility(GONE);
 
                                             Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(intent);
                                             finish();
                                         }
@@ -1331,6 +1337,7 @@ public class Writing extends Activity implements OnClickListener {
                                 public void onClick(View v) {
                                     dialog.dismiss();
                                     Intent intent = new Intent(Writing.this, yj_activity.class).putExtra("carrier", carrier);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();
 //                                    new CountDownTimer(1500, 300) {

@@ -258,21 +258,21 @@
                         android:id="@+id/writing_additional_btn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/writing_additional"/>
+                        android:background="@drawable/writing_additional"
+                        android:visibility="gone"/>
                     <ImageButton
                         android:id="@+id/writing_additional_hide_btn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/writing_additional_hide"
-                        android:visibility="gone"/>
+                        />
                 </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/writing_additional"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_marginTop="4dp"
@@ -530,5 +530,6 @@
         android:layout_centerInParent="true"
         android:background="@drawable/dialog_cancel">
     </RelativeLayout>
+
 
 </RelativeLayout>

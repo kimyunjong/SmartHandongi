@@ -41,7 +41,7 @@ public class PostImageTask extends AsyncTask<Integer, Integer,Integer> {
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
         post_img.setImageBitmap(picture.getPicture());
-        post_img.getLayoutParams().height=picture.getPicture().getHeight()*pic_width/picture.getPicture().getWidth();
+        //post_img.getLayoutParams().height=picture.getPicture().getHeight()*pic_width/picture.getPicture().getWidth();
 
 
     }
