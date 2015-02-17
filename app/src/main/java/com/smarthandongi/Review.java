@@ -1,6 +1,7 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
@@ -11,12 +12,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -48,6 +51,10 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     Button reg_btn, back_btn, del_btn, notify_btn;
     ImageView new_img, comment_register_on, comment_register_off;
 
+    Dialog dialog_delete_reply;
+    Button dialog_delete_confirm, dialog_delete_cancel;
+    LinearLayout dialog_delete_background;
+
     PhpUploadReview phpUploadReview;
     PhpDownloadReview phpDownloadReview;
     PhpPushReview phpPushReview;
@@ -55,7 +62,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     int posting_id,position;
     String kakao_id;
     ReviewDatabase reviewDatabase;
-    Context context;
+    final Context context = this;
     ReviewAdapter adapter;
     private PostDatabase post;
     private ArrayList<ReviewDatabase> review_list = new ArrayList<ReviewDatabase>();
@@ -187,31 +194,79 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                 }
             }
             case R.id.del_btn: {
-                Intent intent = new Intent(Review.this,Review.class);
 
-                if(carrier.getFromSMP()==0) {
-                    intent.putExtra("post",post);
-                    intent.putExtra("position",position);
-                }
-                else if(carrier.getFromSMP()==1) {//내가쓴글에서 댓글을 추가하고 엑스를 눌리라고할때를 위해서
-                    carrier.setFromSMP(1);
-                    carrier.setFromSMPcomment(1);
-                    intent.putExtra("post_list",post_list);
-                }
-                intent.putExtra("carrier",carrier);
-                intent.putExtra("posting_id",posting_id);
+                dialog_delete_reply = new Dialog(context);
+                dialog_delete_reply.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_delete_reply.setContentView(R.layout.dialog_delete);
+                dialog_delete_reply.show();
 
-                startActivity(intent);
-                finish();
+                dialog_delete_background = (LinearLayout)dialog_delete_reply.findViewById(R.id.dialog_delete_background);
+                dialog_delete_background.setBackgroundResource(R.drawable.dialog_delete_reply);
+
+                dialog_delete_confirm = (Button)dialog_delete_reply.findViewById(R.id.dialog_delete_confirm);
+                dialog_delete_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Review.this,Review.class);
+
+                        if(carrier.getFromSMP()==0) {
+                            intent.putExtra("post",post);
+                            intent.putExtra("position",position);
+                        }
+                        else if(carrier.getFromSMP()==1) {//내가쓴글에서 댓글을 추가하고 엑스를 눌리라고할때를 위해서
+                            carrier.setFromSMP(1);
+                            carrier.setFromSMPcomment(1);
+                            intent.putExtra("post_list",post_list);
+                        }
+                        intent.putExtra("carrier",carrier);
+                        intent.putExtra("posting_id",posting_id);
+
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+                dialog_delete_cancel = (Button)dialog_delete_reply.findViewById(R.id.dialog_delete_cancel);
+                dialog_delete_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_delete_reply.dismiss();
+                    }
+                });
+
 
                 break;
             }
             case R.id.notify_btn: {
                // Toast.makeText(this, "신고버튼",Toast.LENGTH_SHORT).show();
+                dialog_delete_reply = new Dialog(context);
+                dialog_delete_reply.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_delete_reply.setContentView(R.layout.dialog_delete);
+                dialog_delete_reply.show();
 
-                Intent intent = new Intent(Review.this, ReportPost.class);
-                intent.putExtra("carrier", carrier);
-                startActivity(intent);
+                dialog_delete_background = (LinearLayout)dialog_delete_reply.findViewById(R.id.dialog_delete_background);
+                dialog_delete_background.setBackgroundResource(R.drawable.dialog_report_reply);
+
+                dialog_delete_confirm = (Button)dialog_delete_reply.findViewById(R.id.dialog_delete_confirm);
+                dialog_delete_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Review.this, ReportPost.class);
+                        intent.putExtra("carrier", carrier);
+                        startActivity(intent);
+                    }
+                });
+
+                dialog_delete_cancel = (Button)dialog_delete_reply.findViewById(R.id.dialog_delete_cancel);
+                dialog_delete_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_delete_reply.dismiss();
+                    }
+                });
+
+
+
 
                 break;
             }

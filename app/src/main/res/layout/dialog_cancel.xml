@@ -4,6 +4,7 @@
     android:layout_width="263.5dp"
     android:layout_height="154dp">
     <LinearLayout
+        android:id="@+id/dialog_writing_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dialog_writing_cancel">

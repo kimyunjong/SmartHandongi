@@ -73,7 +73,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     LinearLayout pos_dates, pos_linkbar, entire_layout;
     String category = "", small_category = "";
     Typeface typeface, typeface_bold;
-    int screen_height = 0;
+    int screen_height = 0, post_image_large_count = 0;
     int push_count = 0;
 
     //수영 추가
@@ -244,6 +244,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         if(post.getLink().length() == 0){
             pos_linkbar.setVisibility(View.GONE);                                       //링크
         } else {
+            post.setLink(post.getLink().replaceAll(" ", ""));
             pos_linkbar.setVisibility(View.VISIBLE);
             link.setText(post.getLink());
         }
@@ -327,7 +328,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
     protected void onDestroy() {
         Log.d("OOMTEST", "onDestroy");
         if(post.getHas_pic().compareTo("1") == 0) {
-            recycleBitmap(post_img);
+            if(post_img.getDrawable() != null) {
+                recycleBitmap(post_img);
+            }
+            //recycleBitmap(post_img_large);
         }
 
         super.onDestroy();
@@ -354,7 +358,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
                 entire_layout_rel.setBackgroundResource(0);
                 entire_layout.setVisibility(GONE);
-
+                post_image_large_count = 1;
                 DisplayMetrics metric = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(metric);
                 screen_width = metric.widthPixels;
@@ -793,6 +797,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
             dialog_del.dismiss();
     }
     public void onBackPressed() {
+        if(post_image_large_count == 1 && post_img_large.getDrawable() != null) {
+            recycleBitmap(post_img_large);
+        }
+
         if(carrier.getFromSMP()==1) {
             Intent intent = new Intent(PostDetail.this,SeeMyPost.class).putExtra("carrier",carrier);
             intent.putExtra("post_list",posting_list);

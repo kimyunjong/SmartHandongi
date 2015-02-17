@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -152,7 +154,9 @@ public class Intro extends Activity {
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
-
+                    if(pic.getDrawable() != null) {
+                        recycleBitmap(pic);
+                    }
                     intent.putExtra("carrier", carrier);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
@@ -165,6 +169,17 @@ public class Intro extends Activity {
 
 
     }
+    private static void recycleBitmap(ImageView iv) {
+        Drawable d = iv.getDrawable();
+        if (d instanceof BitmapDrawable) {
+            Bitmap b = ((BitmapDrawable)d).getBitmap();
+            b.recycle();
+        } // 현재로서는 BitmapDrawable 이외의 drawable 들에 대한 직접적인 메모리 해제는 불가능하다.
+        Log.d("intro", "메모리 리셋합니다");
+        d.setCallback(null);
+    }
+
+
     public void onBackPressed(){
         finish();
         System.exit(0);

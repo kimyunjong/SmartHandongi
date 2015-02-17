@@ -76,6 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    //버블 있던 자리
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
@@ -86,8 +88,7 @@
                             android:layout_weight="1"/>
                         <ImageView
                             android:layout_width="64.5dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/writing_bubble_4"/>
+                            android:layout_height="match_parent"/>
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"

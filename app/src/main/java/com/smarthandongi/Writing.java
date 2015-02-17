@@ -26,6 +26,7 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -594,6 +595,7 @@ public class Writing extends Activity implements OnClickListener {
                             Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
                             startActivity(intent);
                             finish();
+
                         }
                         //단체
                         else if(carrier.getSelector() == 1){
@@ -941,6 +943,7 @@ public class Writing extends Activity implements OnClickListener {
             else {
                 //개인
                 if(carrier.getSelector() == 0){
+                    Log.d("여기로", "들어오나");
                     Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
                     startActivity(intent);
                     finish();
@@ -1888,4 +1891,28 @@ public class Writing extends Activity implements OnClickListener {
             //
         } // try
     } // HttpPostData
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                Intent i = new Intent(this,  SelectGroupOrNot.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+
+
+                finish();
+                return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }

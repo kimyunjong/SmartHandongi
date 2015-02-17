@@ -1,6 +1,7 @@
 package com.smarthandongi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -35,6 +36,7 @@ public class group_info extends Activity {
     Button back_btn,register_group;
     Carrier carrier;
     Typeface typeface;
+    Context context = this;
 
 
     public void construction(int group_id){
