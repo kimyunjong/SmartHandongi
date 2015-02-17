@@ -278,7 +278,7 @@
                     android:id="@+id/notice_img"
                     android:layout_width="63.5dp"
                     android:layout_height="44dp"
-                    android:src="@drawable/notice_btn"
+                    android:src="@drawable/notice_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"/>
 
@@ -298,7 +298,7 @@
                     android:id="@+id/outer_img"
                     android:layout_width="63.5dp"
                     android:layout_height="44dp"
-                    android:src="@drawable/outer_btn"
+                    android:src="@drawable/outer_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -319,7 +319,7 @@
                     android:id="@+id/seminar_img"
                     android:layout_width="63.5dp"
                     android:layout_height="44dp"
-                    android:src="@drawable/seminar_btn"
+                    android:src="@drawable/seminar_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -339,7 +339,7 @@
                     android:id="@+id/recruit_img"
                     android:layout_width="63.5dp"
                     android:layout_height="44dp"
-                    android:src="@drawable/recruit_btn"
+                    android:src="@drawable/recruit_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -360,7 +360,7 @@
                     android:id="@+id/agora_img"
                     android:layout_width="63.5dp"
                     android:layout_height="44dp"
-                    android:src="@drawable/agora_btn"
+                    android:src="@drawable/agora_btn_on"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
 
@@ -405,7 +405,7 @@
 
                 android:layout_height="wrap_content"
 
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="22dp"
                 android:layout_centerVertical="true"
                 android:textColor="#ffffffff"
                 android:textSize="15sp"

@@ -96,7 +96,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="11dp"
-        android:layout_marginTop="11.5dp"
+
         android:layout_alignTop="@+id/dday"/>
 
     <!--<RelativeLayout-->
