@@ -627,6 +627,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     intent.putExtra("carrier", carrier);
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
+                   finish();
                 }
                 break;
             }
@@ -641,7 +642,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
-
+                    finish();
                 }
                 break;
             }
