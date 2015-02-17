@@ -15,6 +15,7 @@ public class AnyQuery {
     anyquery_work anyquery_php;
 
     public void phpCreate(String sql){
+        Log.d("들어와랏", "ㅇㅇㅇ");
 
         anyquery_php = new anyquery_work();
         anyquery_php.execute("http://hungry.portfolio1000.com/smarthandongi/push_update.php?query=" + sql);

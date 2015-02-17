@@ -26,7 +26,6 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -1305,10 +1304,9 @@ public class Writing extends Activity implements OnClickListener {
                                     dialog.dismiss();
                                     SendPush sendPush = new SendPush();                              // 나중에 추가하자
                                     sendPush.execute();
-                                    any_query = "update posting set push = 0 where id=" + push_temp;
                                     Log.d("push temp", String.valueOf(push_temp));
                                     anywork = new AnyQuery();
-                                    anywork.phpCreate(any_query);
+                                    anywork.phpCreate("UPDATE%20posting%20SET%20push%20=%200%20WHERE%20id=" + push_temp);
 
                                     //여기서 푸시 조절 하면 됨
                                     new CountDownTimer(1500, 300) {
@@ -1891,28 +1889,4 @@ public class Writing extends Activity implements OnClickListener {
             //
         } // try
     } // HttpPostData
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                Intent i = new Intent(this,  SelectGroupOrNot.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-
-
-                finish();
-                return true;
-        }
-        return super.onKeyUp(keyCode, event);
-    }
 }

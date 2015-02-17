@@ -473,6 +473,7 @@ public class PushSetup extends Activity implements View.OnClickListener {
                 //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivity(intent);
                 finish();
+                break;
             }
 
             case R.id.push_save_btn:{                           //저장하기

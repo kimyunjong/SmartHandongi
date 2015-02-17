@@ -75,7 +75,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     Typeface typeface, typeface_bold;
     int screen_height = 0, post_image_large_count = 0;
     int push_count = 0;
-
+    AnyQuery anyquery;
     //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
@@ -208,7 +208,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             pos_report.setVisibility(View.GONE);
             pos_edit.setVisibility(View.VISIBLE);
             pos_delete.setVisibility(View.VISIBLE);
-            if(post.getPush() == 1){
+            if(post.getPush() == 1 && post.getBig_category().compareTo("1") != 0){
                 pos_push.setVisibility(VISIBLE);
             }
             else {
@@ -589,8 +589,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         Log.d("내가쓴 글 푸시 가랏","푸시푸시");
                         //SendPush sendpush = new SendPush();
                         //sendpush.execute();
-                        push_count = 1;
-                        delPhp();
+                        Log.d("푸시테스트", "푸시보낼때");
+                        anyquery = new AnyQuery();
+                        anyquery.phpCreate("UPDATE%20posting%20SET%20push%20=%200%20WHERE%20id=" + post.getId());
 
                         new CountDownTimer(1500, 300) {
                             @Override
@@ -731,14 +732,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     public void delPhp(){
         del_php = new DeletePhp();
 
-        if(push_count == 1){
-            del_php.execute();
-            push_count = 0 ;
-
-        }
-        else {
             del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
-        }
     }
 
     public class DeletePhp extends AsyncTask<String, Integer, String>{
@@ -748,7 +742,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
             String return_str = "";
             String result = "";
 
-            while (return_str.equalsIgnoreCase("")) {
                 try {
                     URL data_url = new URL(urls[0]);
                     HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
@@ -780,7 +773,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     e.printStackTrace();
                 }
                 return_str = jsonHtml.toString();
-            }
+
             Log.v("연결 시도", "연결되어라doinbackground$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
             return jsonHtml.toString();
         }
