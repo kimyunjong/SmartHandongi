@@ -70,6 +70,7 @@
             android:orientation="vertical"
             >
             <ScrollView
+                android:id="@+id/post_detail_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -270,6 +271,8 @@
                 </LinearLayout>
 
             </ScrollView>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="68.5dp"
@@ -465,22 +468,27 @@
 
     <RelativeLayout
         android:id="@+id/test"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#66000000"
-            >
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="16.5dp"
+                android:layout_height="43.5dp"
+                android:layout_marginLeft="16.5dp"
+                android:background="@drawable/close_image"/>
+            <Button
+                android:id="@+id/close_image"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"/>
+
+
             <ImageView
                 android:id="@+id/image_large"
+                android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-
+                android:layout_height="wrap_content"
                 />
-        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

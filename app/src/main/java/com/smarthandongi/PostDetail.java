@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.smarthandongi.database.Picture;
@@ -70,16 +71,18 @@ public class PostDetail extends Activity implements View.OnClickListener{
     Picture poster = new Picture();
     RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report, popup_delete_1, popup_delete_2, popup_delete_3, popup_push_confirm, popup_cancel, post_image_large;
     RelativeLayout poster_image, entire_layout_rel, image_large_layout, test;
-    LinearLayout pos_dates, pos_linkbar, entire_layout;
+    LinearLayout pos_dates, pos_linkbar, entire_layout, top_bar;
+    ScrollView postdetail_scroll;
     String category = "", small_category = "";
     Typeface typeface, typeface_bold;
+    Button close_image;
     int screen_height = 0, post_image_large_count = 0;
     int push_count = 0;
     AnyQuery anyquery;
     //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
-    int temp=1;
+    int temp=1, enlarge = 0;
     //수영 추가 끝
 
     //자동개행 관련
@@ -111,6 +114,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         home_btn=(Button)findViewById(R.id.post_detail_home);
         pos_push = (ImageButton)findViewById(R.id.pos_push);
         enlarge_image = (Button)findViewById(R.id.enlarge_image);
+        close_image = (Button)findViewById(R.id.close_image);
 
         writer_group_name.setOnClickListener(this);
         review_show_btn.setOnClickListener(this);
@@ -122,6 +126,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         backward_btn.setOnClickListener(this);
         home_btn.setOnClickListener(this);
         pos_push.setOnClickListener(this);
+        close_image.setOnClickListener(this);
         enlarge_image.setOnClickListener(this);
         enlarge_image.bringToFront();
 
@@ -173,7 +178,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         enlarge_image.getLayoutParams().height = ((int)(screen_height*0.4));
         enlarge_image.requestLayout();
         post_img_large.getLayoutParams().width = (screen_width);
-        post_img_large.getLayoutParams().height = screen_height;
+        post_img_large.getLayoutParams().height = ((int)(screen_height*0.8));
         post_img_large.requestLayout();
 
         pos_delete = (RelativeLayout)findViewById(R.id.pos_delete);  //작성자
@@ -186,6 +191,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         entire_layout_rel = (RelativeLayout)findViewById(R.id.entire_layout_rel);
         poster_image = (RelativeLayout)findViewById(R.id.poster_image);
         test = (RelativeLayout)findViewById(R.id.test);
+        top_bar = (LinearLayout)findViewById(R.id.writing_top_bar);
+        postdetail_scroll = (ScrollView)findViewById(R.id.post_detail_scroll);
 
 
         popup_delete_1 = (RelativeLayout)findViewById(R.id.popup_delete_1);
@@ -343,21 +350,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
             case R.id.enlarge_image : {
                 Log.d("enlarge", "");
 
-//                dialog_image = new Dialog(context);
-//                dialog_image.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                dialog_image.setContentView(R.layout.dialog_image);
-//                dialog_image.show();
-//
-//                dialog_imageview = (ImageView)dialog_image.findViewById(R.id.dialog_image);
-//                dialog_imageview.getLayoutParams().width = (screen_width);
-//                dialog_imageview.requestLayout();
-//                PostImageTask postImageTask;
-//                postImageTask = new PostImageTask(poster, post.getId(), dialog_imageview, screen_width, temp);//수영 수정, temp 추가
-//                postImageTask.execute(0);
+                postdetail_scroll.setVisibility(View.INVISIBLE);
+                top_bar.setVisibility(View.INVISIBLE);
 
-
-                entire_layout_rel.setBackgroundResource(0);
-                entire_layout.setVisibility(GONE);
                 post_image_large_count = 1;
                 DisplayMetrics metric = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -366,8 +361,17 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 postImageTask = new PostImageTask(poster, post.getId(), post_img_large, screen_width, temp);//수영 수정, temp 추가
                 postImageTask.execute(0);
                 test.setVisibility(VISIBLE);
-                post_img_large.setVisibility(VISIBLE);
-                post_img_large.bringToFront();
+                close_image.bringToFront();
+                enlarge = 1;
+//                post_img_large.setVisibility(VISIBLE);
+//                post_img_large.bringToFront();
+                break;
+            }
+            case R.id.close_image : {
+                postdetail_scroll.setVisibility(VISIBLE);
+                top_bar.setVisibility(VISIBLE);
+                test.setVisibility(GONE);
+
                 break;
             }
             case R.id.pos_review_show_btn : {
@@ -790,11 +794,19 @@ public class PostDetail extends Activity implements View.OnClickListener{
             dialog_del.dismiss();
     }
     public void onBackPressed() {
+
+
         if(post_image_large_count == 1 && post_img_large.getDrawable() != null) {
             recycleBitmap(post_img_large);
         }
+        if(enlarge == 1){
+            postdetail_scroll.setVisibility(VISIBLE);
+            top_bar.setVisibility(VISIBLE);
+            test.setVisibility(GONE);
+            enlarge = 0;
 
-        if(carrier.getFromSMP()==1) {
+        }
+        else if(carrier.getFromSMP()==1) {
             Intent intent = new Intent(PostDetail.this,SeeMyPost.class).putExtra("carrier",carrier);
             intent.putExtra("post_list",posting_list);
             startActivity(intent);
