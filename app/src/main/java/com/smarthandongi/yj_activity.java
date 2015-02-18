@@ -156,6 +156,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         search_layout=(RelativeLayout)findViewById(R.id.search_bar_layout);
         default_layout=(RelativeLayout)findViewById(R.id.default_layout);
 
+
         notice_img = (ImageView) findViewById(R.id.notice_img);
         outer_img = (ImageView) findViewById(R.id.outer_img);
         seminar_img = (ImageView) findViewById(R.id.seminar_img);
@@ -622,7 +623,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 }
                 else if (event.getAction() == 1) {
                     write_img.setImageResource(R.drawable.write_btn);
-
+                    carrier.setEdit_count(0);
                     Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
                     intent.putExtra("carrier", carrier);
                     startActivityForResult(intent, 0);
@@ -637,6 +638,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu_on);
                 } else if (event.getAction() == 1) {
                     write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
+                    carrier.setEdit_count(0);
                     Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
                     intent.putExtra("carrier", carrier);
 
@@ -779,6 +781,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     dialog_logout_okay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            dialog_logout.dismiss();
                             if (carrier.isLogged_in()) {
 
                                 UserManagement.requestLogout(new LogoutResponseCallback() {
@@ -878,6 +881,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     {
         if(carrier.isLogged_in()) {
             login_menu_txt.setText(carrier.getNickname());
+            login_menu_txt.setTypeface(typeface);
             login_menu_img.setImageResource(R.drawable.login_bg_img);
             login_menu_btn.setVisibility(View.GONE);
             login_menu_low_img.setVisibility(View.GONE);

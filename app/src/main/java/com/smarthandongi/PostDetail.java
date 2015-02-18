@@ -59,7 +59,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     Dialog dialog_del, dialog_report, dialog_push, dialog_link_message, dialog_image;
     Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm, enlarge_image;
 
-    ImageView post_img, post_img_large, dialog_imageview;
+    ImageView post_img, post_img_large, dialog_imageview, close_imageview;
     private Button scrap_btn, del_btn, review_show_btn, edit_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn, dialog_link_confirm, dialog_link_cancel;
     ImageButton pos_push;
 
@@ -167,6 +167,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post_img.setOnClickListener(this);
         post_img_large=(ImageView)findViewById(R.id.image_large);
         post_img_large.setOnClickListener(this);
+        close_imageview = (ImageView)findViewById(R.id.close_imageview);
 
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -177,9 +178,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post_img.requestLayout();
         enlarge_image.getLayoutParams().height = ((int)(screen_height*0.4));
         enlarge_image.requestLayout();
-        post_img_large.getLayoutParams().width = (screen_width);
-        post_img_large.getLayoutParams().height = ((int)(screen_height*0.8));
-        post_img_large.requestLayout();
+        //post_img_large.getLayoutParams().width = (screen_width);
+//        post_img_large.getLayoutParams().height = ((int)(screen_height*0.837));
+        //post_img_large.requestLayout();
 
         pos_delete = (RelativeLayout)findViewById(R.id.pos_delete);  //작성자
         pos_edit = (RelativeLayout)findViewById(R.id.pos_edit);
@@ -361,6 +362,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 postImageTask = new PostImageTask(poster, post.getId(), post_img_large, screen_width, temp);//수영 수정, temp 추가
                 postImageTask.execute(0);
                 test.setVisibility(VISIBLE);
+                close_imageview.bringToFront();
                 close_image.bringToFront();
                 enlarge = 1;
 //                post_img_large.setVisibility(VISIBLE);
@@ -502,8 +504,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 carrier.setEdit_count(0);
                 carrier.setGroup_name("");
                 carrier.setGroup_code("");
-                carrier.setBig_category(null);
-                carrier.setCategory(null);
+                carrier.setBig_category("0");
+                carrier.setCategory("");
                 carrier.setTitle(null);
                 carrier.setContent(null);
                 carrier.setPosting_date(null);

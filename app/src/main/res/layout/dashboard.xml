@@ -16,6 +16,7 @@
         android:layout_weight="60"
         >
         <RelativeLayout
+            android:id="@+id/dash_top_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <RelativeLayout
@@ -45,9 +46,9 @@
                     android:layout_marginRight="8dp"/>
                 <EditText
                     android:cursorVisible="false"
-                  android:id="@+id/post_search"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                    android:id="@+id/post_search"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
                     android:textSize="14.5dp"
                     android:layout_marginLeft="5dp"
                   android:layout_toRightOf="@+id/search_on_img"
@@ -399,12 +400,13 @@
                 android:layout_height="33dp"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="21dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/login_bg_img"/>
             <TextView
                 android:id="@+id/login_txt_info"
                 android:layout_width="wrap_content"
                 android:layout_alignParentLeft="true"
-
+                android:text="김영민"
                 android:layout_height="wrap_content"
 
                 android:layout_marginLeft="22dp"
