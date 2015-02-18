@@ -28,7 +28,9 @@ public class Carrier implements Serializable {
     private int edit_count = 0;
     private int has_pic = 0;
     private int push = 0;
+    private int group_id;
     //youngmin variable ends
+
 
     private String Group_pw = null;
     private String upload_url=null;
@@ -36,6 +38,10 @@ public class Carrier implements Serializable {
     private int fromSMPcomment=0;
     private int fromSMP=0;
     private int post_position_num;
+
+    public void setGroup_id(int group_id) {this.group_id=group_id;}
+
+    public int getGroup_id() {return group_id;}
 
     public void setFromSMPcomment(int fromSMP) {this.fromSMPcomment = fromSMP;}
 

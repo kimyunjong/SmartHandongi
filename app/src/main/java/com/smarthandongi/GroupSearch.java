@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,14 @@ import android.widget.TextView;
 
 import com.smarthandongi.adapter.GroupListAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 /**
  * Created by user on 2015-01-27.
@@ -36,7 +45,7 @@ public class GroupSearch extends Activity {
     private ArrayList<GroupDatabase> group_list = new ArrayList<GroupDatabase>();
     private ArrayList<GroupDatabase> temp_list = new ArrayList<GroupDatabase>();
     private ArrayList<GroupDatabase> filtered_list = new ArrayList<GroupDatabase>();
-    private GroupPhp group_php;
+    private GroupNewPhp group_php;
     EditText group_search;
     RelativeLayout layoutView,unresistered_screen;
     LinearLayout group_listitem;
@@ -54,7 +63,7 @@ public class GroupSearch extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_search);
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
-        group_php = new GroupPhp(group_list,temp_list,this);
+        group_php = new GroupNewPhp(group_list,temp_list, this);
         group_php.execute("http://hungry.portfolio1000.com/smarthandongi/group.php");
 
         search_cancel_img=(ImageView)findViewById(R.id.search_cancel_img);
@@ -71,6 +80,16 @@ public class GroupSearch extends Activity {
         group_nomatch_3 = (TextView)findViewById(R.id.group_nomatch_3);
         group_nomatch_4 = (TextView)findViewById(R.id.group_nomatch_4);
 
+        search_cancel_btn=(Button)findViewById(R.id.search_cancel_btn);
+        search_cancel_btn.setOnClickListener(new Button.OnClickListener () {
+            public void onClick(View v) {
+                group_search.setText("");
+                search_cancel_img.setVisibility(View.INVISIBLE);
+                search_glass_img.setVisibility(View.VISIBLE);
+            }
+        });
+
+
         unresistered.setTypeface(typeface);
         group_nomatch_1.setTypeface(typeface);
         group_nomatch_2.setTypeface(typeface);
@@ -81,10 +100,11 @@ public class GroupSearch extends Activity {
         group_search.setTypeface(typeface);
         group_search.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-                group_search.setCursorVisible(true);
+
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.showSoftInput(group_search,0);
                 search_please.setVisibility(View.INVISIBLE);
+                group_search.setCursorVisible(true);
                 return true;
             }
         });
@@ -108,11 +128,49 @@ public class GroupSearch extends Activity {
         listview.setOnItemClickListener(groupListClickListener);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+/*
         TextWatcher watcher = new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence charsequence, int i, int j, int k) {
+            public void onTextChanged(CharSequence s, int i, int j, int k) {
                 // TODO Auto-generated method stub
+                search_glass_img.setVisibility(View.INVISIBLE);
+                search_cancel_img.setVisibility(View.VISIBLE);
+                search_cancel_btn.setVisibility(View.VISIBLE);
+
+                //str = group_search.getText().toString();
+                filtered_list.removeAll(filtered_list);
+
+                for (int a = 0; a < group_list.size(); a++) {
+                    if (group_list.get(a).getNickname_list().contains(s)) {
+                        filtered_list.add(new GroupDatabase(group_list.get(a).getId(), group_list.get(a).getGroup_name(),
+                                group_list.get(a).getNickname_list(),group_list.get(a).getGroup_code(),
+                                group_list.get(a).getGroup_pw()));
+                    }
+                }
+                adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
+                listview.setAdapter(adapter);
+
+                if(s.length()>1&&filtered_list.size()==0) {
+                    listview.setVisibility(View.GONE);
+                    background_hidden.setVisibility(View.GONE);
+                    unresistered_background.setVisibility(View.VISIBLE);
+                    unresistered_screen.setVisibility(View.VISIBLE);
+                    unresistered.setText("\""+s+"\"");
+
+                }
+                else
+                {
+
+                    listview.setVisibility(View.VISIBLE);
+                    unresistered_background.setVisibility(View.GONE);
+                    unresistered_screen.setVisibility(View.GONE);
+                    if(filtered_list.size()!=0) {
+                        background_hidden.getLayoutParams().height=getTotalHeightOfListView(listview);
+                        background_hidden.setVisibility(View.VISIBLE);
+                        unresistered_background.setVisibility(View.VISIBLE);
+                    }
+
+                }
             }
 
             @Override
@@ -120,64 +178,44 @@ public class GroupSearch extends Activity {
                 // TODO Auto-generated method stub
             }
             @Override
-            public void afterTextChanged(Editable editable) {
+            public synchronized void afterTextChanged(Editable editable) {
                 // TODO Auto-generated method stub
-                search_glass_img.setVisibility(View.INVISIBLE);
-                search_cancel_img.setVisibility(View.VISIBLE);
-                search_cancel_btn=(Button)findViewById(R.id.search_cancel_btn);
-                search_cancel_btn.setVisibility(View.VISIBLE);
-                search_cancel_btn.setOnClickListener(new Button.OnClickListener () {
-                    public void onClick(View v) {
-                        group_search.setText("");
-                        search_cancel_img.setVisibility(View.INVISIBLE);
-                        search_glass_img.setVisibility(View.VISIBLE);
-                    }
-                });
 
+
+            }
+        };*/
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 str = group_search.getText().toString();
                 filtered_list.removeAll(filtered_list);
-                Log.d("test", Integer.toString(temp_list.size()));
-
-                for (int i = 0; i < temp_list.size(); i++) {
-                    if (temp_list.get(i).getNickname_list().contains(str)) {
-                        filtered_list.add(new GroupDatabase(temp_list.get(i).getId(), temp_list.get(i).getGroup_name(),
-                                                            temp_list.get(i).getNickname_list(),temp_list.get(i).getGroup_code(),
-                                                            temp_list.get(i).getGroup_pw()));
-
-                        adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
-                        listview.setAdapter(adapter);
-                        Log.d("filtered_list", Integer.toString(filtered_list.size()));
-
+                Log.d("test", Integer.toString(filtered_list.size()));
+                for (int a = 0; a < group_list.size(); a++) {
+                    if (group_list.get(a).getNickname_list().contains(str)) {
+                        filtered_list.add(new GroupDatabase(group_list.get(a).getId(), group_list.get(a).getGroup_name(),
+                                group_list.get(a).getNickname_list(),group_list.get(a).getGroup_code(),
+                                group_list.get(a).getGroup_pw()));
                     }
-                }
-
-
-
-                if(str.length()>1&&filtered_list.size()==0) {
-                    listview.setVisibility(View.INVISIBLE);
-                    background_hidden.setVisibility(View.GONE);
-                    unresistered_background.setVisibility(View.VISIBLE);
-                    unresistered_screen.setVisibility(View.VISIBLE);
-                    unresistered.setText("\""+str+"\"");
 
                 }
-                else
-                {
+                Log.d("sjsjijj",str);
 
-                        listview.setVisibility(View.VISIBLE);
-                        unresistered_background.setVisibility(View.INVISIBLE);
-                        unresistered_screen.setVisibility(View.INVISIBLE);
-                        if(filtered_list.size()!=0) {
-                            background_hidden.getLayoutParams().height=getTotalHeightOfListView(listview);
-                            background_hidden.setVisibility(View.VISIBLE);
-                            Log.d("이거되는건가", "제발되람고");
-                            unresistered_background.setVisibility(View.VISIBLE);
-                            Log.d("이거되는건가","아마될거야아마아망마아마");
-
-                        }
-
+                for(int i=0; i<filtered_list.size();i++){
+                    Log.d("이거되야해",filtered_list.get(i).getGroup_name());
                 }
-
+                //adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
+                //listview.setAdapter(adapter);
+                //listview.setOnItemClickListener(groupListClickListener);
             }
         };
         group_search.addTextChangedListener(watcher);
@@ -230,6 +268,7 @@ public class GroupSearch extends Activity {
               carrier.setGroup_code(filtered_list.get(pos).getGroup_code());
               carrier.setGroup_name(filtered_list.get(pos).getGroup_name());
               carrier.setGroup_pw(filtered_list.get(pos).getGroup_pw());
+              carrier.setGroup_id(filtered_list.get(pos).getId());
               Intent intent = new Intent(GroupSearch.this,GroupPassword.class).putExtra("carrier",carrier);
               startActivity(intent);
               finish();
@@ -240,6 +279,7 @@ public class GroupSearch extends Activity {
               carrier.setGroup_code(group_list.get(pos).getGroup_code());
               carrier.setGroup_name(group_list.get(pos).getGroup_name());
               carrier.setGroup_pw(group_list.get(pos).getGroup_pw());
+              carrier.setGroup_id(group_list.get(pos).getId());
               Intent intent = new Intent(GroupSearch.this, GroupPassword.class).putExtra("carrier", carrier);
               startActivity(intent);
               finish();
@@ -253,6 +293,85 @@ public class GroupSearch extends Activity {
         Intent intent = new Intent(GroupSearch.this,SelectGroupOrNot.class).putExtra("carrier",carrier);
         startActivity(intent);
         finish();
+    }
+    public class GroupNewPhp extends AsyncTask<String, android.R.integer , String> {
+        private ArrayList<GroupDatabase> group_list,temp_list;
+        private Context context;
+
+        public GroupNewPhp(ArrayList<GroupDatabase> group_list,ArrayList<GroupDatabase> temp_list, Context context) {
+            super();
+            this.group_list=group_list;
+            this.temp_list = temp_list;
+            this.context=context;
+        }
+
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str="";
+
+            while(return_str.equalsIgnoreCase("")) {
+                try{
+                    URL data_url=new URL(urls[0]);
+                    HttpURLConnection conn = (HttpURLConnection)data_url.openConnection();
+                    if(conn !=null){
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if(conn.getResponseCode()==HttpURLConnection.HTTP_OK){
+                            BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
+                            for(;;){
+                                String line = br.readLine();
+                                if(line==null) break;
+                                jsonHtml.append(line+"\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                return_str=jsonHtml.toString();
+            }
+            return jsonHtml.toString();
+        }
+
+        protected void onPostExecute(String str) {
+            try{
+                JSONObject root = new JSONObject(str);
+                JSONArray ja = root.getJSONArray("results");
+
+                for(int i=0; i<ja.length(); i++) {
+                    JSONObject jo = ja.getJSONObject(i);
+
+                    temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
+
+                }
+
+                while(temp_list.size() != 0) {
+
+                    int j=0;
+                    for (int k = 0; k < temp_list.size(); k++) {
+                        if (temp_list.get(j).getGroup_name().compareToIgnoreCase(temp_list.get(k).getGroup_name()) >= 0)
+                            j = k;
+
+                    }
+                    group_list.add(temp_list.remove(j));
+                }
+
+                adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,group_list);
+                listview.setAdapter(adapter);
+                listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                listview.setOnItemClickListener(groupListClickListener);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+
+
     }
 
 
