@@ -5,8 +5,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.smarthandongi.database.Picture;
@@ -29,12 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -54,11 +56,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
             type, pos_between_days, dialog_push_title, dialog_push_text, dialog_link;
     final Context context = this;
-    Dialog dialog_del, dialog_report, dialog_push, dialog_link_message;
-    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm;
+    Dialog dialog_del, dialog_report, dialog_push, dialog_link_message, dialog_image;
+    Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm, enlarge_image;
 
-
-    ImageView post_img;
+    ImageView post_img, post_img_large, dialog_imageview, close_imageview;
     private Button scrap_btn, del_btn, review_show_btn, edit_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn, dialog_link_confirm, dialog_link_cancel;
     ImageButton pos_push;
 
@@ -68,17 +69,20 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private int posting_id,position;
     int screen_width;
     Picture poster = new Picture();
-    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report, popup_delete_1, popup_delete_2, popup_delete_3, popup_push_confirm, popup_cancel;
-    LinearLayout pos_dates, pos_linkbar;
+    RelativeLayout pos_delete, pos_scrap, pos_edit, pos_report, popup_delete_1, popup_delete_2, popup_delete_3, popup_push_confirm, popup_cancel, post_image_large;
+    RelativeLayout poster_image, entire_layout_rel, image_large_layout, test;
+    LinearLayout pos_dates, pos_linkbar, entire_layout, top_bar;
+    ScrollView postdetail_scroll;
     String category = "", small_category = "";
-    Typeface typeface;
-    int screen_height = 0;
+    Typeface typeface, typeface_bold;
+    Button close_image;
+    int screen_height = 0, post_image_large_count = 0;
     int push_count = 0;
-
+    AnyQuery anyquery;
     //수영 추가
     String myResult;
     ProgressDialog loagindDialog;
-    int temp=1;
+    int temp=1, enlarge = 0;
     //수영 추가 끝
 
     //자동개행 관련
@@ -109,6 +113,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         backward_btn=(Button)findViewById(R.id.post_backward_btn);
         home_btn=(Button)findViewById(R.id.post_detail_home);
         pos_push = (ImageButton)findViewById(R.id.pos_push);
+        enlarge_image = (Button)findViewById(R.id.enlarge_image);
+        close_image = (Button)findViewById(R.id.close_image);
 
         writer_group_name.setOnClickListener(this);
         review_show_btn.setOnClickListener(this);
@@ -120,6 +126,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         backward_btn.setOnClickListener(this);
         home_btn.setOnClickListener(this);
         pos_push.setOnClickListener(this);
+        close_image.setOnClickListener(this);
+        enlarge_image.setOnClickListener(this);
+        enlarge_image.bringToFront();
 
         //텍스트뷰
         pos_between_days=(TextView)findViewById(R.id.pos_between_days);
@@ -137,14 +146,15 @@ public class PostDetail extends Activity implements View.OnClickListener{
         dialog_link.setOnClickListener(this);
 
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface_bold = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_BOLD.OTF");
 
         //폰트설정
         start_day.setTypeface(typeface);
         end_day.setTypeface(typeface);
         link.setTypeface(typeface);
-        type.setTypeface(typeface);
-        post_day.setTypeface(typeface);
-        title.setTypeface(typeface);
+        type.setTypeface(typeface_bold);
+        post_day.setTypeface(typeface_bold);
+        title.setTypeface(typeface_bold);
         content.setTypeface(typeface);
         view_num.setTypeface(typeface);
         review_num.setTypeface(typeface);
@@ -154,12 +164,23 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
         //이미지뷰
         post_img=(ImageView)findViewById(R.id.poster);
+        post_img.setOnClickListener(this);
+        post_img_large=(ImageView)findViewById(R.id.image_large);
+        post_img_large.setOnClickListener(this);
+        close_imageview = (ImageView)findViewById(R.id.close_imageview);
+
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_height = metrics.heightPixels;
+        screen_width = metrics.widthPixels;
         post_img.getLayoutParams().height = ((int)(screen_height*0.4));
         post_img.requestLayout();
+        enlarge_image.getLayoutParams().height = ((int)(screen_height*0.4));
+        enlarge_image.requestLayout();
+        //post_img_large.getLayoutParams().width = (screen_width);
+//        post_img_large.getLayoutParams().height = ((int)(screen_height*0.837));
+        //post_img_large.requestLayout();
 
         pos_delete = (RelativeLayout)findViewById(R.id.pos_delete);  //작성자
         pos_edit = (RelativeLayout)findViewById(R.id.pos_edit);
@@ -167,6 +188,13 @@ public class PostDetail extends Activity implements View.OnClickListener{
         pos_scrap = (RelativeLayout)findViewById(R.id.pos_scrap);
         pos_dates = (LinearLayout)findViewById(R.id.pos_dates);
         pos_linkbar = (LinearLayout)findViewById(R.id.pos_linkbar);
+        entire_layout = (LinearLayout)findViewById(R.id.entire_layout);
+        entire_layout_rel = (RelativeLayout)findViewById(R.id.entire_layout_rel);
+        poster_image = (RelativeLayout)findViewById(R.id.poster_image);
+        test = (RelativeLayout)findViewById(R.id.test);
+        top_bar = (LinearLayout)findViewById(R.id.writing_top_bar);
+        postdetail_scroll = (ScrollView)findViewById(R.id.post_detail_scroll);
+
 
         popup_delete_1 = (RelativeLayout)findViewById(R.id.popup_delete_1);
         popup_delete_2 = (RelativeLayout)findViewById(R.id.popup_delete_2);
@@ -178,7 +206,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
 
         if(post.getHas_pic().compareTo("1")==0) {
-            construction();
+            construction(post_img);
+            poster_image.setVisibility(VISIBLE);
+//            construction(post_img_large);
         }
 
         if(carrier.getId().compareTo(post.getKakao_id())==0) {
@@ -186,33 +216,43 @@ public class PostDetail extends Activity implements View.OnClickListener{
             pos_report.setVisibility(View.GONE);
             pos_edit.setVisibility(View.VISIBLE);
             pos_delete.setVisibility(View.VISIBLE);
-            if(post.getPush() == 1){
+            if(post.getPush() == 1 && post.getBig_category().compareTo("1") != 0){
                 pos_push.setVisibility(VISIBLE);
             }
             else {
                 pos_push.setVisibility(GONE);
             }
         }
-        if(post.getGroup_name().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
+        if(post.getGroup_name().compareTo("") != 0 && post.getGroup().compareTo("") != 0){                             //리스트 내에 있을 때만 이거 적용
             //리스트 내부에 있는지 체크해서 있으면 clickable하게 바꿈
             writer_name.setVisibility(View.GONE);
             writer_group_name.setVisibility(View.VISIBLE);
             writer_group_name.setText(post.getGroup_name());                     //그룹코드 말고 그룹 네임 받아와야 한다.
-            writer_group_name.setTextColor(Color.parseColor("#7CD752"));
+            writer_group_name.setTextColor(Color.parseColor("#C7FF5C"));
+            writer_group_name.setPaintFlags(writer_group_name.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        }
+        else if(post.getGroup_name().compareTo("") != 0 && post.getGroup().compareTo("") == 0){
+            //리스트내 존재하지 않은 단체
+            writer_name.setVisibility(GONE);
+            writer_group_name.setVisibility(VISIBLE);
+            writer_group_name.setText(post.getGroup_name());
+            writer_group_name.setTextColor(Color.parseColor("#f1f2f2"));
+            writer_group_name.setClickable(false);
         }
         else writer_name.setText(post.getKakao_nic());
 
-        if(post.getStart_date().length() < 4) {                                             //시작일
+        if(post.getStart_date().length() < 2) {                                             //시작일
             pos_dates.setVisibility(View.GONE);
         } else {
             pos_dates.setVisibility(View.VISIBLE);
-            start_day.setText(post.getStart_date());
-            end_day.setText(post.getEnd_date());                                            //종료일
+            start_day.setText(post.getStart_date().substring(0,4) + "-" + post.getStart_date().substring(4,6) + "-" + post.getStart_date().substring(6,8));
+            end_day.setText(post.getEnd_date().substring(0,4) + "-" + post.getEnd_date().substring(4,6) + "-" + post.getEnd_date().substring(6,8));                                           //종료일
         }
 
         if(post.getLink().length() == 0){
             pos_linkbar.setVisibility(View.GONE);                                       //링크
         } else {
+            post.setLink(post.getLink().replaceAll(" ", ""));
             pos_linkbar.setVisibility(View.VISIBLE);
             link.setText(post.getLink());
         }
@@ -252,9 +292,15 @@ public class PostDetail extends Activity implements View.OnClickListener{
             case "recruiting_display_65"     : small_category = "전시"; break;
             case "recruiting_service_66"     : small_category = "봉사"; break;
         }
-        type.setText("[" + category + "/" + small_category + "]");                                // [대분류/소분류]
+        if(post.getBig_category().compareTo("1") == 0){
+            type.setText("[" + category + "]");
+        }
+        else {
+            type.setText("[" + category + "/" + small_category + "]");                                // [대분류/소분류]
+        }
 
-        post_day.setText(post.getPosting_date());                                           //등록일
+
+        post_day.setText(post.getPosting_date().substring(0, 4) + "-" + post.getPosting_date().substring(4, 6) + "-" + post.getPosting_date().substring(6, 8));   //등록일
 
         title.setText(post.getTitle());                                                     //제목
 
@@ -268,19 +314,68 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
     }
 
-    public void construction() {
-        post_img.setVisibility(View.VISIBLE);
+    public void construction(ImageView iv) {
+        iv.setVisibility(VISIBLE);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_width = metrics.widthPixels;
         PostImageTask postImageTask;
-        postImageTask = new PostImageTask(poster, post.getId(), post_img, screen_width, temp);//수영 수정, temp 추가
+        postImageTask = new PostImageTask(poster, post.getId(), iv, screen_width, temp);//수영 수정, temp 추가
         postImageTask.execute(0);
+    }
+
+    private static void recycleBitmap(ImageView iv) {
+        Drawable d = iv.getDrawable();
+        if (d instanceof BitmapDrawable) {
+            Bitmap b = ((BitmapDrawable)d).getBitmap();
+            b.recycle();
+        } // 현재로서는 BitmapDrawable 이외의 drawable 들에 대한 직접적인 메모리 해제는 불가능하다.
+
+        d.setCallback(null);
+    }
+    protected void onDestroy() {
+        Log.d("OOMTEST", "onDestroy");
+        if(post.getHas_pic().compareTo("1") == 0) {
+            if(post_img.getDrawable() != null) {
+                recycleBitmap(post_img);
+            }
+            //recycleBitmap(post_img_large);
+        }
+
+        super.onDestroy();
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
+            case R.id.enlarge_image : {
+                Log.d("enlarge", "");
+
+                postdetail_scroll.setVisibility(View.INVISIBLE);
+                top_bar.setVisibility(View.INVISIBLE);
+
+                post_image_large_count = 1;
+                DisplayMetrics metric = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metric);
+                screen_width = metric.widthPixels;
+                PostImageTask postImageTask;
+                postImageTask = new PostImageTask(poster, post.getId(), post_img_large, screen_width, temp);//수영 수정, temp 추가
+                postImageTask.execute(0);
+                test.setVisibility(VISIBLE);
+                close_imageview.bringToFront();
+                close_image.bringToFront();
+                enlarge = 1;
+//                post_img_large.setVisibility(VISIBLE);
+//                post_img_large.bringToFront();
+                break;
+            }
+            case R.id.close_image : {
+                postdetail_scroll.setVisibility(VISIBLE);
+                top_bar.setVisibility(VISIBLE);
+                test.setVisibility(GONE);
+
+                break;
+            }
             case R.id.pos_review_show_btn : {
                 Intent intent = new Intent(PostDetail.this, Review.class);
                 carrier.setFromSMP(0);
@@ -409,8 +504,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 carrier.setEdit_count(0);
                 carrier.setGroup_name("");
                 carrier.setGroup_code("");
-                carrier.setBig_category(null);
-                carrier.setCategory(null);
+                carrier.setBig_category("0");
+                carrier.setCategory("");
                 carrier.setTitle(null);
                 carrier.setContent(null);
                 carrier.setPosting_date(null);
@@ -498,10 +593,11 @@ public class PostDetail extends Activity implements View.OnClickListener{
                         //푸시보내는거
                         //푸시카운트 0으로 초기화
                         Log.d("내가쓴 글 푸시 가랏","푸시푸시");
-                        SendPush sendpush = new SendPush();
-                        sendpush.execute();
-                        push_count = 1;
-                        delPhp();
+                        //SendPush sendpush = new SendPush();
+                        //sendpush.execute();
+                        Log.d("푸시테스트", "푸시보낼때");
+                        anyquery = new AnyQuery();
+                        anyquery.phpCreate("UPDATE%20posting%20SET%20push%20=%200%20WHERE%20id=" + post.getId());
 
                         new CountDownTimer(1500, 300) {
                             @Override
@@ -550,9 +646,21 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     @Override
                     public void onClick(View v) {
                         dialog_link_message.dismiss();
-                        Intent intent = new Intent(PostDetail.this, yj_activity.class).putExtra("carrier",carrier);   //링크페이지로 가야함
+                        Uri u;
+                        if(post.getLink().toLowerCase().contains("http://")){
+                            u = Uri.parse(post.getLink());
+                        }
+                        else {
+                            u = Uri.parse("http://" + post.getLink());
+                        }
+
+
+                        Log.d("link", post.getLink());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, u);   //링크페이지로 가야함
+
+                        //intent.setData(u);
                         startActivity(intent);
-                        finish();
+
                     }
                 });
                 break;
@@ -630,75 +738,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
     public void delPhp(){
         del_php = new DeletePhp();
 
-        if(push_count == 1){
-            del_php.execute();
-            push_count = 0 ;
-
-        }
-        else {
             del_php.execute("http://hungry.portfolio1000.com/smarthandongi/delete_post.php?posting_id=" + post.getId());
-        }
-    }
-    private class SendPush extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-           /* loagindDialog = ProgressDialog.show(Writing.this, "키 등록 중입니다..",
-                    "Please wait..", true, false);*/
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-            HttpPostData(post.getId());
-
-            return null;
-        }
-
-        protected void onPostExecute(Void result) {
-            //    loagindDialog.dismiss();
-        }
     }
 
-    public void HttpPostData(int posting_id ) {
-        try {
-            String posting_id1 = String.valueOf(posting_id);
-            Log.d("포스팅 아이디를 보자",posting_id1);
-            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/want_push.php?posting_id="+posting_id1);       // URL 설정
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
-            //--------------------------
-            //   전송 모드 설정 - 기본적인 설정이다
-            //--------------------------
-            http.setDefaultUseCaches(false);
-            http.setDoInput(true);
-            http.setDoOutput(true);
-            http.setRequestMethod("POST");
-
-            http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
-            StringBuffer buffer = new StringBuffer();
-            buffer.append("posting_id").append("=").append(posting_id);                 // php 변수에 값 대입
-
-
-            OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "EUC-KR");
-            PrintWriter writer = new PrintWriter(outStream);
-            writer.write(buffer.toString());
-            writer.flush();
-            InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "EUC-KR");
-            BufferedReader reader = new BufferedReader(tmp);
-            StringBuilder builder = new StringBuilder();
-            String str;
-            while ((str = reader.readLine()) != null) {
-                builder.append(str + "\n");
-            }
-
-            myResult = builder.toString();
-
-        } catch (MalformedURLException e) {
-            //
-        } catch (IOException e) {
-            //
-        } // try
-    } // HttpPostData
     public class DeletePhp extends AsyncTask<String, Integer, String>{
 
         protected String doInBackground(String... urls) {
@@ -706,7 +748,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
             String return_str = "";
             String result = "";
 
-            while (return_str.equalsIgnoreCase("")) {
                 try {
                     URL data_url = new URL(urls[0]);
                     HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
@@ -738,7 +779,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     e.printStackTrace();
                 }
                 return_str = jsonHtml.toString();
-            }
+
             Log.v("연결 시도", "연결되어라doinbackground$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
             return jsonHtml.toString();
         }
@@ -755,7 +796,19 @@ public class PostDetail extends Activity implements View.OnClickListener{
             dialog_del.dismiss();
     }
     public void onBackPressed() {
-        if(carrier.getFromSMP()==1) {
+
+
+        if(post_image_large_count == 1 && post_img_large.getDrawable() != null) {
+            recycleBitmap(post_img_large);
+        }
+        if(enlarge == 1){
+            postdetail_scroll.setVisibility(VISIBLE);
+            top_bar.setVisibility(VISIBLE);
+            test.setVisibility(GONE);
+            enlarge = 0;
+
+        }
+        else if(carrier.getFromSMP()==1) {
             Intent intent = new Intent(PostDetail.this,SeeMyPost.class).putExtra("carrier",carrier);
             intent.putExtra("post_list",posting_list);
             startActivity(intent);

@@ -90,6 +90,13 @@ public class group_info extends Activity {
         introduce.setText(introduce1);
 
         group_image=(ImageView)findViewById(R.id.small_image);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        screen_height = metrics.heightPixels;
+        screen_width = metrics.widthPixels;
+        group_image.getLayoutParams().width = screen_width;
+        group_image.requestLayout();
+
         register_group = (Button)findViewById(R.id.writing_confirm_btn);
 
         register_group.setOnClickListener(new View.OnClickListener() {

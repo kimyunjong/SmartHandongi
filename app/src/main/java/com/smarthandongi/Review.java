@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.PaintDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     PhpUploadReview phpUploadReview;
     PhpDownloadReview phpDownloadReview;
     PhpPushReview phpPushReview;
+    Typeface typeface;
 
     int posting_id,position;
     String kakao_id;
@@ -76,6 +78,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review);
         Intent intent=getIntent();
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         posting_id =(int)intent.getSerializableExtra("posting_id");
@@ -89,6 +92,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
        // kakao_id =(String)intent.getSerializableExtra("kakao_id");
 
         review_write = (EditText)findViewById(R.id.review_write);
+        review_write.setTypeface(typeface);
         reg_btn = (Button)findViewById(R.id.reg_btn);
         del_btn = (Button)findViewById(R.id.del_btn);
         back_btn = (Button)findViewById(R.id.back_btn);

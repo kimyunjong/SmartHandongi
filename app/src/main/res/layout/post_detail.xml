@@ -473,6 +473,7 @@
         android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/close_imageview"
                 android:layout_width="16.5dp"
                 android:layout_height="43.5dp"
                 android:layout_marginLeft="16.5dp"
@@ -486,9 +487,9 @@
 
             <ImageView
                 android:id="@+id/image_large"
-                android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="69.5dp"
                 />
     </RelativeLayout>
 </RelativeLayout>
