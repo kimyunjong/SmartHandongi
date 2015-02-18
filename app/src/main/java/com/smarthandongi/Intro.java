@@ -10,8 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -85,9 +83,11 @@ public class Intro extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        get_intent = getIntent();
-        carrier = new Carrier();
-        setContentView(R.layout.intro);
+        Intent intent = getIntent();
+        if (intent.getSerializableExtra("carrier") != null)
+            carrier = (Carrier)intent.getSerializableExtra("carrier");
+        else
+            carrier = new Carrier(); setContentView(R.layout.intro);
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -99,6 +99,8 @@ public class Intro extends Activity {
         //수영추가
         mDisplay = (TextView) findViewById(R.id.display);
 
+
+
         //carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         context = getApplicationContext();
 
@@ -106,27 +108,29 @@ public class Intro extends Activity {
         //  GCM registration.
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(context);
-            regid = getRegistrationId(context);
+            carrier.setRegid(getRegistrationId(context));
             Log.d("여기입니다","여기가 안된다구요");
-            Log.d("regid는요 ", regid);
+            Log.d("regid는요 ", carrier.getRegid());
 
-            if (regid.isEmpty()) {
+            if (carrier.getRegid().isEmpty()) {
                 registerInBackground();
             }
         } else {
             Log.i(TAG, "No valid Google Play Services APK found.");
 
         }
-        System.out.println(regid+"제발 확인 ");
-        String temp=regid;
+        System.out.println(carrier.getRegid()+"제발 확인 ");
+       // String temp=regid;
 
-        carrier.setRegid(regid);
-        System.out.println(regid+"제발 확인되어라");
+        //carrier.setRegid(regid);
+      //  System.out.println(regid+"제발 확인되어라");
 
 
         RegIDInsertTask regIDInsertTask = new RegIDInsertTask();
-        regIDInsertTask.execute(regid);
+        regIDInsertTask.execute(carrier.getRegid());
 
+       if (carrier.isBy_GCM())
+            enter();
         //수영추가
 
         blink = (TextView) findViewById(R.id.blink);
@@ -154,9 +158,7 @@ public class Intro extends Activity {
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
-                    if(pic.getDrawable() != null) {
-                        recycleBitmap(pic);
-                    }
+
                     intent.putExtra("carrier", carrier);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
@@ -169,16 +171,15 @@ public class Intro extends Activity {
 
 
     }
-    private static void recycleBitmap(ImageView iv) {
-        Drawable d = iv.getDrawable();
-        if (d instanceof BitmapDrawable) {
-            Bitmap b = ((BitmapDrawable)d).getBitmap();
-            b.recycle();
-        } // 현재로서는 BitmapDrawable 이외의 drawable 들에 대한 직접적인 메모리 해제는 불가능하다.
-        Log.d("intro", "메모리 리셋합니다");
-        d.setCallback(null);
+    //수영추가 GCM 화면 들어가기
+    public void enter() {
+        Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
+        intent.putExtra("carrier", carrier);
+        startActivity(intent);
+        overridePendingTransition(0,0);
+        finish();
     }
-
+    //수영 추가 끝
 
     public void onBackPressed(){
         finish();
@@ -286,12 +287,12 @@ public class Intro extends Activity {
                     {
                         gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
                     }
-                    regid = gcm.register(SENDER_ID);
-                    msg = "Device registered, registration ID=" +regid;
+                    carrier.setRegid(gcm.register(SENDER_ID));
+                    msg = "Device registered, registration ID=" +carrier.getRegid();
                     sendRegistrationIdToBackend();
 
 
-                    storeRegistrationId(context,regid);
+                    storeRegistrationId(context,carrier.getRegid());
 
                 }
                 catch (IOException ex)
@@ -309,7 +310,7 @@ public class Intro extends Activity {
             {
 
                 Log.i("ds_activity.java | onPostExecute", "|" + msg + "|");
-                mDisplay.append(msg);
+              //  mDisplay.append(msg);
             }
         }.execute(null, null, null);
     }
@@ -328,39 +329,7 @@ public class Intro extends Activity {
     }
 
     public void onClick(final View view) {
-       /* if (view == findViewById(R.id.button_registId)) {
-            new AsyncTask() {
-                @Override
-                protected String doInBackground(Object... params) {
-                    String msg = "";
-                    try {
-                        Bundle data = new Bundle();
-                        data.putString("my_message", "Hello World");
-                        data.putString("my_action",
-                                "com.google.android.gcm.demo.app.ECHO_NOW");
-                        String id = Integer.toString(msgId.incrementAndGet());
-                        gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
-                        msg = "Sent message";
-                    } catch (IOException ex) {
-                        msg = "Error :" + ex.getMessage();
-                    }
-                    return msg;
-                }
 
-                @Override
-                protected void onPostExecute(Object msg) {
-                    //super.onPostExecute(msg);
-                    mDisplay.append(msg + "\n");
-                }
-            }.execute(null, null, null);
-        } else if (view == findViewById(R.id.clear)) {
-            mDisplay.setText("");
-        }/*
-        else if (view==findViewById(R.id.group_info)){
-            Intent intent = new Intent(ds_activity.this, group_info.class).putExtra("carrier", carrier);
-            startActivity(intent);
-        }
-*/
 
     }
     private class RegIDInsertTask extends AsyncTask<String, Void, Void> {
@@ -385,7 +354,7 @@ public class Intro extends Activity {
 
     public void HttpPostData(String reg_id ) {
         try {
-            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_reg_insert.php?reg_id="+regid);       // URL 설정
+            URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_reg_insert.php?reg_id="+carrier.getRegid());       // URL 설정
             Log.d("regid등록","등록되었습니다.");
             HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
             //--------------------------

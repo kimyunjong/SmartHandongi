@@ -22,6 +22,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,8 +30,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -61,6 +64,19 @@ public class group_infoList extends Activity {
     }
 
     public void phpCreate(){
+
+       /* String introduce=group.getIntroduce() ;
+        try {
+            introduce = URLEncoder.encode(introduce, "UTF-8");
+            //review = URLEncoder.encode(review, "UTF-8");
+            //format2 = URLEncoder.encode(format2, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        group.setIntroduce(introduce);
+        */
+
         group_Php = new GroupPhp(group_list,temp_list, this);
         group_Php.execute("http://hungry.portfolio1000.com/smarthandongi/group_info.php?");
 
@@ -82,6 +98,8 @@ public class group_infoList extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(group_infoList.this, yj_activity.class).putExtra("carrier",carrier);
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -94,6 +112,7 @@ public class group_infoList extends Activity {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+                finish();
             }
         });
         //search bar
@@ -295,6 +314,15 @@ public class group_infoList extends Activity {
         return totalHeight;
     }
 
+    public void onBackPressed()
+    {
+
+        Intent intent = new Intent(group_infoList.this, yj_activity.class).putExtra("carrier",carrier);
+        startActivity(intent);
+        finish();
+
+
+    }
 
 
 
@@ -346,18 +374,26 @@ public class group_infoList extends Activity {
                 JSONArray ja = root.getJSONArray("results");
 
                 Log.d("되나보자","여긴되나?");
+
                 for(int i=0; i<ja.length();i++) {
                     JSONObject jo = ja.getJSONObject(i);
 
+                   /* String introduce= jo.getString("introduce");
+                    try {
+                        introduce = URLEncoder.encode(introduce, "UTF-8");
+
+                    } catch (UnsupportedEncodingException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }*/
+                    ;
                     group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"),jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
                     temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"),jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
 
                 }
 
-                //groupinfoAdapter= new GroupinfoAdapter(group_infoList.this, group_list,R.layout.group_lifo_list );
                 group_list_view.setAdapter(groupinfoAdapter);
-                //group_list_view.setOnScrollListener(context);
-                //group_list_view.setOnItemClickListener(context);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

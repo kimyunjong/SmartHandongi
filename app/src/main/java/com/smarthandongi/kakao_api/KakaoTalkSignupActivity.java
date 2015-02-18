@@ -67,5 +67,8 @@ public class KakaoTalkSignupActivity extends SampleSignupActivity {
         startActivity(intent);
 
         finish();
+        if(carrier.isBy_GCM()){
+
+        }
     }
 }

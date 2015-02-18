@@ -96,8 +96,8 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/group_category"
                                 android:layout_gravity="center_horizontal"
-
-                                android:textSize="25dp"
+                                android:textSize="15.5dp"
+                                android:fontFamily="sans-serif-light"
                                 android:text="category"
                                 />
 
@@ -105,7 +105,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/group_name"
-                                android:textSize="25dp"
+                                android:textStyle="bold"
+                                android:textSize="17.5dp"
                                 android:text="group_name"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_below="@id/group_category" />
@@ -131,15 +132,19 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 >
-            <TextView
+                <com.smarthandongi.CTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/intro"
-                android:textSize="20dp"
-                android:text="소개하는 말 입니다. \n 안녕하세요. 동아리 소개입니다.\n 성공하면 좋겠습니다."
+                android:textSize="15.5dp"
+                android:fontFamily="sans-serif-light"
+                android:text="소개하는 말 입니다. \n안녕하세요. 동아리 소개입니다 우리가 성공할수 있을까요 대박힘들다.\n성공하면 좋겠습니다."
                 android:layout_below="@+id/group_category"
                  />
              </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></LinearLayout>
          </LinearLayout>
 
         </ScrollView>

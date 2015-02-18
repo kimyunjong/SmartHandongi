@@ -36,7 +36,16 @@ public class Carrier implements Serializable {
     private int fromSMPcomment=0;
     private int fromSMP=0;
     private int post_position_num;
+    //수영 추가
+    private boolean gcm;
 
+    public void setBy_GCM(boolean gcm){
+        this.gcm= gcm;
+    }
+    public boolean isBy_GCM(){
+        return gcm;
+    }
+    //수영 추가 끝
     public void setFromSMPcomment(int fromSMP) {this.fromSMPcomment = fromSMP;}
 
     public int getFromSMPcomment() {return fromSMPcomment;}

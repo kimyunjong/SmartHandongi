@@ -74,6 +74,7 @@ public class group_info extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -108,6 +109,15 @@ public class group_info extends Activity {
         display = wm.getDefaultDisplay();
         buf = new StringBuffer();
         buf.append("Window height: " + display.getHeight() + "\n");
+    }
+
+    public void onBackPressed()
+    {
+
+        Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
+        startActivity(intent);
+
+
     }
 
 

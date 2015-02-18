@@ -2,7 +2,6 @@ package com.smarthandongi;
 
 import android.R.integer;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,7 +12,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -22,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -62,9 +59,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     TextView login_menu_txt;
     EditText post_search;
     Carrier carrier;
-    Dialog dialog_logout;
-    Button dialog_logout_okay, dialog_logout_no;
-    LinearLayout dialog_logout_background;
     private Intent intent;
     int ca1=1,ca2=1,ca3=1, ca4=1, ca5=1;//켜진상태
     boolean board_on=true,timeline_on=false, search_on=false,default_on=true;
@@ -86,7 +80,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private Post2Adapter adapter2;
     String myResult,str;
     Typeface typeface;
-    final Context context = this;
 
     private Thread thread;
     private Boolean thread_running = false;
@@ -627,7 +620,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     intent.putExtra("carrier", carrier);
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
-                   finish();
                 }
                 break;
             }
@@ -642,7 +634,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
                     startActivityForResult(intent, 0);
                     overridePendingTransition(0,0);
-                    finish();
+
                 }
                 break;
             }
@@ -767,53 +759,33 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 }
                 else if (event.getAction() == 1) {
                     logout_btn_img.setImageResource(R.drawable.logout_menu);
+                    if (carrier.isLogged_in()) {
 
-                    dialog_logout = new Dialog(context);
-                    dialog_logout.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog_logout.setContentView(R.layout.dialog_cancel);
-                    dialog_logout.show();
-
-                    dialog_logout_background = (LinearLayout)dialog_logout.findViewById(R.id.dialog_writing_background);
-                    dialog_logout_background.setBackgroundResource(R.drawable.dialog_logout);
-                    dialog_logout_okay = (Button)dialog_logout.findViewById(R.id.dialog_writing_confirm);
-                    dialog_logout_okay.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (carrier.isLogged_in()) {
-
-                                UserManagement.requestLogout(new LogoutResponseCallback() {
-                                    @Override
-                                    protected void onSuccess(long l) {
-                                        carrier.setLogged_in(false);
-                                        carrier.setNickname("not_logged_in");
-                                        carrier.setId("000000");
-                                        // 수영추가
-                                        // carrier.setIsLogout_regid(2);
-                                        RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
-                                        regIDDeleteTask.execute(regid);
-                                        // 수영 추가 끝
-                                        Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-
-                                    @Override
-                                    protected void onFailure(APIErrorResult apiErrorResult) {
-
-                                    }
-                                });
-                                login_toggle();
+                        UserManagement.requestLogout(new LogoutResponseCallback() {
+                            @Override
+                            protected void onSuccess(long l) {
+                                carrier.setLogged_in(false);
+                                carrier.setNickname("not_logged_in");
+                                carrier.setId("000000");
+                                // 수영추가
+                                // carrier.setIsLogout_regid(2);
+                               // RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
+                               // regIDDeleteTask.execute(regid);
+                                // 수영 추가 끝
+                                Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
+                                startActivity(intent);
+                                finish();
                             }
-                        }
-                    });
 
-                    dialog_logout_no = (Button)dialog_logout.findViewById(R.id.dialog_writing_cancel);
-                    dialog_logout_no.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_logout.dismiss();
-                        }
-                    });
+                            @Override
+                            protected void onFailure(APIErrorResult apiErrorResult) {
+
+                            }
+                        });
+                        login_toggle();
+                    }
+
+
                 }
                 break;
             }
