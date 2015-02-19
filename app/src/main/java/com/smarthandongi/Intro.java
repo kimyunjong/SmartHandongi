@@ -87,7 +87,8 @@ public class Intro extends Activity {
         if (intent.getSerializableExtra("carrier") != null)
             carrier = (Carrier)intent.getSerializableExtra("carrier");
         else
-            carrier = new Carrier(); setContentView(R.layout.intro);
+            carrier = new Carrier();
+        setContentView(R.layout.intro);
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -109,7 +110,7 @@ public class Intro extends Activity {
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(context);
             carrier.setRegid(getRegistrationId(context));
-            Log.d("여기입니다","여기가 안된다구요");
+    //        Log.d("여기입니다","여기가 안된다구요");
             Log.d("regid는요 ", carrier.getRegid());
 
             if (carrier.getRegid().isEmpty()) {
@@ -173,7 +174,11 @@ public class Intro extends Activity {
     }
     //수영추가 GCM 화면 들어가기
     public void enter() {
+
+        Log.d("enter화면 푸시들어왔어요","푸쉬화면으로 전환");
+        //carrier.setPost_id();
         Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
+        Log.e("enter", "carrier.getPost_id"+carrier.getPost_id() );
         intent.putExtra("carrier", carrier);
         startActivity(intent);
         overridePendingTransition(0,0);

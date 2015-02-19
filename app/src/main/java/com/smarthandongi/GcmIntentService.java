@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -26,19 +27,19 @@ public class GcmIntentService extends GCMBaseIntentService {
     static String re_message = null;
     static Carrier carrier = new Carrier();
 
-    private  void generateNotifiaction(Context context, String message) {
+    private  void generateNotifiaction(Context context, String message ,String posting_id) {
         int icon = R.drawable.push_handongi;
         long when = System.currentTimeMillis();
         String title = "모여라 한동이";
+        String posting_id1 =posting_id;
         carrier.setBy_GCM(true);
-
-//        carrier.setBy_GCM(true);
-        //passed.setPic_id(pic_id.replace("'", ""));
+        carrier.setPost_id(Integer.valueOf(posting_id1));
+        Log.e("getposting_id1", "carrier.getPost_id"+carrier.getPost_id() );
         Intent intent = new Intent(this, Intro.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("carrier", carrier);
-
+        Log.e("getposting_id2", "carrier.getPost_id"+carrier.getPost_id() );
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification notification = new Notification(icon, message, when);
@@ -67,9 +68,13 @@ public class GcmIntentService extends GCMBaseIntentService {
     }
     @Override
     protected void onMessage(Context context, Intent intent){
-        String msg = intent.getStringExtra("msg");
-        Log.e("getmessage", "getmessage:"+ msg);
-        generateNotifiaction(context,msg);
+        Bundle extra= intent.getExtras();
+        String msg = extra.getString("msg");
+        String posting_id = extra.getString("posting_ids");
+       Log.e("getmessage", "getmessage:"+ msg);
+
+       Log.e("getposting_id", "getposting_id:"+posting_id );
+        generateNotifiaction(context,msg,posting_id);
     }
     @Override
     protected void onRegistered(Context context, String reg_id ){

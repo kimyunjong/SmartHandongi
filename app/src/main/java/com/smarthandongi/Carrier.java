@@ -30,6 +30,17 @@ public class Carrier implements Serializable {
     private int push = 0;
     private int group_id;
     //youngmin variable ends
+    //수영 추가
+    private boolean gcm=false;
+
+    public void setBy_GCM(boolean gcm){
+        this.gcm= gcm;
+    }
+    public boolean isBy_GCM(){
+        return gcm;
+    }
+    //수영 추가 끝
+
 
 
     private String Group_pw = null;

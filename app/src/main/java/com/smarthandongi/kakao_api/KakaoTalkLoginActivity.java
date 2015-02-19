@@ -72,6 +72,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         carrier = (Carrier) getIntent().getSerializableExtra("carrier");
         super.onCreate(savedInstanceState);
         setBackground(getResources().getDrawable(R.drawable.kakaotalk_sample_login_background)); //image 바꿀수 있다
@@ -100,6 +101,21 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
         overridePendingTransition(0, 0);
         finish();
 
+        if(carrier.isBy_GCM()){
+            Log.d("Kakaotalk 로그인 액티비티","intro화면을 지나서왔어요");
+            Log.d("Kakaotalk 로그인 액티비티",String.valueOf(carrier.getPost_id()));
+            carrier = (Carrier) getIntent().getSerializableExtra("carrier");
+            intent = new Intent(KakaoTalkLoginActivity.this, KakaoTalkSignupActivity.class);
+            carrier.setLogged_in(true);
+            carrier.setId(String.valueOf(userProfile.getId()));
+            carrier.setNickname(userProfile.getNickname());
+
+            intent.putExtra("carrier", carrier);
+            startActivity(intent);
+
+            overridePendingTransition(0, 0);
+            finish();
+        }
     }
 
     @Override

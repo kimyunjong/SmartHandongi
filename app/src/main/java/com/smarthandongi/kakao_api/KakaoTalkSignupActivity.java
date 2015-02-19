@@ -19,6 +19,7 @@ package com.smarthandongi.kakao_api;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.kakao.UserProfile;
 import com.smarthandongi.Carrier;
@@ -63,12 +64,10 @@ public class KakaoTalkSignupActivity extends SampleSignupActivity {
 
         final Intent intent = new Intent(this, yj_activity.class);
         intent.putExtra("carrier", carrier);
-
+        Log.d("Kakaotalk 사인업액티비티1", String.valueOf(carrier.getPost_id()));
         startActivity(intent);
 
         finish();
-        if(carrier.isBy_GCM()){
-
-        }
+        if(carrier.isBy_GCM()){  Log.d("Kakaotalk 로그인 액티비티2",String.valueOf(carrier.getPost_id()));       }
     }
 }
