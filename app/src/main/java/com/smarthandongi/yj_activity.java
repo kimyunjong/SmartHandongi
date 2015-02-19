@@ -220,7 +220,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 // TODO Auto-generated method stub
                 str = post_search.getText().toString();
                 filtered_list.removeAll(filtered_list);
-                Log.d("test", Integer.toString(temp_list.size()));
+                Log.d("test", Integer.toString(filtered_list.size()));
 
                 for (int i = 0; i < temp_list.size(); i++) {
                     if (temp_list.get(i).getTitle().contains(str)) {
@@ -233,7 +233,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                                         temp_list.get(i).getKakao_nic(), temp_list.get(i).getPush(), temp_list.get(i).getRegid()));
                         adapter = new PostAdapter(yj_activity.this, filtered_list,carrier);
                         adapter2= new Post2Adapter(yj_activity.this, filtered_list );
-                        Log.v("연결 시도", "연결되어라@*********************************************");
+
 
                         board_listview.setAdapter(adapter);
                         board_listview.setOnScrollListener(yj_activity.this);
@@ -244,6 +244,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                         timeline_listview.setOnItemClickListener(timelineItemClickListener);
 
                     }
+                    Log.d("test", Integer.toString(filtered_list.size()));
                 }
             }
         };

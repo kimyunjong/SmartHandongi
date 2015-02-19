@@ -134,9 +134,11 @@ public class ReviewAdapter extends BaseAdapter {
         if(getItem(position).getKakao_id().compareTo(carrier.getId())==0) {
             holder.notify_btn.setVisibility(View.GONE);
             holder.del_btn.setVisibility(View.VISIBLE);
+
         }else{
             holder.notify_btn.setVisibility(View.VISIBLE);
             holder.del_btn.setVisibility(View.GONE);
+
         }
 
         //  holder.del_btn.setVisibility(carrier.isLogged_in() ? View.VISIBLE : View.GONE);
