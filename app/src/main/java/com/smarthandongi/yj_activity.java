@@ -1084,7 +1084,17 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             //Log.d("board_list.get", String.valueOf(board_list.get(position).getId()));
             Log.d("board_list1",String.valueOf(board_list.get(position).getId()));
             Log.d("getPost_id1",String.valueOf(carrier.getPost_id()));
-            for(position=0;board_list.get(position).getId()==carrier.getPost_id();position++){
+            int i=1;
+            while(i==1){
+                    if(board_list.get(position).getId()!=carrier.getPost_id())
+                    { position++;
+                    Log.d("board_list",String.valueOf(board_list.get(position).getId()));
+                    Log.d("getPost_id",String.valueOf(carrier.getPost_id()));
+                    }
+                else i=0;
+
+            }
+            /*for(position=0;board_list.get(position).getId()==carrier.getPost_id();position++){
 
                 Log.d("board_list2",String.valueOf(board_list.get(position).getId()));
                 Log.d("getPost_id2",String.valueOf(carrier.getPost_id()));

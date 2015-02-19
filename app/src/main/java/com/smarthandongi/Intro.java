@@ -85,7 +85,10 @@ public class Intro extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Intent intent = getIntent();
         if (intent.getSerializableExtra("carrier") != null)
-            carrier = (Carrier)intent.getSerializableExtra("carrier");
+        {carrier = (Carrier)intent.getSerializableExtra("carrier");
+
+        //    Log.d("처음에 들어온 posting_id",String.valueOf(carrier.getPost_id()));
+        }
         else
             carrier = new Carrier();
         setContentView(R.layout.intro);
@@ -102,7 +105,7 @@ public class Intro extends Activity {
 
 
 
-        //carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+
         context = getApplicationContext();
 
         // Check device for Play Services APK. If check succeeds, proceed with
@@ -174,14 +177,14 @@ public class Intro extends Activity {
     }
     //수영추가 GCM 화면 들어가기
     public void enter() {
-
-        Log.d("enter화면 푸시들어왔어요","푸쉬화면으로 전환");
-        //carrier.setPost_id();
         Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
-        Log.e("enter", "carrier.getPost_id"+carrier.getPost_id() );
         intent.putExtra("carrier", carrier);
         startActivity(intent);
         overridePendingTransition(0,0);
+
+        Log.d("enter화면 푸시들어왔어요","푸쉬화면으로 전환");
+        Log.e("enter", "carrier.getPost_id"+carrier.getPost_id());
+
         finish();
     }
     //수영 추가 끝
