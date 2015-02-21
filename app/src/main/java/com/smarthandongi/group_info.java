@@ -26,8 +26,6 @@ public class group_info extends Activity {
     //ListView group_list_view;
     ArrayList<GroupDatabase1> group_list = new ArrayList<GroupDatabase1>();
 
-
-
     ImageView group_image;
     TextView group_name,group_category, introduce, slash;
     int screen_width,temp=2,screen_height;
