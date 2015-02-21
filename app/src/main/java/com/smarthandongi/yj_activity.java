@@ -96,7 +96,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     CollectPushInfo push_check_php;
     PushRegister push_register;
 
-    int visited = 0;
+
     int timer = 1000;
     int count;
     int taskPosition = -1;
@@ -123,8 +123,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.dashboard);
-        // 수영추가
-        visited = 0;
+
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
@@ -806,8 +805,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                                         carrier.setId("000000");
                                         // 수영추가
                                         // carrier.setIsLogout_regid(2);
-                                        //RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
-                                        //regIDDeleteTask.execute(regid);
+                                        RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
+                                        regIDDeleteTask.execute(regid);
                                         // 수영 추가 끝
                                         Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
                                         startActivity(intent);
@@ -1060,9 +1059,14 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
 
         }
-        if(carrier.isBy_GCM()) {
-            visited ++;
-            if (visited == 1) {
+        adapter = new PostAdapter(yj_activity.this, board_list,carrier);
+        board_listview.setAdapter(adapter);
+
+        //수영추가 시작
+        carrier=(Carrier)getIntent().getSerializableExtra("carrier");
+        if(carrier.getVisited()==false) {
+            if (carrier.isBy_GCM()) {
+
                 Log.d("yj_activity", "푸시로 들어왔어요");
                 Log.d("yj_posting_id", String.valueOf(carrier.getPost_id()));
                 int position = 0;
@@ -1090,13 +1094,12 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
                 startActivityForResult(intent, 0);
                 overridePendingTransition(0, 0);
-                finish();
+                carrier.setVisited(true);
+
+
             }
         }
-            //수영 추가 끝
-        adapter = new PostAdapter(yj_activity.this, board_list,carrier);
-        board_listview.setAdapter(adapter);
-
+        //수영 추가 끝
     }
     public void filter_by_date()
     {

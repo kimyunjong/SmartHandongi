@@ -117,7 +117,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             intent.putExtra("position",position);
 
             startActivity(intent);
-            finish();
+
         }
         //버튼
         writer_group_name =(TextView)findViewById(R.id.writer_group_name);
