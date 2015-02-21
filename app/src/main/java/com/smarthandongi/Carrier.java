@@ -32,7 +32,7 @@ public class Carrier implements Serializable {
     //youngmin variable ends
     //수영 추가
     private boolean gcm=false;
-    private String where;
+    private String where="fisrt";
 
     public void setBy_GCM(boolean gcm){
         this.gcm= gcm;
