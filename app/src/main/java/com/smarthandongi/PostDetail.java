@@ -104,6 +104,21 @@ public class PostDetail extends Activity implements View.OnClickListener{
         carrier.setPost_position(position);
         setContentView(R.layout.post_detail);
 
+        if(carrier.getWhereFrom().equalsIgnoreCase("review"))
+        {
+            carrier=(Carrier)intent.getSerializableExtra("carrier");
+            intent = new Intent(PostDetail.this, Review.class);
+            carrier.setFromSMP(0);
+            intent.putExtra("carrier", carrier);
+            intent.putExtra("posting_id", post.getId());
+            intent.putExtra("kakao_id", post.getKakao_id());
+            intent.putExtra("post",post);
+            intent.putExtra("post_list",posting_list);
+            intent.putExtra("position",position);
+
+            startActivity(intent);
+            finish();
+        }
         //버튼
         writer_group_name =(TextView)findViewById(R.id.writer_group_name);
         writer_name =(TextView)findViewById(R.id.writer_name);

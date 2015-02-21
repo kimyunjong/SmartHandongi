@@ -27,13 +27,15 @@ public class GcmIntentService extends GCMBaseIntentService {
     static String re_message = null;
     static Carrier carrier = new Carrier();
 
-    private  void generateNotifiaction(Context context, String message ,String posting_id) {
+    private  void generateNotifiaction(Context context, String message ,String posting_id, String where) {
         int icon = R.drawable.push_handongi;
         long when = System.currentTimeMillis();
         String title = "모여라 한동이";
         String posting_id1 =posting_id;
+
         carrier.setBy_GCM(true);
         carrier.setPost_id(Integer.valueOf(posting_id1));
+        carrier.setWhereFrom(where);
         //Log.e("getposting_id1", "carrier.getPost_id"+carrier.getPost_id() );
         Intent intent = new Intent(this, Intro.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -70,10 +72,14 @@ public class GcmIntentService extends GCMBaseIntentService {
         Bundle extra= intent.getExtras();
         String msg = extra.getString("msg");
         String posting_id = extra.getString("posting_ids");
+        String where = extra.getString("where");
+
        Log.e("getmessage", "getmessage:"+ msg);
 
        Log.e("getposting_id", "getposting_id:"+posting_id );
-        generateNotifiaction(context,msg,posting_id);
+        Log.e("where", "where"+ where);
+
+        generateNotifiaction(context,msg,posting_id,where);
     }
     @Override
     protected void onRegistered(Context context, String reg_id ){
