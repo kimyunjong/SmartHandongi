@@ -700,17 +700,6 @@ public class PushSetup extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String temp;
-            try {
-                JSONObject root = new JSONObject(s);
-                JSONArray ja = root.getJSONArray("results");
-                JSONObject jo = ja.getJSONObject(0);
-                temp = jo.getString("results");                                                       //php를 통해서 업로드가 되었는지 확인하기 위해 $result의 값을 받아온다.
-                Log.d("result", temp);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
         }
 
 

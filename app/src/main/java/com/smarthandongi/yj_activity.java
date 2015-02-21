@@ -45,9 +45,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
@@ -91,7 +93,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private Thread thread;
     private Boolean thread_running = false;
     private Boolean menu_on = false;
-
+    CollectPushInfo push_check_php;
+    PushRegister push_register;
 
     int visited = 0;
     int timer = 1000;
@@ -126,6 +129,13 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
         Log.v("연결 시도", "연결되어라@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&");
+
+        Log.d("푸시체크넘버", String.valueOf(carrier.getPush_check()));
+        if(carrier.getPush_check() == 0){
+            Log.d("푸시체크 1번", "");
+            phpCreatePushCheck();
+        }
+
 
         login_menu_low_img=(ImageView)findViewById(R.id.login_img);
         login_menu_btn=(Button)findViewById(R.id.login_btn);
@@ -1396,6 +1406,132 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
              adapter.notifyDataSetChanged();
 
         }
+    }
+
+
+    public class CollectPushInfo extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            Log.d("in","doInBackground - CollectPushInfoPhp");
+            StringBuilder jsonHtml = new StringBuilder();
+
+            try {
+                URL data_url = new URL(urls[0]);
+                HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        for (; ; ) {
+                            String line = br.readLine();
+                            if (line == null) break;
+                            jsonHtml.append(line + "\n");
+                        }
+                        br.close();
+                    }
+                    conn.disconnect();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return jsonHtml.toString();
+
+
+        }
+
+        protected void onPostExecute(String str) {
+            Log.d("in","onPostExecute - Collect");
+            try {
+                JSONObject root = new JSONObject(str);
+                JSONArray ja = root.getJSONArray("results");
+
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject jo = ja.getJSONObject(i);
+                    Log.d("", jo.getString("kakao_id"));
+
+                    if (jo.getString("kakao_id").compareTo(carrier.getId()) == 0) {   //이 두 값이 같을 경우 해당 데이터베이스 테이블에 아이디가 존재한다는 말
+                        Log.d("in","compare");
+                        carrier.setPush_check(1);
+                        break;
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if(carrier.getPush_check() == 0){
+                Log.d("푸시체크", "");
+                phpCreatePushRegister();
+
+
+            }
+        }
+    }
+
+    public void phpCreatePushCheck() {
+        Log.d("in", "phpCreate");
+        push_check_php = new CollectPushInfo();
+        push_check_php.execute("http://hungry.portfolio1000.com/smarthandongi/push_check.php");
+    }
+
+    public class PushRegister extends AsyncTask<String, Integer, String> {
+
+        protected String doInBackground(String... urls) {
+            Log.d("", "doInBackground SendPushInfo");
+            StringBuilder jsonHtml = new StringBuilder();
+
+            try {
+                URL data_url = new URL(urls[0]);
+                HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        for (; ; ) {
+                            String line = br.readLine();
+                            if (line == null) break;
+                            jsonHtml.append(line + "\n");
+                        }
+                        br.close();
+                    }
+                    conn.disconnect();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return jsonHtml.toString();
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+
+    }
+
+    public void phpCreatePushRegister() {
+        String kakao_nick_temp = "";
+
+        try {
+            kakao_nick_temp = URLEncoder.encode(carrier.getNickname(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("in", "phpCreateRegister");
+        Log.d("kakaoid", carrier.getId());
+        Log.d("kakao_nick", kakao_nick_temp);
+        push_register = new PushRegister();
+        push_register.execute("http://hungry.portfolio1000.com/smarthandongi/push_register.php?kakao_id=" + carrier.getId() + "&kakao_nick=" + kakao_nick_temp);
+
+        Intent intent = new Intent(yj_activity.this, PushSetup.class);
+        intent.putExtra("carrier", carrier);
+        startActivity(intent);
     }
 
 }

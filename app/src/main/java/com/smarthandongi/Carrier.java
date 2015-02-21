@@ -29,6 +29,9 @@ public class Carrier implements Serializable {
     private int has_pic = 0;
     private int push = 0;
     private int group_id;
+
+
+    private int push_check = 0;
     //youngmin variable ends
     //수영 추가
     private boolean gcm=false;
@@ -168,4 +171,7 @@ public class Carrier implements Serializable {
     public void setPost_position(int num){this.post_position_num=num;}
     public int getPost_position_num(){return post_position_num;}
 
+    public int getPush_check() { return push_check;}
+
+    public void setPush_check(int push_check) { this.push_check = push_check;}
 }
