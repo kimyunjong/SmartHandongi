@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_menu"
     android:id="@+id/group_info">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
 
 
 
@@ -40,10 +35,7 @@
 
         </LinearLayout>
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical">
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -53,99 +45,67 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="top">
                 <RelativeLayout
+                    android:id="@+id/test"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/small_image"
-                    android:src="@drawable/white_picture"
-
-                     />
-
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-
-
-                        >
-                        <ImageView
+                        android:adjustViewBounds="true"
+                        android:id="@+id/small_image"/>
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="70.5dp"
                         android:background="@drawable/group_name_background"
-                        android:alpha="0.5"
                         android:layout_centerInParent="true"
-
-                        />
-
-                        <LinearLayout
+                        android:alpha="0.5"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_centerInParent="true">
-                            <TextView
+                            android:id="@+id/group_category"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14.5dp"
+                            android:text="category"
+                            android:layout_marginBottom="10dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/group_name"
+                            android:textSize="17.5dp"
+                            android:text="group_name"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_below="@id/group_category" />
 
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/group_category"
-                                android:layout_gravity="center_horizontal"
-                                android:textSize="15.5dp"
-                                android:fontFamily="sans-serif-light"
-                                android:text="category"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/group_name"
-                                android:textStyle="bold"
-                                android:textSize="17.5dp"
-                                android:text="group_name"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_below="@id/group_category" />
-
-                         </LinearLayout>
-
-                    </RelativeLayout>
-
-                </FrameLayout>
-
+                     </LinearLayout>
         </RelativeLayout>
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"></LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 >
-                <com.smarthandongi.CTextView
+            <com.smarthandongi.CTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/intro"
-                android:textSize="15.5dp"
-                android:fontFamily="sans-serif-light"
-                android:text="소개하는 말 입니다. \n안녕하세요. 동아리 소개입니다 우리가 성공할수 있을까요 대박힘들다.\n성공하면 좋겠습니다."
-                android:layout_below="@+id/group_category"
+                android:textSize="14.5dp"
+                android:text="소개하는 말 입니다. \n 안녕하세요. 동아리 소개입니다.\n 성공하면 좋겠습니다."
                  />
              </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"></LinearLayout>
          </LinearLayout>
 
         </ScrollView>
@@ -180,7 +140,5 @@
           </RelativeLayout>
         </LinearLayout>
 
-       </LinearLayout>
-    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

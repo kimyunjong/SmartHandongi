@@ -63,7 +63,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     Dialog dialog_del, dialog_report, dialog_push, dialog_link_message, dialog_image;
     Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm, enlarge_image;
 
-    ImageView post_img, post_img_large, dialog_imageview, close_imageview;
+    ImageView post_img, post_img_large, dialog_imageview, close_imageview, pos_scrap_img;
     private Button scrap_btn, del_btn, review_show_btn, edit_btn,report_btn,group_btn,home_btn,backward_btn,forward_btn, dialog_link_confirm, dialog_link_cancel;
     ImageButton pos_push;
 
@@ -172,6 +172,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         post_img_large=(ImageView)findViewById(R.id.image_large);
         post_img_large.setOnClickListener(this);
         close_imageview = (ImageView)findViewById(R.id.close_imageview);
+        pos_scrap_img = (ImageView)findViewById(R.id.pos_scrap_img);
 
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -315,6 +316,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
         reviewNum(); //댓글수
 
         carrier.setEdit_count(0);
+
+        if(post.getLike().compareTo("1") == 0){                                             //스크랩
+            pos_scrap_img.setBackgroundResource(R.drawable.pos_scrap_on_img);
+        }
 
     }
 
@@ -1001,6 +1006,13 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 JSONObject jo = ja.getJSONObject(0);
 
                 database.setLike(jo.getString("result"));
+                Log.d("like in task", database.getLike());
+                if(database.getLike().compareTo("0") == 0){
+                    pos_scrap_img.setBackgroundResource(R.drawable.pos_scrap_img);
+                }
+                else {
+                    pos_scrap_img.setBackgroundResource(R.drawable.pos_scrap_on_img);
+                }
             }
             catch(JSONException e) {
                 e.printStackTrace();

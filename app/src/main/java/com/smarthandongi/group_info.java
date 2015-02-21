@@ -8,11 +8,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.smarthandongi.database.Picture;
@@ -35,9 +35,9 @@ public class group_info extends Activity {
     GroupDatabase1 group;
     Button back_btn,register_group;
     Carrier carrier;
-    Typeface typeface;
+    Typeface typeface, typeface_bold;
     Context context = this;
-
+    RelativeLayout test;
 
     public void construction(int group_id){
 
@@ -59,6 +59,7 @@ public class group_info extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_info);
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface_bold = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_BOLD.OTF");
         Intent intent=getIntent();
         int group_id1= intent.getIntExtra("group_id",0);
         String group_name1 =intent.getStringExtra("group_name");
@@ -72,14 +73,14 @@ public class group_info extends Activity {
         back_btn=(Button)findViewById(R.id.back);// 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
-                startActivity(intent);
+                //Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
+                //startActivity(intent);
                 finish();
             }
         });
 
         group_name=(TextView) findViewById(R.id.group_name);
-        group_name.setTypeface(typeface);
+        group_name.setTypeface(typeface_bold);
         group_name.setText(group_name1);
         group_category=(TextView) findViewById(R.id.group_category);
         group_category.setTypeface(typeface);
@@ -95,6 +96,14 @@ public class group_info extends Activity {
         screen_height = metrics.heightPixels;
         screen_width = metrics.widthPixels;
         group_image.getLayoutParams().width = screen_width;
+//
+//        test = (RelativeLayout)findViewById(R.id.test);
+//
+//        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        relativeParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, R.id.test);
+
+
+
         group_image.requestLayout();
 
         register_group = (Button)findViewById(R.id.writing_confirm_btn);
@@ -112,11 +121,11 @@ public class group_info extends Activity {
         construction(group_id1);
         StringBuffer buf = null;
         WindowManager wm = null;
-        Display display = null;
-        wm = getWindowManager();
-        display = wm.getDefaultDisplay();
-        buf = new StringBuffer();
-        buf.append("Window height: " + display.getHeight() + "\n");
+//        Display display = null;
+//        wm = getWindowManager();
+//        display = wm.getDefaultDisplay();
+//        buf = new StringBuffer();
+//        buf.append("Window height: " + display.getHeight() + "\n");
     }
 
     public void onBackPressed()
