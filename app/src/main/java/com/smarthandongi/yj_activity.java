@@ -93,7 +93,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private Boolean menu_on = false;
 
 
-
+    int visited = 0;
     int timer = 1000;
     int count;
     int taskPosition = -1;
@@ -115,11 +115,13 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.dashboard);
-
+        // 수영추가
+        visited = 0;
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
@@ -271,35 +273,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         });
         thread.setDaemon(true);
 
-        //수영 추가
-       /* if(carrier.isBy_GCM()){
-            Log.d("yj_activity","푸시로 들어왔어요");
-            Log.d("yj_posting_id",String.valueOf(carrier.getPost_id()));
-            int position=1 ;
-            Log.d("board_list.get",String.valueOf(board_list.get(position).getId()));*/
-            /*while(board_list.get(position).getId()==carrier.getPost_id())
-            {
-                position++;
-                Log.d("push_position1",String.valueOf(position));
-            }*/
-            //Log.d("push_position2",String.valueOf(position));
-            /*
-            ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
-            Log.d("글번호잘못??",String.valueOf(board_list.get(position).getId()));
-            Log.d("글의 포지션",String.valueOf(position));
-            viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+board_list.get(position).getId());
-            Intent intent = new Intent(yj_activity.this, PostDetail.class);
-            intent.putExtra("carrier", carrier);
-            intent.putExtra("post_list",board_list);
-            intent.putExtra("position",position);
-            intent.putExtra("post", board_list.get(position));
-            Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
-
-            startActivityForResult(intent, 0);
-            overridePendingTransition(0,0);
-            */
-            //수영 추가 끝
-       // }
 
     }
 
@@ -1078,49 +1051,37 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         }
         if(carrier.isBy_GCM()) {
-            Log.d("yj_activity", "푸시로 들어왔어요");
-            Log.d("yj_posting_id", String.valueOf(carrier.getPost_id()));
-            int position=0 ;
-            //Log.d("board_list.get", String.valueOf(board_list.get(position).getId()));
-            Log.d("board_list1",String.valueOf(board_list.get(position).getId()));
-            Log.d("getPost_id1",String.valueOf(carrier.getPost_id()));
-            int i=1;
-            while(i==1){
-                    if(board_list.get(position).getId()!=carrier.getPost_id())
-                    { position++;
-                    Log.d("board_list",String.valueOf(board_list.get(position).getId()));
-                    Log.d("getPost_id",String.valueOf(carrier.getPost_id()));
-                    }
-                else i=0;
+            visited ++;
+            if (visited == 1) {
+                Log.d("yj_activity", "푸시로 들어왔어요");
+                Log.d("yj_posting_id", String.valueOf(carrier.getPost_id()));
+                int position = 0;
 
+                Log.d("board_list1", String.valueOf(board_list.get(position).getId()));
+                Log.d("getPost_id1", String.valueOf(carrier.getPost_id()));
+                int i = 1;
+                while (i == 1) {
+                    if (board_list.get(position).getId() != carrier.getPost_id()) {
+                        position++;
+                        Log.d("board_list", String.valueOf(board_list.get(position).getId()));
+                        Log.d("getPost_id", String.valueOf(carrier.getPost_id()));
+                    } else i = 0;
+
+                }
+                Log.d("push_position1", String.valueOf(position));
+
+                ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
+                viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + carrier.getPost_id());
+                Intent intent = new Intent(yj_activity.this, PostDetail.class);
+                intent.putExtra("carrier", carrier);
+                intent.putExtra("post_list", board_list);
+                intent.putExtra("position", position);
+                intent.putExtra("post", board_list.get(position));
+
+                startActivityForResult(intent, 0);
+                overridePendingTransition(0, 0);
+                finish();
             }
-            /*for(position=0;board_list.get(position).getId()==carrier.getPost_id();position++){
-
-                Log.d("board_list2",String.valueOf(board_list.get(position).getId()));
-                Log.d("getPost_id2",String.valueOf(carrier.getPost_id()));
-
-            }
-            /*do{
-                Log.d("board_list",String.valueOf(board_list.get(position).getId()));
-                Log.d("getPost_id",String.valueOf(carrier.getPost_id()));
-                position++;
-
-            }while(board_list.get(position).getId()==carrier.getPost_id());
-             */
-            Log.d("push_position1",String.valueOf(position));
-
-            ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
-            viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+carrier.getPost_id());
-            Intent intent = new Intent(yj_activity.this, PostDetail.class);
-            intent.putExtra("carrier", carrier);
-            intent.putExtra("post_list",board_list);
-            intent.putExtra("position",position);
-            intent.putExtra("post", board_list.get(position));
-
-
-            startActivityForResult(intent, 0);
-            overridePendingTransition(0,0);
-            finish();
         }
             //수영 추가 끝
         adapter = new PostAdapter(yj_activity.this, board_list,carrier);

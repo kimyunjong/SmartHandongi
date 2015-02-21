@@ -42,13 +42,12 @@ public class GcmIntentService extends GCMBaseIntentService {
         Log.e("getposting_id2", "carrier.getPost_id"+carrier.getPost_id() );
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+
         Notification notification = new Notification(icon, message, when);
+        notification.largeIcon=(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),icon), 250, 250, false));
 
 
-        notification.largeIcon=(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.push_handongi), 250, 250, false));
-
-
-        PendingIntent pintent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pintent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 
         notification.setLatestEventInfo(context, title, message, pintent);
@@ -56,7 +55,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         notificationManager.notify(0, notification);
 
         // Play default notification sound
-        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal);
+        notification.sound = Uri.parse("android.resource://com.smarthandongi/" + R.raw.wal1);
         //notification.defaults |= Notification.DEFAULT_SOUND;
 
         // Vibrate if vibrate is enabled

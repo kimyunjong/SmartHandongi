@@ -179,6 +179,7 @@ public class Intro extends Activity {
     public void enter() {
         Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
         intent.putExtra("carrier", carrier);
+
         startActivity(intent);
         overridePendingTransition(0,0);
 

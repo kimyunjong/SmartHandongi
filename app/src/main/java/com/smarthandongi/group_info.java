@@ -102,7 +102,8 @@ public class group_info extends Activity {
         register_group.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://me2.do/FY0wtxRF");
+
+                Uri uri = Uri.parse("http://hungry.portfolio1000.com/smarthandongi/group_request.php");
 
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
