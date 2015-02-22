@@ -10,13 +10,11 @@
         android:layout_marginBottom="40dp"
     	>
 
-
     	<ImageView
             android:layout_centerInParent="true"
         	android:layout_width="match_parent"
 	        android:layout_height="match_parent"
     	    android:id="@+id/Intro_background"
-
 	        />
 
     </RelativeLayout>
