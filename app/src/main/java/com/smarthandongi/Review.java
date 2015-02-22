@@ -256,10 +256,6 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
                         dialog_delete_reply.dismiss();
                     }
                 });
-
-
-
-
                 break;
             }
         }
@@ -304,6 +300,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
          else
          {
              Log.d("content",carrier.getContent());
+             //댓글 올리고 푸시보내기
              phpUploadPushReview = new PhpUploadPushReview();
              phpUploadPushReview.execute("http://hungry.portfolio1000.com/smarthandongi/review_up_push.php?"
                      + "kakao_id=" + carrier.getId()
