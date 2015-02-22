@@ -386,9 +386,19 @@ public class group_infoList extends Activity {
                         e.printStackTrace();
                     }*/
                     ;
-                    group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
+                    //group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
                     temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
 
+                }
+                while(temp_list.size() != 0) {
+
+                    int j=0;
+                    for (int k = 0; k < temp_list.size(); k++) {
+                        if (temp_list.get(j).getGroup_name().compareToIgnoreCase(temp_list.get(k).getGroup_name()) >= 0)
+                            j = k;
+
+                    }
+                    group_list.add(temp_list.remove(j));
                 }
 
                 group_list_view.setAdapter(groupinfoAdapter);
