@@ -35,8 +35,15 @@ public class Carrier implements Serializable {
     //youngmin variable ends
     //수영 추가
     private boolean gcm=false;
+    private boolean visited = false;
     private String where="fisrt";
 
+    public void setVisited (boolean visited){
+        this.visited= visited;
+    }
+    public boolean getVisited (){
+        return visited;
+    }
     public void setBy_GCM(boolean gcm){
         this.gcm= gcm;
     }
