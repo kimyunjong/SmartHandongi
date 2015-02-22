@@ -213,9 +213,31 @@ public class GroupSearch extends Activity {
                 for(int i=0; i<filtered_list.size();i++){
                     Log.d("이거되야해",filtered_list.get(i).getGroup_name());
                 }
-                //adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
-                //listview.setAdapter(adapter);
-                //listview.setOnItemClickListener(groupListClickListener);
+                adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
+                listview.setAdapter(adapter);
+                listview.setOnItemClickListener(groupListClickListener);
+
+                if(str.length()>1&&filtered_list.size()==0) {
+                    listview.setVisibility(View.GONE);
+                    background_hidden.setVisibility(View.GONE);
+                    unresistered_background.setVisibility(View.VISIBLE);
+                    unresistered_screen.setVisibility(View.VISIBLE);
+                    unresistered.setText("\""+str+"\"");
+
+                }
+                else
+                {
+
+                    listview.setVisibility(View.VISIBLE);
+                    unresistered_background.setVisibility(View.GONE);
+                    unresistered_screen.setVisibility(View.GONE);
+                    if(filtered_list.size()!=0) {
+                        background_hidden.getLayoutParams().height=getTotalHeightOfListView(listview);
+                        background_hidden.setVisibility(View.VISIBLE);
+                        unresistered_background.setVisibility(View.VISIBLE);
+                    }
+
+                }
             }
         };
         group_search.addTextChangedListener(watcher);

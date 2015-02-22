@@ -44,7 +44,7 @@
             android:layout_height="66dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="28.5dp"
+            android:layout_height="33.5dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
             >
@@ -53,7 +53,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"/>
             <ImageView
-                android:layout_width="26.5dp"
+                android:layout_width="20.5dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/black_p_left"
                 />
@@ -69,7 +69,7 @@
                     android:id="@+id/search_please_area">
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="33.5dp"
                     android:background="@drawable/black_p_middle"
                     />
                 <ImageView
@@ -87,20 +87,22 @@
                     android:id="@+id/groupsearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textSize="14.5dp"
                     android:background="#00000000"
                     android:singleLine="true"
                     />
                 </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="23dp"
+                    android:layout_width="24.5dp"
                     android:layout_height="match_parent"
                     android:layout_alignRight="@+id/search_please_area"
                     >
                     <ImageView
                         android:id="@+id/search_glass_img"
-                        android:layout_width="23dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/black_glass1"
+                        android:layout_width="24.5dp"
+                        android:layout_height="24.5dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/black_glass"
                         android:visibility="visible"
 
                         />
@@ -114,8 +116,9 @@
                         />
                     <ImageView
                         android:id="@+id/search_cancel_img"
-                        android:layout_width="23dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="24.5dp"
+                        android:layout_height="24.5dp"
+                        android:layout_centerVertical="true"
                         android:background="@drawable/black_cancel"
                         android:visibility="invisible"
 
@@ -124,8 +127,8 @@
                 </RelativeLayout>
             <ImageView
 
-                android:layout_width="16.5dp"
-                android:layout_height="match_parent"
+                android:layout_width="20.5dp"
+                android:layout_height="33.5dp"
                 android:background="@drawable/black_p_right"
 
                 />
