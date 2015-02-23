@@ -4,124 +4,139 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="20dp"
+        android:layout_height="46dp">
+        <ImageView
+            android:layout_marginLeft="12.5dp"
+            android:layout_width="76dp"
+            android:layout_height="30.5dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/dialog_bigcategory_img"
+            />
 
-            android:text="대분류"/>
     </RelativeLayout>
-
-    <ScrollView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="1dp"
+        android:background="#ffd3d4d4"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="33dp"
+            android:layout_marginTop="10dp">
             <Button
                 android:id="@+id/big_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <TextView
+                android:id="@+id/text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="12.5dp"
                 android:layout_centerVertical="true"
-                android:textSize="20dp"
+                android:textSize="16.5dp"
                 android:text="일반공지"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="33dp">
             <Button
                 android:id="@+id/big_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <TextView
+                android:id="@+id/text2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="12.5dp"
                 android:layout_centerVertical="true"
-                android:textSize="20dp"
+                android:textSize="16.5dp"
                 android:text="대외활동"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="33dp">
             <Button
                 android:id="@+id/big_3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <TextView
+                android:id="@+id/text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="12.5dp"
                 android:layout_centerVertical="true"
-                android:textSize="20dp"
+                android:textSize="16.5dp"
                 android:text="공연·세미나"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="33dp">
             <Button
                 android:id="@+id/big_4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <TextView
+                android:id="@+id/text4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="12.5dp"
                 android:layout_centerVertical="true"
-                android:textSize="20dp"
+                android:textSize="16.5dp"
                 android:text="리쿠르팅"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="33dp"
+            android:layout_marginBottom="10dp">
             <Button
                 android:id="@+id/big_5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"/>
             <TextView
+                android:id="@+id/text5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="12.5dp"
                 android:layout_centerVertical="true"
-                android:textSize="20dp"
+                android:textSize="16.5dp"
                 android:text="붙어라"/>
         </RelativeLayout>
     </LinearLayout>
-    </ScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffd3d4d4"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="33dp">
         <Button
             android:id="@+id/big_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"/>
         <TextView
+            android:id="@+id/text6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_centerInParent="true"
-            android:textSize="20dp"
+            android:textSize="16.5dp"
             android:text="취소"/>
     </RelativeLayout>
 

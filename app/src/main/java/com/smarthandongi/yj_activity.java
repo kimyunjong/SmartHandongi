@@ -87,7 +87,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     private PostAdapter adapter;
     private Post2Adapter adapter2;
     String myResult,str;
-    Typeface typeface;
+    Typeface typeface, typeface_medium;
     final Context context = this;
 
     private Thread thread;
@@ -125,6 +125,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         setContentView(R.layout.dashboard);
 
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface_medium = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
         Log.v("연결 시도", "연결되어라@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&");
@@ -894,7 +895,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     {
         if(carrier.isLogged_in()) {
             login_menu_txt.setText(carrier.getNickname());
-            login_menu_txt.setTypeface(typeface);
+            login_menu_txt.setTypeface(typeface_medium);
             login_menu_img.setImageResource(R.drawable.login_bg_img);
             login_menu_btn.setVisibility(View.GONE);
             login_menu_low_img.setVisibility(View.GONE);

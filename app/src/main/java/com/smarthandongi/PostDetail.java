@@ -90,8 +90,6 @@ public class PostDetail extends Activity implements View.OnClickListener{
     //수영 추가 끝
 
     //자동개행 관련
-    CTextView textView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -569,9 +567,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
                     break;
                 else {
                     Intent intent=new Intent(this,PostDetail.class);
-                    //수영 추가
                     carrier.setVisited(true);
-                    //수영 추가 끝
                     intent.putExtra("carrier", carrier);
                     intent.putExtra("post_list",posting_list);
                     intent.putExtra("position",position-1);

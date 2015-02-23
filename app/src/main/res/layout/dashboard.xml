@@ -320,11 +320,12 @@
                     />
                 <ImageView
                     android:id="@+id/seminar_img"
+                    android:layout_marginTop="8.5dp"
                     android:layout_width="63.5dp"
                     android:layout_height="44dp"
                     android:src="@drawable/seminar_btn_on"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+
 
                     /></RelativeLayout>
             <RelativeLayout
@@ -381,8 +382,8 @@
     android:layout_height="match_parent"
     android:layout_alignParentRight="true"
     android:layout_below="@+id/upper_bar"
-    android:background="@drawable/menu_bg"
     android:visibility="gone"
+    android:background="@drawable/menu_bg"
     android:id="@+id/menu">
 
     <LinearLayout
@@ -400,6 +401,7 @@
                 android:layout_height="33dp"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="21dp"
+                android:layout_marginRight="1dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/login_bg_img"/>
             <TextView
@@ -408,8 +410,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="김영민"
                 android:layout_height="wrap_content"
-
-                android:layout_marginLeft="22dp"
+                android:layout_marginLeft="24dp"
                 android:layout_centerVertical="true"
                 android:textColor="#ffffffff"
                 android:textSize="15sp"
