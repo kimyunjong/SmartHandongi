@@ -1064,7 +1064,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         //수영추가 시작
         carrier=(Carrier)getIntent().getSerializableExtra("carrier");
-        if(carrier.getVisited()==false) {
+        if(carrier.getVisited()) {
             if (carrier.isBy_GCM()) {
 
                 Log.d("yj_activity", "푸시로 들어왔어요");
