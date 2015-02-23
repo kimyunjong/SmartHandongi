@@ -86,7 +86,7 @@ public class Intro extends Activity {
         Intent intent = getIntent();
         if (intent.getSerializableExtra("carrier") != null)
         {carrier = (Carrier)intent.getSerializableExtra("carrier");
-
+         Log.d("VISITED",String.valueOf(carrier.getVisited()));
         //    Log.d("처음에 들어온 posting_id",String.valueOf(carrier.getPost_id()));
         }
         else
@@ -177,6 +177,7 @@ public class Intro extends Activity {
     }
     //수영추가 GCM 화면 들어가기
     public void enter() {
+
         Intent intent = new Intent(Intro.this, KakaoTalkLoginActivity.class);
         intent.putExtra("carrier", carrier);
 
