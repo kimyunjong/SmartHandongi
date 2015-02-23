@@ -98,7 +98,7 @@ public class Writing extends Activity implements OnClickListener {
 
 
     Picture poster = new Picture();
-    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn;
+    Button writing_confirm_btn, writing_image_btn, writing_back_btn, writing_cancel_btn, choice_btn_three_1, choice_btn_three_2, choice_btn_three_3, choice_cancel_three;
     Button dialog_push_cancel, dialog_push_confirm, dialog_writing_confirm, dialog_writing_cancel, dialog_okay, dialog_back_cancel, dialog_back_confirm;
     ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img, writing_edit_title;
     ImageView writing_startdate_img, writing_enddate_img, writing_title_message, writing_confirm_img, writing_edit_confirm;
@@ -120,7 +120,9 @@ public class Writing extends Activity implements OnClickListener {
     //소분류
     RelativeLayout choice_layout_1, choice_layout_2, choice_layout_3, choice_layout_4, choice_layout_5, choice_layout_6, choice_layout_7, choice_layout_8, choice_layout_9, choice_layout_10;
     Button choice_btn_1, choice_btn_2, choice_btn_3, choice_btn_4, choice_btn_5, choice_btn_6, choice_btn_7, choice_btn_8, choice_btn_9, choice_btn_10, choice_cancel;
+    TextView text1, text2, text3, text4, text5, text6, choice_tv_three_1, choice_tv_three_2, choice_tv_three_3, choice_tv_three_4, choice_tv_three_cancel, choice_cancel_text;
     TextView choice_tv_1, choice_tv_2, choice_tv_3, choice_tv_4, choice_tv_5, choice_tv_6, choice_tv_7, choice_tv_8, choice_tv_9, choice_tv_10;
+
 
     //날짜관련 변수
     int year, month, day; //날짜 받기위해
@@ -678,6 +680,18 @@ public class Writing extends Activity implements OnClickListener {
                 dialog_bigcategory.setContentView(R.layout.dialog_big_category);
                 dialog_bigcategory.show();
 
+                text1 = (TextView)dialog_bigcategory.findViewById(R.id.text1);
+                text2 = (TextView)dialog_bigcategory.findViewById(R.id.text2);
+                text3 = (TextView)dialog_bigcategory.findViewById(R.id.text3);
+                text4 = (TextView)dialog_bigcategory.findViewById(R.id.text4);
+                text5 = (TextView)dialog_bigcategory.findViewById(R.id.text5);
+                text6 = (TextView)dialog_bigcategory.findViewById(R.id.text6);
+                text1.setTypeface(typeface);
+                text2.setTypeface(typeface);
+                text3.setTypeface(typeface);
+                text4.setTypeface(typeface);
+                text5.setTypeface(typeface);
+                text6.setTypeface(typeface);
                 big_1 = (Button)dialog_bigcategory.findViewById(R.id.big_1);
                 big_2 = (Button)dialog_bigcategory.findViewById(R.id.big_2);
                 big_3 = (Button)dialog_bigcategory.findViewById(R.id.big_3);
@@ -787,166 +801,182 @@ public class Writing extends Activity implements OnClickListener {
             }
 
             case R.id.small_category_btn : {
-                dialog_category = new Dialog(context);
-                dialog_category.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog_category.setContentView(R.layout.dialog_category);
-                dialog_category.show();
 
-                choice_layout_1 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_1);
-                choice_layout_2 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_2);
-                choice_layout_3 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_3);
-                choice_layout_4 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_4);
-                choice_layout_5 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_5);
-                choice_layout_6 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_6);
-                choice_layout_7 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_7);
-                choice_layout_8 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_8);
-                choice_layout_9 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_9);
-                choice_layout_10 = (RelativeLayout)dialog_category.findViewById(R.id.choice_layout_10);
+                if(carrier.getBig_category().compareTo("4") == 0 || carrier.getBig_category().compareTo("5") == 0) {
 
-                choice_btn_1 = (Button)dialog_category.findViewById(R.id.choice_btn_1);
-                choice_btn_2 = (Button)dialog_category.findViewById(R.id.choice_btn_2);
-                choice_btn_3 = (Button)dialog_category.findViewById(R.id.choice_btn_3);
-                choice_btn_4 = (Button)dialog_category.findViewById(R.id.choice_btn_4);
-                choice_btn_5 = (Button)dialog_category.findViewById(R.id.choice_btn_5);
-                choice_btn_6 = (Button)dialog_category.findViewById(R.id.choice_btn_6);
-                choice_btn_7 = (Button)dialog_category.findViewById(R.id.choice_btn_7);
-                choice_btn_8 = (Button)dialog_category.findViewById(R.id.choice_btn_8);
-                choice_btn_9 = (Button)dialog_category.findViewById(R.id.choice_btn_9);
-                choice_btn_10 = (Button)dialog_category.findViewById(R.id.choice_btn_10);
-                choice_cancel = (Button)dialog_category.findViewById(R.id.choice_cancel);
+                    dialog_category = new Dialog(context);
+                    dialog_category.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_category.setContentView(R.layout.dialog_category);
+                    dialog_category.show();
 
-                choice_tv_1 = (TextView)dialog_category.findViewById(R.id.choice_tv_1);
-                choice_tv_2 = (TextView)dialog_category.findViewById(R.id.choice_tv_2);
-                choice_tv_3 = (TextView)dialog_category.findViewById(R.id.choice_tv_3);
-                choice_tv_4 = (TextView)dialog_category.findViewById(R.id.choice_tv_4);
-                choice_tv_5 = (TextView)dialog_category.findViewById(R.id.choice_tv_5);
-                choice_tv_6 = (TextView)dialog_category.findViewById(R.id.choice_tv_6);
-                choice_tv_7 = (TextView)dialog_category.findViewById(R.id.choice_tv_7);
-                choice_tv_8 = (TextView)dialog_category.findViewById(R.id.choice_tv_8);
-                choice_tv_9 = (TextView)dialog_category.findViewById(R.id.choice_tv_9);
-                choice_tv_10 = (TextView)dialog_category.findViewById(R.id.choice_tv_10);
+                    choice_layout_1 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_1);
+                    choice_layout_2 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_2);
+                    choice_layout_3 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_3);
+                    choice_layout_4 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_4);
+                    choice_layout_5 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_5);
+                    choice_layout_6 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_6);
+                    choice_layout_7 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_7);
+                    choice_layout_8 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_8);
+                    choice_layout_9 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_9);
+                    choice_layout_10 = (RelativeLayout) dialog_category.findViewById(R.id.choice_layout_10);
 
-                choice_layout_1.setVisibility(VISIBLE);
-                choice_layout_2.setVisibility(VISIBLE);
-                choice_layout_3.setVisibility(VISIBLE);
-                choice_layout_4.setVisibility(VISIBLE);
-                choice_layout_5.setVisibility(VISIBLE);
-                choice_layout_6.setVisibility(VISIBLE);
-                choice_layout_7.setVisibility(VISIBLE);
-                choice_layout_8.setVisibility(VISIBLE);
-                choice_layout_9.setVisibility(VISIBLE);
-                choice_layout_10.setVisibility(VISIBLE);
+                    choice_btn_1 = (Button) dialog_category.findViewById(R.id.choice_btn_1);
+                    choice_btn_2 = (Button) dialog_category.findViewById(R.id.choice_btn_2);
+                    choice_btn_3 = (Button) dialog_category.findViewById(R.id.choice_btn_3);
+                    choice_btn_4 = (Button) dialog_category.findViewById(R.id.choice_btn_4);
+                    choice_btn_5 = (Button) dialog_category.findViewById(R.id.choice_btn_5);
+                    choice_btn_6 = (Button) dialog_category.findViewById(R.id.choice_btn_6);
+                    choice_btn_7 = (Button) dialog_category.findViewById(R.id.choice_btn_7);
+                    choice_btn_8 = (Button) dialog_category.findViewById(R.id.choice_btn_8);
+                    choice_btn_9 = (Button) dialog_category.findViewById(R.id.choice_btn_9);
+                    choice_btn_10 = (Button) dialog_category.findViewById(R.id.choice_btn_10);
+                    choice_cancel = (Button) dialog_category.findViewById(R.id.choice_cancel);
 
-                                                                                                               //소분류btn
-                if(carrier.getBig_category().compareTo("5") == 0) {  //TODO 붙어라!!
+                    choice_tv_1 = (TextView) dialog_category.findViewById(R.id.choice_tv_1);
+                    choice_tv_2 = (TextView) dialog_category.findViewById(R.id.choice_tv_2);
+                    choice_tv_3 = (TextView) dialog_category.findViewById(R.id.choice_tv_3);
+                    choice_tv_4 = (TextView) dialog_category.findViewById(R.id.choice_tv_4);
+                    choice_tv_5 = (TextView) dialog_category.findViewById(R.id.choice_tv_5);
+                    choice_tv_6 = (TextView) dialog_category.findViewById(R.id.choice_tv_6);
+                    choice_tv_7 = (TextView) dialog_category.findViewById(R.id.choice_tv_7);
+                    choice_tv_8 = (TextView) dialog_category.findViewById(R.id.choice_tv_8);
+                    choice_tv_9 = (TextView) dialog_category.findViewById(R.id.choice_tv_9);
+                    choice_tv_10 = (TextView) dialog_category.findViewById(R.id.choice_tv_10);
+                    choice_cancel_text = (TextView)dialog_category.findViewById(R.id.choice_cancel_text);
 
-                      choice_tv_1.setText("운동경기");
-                      choice_tv_2.setText("게임");
-                      choice_tv_3.setText("야식");
-                      choice_tv_4.setText("공동구매");
-                      choice_tv_5.setText("카풀");
-                      choice_tv_6.setText("스터디");
-                      choice_tv_7.setText("사고팔기");
-                      choice_tv_8.setText("분실물");
-                      choice_tv_9.setText("구인구직");
-                      choice_tv_10.setText("교환");
+                    choice_tv_1.setTypeface(typeface);
+                    choice_tv_2.setTypeface(typeface);
+                    choice_tv_3.setTypeface(typeface);
+                    choice_tv_4.setTypeface(typeface);
+                    choice_tv_5.setTypeface(typeface);
+                    choice_tv_6.setTypeface(typeface);
+                    choice_tv_7.setTypeface(typeface);
+                    choice_tv_8.setTypeface(typeface);
+                    choice_tv_9.setTypeface(typeface);
+                    choice_tv_10.setTypeface(typeface);
+                    choice_cancel_text.setTypeface(typeface);
 
-                    choice_btn_1.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_1.getText().toString());
-                            carrier.setCategory("together_sports_1");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                    choice_layout_1.setVisibility(VISIBLE);
+                    choice_layout_2.setVisibility(VISIBLE);
+                    choice_layout_3.setVisibility(VISIBLE);
+                    choice_layout_4.setVisibility(VISIBLE);
+                    choice_layout_5.setVisibility(VISIBLE);
+                    choice_layout_6.setVisibility(VISIBLE);
+                    choice_layout_7.setVisibility(VISIBLE);
+                    choice_layout_8.setVisibility(VISIBLE);
+                    choice_layout_9.setVisibility(VISIBLE);
+                    choice_layout_10.setVisibility(VISIBLE);
 
-                    choice_btn_2.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_2.getText().toString());
-                            carrier.setCategory("together_game_2");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                    //소분류btn
+                    if (carrier.getBig_category().compareTo("5") == 0) {  //TODO 붙어라!!
 
-                    choice_btn_3.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_3.getText().toString());
-                            carrier.setCategory("together_nightfood_3");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_tv_1.setText("운동경기");
+                        choice_tv_2.setText("게임");
+                        choice_tv_3.setText("야식");
+                        choice_tv_4.setText("공동구매");
+                        choice_tv_5.setText("카풀");
+                        choice_tv_6.setText("스터디");
+                        choice_tv_7.setText("사고팔기");
+                        choice_tv_8.setText("분실물");
+                        choice_tv_9.setText("구인구직");
+                        choice_tv_10.setText("교환");
 
-                    choice_btn_4.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_4.getText().toString());
-                            carrier.setCategory("together_gonggu_4");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_1.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_1.getText().toString());
+                                carrier.setCategory("together_sports_1");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_5.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_5.getText().toString());
-                            carrier.setCategory("together_carpool_5");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_2.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_2.getText().toString());
+                                carrier.setCategory("together_game_2");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_6.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_6.getText().toString());
-                            carrier.setCategory("together_study_6");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_3.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_3.getText().toString());
+                                carrier.setCategory("together_nightfood_3");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_7.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_7.getText().toString());
-                            carrier.setCategory("together_trading_7");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_4.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_4.getText().toString());
+                                carrier.setCategory("together_gonggu_4");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_8.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_8.getText().toString());
-                            carrier.setCategory("together_lost_8");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_5.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_5.getText().toString());
+                                carrier.setCategory("together_carpool_5");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_9.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_9.getText().toString());
-                            carrier.setCategory("together_recruiting_9");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_6.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_6.getText().toString());
+                                carrier.setCategory("together_study_6");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_10.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_10.getText().toString());
-                            carrier.setCategory("together_exchange_10");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
+                        choice_btn_7.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_7.getText().toString());
+                                carrier.setCategory("together_trading_7");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_cancel.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                        }
-                    });
+                        choice_btn_8.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_8.getText().toString());
+                                carrier.setCategory("together_lost_8");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+
+                        choice_btn_9.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_9.getText().toString());
+                                carrier.setCategory("together_recruiting_9");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+
+                        choice_btn_10.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_10.getText().toString());
+                                carrier.setCategory("together_exchange_10");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+
+                        choice_cancel.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                            }
+                        });
 
 
 //                    new AlertDialog.Builder(this)
@@ -971,197 +1001,75 @@ public class Writing extends Activity implements OnClickListener {
 //                                    })
 //                            .setNegativeButton("취소", null)
 //                            .show();
-                } //붙어라
+                    } //붙어라
 
-                if(carrier.getBig_category().compareTo("2") == 0) {   //TODO 대외활동!!!!!
-                    choice_tv_1.setText("공모전");
-                    choice_tv_2.setText("인턴");
-                    choice_tv_3.setText("자원봉사");
+                    if (carrier.getBig_category().compareTo("4") == 0) {        //TODO 리쿠르팅!!!
+                        choice_tv_1.setText("학술");
+                        choice_tv_2.setText("운동");
+                        choice_tv_3.setText("공연");
+                        choice_tv_4.setText("신앙");
+                        choice_tv_5.setText("전시");
+                        choice_tv_6.setText("봉사");
+                        choice_layout_7.setVisibility(GONE);
+                        choice_layout_8.setVisibility(GONE);
+                        choice_layout_9.setVisibility(GONE);
+                        choice_layout_10.setVisibility(GONE);
 
-                    choice_layout_4.setVisibility(GONE);
-                    choice_layout_5.setVisibility(GONE);
-                    choice_layout_6.setVisibility(GONE);
-                    choice_layout_7.setVisibility(GONE);
-                    choice_layout_8.setVisibility(GONE);
-                    choice_layout_9.setVisibility(GONE);
-                    choice_layout_10.setVisibility(GONE);
+                        choice_btn_1.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_1.getText().toString());
+                                carrier.setCategory("recruiting_scholarship_61");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_2.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_2.getText().toString());
+                                carrier.setCategory("recruiting_sports_62");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_3.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_3.getText().toString());
+                                carrier.setCategory("recruiting_perf_63");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_4.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_4.getText().toString());
+                                carrier.setCategory("recruiting_faith_64");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_5.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_5.getText().toString());
+                                carrier.setCategory("recruiting_display_65");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_6.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_6.getText().toString());
+                                carrier.setCategory("recruiting_service_66");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
 
-                    choice_btn_1.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_1.getText().toString());
-                            carrier.setCategory("outer_contest_21");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_2.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_2.getText().toString());
-                            carrier.setCategory("outer_intern_22");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_3.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_3.getText().toString());
-                            carrier.setCategory("outer_service_23");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_cancel.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                        }
-                    });
-//                    new AlertDialog.Builder(this)
-//                            .setTitle("소분류")
-//                            .setItems(R.array.small_category_outer,
-//                                    new DialogInterface.OnClickListener() {
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            String[] temp = getResources().getStringArray(R.array.small_category_outer);
-//                                            small_category_btn.setText(temp[which]);
-//                                            if (temp[which].compareTo("공모전") == 0) { carrier.setCategory("outer_contest_21"); category_push_string = "공모전";}
-//                                            if (temp[which].compareTo("인턴") == 0) { carrier.setCategory("outer_intern_22"); category_push_string = "인턴";}
-//                                            if (temp[which].compareTo("자원봉사") == 0) { carrier.setCategory("outer_service_23"); category_push_string = "자원봉사";}
-//                                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-//                                        }
-//                                    })
-//                            .setNegativeButton("취소", null)
-//                            .show();
-                } //대외활동
-
-                if(carrier.getBig_category().compareTo("3") == 0) {     //TODO 공연세미나!!!!!!
-                    choice_tv_1.setText("공연");
-                    choice_tv_2.setText("세미나");
-                    choice_tv_3.setText("발표");
-
-                    choice_layout_4.setVisibility(GONE);
-                    choice_layout_5.setVisibility(GONE);
-                    choice_layout_6.setVisibility(GONE);
-                    choice_layout_7.setVisibility(GONE);
-                    choice_layout_8.setVisibility(GONE);
-                    choice_layout_9.setVisibility(GONE);
-                    choice_layout_10.setVisibility(GONE);
-
-                    choice_btn_1.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_1.getText().toString());
-                            carrier.setCategory("seminar_perf_41");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_2.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_2.getText().toString());
-                            carrier.setCategory("seminar_seminar_42");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_3.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_3.getText().toString());
-                            carrier.setCategory("seminar_presentation_43");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_cancel.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                        }
-                    });
-
-
-//                    new AlertDialog.Builder(this)
-//                            .setTitle("소분류")
-//                            .setItems(R.array.small_category_seminar,
-//                                    new DialogInterface.OnClickListener() {
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            String[] temp = getResources().getStringArray(R.array.small_category_seminar);
-//                                            small_category_btn.setText(temp[which]);
-//                                            if (temp[which].compareTo("공연") == 0) { carrier.setCategory("seminar_perf_41"); category_push_string = "공연";}
-//                                            if (temp[which].compareTo("세미나") == 0) { carrier.setCategory("seminar_seminar_42"); category_push_string = "세미나";}
-//                                            if (temp[which].compareTo("발표") == 0) { carrier.setCategory("seminar_presentation_43"); category_push_string = "발표";}
-//                                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-//                                        }
-//                                    })
-//                            .setNegativeButton("취소", null)
-//                            .show();
-                } //공연세미나
-
-                if(carrier.getBig_category().compareTo("4") == 0) {        //TODO 리쿠르팅!!!
-                    choice_tv_1.setText("학술");
-                    choice_tv_2.setText("운동");
-                    choice_tv_3.setText("공연");
-                    choice_tv_4.setText("신앙");
-                    choice_tv_5.setText("전시");
-                    choice_tv_6.setText("봉사");
-                    choice_layout_7.setVisibility(GONE);
-                    choice_layout_8.setVisibility(GONE);
-                    choice_layout_9.setVisibility(GONE);
-                    choice_layout_10.setVisibility(GONE);
-
-                    choice_btn_1.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_1.getText().toString());
-                            carrier.setCategory("recruiting_scholarship_61");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_2.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_2.getText().toString());
-                            carrier.setCategory("recruiting_sports_62");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_3.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_3.getText().toString());
-                            carrier.setCategory("recruiting_perf_63");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_4.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_4.getText().toString());
-                            carrier.setCategory("recruiting_faith_64");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_5.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_5.getText().toString());
-                            carrier.setCategory("recruiting_display_65");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-                    choice_btn_6.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                            small_category_btn.setText(choice_tv_6.getText().toString());
-                            carrier.setCategory("recruiting_service_66");
-                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        }
-                    });
-
-                    choice_cancel.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_category.dismiss();
-                        }
-                    });
+                        choice_cancel.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                            }
+                        });
 
 //                    new AlertDialog.Builder(this)
 //                            .setTitle("소분류")
@@ -1181,7 +1089,144 @@ public class Writing extends Activity implements OnClickListener {
 //                                    })
 //                            .setNegativeButton("취소", null)
 //                            .show();
-                } //리쿠르팅
+                    } //리쿠르팅
+                }
+
+
+
+
+                if(carrier.getBig_category().compareTo("3")== 0 || carrier.getBig_category().compareTo("2") == 0) {
+
+                    dialog_category = new Dialog(context);
+                    dialog_category.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog_category.setContentView(R.layout.dialog_category_3);
+                    dialog_category.show();
+
+                    choice_btn_three_1 = (Button) dialog_category.findViewById(R.id.choice_btn_three_1);
+                    choice_btn_three_2 = (Button) dialog_category.findViewById(R.id.choice_btn_three_2);
+                    choice_btn_three_3 = (Button) dialog_category.findViewById(R.id.choice_btn_three_3);
+                    choice_cancel_three = (Button) dialog_category.findViewById(R.id.choice_cancel_three);
+
+                    choice_tv_three_1 = (TextView) dialog_category.findViewById(R.id.choice_tv_three_1);
+                    choice_tv_three_2 = (TextView) dialog_category.findViewById(R.id.choice_tv_three_2);
+                    choice_tv_three_3 = (TextView) dialog_category.findViewById(R.id.choice_tv_three_3);
+                    choice_tv_three_4 = (TextView) dialog_category.findViewById(R.id.choice_tv_three_4);
+                    choice_tv_three_1.setTypeface(typeface);
+                    choice_tv_three_2.setTypeface(typeface);
+                    choice_tv_three_3.setTypeface(typeface);
+                    choice_tv_three_4.setTypeface(typeface);
+
+
+                    if(carrier.getBig_category().compareTo("2") == 0) {   //TODO 대외활동!!!!!
+                        choice_tv_three_1.setText("공모전");
+                        choice_tv_three_2.setText("인턴");
+                        choice_tv_three_3.setText("자원봉사");
+
+                        choice_btn_three_1.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_three_1.getText().toString());
+                                carrier.setCategory("outer_contest_21");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_three_2.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_three_2.getText().toString());
+                                carrier.setCategory("outer_intern_22");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_three_3.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_three_3.getText().toString());
+                                carrier.setCategory("outer_service_23");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_cancel_three.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                            }
+                        });
+//                    new AlertDialog.Builder(this)
+//                            .setTitle("소분류")
+//                            .setItems(R.array.small_category_outer,
+//                                    new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            String[] temp = getResources().getStringArray(R.array.small_category_outer);
+//                                            small_category_btn.setText(temp[which]);
+//                                            if (temp[which].compareTo("공모전") == 0) { carrier.setCategory("outer_contest_21"); category_push_string = "공모전";}
+//                                            if (temp[which].compareTo("인턴") == 0) { carrier.setCategory("outer_intern_22"); category_push_string = "인턴";}
+//                                            if (temp[which].compareTo("자원봉사") == 0) { carrier.setCategory("outer_service_23"); category_push_string = "자원봉사";}
+//                                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+//                                        }
+//                                    })
+//                            .setNegativeButton("취소", null)
+//                            .show();
+                    } //대외활동
+
+                    if (carrier.getBig_category().compareTo("3") == 0) {     //TODO 공연세미나!!!!!!
+                        choice_tv_three_1.setText("공연");
+                        choice_tv_three_2.setText("세미나");
+                        choice_tv_three_3.setText("발표");
+
+
+                        choice_btn_three_1.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_three_1.getText().toString());
+                                carrier.setCategory("seminar_perf_41");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_three_2.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_three_2.getText().toString());
+                                carrier.setCategory("seminar_seminar_42");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_btn_three_3.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                                small_category_btn.setText(choice_tv_three_3.getText().toString());
+                                carrier.setCategory("seminar_presentation_43");
+                                small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+                            }
+                        });
+                        choice_cancel_three.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog_category.dismiss();
+                            }
+                        });
+
+
+//                    new AlertDialog.Builder(this)
+//                            .setTitle("소분류")
+//                            .setItems(R.array.small_category_seminar,
+//                                    new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            String[] temp = getResources().getStringArray(R.array.small_category_seminar);
+//                                            small_category_btn.setText(temp[which]);
+//                                            if (temp[which].compareTo("공연") == 0) { carrier.setCategory("seminar_perf_41"); category_push_string = "공연";}
+//                                            if (temp[which].compareTo("세미나") == 0) { carrier.setCategory("seminar_seminar_42"); category_push_string = "세미나";}
+//                                            if (temp[which].compareTo("발표") == 0) { carrier.setCategory("seminar_presentation_43"); category_push_string = "발표";}
+//                                            small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
+//                                        }
+//                                    })
+//                            .setNegativeButton("취소", null)
+//                            .show();
+                    } //공연세미나
+
+                }
+
+
 
                 break;
             }
@@ -1269,6 +1314,10 @@ public class Writing extends Activity implements OnClickListener {
             //내용 무
             else {
                 //개인
+                carrier.setBig_category("0");
+                carrier.setCategory("");
+                carrier.setTitle(null);
+                carrier.setContent(null);
                 if(carrier.getSelector() == 0){
                     Log.d("여기로", "들어오나");
                     Intent intent = new Intent(Writing.this, SelectGroupOrNot.class).putExtra("carrier", carrier);
@@ -1585,9 +1634,9 @@ public class Writing extends Activity implements OnClickListener {
                         // do something after 1s
                         popup_1.setVisibility(VISIBLE);
                         popup_2.setVisibility(VISIBLE);
-//                        if(carrier.getEdit_count() == 1){
-//                            popup_3.setBackgroundResource(R.drawable.수정된거);
-//                        }
+                        if(carrier.getEdit_count() == 1){
+                            popup_3.setBackgroundResource(R.drawable.dialog_edit);
+                        }
                         popup_3.setVisibility(VISIBLE);
                     }
 

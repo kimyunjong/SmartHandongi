@@ -4,27 +4,31 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="15dp"
-
-            android:text="소분류"/>
+        android:layout_height="46dp">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="76.5dp"
+            android:layout_height="30.5dp"
+            android:layout_marginLeft="12.5dp"
+            android:background="@drawable/dialog_category_img"/>
     </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="#ffd3d4d4"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="165dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <RelativeLayout
                 android:id="@+id/choice_layout_1"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_1"
                     android:layout_width="match_parent"
@@ -34,15 +38,15 @@
                     android:id="@+id/choice_tv_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/choice_layout_2"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_2"
                     android:layout_width="match_parent"
@@ -52,15 +56,15 @@
                     android:id="@+id/choice_tv_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/choice_layout_3"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_3"
                     android:layout_width="match_parent"
@@ -70,15 +74,15 @@
                     android:id="@+id/choice_tv_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/choice_layout_4"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_4"
                     android:layout_width="match_parent"
@@ -88,15 +92,15 @@
                     android:id="@+id/choice_tv_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/choice_layout_5"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_5"
                     android:layout_width="match_parent"
@@ -106,14 +110,14 @@
                     android:id="@+id/choice_tv_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/choice_layout_6"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_6"
                     android:layout_width="match_parent"
@@ -123,14 +127,14 @@
                     android:id="@+id/choice_tv_6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/choice_layout_7"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_7"
                     android:layout_width="match_parent"
@@ -140,14 +144,14 @@
                     android:id="@+id/choice_tv_7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/choice_layout_8"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_8"
                     android:layout_width="match_parent"
@@ -157,14 +161,14 @@
                     android:id="@+id/choice_tv_8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/choice_layout_9"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_9"
                     android:layout_width="match_parent"
@@ -174,14 +178,14 @@
                     android:id="@+id/choice_tv_9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/choice_layout_10"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="33dp">
                 <Button
                     android:id="@+id/choice_btn_10"
                     android:layout_width="match_parent"
@@ -191,27 +195,32 @@
                     android:id="@+id/choice_tv_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12.5dp"
                     android:layout_centerVertical="true"
-                    android:textSize="15dp"/>
+                    android:textSize="16.5dp"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffd3d4d4"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="33dp">
         <Button
             android:id="@+id/choice_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"/>
         <TextView
+            android:id="@+id/choice_cancel_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_centerInParent="true"
-            android:textSize="15dp"
+            android:textSize="16.5dp"
             android:text="취소"/>
     </RelativeLayout>
 
