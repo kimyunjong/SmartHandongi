@@ -121,7 +121,8 @@
         <activity android:name=".group_infoList"
             android:label="smart_handongi"/>
         <!-- 수영 동아리정보보기 activity-->
-
+        <activity android:name=".ProductionNote"
+            android:label="smart_handongi"/>
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="ddeea2953497222f88542be190749e85"/>
     </application>
 

@@ -37,7 +37,14 @@ public class Carrier implements Serializable {
     private boolean gcm=false;
     private boolean visited = false;
     private String where="fisrt";
+    private int i =0;
 
+    public void setI(int i ){
+        this.i= i;
+    }
+     public int getI(){
+         return i;
+     }
     public void setVisited (boolean visited){
         this.visited= visited;
     }

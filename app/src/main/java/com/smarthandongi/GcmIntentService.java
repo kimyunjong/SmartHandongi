@@ -28,7 +28,7 @@ public class GcmIntentService extends GCMBaseIntentService {
     static Carrier carrier = new Carrier();
 
     private  void generateNotifiaction(Context context, String message ,String posting_id, String where) {
-        int icon = R.drawable.push_handongi;
+        int icon = R.drawable.push_image;
         long when = System.currentTimeMillis();
         String title = "모여라 한동이";
         String posting_id1 =posting_id;

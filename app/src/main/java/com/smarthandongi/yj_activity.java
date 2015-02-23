@@ -766,11 +766,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     history_btn_img.setImageResource(R.drawable.our_history_on);
                 } else if (event.getAction() == 1) {
                     history_btn_img.setImageResource(R.drawable.our_history);
-//                   Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
-//                    intent.putExtra("carrier", carrier);
-//                    intent.putExtra("post_list",post_list);
-//                    startActivityForResult(intent, 0);
-//                    overridePendingTransition(0,0);
+                    Intent intent = new Intent(yj_activity.this, ProductionNote.class);
+                    intent.putExtra("carrier", carrier);
+
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
 
                 }
                 break;
@@ -924,7 +924,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
     public void onBackPressed()
     {
-
+        //수영 추가
+        carrier.setVisited(true);
+        //수영 추가 끝
         if (menu_on) {
             menu_toggle();
         } else {
@@ -1063,7 +1065,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         board_listview.setAdapter(adapter);
 
         //수영추가 시작
+
         carrier=(Carrier)getIntent().getSerializableExtra("carrier");
+
         if(carrier.getVisited()==false) {
             if (carrier.isBy_GCM()) {
 

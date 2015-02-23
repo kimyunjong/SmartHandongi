@@ -60,14 +60,25 @@ public class KakaoTalkSignupActivity extends SampleSignupActivity {
         carrier.setLogged_in(true);
         carrier.setId(String.valueOf(userProfile.getId()));
         carrier.setNickname(userProfile.getNickname());
+        carrier.getVisited();
 
 
         final Intent intent = new Intent(this, yj_activity.class);
         intent.putExtra("carrier", carrier);
-        Log.d("Kakaotalk 사인업액티비티1", String.valueOf(carrier.getPost_id()));
+
         startActivity(intent);
 
         finish();
-        if(carrier.isBy_GCM()){  Log.d("Kakaotalk 로그인 액티비티2",String.valueOf(carrier.getPost_id()));       }
+        if(carrier.isBy_GCM()){
+
+           if(carrier.getPost_id()==1)
+           {
+               carrier.setVisited(true);
+           }
+            Log.d("Kakaotalk 로그인 사인업2",String.valueOf(carrier.getPost_id()));
+            Log.d("Kakaotalk 사인업액티비티1", String.valueOf(carrier.getPost_id()));
+            Log.d("사인업 액티비티 VISITED",String.valueOf(carrier.getVisited()));
+            carrier.setI(1);
+           }
     }
 }
