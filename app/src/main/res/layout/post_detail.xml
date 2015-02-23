@@ -20,11 +20,13 @@
                 android:layout_width="50.5dp"
                 android:layout_height="match_parent">
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/post_backward_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"/>
                 <ImageView
+                    android:visibility="gone"
                     android:layout_width="16.5dp"
                     android:layout_height="43.5dp"
                     android:layout_centerHorizontal="true"
@@ -52,11 +54,13 @@
                 android:layout_width="50.5dp"
                 android:layout_height="match_parent">
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/post_forward_btn"
                     android:layout_width="50.5dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"/>
                 <ImageView
+                    android:visibility="gone"
                     android:layout_width="16.5dp"
                     android:layout_height="43.5dp"
                     android:layout_centerHorizontal="true"
