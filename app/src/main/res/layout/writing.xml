@@ -298,7 +298,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"/>
+                        //아래의 시작일 종료일 초기화 버튼은 이후에 수정
                         <Button
+                            android:visibility="gone"
                             android:id="@+id/writing_reset_dates"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
