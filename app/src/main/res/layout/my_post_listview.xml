@@ -16,20 +16,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="2dp">
                 <TextView
                     android:id="@+id/smp_category"
                     android:layout_width="wrap_content"
-                    android:layout_height="22.5dp"
-                    android:textSize="14.5dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13.5dp"
+                    android:textColor="#ff6868"
+                    android:alpha="0.6"
                     android:text="일반공지"
                     />
                 <TextView
                     android:id="@+id/smp_posting_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14.5dp"
+                    android:textSize="13.5dp"
                     android:text="2015-01-30"
+                    android:textColor="#ff6868"
+                    android:alpha="0.6"
                     android:layout_marginLeft="8dp"
                     />
             </LinearLayout>
@@ -40,6 +45,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textSize="14.5dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="dhdjklaf;dasf"
                 />
 

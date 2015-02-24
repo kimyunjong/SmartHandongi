@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp">
-                        <com.smarthandongi.CTextView2
+                        <TextView
                             android:id="@+id/pos_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

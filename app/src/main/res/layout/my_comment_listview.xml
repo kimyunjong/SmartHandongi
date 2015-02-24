@@ -12,38 +12,57 @@
             android:orientation="vertical"
             android:gravity="center_vertical"
             android:layout_marginRight="24dp"
+            ><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
+
+            <TextView
+                android:id="@+id/smp_comment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13.5dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="#ff6868"
+                android:alpha="0.6"
+                android:text="제목이다다다다다다다다다다"
+                android:layout_marginLeft="8dp"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="22.2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/smp_comment_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14.5dp"
-                    android:text="2015-01-20"
-                    />
-                <TextView
-                    android:id="@+id/smp_comment_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14.5dp"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:text="제목이다다다다다다다다다다"
-                    android:layout_marginLeft="8dp"
-                    />
-            </LinearLayout>
+
+        <TextView
+                android:id="@+id/smp_comment_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14.5dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#4d4d4d"
+                android:text="2015-01-20"
+
+               android:layout_marginLeft="8dp"
+                />
             <TextView
                 android:id="@+id/smp_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textSize="14.5dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#4d4d4d"
                 android:text="dhdjklaf;dasf"
                 />
+        </LinearLayout>
+
 
         </LinearLayout>
         <RelativeLayout

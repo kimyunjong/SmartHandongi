@@ -1635,7 +1635,8 @@ public class Writing extends Activity implements OnClickListener {
                         popup_1.setVisibility(VISIBLE);
                         popup_2.setVisibility(VISIBLE);
                         if(carrier.getEdit_count() == 1){
-                            popup_3.setBackgroundResource(R.drawable.dialog_edit);
+                      //
+                      //      popup_3.setBackgroundResource(R.drawable.dialog_edit);
                         }
                         popup_3.setVisibility(VISIBLE);
                     }
