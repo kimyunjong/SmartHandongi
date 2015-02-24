@@ -102,12 +102,12 @@
 </RelativeLayout>
     <ImageButton
         android:layout_width="40dp"
-        android:layout_height="66.5dp"
+        android:layout_height="50.5dp"
         android:id="@+id/like_button"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="11dp"
-
+        android:layout_marginTop="5dp"
         android:layout_alignTop="@+id/dday"/>
 
     <!--<RelativeLayout-->

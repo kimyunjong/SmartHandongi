@@ -24,7 +24,7 @@ public class SMP_PostAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private Carrier carrier;
-    private String big_category,small_category;
+    private String big_category,small_category,posting_dates;
     Typeface typeface;
 
     public  SMP_PostAdapter(Context context, int alayout, ArrayList<PostDatabase> post_list,ArrayList<PostDatabase> all_posting_list, Carrier carrier) {
@@ -95,8 +95,9 @@ public class SMP_PostAdapter extends BaseAdapter {
 
 
         TextView posting_date = (TextView)convert_view.findViewById(R.id.smp_posting_date);
+        posting_dates = post_list.get(position).getPosting_date();
         posting_date.setTypeface(typeface);
-        posting_date.setText(post_list.get(position).getPosting_date());
+        posting_date.setText(posting_dates.substring(0,4) + "-" + posting_dates.substring(4,6) + "-" + posting_dates.substring(6,8));
 
         TextView title = (TextView)convert_view.findViewById(R.id.smp_title);
         title.setTypeface(typeface);

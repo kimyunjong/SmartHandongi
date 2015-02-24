@@ -298,14 +298,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"/>
-                        //아래의 시작일 종료일 초기화 버튼은 이후에 수정
-                        <Button
+                        <ImageButton
                             android:visibility="gone"
                             android:id="@+id/writing_reset_dates"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="초기화"
-                            android:layout_marginLeft="50dp"/>
+                            android:layout_width="51dp"
+                            android:layout_height="25.5dp"
+                            android:layout_marginLeft="54dp"
+                            android:background="@drawable/writing_reset_dates"/>
                         <ImageView
                             android:id="@+id/writing_startdate_img"
                             android:layout_width="97dp"

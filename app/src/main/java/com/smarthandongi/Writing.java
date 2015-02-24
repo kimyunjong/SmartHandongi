@@ -102,9 +102,9 @@ public class Writing extends Activity implements OnClickListener {
     Button dialog_push_cancel, dialog_push_confirm, dialog_writing_confirm, dialog_writing_cancel, dialog_okay, dialog_back_cancel, dialog_back_confirm;
     ImageView big_category_img, small_category_img, writing_title_img, writing_body_img, writing_preview_img, writing_edit_title;
     ImageView writing_startdate_img, writing_enddate_img, writing_title_message, writing_confirm_img, writing_edit_confirm;
-    Button big_category_btn, small_category_btn, writing_reset_dates;
+    Button big_category_btn, small_category_btn;
     EditText writing_title, writing_content, writing_link;
-    ImageButton writing_additional_btn, writing_additional_hide_btn, writing_remove_pic_btn;
+    ImageButton writing_additional_btn, writing_additional_hide_btn, writing_remove_pic_btn, writing_reset_dates;
     LinearLayout writing_additional, linear, entire_layout, dialog_check_background;
     ScrollView scroll;
     Dialog dialog, dialog_cancel, dialog_check, dialog_back, dialog_back_edit, dialog_bigcategory, dialog_category;
@@ -272,7 +272,7 @@ public class Writing extends Activity implements OnClickListener {
         end_dateLabel=(TextView)findViewById(R.id.end_date_label);
         startDate_btn=(Button)findViewById(R.id.startdate_choose);
         endDate_btn=(Button)findViewById(R.id.enddate_choose);
-        writing_reset_dates=(Button)findViewById(R.id.writing_reset_dates);
+        writing_reset_dates=(ImageButton)findViewById(R.id.writing_reset_dates);
 
         startDate_btn.setOnClickListener(this);
         endDate_btn.setOnClickListener(this);
@@ -657,6 +657,7 @@ public class Writing extends Activity implements OnClickListener {
                     writing_enddate_img.setVisibility(GONE);
                     start_dateLabel.setVisibility(VISIBLE);
                     end_dateLabel.setVisibility(VISIBLE);}
+                writing_reset_dates.setVisibility(VISIBLE);
                 break;
             }
 
@@ -670,6 +671,7 @@ public class Writing extends Activity implements OnClickListener {
                     writing_startdate_img.setVisibility(GONE);
                     writing_enddate_img.setVisibility(GONE);
                 }
+                writing_reset_dates.setVisibility(VISIBLE);
                 break;
             }
 
@@ -706,7 +708,7 @@ public class Writing extends Activity implements OnClickListener {
                         carrier.setBig_category("1");
                         big_category_btn.setText("일반공지");
                         big_category_img.setBackgroundResource(R.drawable.writing_category_empty);
-                        small_category_img.setBackgroundResource(0);
+                        small_category_img.setBackgroundResource(R.drawable.writing_category_none);
                         small_category_btn.setVisibility(GONE);
                         small_category_btn.setText("");
                         carrier.setCategory("");
@@ -1240,13 +1242,15 @@ public class Writing extends Activity implements OnClickListener {
             }
 
             case R.id.writing_reset_dates : {
-                start_dateLabel.setText("0");
-                end_dateLabel.setText("0");
                 writing_startdate_img.setVisibility(VISIBLE);
                 writing_enddate_img.setVisibility(VISIBLE);
+                writing_startdate_img.setBackgroundResource(R.drawable.writing_dates);
+                writing_enddate_img.setBackgroundResource(R.drawable.writing_dates);
+                carrier.setStart_date("0");
+                carrier.setEnd_date("0");
                 start_dateLabel.setVisibility(GONE);
                 end_dateLabel.setVisibility(GONE);
-
+                writing_reset_dates.setVisibility(GONE);
                 break;
             }
         }
