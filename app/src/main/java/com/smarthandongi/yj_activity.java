@@ -293,6 +293,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
        switch (v.getId())
        {
            case  R.id.delete_search:{
+               InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+               inputManager.hideSoftInputFromWindow(post_search.getWindowToken(), 0);
                adapter = new PostAdapter(yj_activity.this, board_list,carrier);
                adapter2= new Post2Adapter(yj_activity.this, timeline_list );
                Log.v("연결 시도", "연결되어라@*********************************************");
@@ -1313,20 +1315,37 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     AdapterView.OnItemClickListener boardItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
-            Log.d("글번호잘못??",String.valueOf(board_list.get(position).getId()));
-            Log.d("글의 포지션",String.valueOf(position));
-            viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+board_list.get(position).getId());
-            Intent intent = new Intent(yj_activity.this, PostDetail.class);
-            intent.putExtra("carrier", carrier);
-            intent.putExtra("post_list",board_list);
-            intent.putExtra("position",position);
-            intent.putExtra("post", board_list.get(position));
-            Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
 
-            startActivityForResult(intent, 0);
-            overridePendingTransition(0,0);
+            if(filtered_list.size()!=0) {
+                ViewNumPhp viewNumPhp = new ViewNumPhp(filtered_list.get(position));
+                Log.d("글번호잘못??", String.valueOf(filtered_list.get(position).getId()));
+                Log.d("글의 포지션", String.valueOf(position));
+                viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + board_list.get(position).getId());
+                Intent intent = new Intent(yj_activity.this, PostDetail.class);
+                intent.putExtra("carrier", carrier);
+                intent.putExtra("post_list", filtered_list);
+                intent.putExtra("position", position);
+                intent.putExtra("post", filtered_list.get(position));
+                Log.d("니가 나중에되야해니가나중에되야해", "으어어우엉오으우엉");
 
+                startActivityForResult(intent, 0);
+                overridePendingTransition(0, 0);
+            }
+            else {
+                ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
+                Log.d("글번호잘못??", String.valueOf(board_list.get(position).getId()));
+                Log.d("글의 포지션", String.valueOf(position));
+                viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + board_list.get(position).getId());
+                Intent intent = new Intent(yj_activity.this, PostDetail.class);
+                intent.putExtra("carrier", carrier);
+                intent.putExtra("post_list", board_list);
+                intent.putExtra("position", position);
+                intent.putExtra("post", board_list.get(position));
+                Log.d("니가 나중에되야해니가나중에되야해", "으어어우엉오으우엉");
+
+                startActivityForResult(intent, 0);
+                overridePendingTransition(0, 0);
+            }
         }
     };
 
