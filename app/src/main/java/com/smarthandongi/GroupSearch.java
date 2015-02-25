@@ -42,9 +42,9 @@ public class GroupSearch extends Activity {
     Carrier carrier;
     private ListView listview;
     private GroupListAdapter adapter;
-    private ArrayList<GroupDatabase> group_list = new ArrayList<GroupDatabase>();
-    private ArrayList<GroupDatabase> temp_list = new ArrayList<GroupDatabase>();
-    private ArrayList<GroupDatabase> filtered_list = new ArrayList<GroupDatabase>();
+    private ArrayList<GroupDatabase1> group_list = new ArrayList<GroupDatabase1>();
+    private ArrayList<GroupDatabase1> temp_list = new ArrayList<GroupDatabase1>();
+    private ArrayList<GroupDatabase1> filtered_list = new ArrayList<GroupDatabase1>();
     private GroupNewPhp group_php;
     EditText group_search;
     RelativeLayout layoutView,unresistered_screen;
@@ -64,7 +64,7 @@ public class GroupSearch extends Activity {
         setContentView(R.layout.group_search);
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
         group_php = new GroupNewPhp(group_list,temp_list, this);
-        group_php.execute("http://hungry.portfolio1000.com/smarthandongi/group.php");
+        group_php.execute("http://hungry.portfolio1000.com/smarthandongi/group_info.php");
 
         search_cancel_img=(ImageView)findViewById(R.id.search_cancel_img);
         search_glass_img=(ImageView)findViewById(R.id.search_glass_img);
@@ -200,11 +200,11 @@ public class GroupSearch extends Activity {
                 str = group_search.getText().toString();
                 filtered_list.removeAll(filtered_list);
                 Log.d("test", Integer.toString(filtered_list.size()));
-                for (int a = 0; a < group_list.size(); a++) {
-                    if (group_list.get(a).getNickname_list().contains(str)) {
-                        filtered_list.add(new GroupDatabase(group_list.get(a).getId(), group_list.get(a).getGroup_name(),
-                                group_list.get(a).getNickname_list(),group_list.get(a).getGroup_code(),
-                                group_list.get(a).getGroup_pw()));
+                for (int i = 0; i < group_list.size(); i++) {
+                    if (group_list.get(i).getNickname_list().contains(str)) {
+                        filtered_list.add(new GroupDatabase1(group_list.get(i).getGroup_id(), group_list.get(i).getGroup_name(), group_list.get(i).getNickname_list(),
+                                group_list.get(i).getGroup_category(), group_list.get(i).getIntroduce(),group_list.get(i).getPassword(),group_list.get(i).getGroup_code()
+                        ));
                     }
 
                 }
@@ -286,11 +286,11 @@ public class GroupSearch extends Activity {
           int pos = position;
           if(filtered_list.size()!=0) //검색했는데 검색결과가 리스트에 있을때
           {
-              Log.d("선택된거", filtered_list.get(pos).getGroup_code());
+              //Log.d("선택된거", filtered_list.get(pos).getGroup_code());
               carrier.setGroup_code(filtered_list.get(pos).getGroup_code());
               carrier.setGroup_name(filtered_list.get(pos).getGroup_name());
-              carrier.setGroup_pw(filtered_list.get(pos).getGroup_pw());
-              carrier.setGroup_id(filtered_list.get(pos).getId());
+              carrier.setGroup_pw(filtered_list.get(pos).getPassword());
+              carrier.setGroup_id(filtered_list.get(pos).getGroup_id());
               Intent intent = new Intent(GroupSearch.this,GroupPassword.class).putExtra("carrier",carrier);
               startActivity(intent);
               finish();
@@ -300,8 +300,8 @@ public class GroupSearch extends Activity {
               Log.d("index", String.valueOf(pos));
               carrier.setGroup_code(group_list.get(pos).getGroup_code());
               carrier.setGroup_name(group_list.get(pos).getGroup_name());
-              carrier.setGroup_pw(group_list.get(pos).getGroup_pw());
-              carrier.setGroup_id(group_list.get(pos).getId());
+              carrier.setGroup_pw(group_list.get(pos).getPassword());
+              carrier.setGroup_id(group_list.get(pos).getGroup_id());
               Intent intent = new Intent(GroupSearch.this, GroupPassword.class).putExtra("carrier", carrier);
               startActivity(intent);
               finish();
@@ -317,10 +317,10 @@ public class GroupSearch extends Activity {
         finish();
     }
     public class GroupNewPhp extends AsyncTask<String, android.R.integer , String> {
-        private ArrayList<GroupDatabase> group_list,temp_list;
+        private ArrayList<GroupDatabase1> group_list,temp_list;
         private Context context;
 
-        public GroupNewPhp(ArrayList<GroupDatabase> group_list,ArrayList<GroupDatabase> temp_list, Context context) {
+        public GroupNewPhp(ArrayList<GroupDatabase1> group_list,ArrayList<GroupDatabase1> temp_list, Context context) {
             super();
             this.group_list=group_list;
             this.temp_list = temp_list;
@@ -365,7 +365,8 @@ public class GroupSearch extends Activity {
                 for(int i=0; i<ja.length(); i++) {
                     JSONObject jo = ja.getJSONObject(i);
 
-                    temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
+                    //temp_list.add(new GroupDatabase(jo.getInt("id"),jo.getString("group_name"),jo.getString("nickname"),jo.getString("group_code"),jo.getString("password")));
+                    temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce"),jo.getString("password"),jo.getString("group_code")));
 
                 }
 

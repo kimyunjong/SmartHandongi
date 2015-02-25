@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.smarthandongi.GroupDatabase;
+import com.smarthandongi.GroupDatabase1;
 import com.smarthandongi.R;
 
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.List;
 
 public class GroupListAdapter extends BaseAdapter{
     private LayoutInflater inflater;
-    private ArrayList<GroupDatabase> group_list;
+    private ArrayList<GroupDatabase1> group_list;
     private Context context;
     private int layout;
     Typeface typeface;
 
-    public  GroupListAdapter(Context context, int alayout, ArrayList<GroupDatabase> group_list) {
+    public  GroupListAdapter(Context context, int alayout, ArrayList<GroupDatabase1> group_list) {
         this.context=context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.group_list=group_list;
@@ -29,8 +30,8 @@ public class GroupListAdapter extends BaseAdapter{
     }
 
     public int getCount(){return group_list.size();}
-    public GroupDatabase getItem(int position) {return group_list.get(position);}
-    public List<GroupDatabase> getLists() {return group_list;}
+    public GroupDatabase1 getItem(int position) {return group_list.get(position);}
+    public List<GroupDatabase1> getLists() {return group_list;}
     public long getItemId(int position) {return position;}
 
     public View getView(int position, View convert_view, ViewGroup parent) {

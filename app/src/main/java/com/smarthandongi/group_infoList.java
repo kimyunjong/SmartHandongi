@@ -200,7 +200,7 @@ public class group_infoList extends Activity {
                 for (int i = 0; i < group_list.size(); i++) {
                     if (group_list.get(i).getNickname_list().contains(str)) {
                         filtered_list.add(new GroupDatabase1(group_list.get(i).getGroup_id(), group_list.get(i).getGroup_name(), group_list.get(i).getNickname_list(),
-                                group_list.get(i).getGroup_category(), group_list.get(i).getIntroduce()
+                                group_list.get(i).getGroup_category(), group_list.get(i).getIntroduce(),group_list.get(i).getPassword(),group_list.get(i).getGroup_code()
                         ));
 
                         //      groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list);
@@ -394,7 +394,8 @@ public class group_infoList extends Activity {
                     }*/
                     ;
                     //group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
-                    temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
+                    temp_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"),
+                            jo.getString("introduce"),jo.getString("password"),jo.getString("group_code")));
 
                 }
                 while(temp_list.size() != 0) {
