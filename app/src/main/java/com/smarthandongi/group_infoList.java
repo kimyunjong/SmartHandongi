@@ -195,45 +195,52 @@ public class group_infoList extends Activity {
 
                 str = group_search.getText().toString();
                 filtered_list.removeAll(filtered_list);
-                Log.d("test", Integer.toString(temp_list.size()));
+                Log.d("test111", Integer.toString(temp_list.size()));
 
-                for (int i = 0; i < temp_list.size(); i++) {
-                    if (temp_list.get(i).getNickname_list().contains(str)) {
-                        filtered_list.add(new GroupDatabase1(temp_list.get(i).getGroup_id(), temp_list.get(i).getGroup_name(), temp_list.get(i).getNickname_list(),
-                                temp_list.get(i).getGroup_category(), temp_list.get(i).getIntroduce()
+                for (int i = 0; i < group_list.size(); i++) {
+                    if (group_list.get(i).getNickname_list().contains(str)) {
+                        filtered_list.add(new GroupDatabase1(group_list.get(i).getGroup_id(), group_list.get(i).getGroup_name(), group_list.get(i).getNickname_list(),
+                                group_list.get(i).getGroup_category(), group_list.get(i).getIntroduce()
                         ));
 
-                        groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list);
-                        group_list_view.setAdapter(groupinfoAdapter);
-                        Log.d("filtered_list", Integer.toString(filtered_list.size()));
+                        //      groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list);
+                        //     group_list_view.setAdapter(groupinfoAdapter);
+                        //     Log.d("filtered_list", Integer.toString(filtered_list.size()));
 
                     }
                 }
 
 
-                if (str.length() > 1 && filtered_list.size() == 0) {
-                    group_list_view.setVisibility(View.INVISIBLE);
+                Log.d("sjsjijj",str);
+
+                for(int i=0; i<filtered_list.size();i++){
+                    Log.d("이거되야해",filtered_list.get(i).getGroup_name());
+                }
+                groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list);
+                group_list_view.setAdapter(groupinfoAdapter);
+                group_list_view.setOnItemClickListener(groupListClickListener);
+
+                if(str.length()>1&&filtered_list.size()==0) {
+                    group_list_view.setVisibility(View.GONE);
                     background_hidden.setVisibility(View.GONE);
                     unresistered_background.setVisibility(View.VISIBLE);
                     unresistered_screen.setVisibility(View.VISIBLE);
-                    // unresistered.setText("\""+str+"\"");
+//                    unresistered.setText("\""+str+"\"");
 
-                } else {
+                }
+                else
+                {
 
                     group_list_view.setVisibility(View.VISIBLE);
-                    unresistered_background.setVisibility(View.INVISIBLE);
-                    unresistered_screen.setVisibility(View.INVISIBLE);
-                    if (filtered_list.size() != 0) {
-                        background_hidden.getLayoutParams().height = getTotalHeightOfListView(group_list_view);
+                    unresistered_background.setVisibility(View.GONE);
+                    unresistered_screen.setVisibility(View.GONE);
+                    if(filtered_list.size()!=0) {
+                        background_hidden.getLayoutParams().height=getTotalHeightOfListView(group_list_view);
                         background_hidden.setVisibility(View.VISIBLE);
-                        Log.d("이거되는건가", "제발되람고");
                         unresistered_background.setVisibility(View.VISIBLE);
-                        Log.d("이거되는건가", "아마될거야아마아망마아마");
-
                     }
 
                 }
-
             }
         };
         group_search.addTextChangedListener(watcher);
