@@ -376,7 +376,20 @@
 
     </LinearLayout>
 //메뉴부분
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:layout_toLeftOf="@+id/menu"
+    android:id="@+id/next_menu_layout"
+    >
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
+    android:background="@android:color/transparent"
+        android:id="@+id/next_menu_btn"/>
+    </RelativeLayout>
 <RelativeLayout
     android:layout_width="152dp"
     android:layout_height="match_parent"

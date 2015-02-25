@@ -57,10 +57,10 @@ import java.util.ArrayList;
  * Created by Joel on 2015-01-21.
  */
 public class yj_activity extends Activity implements View.OnTouchListener,AbsListView.OnScrollListener,View.OnClickListener {
-    Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn,write_btn_in_menu,scrap_menu,my_posting_btn,push_set_btn, show_group_btn,bustime_table_btn,report_btn, history_btn,login_menu_btn, logout_btn;
+    Button notice_btn, outer_btn, seminar_btn, recruit_btn, agora_btn, board_btn, timeline_btn, search_btn, menu_btn,write_btn,write_btn_in_menu,scrap_menu,my_posting_btn,push_set_btn, show_group_btn,bustime_table_btn,report_btn, history_btn,login_menu_btn, logout_btn,next_menu_btn;
     ImageView notice_img, outer_img, seminar_img, recruit_img, agora_img, board_img, timeline_img, search_img, menu_img,write_img,write_btn_in_menu_img,scrap_menu_img,my_posting_btn_img,push_set_btn_img, show_group_btn_img,bustime_table_btn_img,report_btn_img, history_btn_img,login_menu_low_img, logout_btn_img,login_menu_img;
     ImageButton search_default_btn;
-    RelativeLayout menu,search_layout, default_layout;
+    RelativeLayout menu,search_layout, default_layout,next_menu;
     TextView login_menu_txt;
     EditText post_search;
     Carrier carrier;
@@ -136,7 +136,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             phpCreatePushCheck();
         }
 
-
+        next_menu=(RelativeLayout)findViewById(R.id.next_menu_layout);
         login_menu_low_img=(ImageView)findViewById(R.id.login_img);
         login_menu_btn=(Button)findViewById(R.id.login_btn);
         login_menu_img=(ImageView)findViewById(R.id.login_img_info);
@@ -161,7 +161,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         bustime_table_btn=(Button)findViewById(R.id.bustime_table_btn);
         report_btn=(Button)findViewById(R.id.error_report_btn);
          history_btn=(Button)findViewById(R.id.ourstory_btn);
-
+        next_menu_btn=(Button)findViewById(R.id.next_menu_btn);
         logout_btn=(Button)findViewById(R.id.logout_btn);
         write_btn=(Button)findViewById(R.id.write_btn);
 
@@ -190,6 +190,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         logout_btn_img=(ImageView)findViewById(R.id.logout_img);
         write_img=(ImageView)findViewById(R.id.write_btn_img);
 
+        next_menu_btn.setOnClickListener(this);
         search_default_btn.setOnClickListener(this);
         notice_btn.setOnTouchListener(this);
         outer_btn.setOnTouchListener(this);
@@ -307,6 +308,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                search_on=false;
                search_toggle();
 
+           }
+           case R.id.next_menu_btn:{
+               menu_toggle();
            }
 
        }
@@ -870,11 +874,14 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     {
         if (menu_on) {
             menu.setVisibility(View.GONE);
+            next_menu.setVisibility(View.GONE);
             menu_img.setImageResource(R.drawable.menu_btn);
             menu_on = false;
         } else {
             menu.setVisibility(View.VISIBLE);
+            next_menu.setVisibility(View.VISIBLE);
             menu_img.setImageResource(R.drawable.menu_btn_on);
+
             menu_on = true;
         }
     }
