@@ -638,33 +638,58 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 break;
             }
             case R.id.write_btn: {
-                if (event.getAction() == 0) {
-                    write_img.setImageResource(R.drawable.write_btn_on);
+                if(!carrier.isLogged_in())
+                {
+                    if (event.getAction()==0)
+                    {
+                        write_btn_in_menu_img.setImageResource(R.drawable.write_btn_on);
+                    }
+                    else if(event.getAction()==1)
+                    { write_btn_in_menu_img.setImageResource(R.drawable.write_btn);
+                        Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                    }
                 }
-                else if (event.getAction() == 1) {
-                    write_img.setImageResource(R.drawable.write_btn);
-                    carrier.setEdit_count(0);
-                    Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
-                    intent.putExtra("carrier", carrier);
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
-                   finish();
+                else {
+                    if (event.getAction() == 0) {
+                        write_img.setImageResource(R.drawable.write_btn_on);
+                    } else if (event.getAction() == 1) {
+                        write_img.setImageResource(R.drawable.write_btn);
+                        carrier.setEdit_count(0);
+                        Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
+                        intent.putExtra("carrier", carrier);
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
                 }
                 break;
             }
             case R.id.write_btn_in_menu: {
                 //돌아올곳
-                if (event.getAction() == 0) {
-                    write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu_on);
-                } else if (event.getAction() == 1) {
-                    write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
-                    carrier.setEdit_count(0);
-                    Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
-                    intent.putExtra("carrier", carrier);
+                if(!carrier.isLogged_in())
+                {
+                    if (event.getAction()==0)
+                    {
+                        write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu_on);
+                    }
+                    else if(event.getAction()==1)
+                    { write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
+                        Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                    }
+                }
+                else {
+                    if (event.getAction() == 0) {
+                        write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu_on);
+                    } else if (event.getAction() == 1) {
+                        write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
+                        carrier.setEdit_count(0);
+                        Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
+                        intent.putExtra("carrier", carrier);
 
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
-                    finish();
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
                 }
                 break;
             }
@@ -672,47 +697,88 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
             case R.id.my_posting_btn: {
                 //돌아올곳
-                if (event.getAction() == 0) {
-                    my_posting_btn_img.setImageResource(R.drawable.my_post_on);
-                } else if (event.getAction() == 1) {
-                    my_posting_btn_img.setImageResource(R.drawable.my_post);
-                    Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
-                    intent.putExtra("carrier", carrier);
-                    intent.putExtra("post_list",post_list);
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
+                if(!carrier.isLogged_in())
+                {
+                 if (event.getAction()==0)
+                 {
+                     my_posting_btn_img.setImageResource(R.drawable.my_post_on);
+                 }
+                    else if(event.getAction()==1)
+                 {  my_posting_btn_img.setImageResource(R.drawable.my_post);
+                     Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                 }
+                }
+                else
+                {
+                    if (event.getAction() == 0) {
+                        my_posting_btn_img.setImageResource(R.drawable.my_post_on);
+                    } else if (event.getAction() == 1) {
+                        my_posting_btn_img.setImageResource(R.drawable.my_post);
+                        Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+                        intent.putExtra("carrier", carrier);
+                        intent.putExtra("post_list", post_list);
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
 
+                    }
                 }
                 break;
+
             }
 
             case R.id.scrap_btn: {
                 //돌아올곳
-                if (event.getAction() == 0) {
-                    scrap_menu_img.setImageResource(R.drawable.scrap_menu_on);
-                } else if (event.getAction() == 1) {
-                    scrap_menu_img.setImageResource(R.drawable.scrap_menu);
-                    Intent intent = new Intent(yj_activity.this, My_scrap.class);
-                    intent.putExtra("carrier", carrier);
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
-                    finish();
+                if(!carrier.isLogged_in())
+                {
+                    if (event.getAction()==0)
+                    {
+                        scrap_menu_img.setImageResource(R.drawable.scrap_menu_on);
+                    }
+                    else if(event.getAction()==1)
+                    {scrap_menu_img.setImageResource(R.drawable.scrap_menu);
+                        Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                    }
+                }
+                else {
+                    if (event.getAction() == 0) {
+                        scrap_menu_img.setImageResource(R.drawable.scrap_menu_on);
+                    } else if (event.getAction() == 1) {
+                        scrap_menu_img.setImageResource(R.drawable.scrap_menu);
+                        Intent intent = new Intent(yj_activity.this, My_scrap.class);
+                        intent.putExtra("carrier", carrier);
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
                 }
                 break;
             }
 
             case R.id.push_set_btn: {
                 //돌아올곳
-                if (event.getAction() == 0) {
-                    push_set_btn_img.setImageResource(R.drawable.alarm_menu_on);
-                } else if (event.getAction() == 1) {
-                    push_set_btn_img.setImageResource(R.drawable.alarm_menu);
-                    Intent intent = new Intent(yj_activity.this, PushSetup.class);
-                    intent.putExtra("carrier", carrier);
+                if(!carrier.isLogged_in())
+                {
+                    if (event.getAction()==0)
+                    {
+                        push_set_btn_img.setImageResource(R.drawable.alarm_menu_on);
+                    }
+                    else if(event.getAction()==1)
+                    {  push_set_btn_img.setImageResource(R.drawable.alarm_menu);
+                        Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                    }
+                }
+                else {
+                    if (event.getAction() == 0) {
+                        push_set_btn_img.setImageResource(R.drawable.alarm_menu_on);
+                    } else if (event.getAction() == 1) {
+                        push_set_btn_img.setImageResource(R.drawable.alarm_menu);
+                        Intent intent = new Intent(yj_activity.this, PushSetup.class);
+                        intent.putExtra("carrier", carrier);
 
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
 
+                    }
                 }
                 break;
             }
