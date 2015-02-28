@@ -287,6 +287,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
     }
 
+
     @Override
     public  void onClick(View v)
     {
@@ -912,7 +913,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     login_menu_low_img.setImageResource(R.drawable.login_img_on);
                 } else if (event.getAction() == 1) {
                     login_menu_low_img.setImageResource(R.drawable.login_img);
-                        System.out.println("들어 오나? ");
+
                         Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
                         startActivity(intent);
                     login_toggle();
@@ -987,7 +988,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         }
     }
 
-    public void board_toogle(){
+    public void board_toogle()
+    {
         if(board_on) {
             board_listview.setVisibility(View.VISIBLE);
             timeline_listviewR.setVisibility(View.GONE);
@@ -1066,7 +1068,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 }
                 return_str = jsonHtml.toString();
             }
-            Log.v("연결 시도", "연결되어라doinbackground$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
+
             return jsonHtml.toString();
         }
 
@@ -1086,6 +1088,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                             jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
                             jo.getString("like"), jo.getInt("view"),jo.getString("group_name"),jo.getString("kakao_nick"),jo.getInt("push"),jo.getString("regid"))
                     );
+
                     temp_list.add(new PostDatabase(
                                     jo.getString("title"), jo.getInt("id"), jo.getString("kakao_id"), jo.getString("big_category"), jo.getString("category"), jo.getString("group"),
                                     jo.getString("content"), jo.getString("posting_date"), jo.getString("link"), jo.getString("start_date"), jo.getString("end_date"), jo.getString("has_pic"),
@@ -1099,9 +1102,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 //filter_by_category();                         나중에 필터할때 손봐주기
                 filter_by_category();
                 filter_by_date();
-                adapter = new PostAdapter(yj_activity.this, board_list,carrier);
+                adapter = new PostAdapter(yj_activity.this, board_list, carrier);
                 adapter2= new Post2Adapter(yj_activity.this, timeline_list );
-                Log.v("연결 시도", "연결되어라@*********************************************");
+
 
                 board_listview.setAdapter(adapter);
                 board_listview.setOnScrollListener(context);
@@ -1147,22 +1150,22 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         if(carrier.getVisited()==false) {
             if (carrier.isBy_GCM()) {
 
-                Log.d("yj_activity", "푸시로 들어왔어요");
-                Log.d("yj_posting_id", String.valueOf(carrier.getPost_id()));
+               // Log.d("yj_activity", "푸시로 들어왔어요");
+                //Log.d("yj_posting_id", String.valueOf(carrier.getPost_id()));
                 int position = 0;
 
-                Log.d("board_list1", String.valueOf(board_list.get(position).getId()));
-                Log.d("getPost_id1", String.valueOf(carrier.getPost_id()));
+              //  Log.d("board_list1", String.valueOf(board_list.get(position).getId()));
+                //Log.d("getPost_id1", String.valueOf(carrier.getPost_id()));
                 int i = 1;
                 while (i == 1) {
                     if (board_list.get(position).getId() != carrier.getPost_id()) {
                         position++;
-                        Log.d("board_list", String.valueOf(board_list.get(position).getId()));
-                        Log.d("getPost_id", String.valueOf(carrier.getPost_id()));
+                    //    Log.d("board_list", String.valueOf(board_list.get(position).getId()));
+                      //  Log.d("getPost_id", String.valueOf(carrier.getPost_id()));
                     } else i = 0;
 
                 }
-                Log.d("push_position1", String.valueOf(position));
+               // Log.d("push_position1", String.valueOf(position));
 
                 ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
                 viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + carrier.getPost_id());
@@ -1296,7 +1299,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         for(PostDatabase db:temp_plist){
                 db.setFirst_day_F();
-                System.out.println(db.getId()+"앞서 나와야할 정보:설정 2"+db.getDday()+db.getFirst_day());
+
         }
         //첫번째 이벤트에 대한 정보주기
         int first_day=0;
@@ -1331,7 +1334,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
             else//디데이 바뀌지 않음.
             {
-                System.out.println("바뀌지 않음."+first_day);
+
             }
             before_dday=db.getDday();
         }
@@ -1340,7 +1343,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
 
         for(PostDatabase db:temp_plist){
-            System.out.println(db.getId()+"앞서 나와야할 정보설정점2:퍼스트데이설정"+db.getDday()+db.getFirst_day());
+
         }
 
 
@@ -1349,7 +1352,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             timeline_list.add(db);
         }
         for(PostDatabase db:temp_plist){
-            System.out.println("첫째날입니다."+db.getFirst_day());
+
         }
 
         adapter2= new Post2Adapter(yj_activity.this, timeline_list );
@@ -1384,30 +1387,29 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
             if(filtered_list.size()!=0) {
                 ViewNumPhp viewNumPhp = new ViewNumPhp(filtered_list.get(position));
-                Log.d("글번호잘못??", String.valueOf(filtered_list.get(position).getId()));
-                Log.d("글의 포지션", String.valueOf(position));
+                //Log.d("글번호잘못??", String.valueOf(filtered_list.get(position).getId()));
+                //Log.d("글의 포지션", String.valueOf(position));
                 viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + board_list.get(position).getId());
                 Intent intent = new Intent(yj_activity.this, PostDetail.class);
                 intent.putExtra("carrier", carrier);
                 intent.putExtra("post_list", filtered_list);
                 intent.putExtra("position", position);
                 intent.putExtra("post", filtered_list.get(position));
-                Log.d("니가 나중에되야해니가나중에되야해", "으어어우엉오으우엉");
+
 
                 startActivityForResult(intent, 0);
                 overridePendingTransition(0, 0);
             }
             else {
                 ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
-                Log.d("글번호잘못??", String.valueOf(board_list.get(position).getId()));
-                Log.d("글의 포지션", String.valueOf(position));
+
                 viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + board_list.get(position).getId());
                 Intent intent = new Intent(yj_activity.this, PostDetail.class);
                 intent.putExtra("carrier", carrier);
                 intent.putExtra("post_list", board_list);
                 intent.putExtra("position", position);
                 intent.putExtra("post", board_list.get(position));
-                Log.d("니가 나중에되야해니가나중에되야해", "으어어우엉오으우엉");
+
 
                 startActivityForResult(intent, 0);
                 overridePendingTransition(0, 0);
@@ -1419,8 +1421,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             ViewNumPhp viewNumPhp = new ViewNumPhp(timeline_list.get(position));
-            Log.d("글번호잘못??",String.valueOf(timeline_list.get(position).getId()));
-            Log.d("글의 포지션",String.valueOf(position));
+
             viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id="+timeline_list.get(position).getId());
             Intent intent = new Intent(yj_activity.this, PostDetail.class);
             intent.putExtra("carrier", carrier);
@@ -1428,7 +1429,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
             intent.putExtra("position",position);
             intent.putExtra("post", timeline_list.get(position));
-            Log.d("니가 나중에되야해니가나중에되야해","으어어우엉오으우엉");
+
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0);
 
@@ -1458,7 +1459,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         try {
             URL url = new URL("http://hungry.portfolio1000.com/smarthandongi/gcm_delete_regid.php?reg_id="+regid);       // URL 설정
             HttpURLConnection http = (HttpURLConnection) url.openConnection();   // 접속
-            Log.d("php실행 ", "성공");
+
             //--------------------------
             //   전송 모드 설정 - 기본적인 설정이다
             //--------------------------
@@ -1500,7 +1501,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         if (resultCode == RESULT_OK) {
             PostDatabase db = (PostDatabase)data.getSerializableExtra("post");
             Carrier carrier=(Carrier)data.getSerializableExtra("carrier");
-            System.out.println("확인합니다 확인이요"+carrier.getPost_position_num()+"해당것의 스크랩여부"+db.getLike());
+
              board_list.get(carrier.getPost_position_num()).setLike(db.getLike());
 
              adapter.notifyDataSetChanged();

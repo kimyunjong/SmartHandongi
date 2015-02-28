@@ -24,8 +24,7 @@ public class dday{
 
             long tday = today.getTimeInMillis()/86400000;
 
-            System.out.println(day);
-            System.out.println(tday);
+
 
             long count = tday - day; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
             return (int) count+1; // 날짜는 하루 + 시켜줘야합니다.
