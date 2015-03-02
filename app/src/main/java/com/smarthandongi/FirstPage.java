@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
-import java.sql.Date;
-
 /**
  * Created by Joel on 2015-02-13.
  */
@@ -29,7 +27,7 @@ public class FirstPage extends Activity {
                 // TODO Auto-generated method stub
                 while (true) {
                     timer++;
-                    if (timer == 200) {
+                    if (timer == 100) {
                         Intent intent = new Intent(FirstPage.this, Intro.class);
 
                         startActivityForResult(intent, 0);

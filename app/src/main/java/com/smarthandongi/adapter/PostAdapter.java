@@ -35,7 +35,7 @@ public class PostAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private List<PostDatabase> list;
     private Context context;
-    Typeface typeface;
+    Typeface typeface, typeface_bold;
 
     dday deadline=new dday();
 
@@ -83,7 +83,8 @@ public class PostAdapter extends BaseAdapter{
         View v = convertView;
         if (v == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
+            typeface_bold = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_BOLD.OTF");
 
             v = inflater.inflate(R.layout.post_item, null);
             holder = new ViewHolder();
@@ -96,7 +97,7 @@ public class PostAdapter extends BaseAdapter{
             holder.like = (ImageButton) v.findViewById(R.id.like_button);
 
             //폰트작업
-            holder.post_title.setTypeface(typeface);
+            holder.post_title.setTypeface(typeface_bold);
             holder.post_id.setTypeface(typeface);
             holder.post_dday.setTypeface(typeface);
             holder.post_group.setTypeface(typeface);

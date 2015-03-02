@@ -197,7 +197,7 @@ public class Writing extends Activity implements OnClickListener {
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
 
         DisplayMetrics metrics = new DisplayMetrics();

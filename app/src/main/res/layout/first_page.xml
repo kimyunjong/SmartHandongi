@@ -6,12 +6,14 @@
 <ImageView
     android:layout_centerInParent="true"
     android:layout_width="360dp"
-    android:layout_height="66dp"
+    android:layout_height="99.5dp"
     android:background="@drawable/firstpage_img_1"/>
 <ImageView
-    android:layout_width="360dp"
-    android:layout_height="50dp"
+    android:layout_width="64.5dp"
+    android:layout_height="17dp"
     android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="18dp"
     android:background="@drawable/firstpage_img_2"/>
 
 </RelativeLayout>

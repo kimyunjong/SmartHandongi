@@ -73,7 +73,7 @@ public class Post2Adapter extends BaseAdapter{
 
 
             //폰트
-            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
             holder.post_title.setTypeface(typeface);
             holder.first_date.setTypeface(typeface);
             holder.post_group.setTypeface(typeface);

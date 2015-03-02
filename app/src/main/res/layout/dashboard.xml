@@ -395,8 +395,8 @@
     android:layout_height="match_parent"
     android:layout_alignParentRight="true"
     android:layout_below="@+id/upper_bar"
-    android:visibility="gone"
     android:background="@drawable/menu_bg"
+    android:visibility="gone"
     android:id="@+id/menu">
 
     <LinearLayout
@@ -442,6 +442,7 @@
             <ImageView
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
+                android:layout_marginRight="2dp"
                 android:id="@+id/write_btn_in_menu_img"
                 android:src="@drawable/write_btn_menu"/>
         </RelativeLayout>
@@ -459,6 +460,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/scrap_img"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/scrap_menu"/>
         </RelativeLayout>
 
@@ -474,6 +476,7 @@
             <ImageView
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
+                android:layout_marginRight="2dp"
                 android:id="@+id/my_posting_img"
                 android:src="@drawable/my_post"/>
         </RelativeLayout>
@@ -491,6 +494,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/push_set_img"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/alarm_menu"/>
         </RelativeLayout>
    </LinearLayout>
@@ -513,6 +517,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/show_group_img"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/group_menu"/>
         </RelativeLayout>
 
@@ -531,6 +536,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/bustime_table_img"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/bustime_table_menu"/>
         </RelativeLayout>
 
@@ -550,6 +556,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/error_report_img"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/error_report"/>
         </RelativeLayout>
 
@@ -568,6 +575,7 @@
                 android:layout_width="152dp"
                 android:layout_height="41.5dp"
                 android:id="@+id/ourstory_img"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/our_history"/>
         </RelativeLayout>
 
@@ -603,7 +611,7 @@
                 android:layout_height="41.5dp"
                 android:id="@+id/login_img"
                 android:src="@drawable/login_img"
-
+                android:layout_marginRight="2dp"
                 />
         </RelativeLayout>
 

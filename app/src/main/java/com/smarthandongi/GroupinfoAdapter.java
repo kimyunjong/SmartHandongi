@@ -44,7 +44,7 @@ public class GroupinfoAdapter extends BaseAdapter {
     }
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         if (convertView == null) {
 
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

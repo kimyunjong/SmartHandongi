@@ -42,7 +42,7 @@ public class SMP_PostAdapter extends BaseAdapter {
 
     public View getView(final int position, View convert_view, ViewGroup parent) {
 
-        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         if(convert_view==null) {
             convert_view=inflater.inflate(layout,parent,false);
         }

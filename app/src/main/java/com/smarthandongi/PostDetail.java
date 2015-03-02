@@ -162,7 +162,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
         dialog_link.setOnClickListener(this);
 
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         typeface_bold = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_BOLD.OTF");
 
         //폰트설정

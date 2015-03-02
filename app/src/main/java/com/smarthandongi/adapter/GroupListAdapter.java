@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.smarthandongi.GroupDatabase;
 import com.smarthandongi.GroupDatabase1;
 import com.smarthandongi.R;
 
@@ -35,7 +34,7 @@ public class GroupListAdapter extends BaseAdapter{
     public long getItemId(int position) {return position;}
 
     public View getView(int position, View convert_view, ViewGroup parent) {
-        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
         if(convert_view==null) {
             convert_view=inflater.inflate(layout,parent,false);

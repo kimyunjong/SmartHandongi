@@ -62,7 +62,7 @@ public class GroupSearch extends Activity {
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_search);
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         group_php = new GroupNewPhp(group_list,temp_list, this);
         group_php.execute("http://hungry.portfolio1000.com/smarthandongi/group_info.php");
 

@@ -151,6 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginBottom="56.5dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,7 +172,6 @@
                         android:visibility="visible"
                         android:divider="@null"
                         android:dividerHeight="0dp"
-                        android:layout_marginBottom="59.5dp"
                         > </ListView>
                     <LinearLayout
                         android:layout_width="match_parent"

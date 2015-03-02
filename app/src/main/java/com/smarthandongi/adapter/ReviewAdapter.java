@@ -73,7 +73,7 @@ public class ReviewAdapter extends BaseAdapter {
         if (v == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.review_detail, null);
-            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
             holder = new ViewHolder();
 
             holder.kakao_nick = (TextView) v.findViewById(R.id.kakao_nick);

@@ -56,7 +56,7 @@ public class group_info extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_info);
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         typeface_bold = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_BOLD.OTF");
         Intent intent=getIntent();
         int group_id1= intent.getIntExtra("group_id",0);

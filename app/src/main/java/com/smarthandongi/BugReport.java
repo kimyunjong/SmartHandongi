@@ -86,7 +86,7 @@ public class BugReport extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bug_report);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
         bug_back_btn    = (Button)findViewById(R.id.bug_back_btn);
         bug_image_btn   = (Button)findViewById(R.id.bug_image_btn);

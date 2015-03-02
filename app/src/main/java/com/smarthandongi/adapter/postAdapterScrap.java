@@ -85,7 +85,7 @@ public class postAdapterScrap extends BaseAdapter {
         View v = convertView;
         if (v == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
             v = inflater.inflate(R.layout.post_item, null);
             holder = new ViewHolder();

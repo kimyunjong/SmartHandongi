@@ -124,8 +124,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         carrier = (Carrier) intent.getSerializableExtra("carrier");
         setContentView(R.layout.dashboard);
 
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
-        typeface_medium = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         Log.v("연결 시도", "연결되어라$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         construction();
         Log.v("연결 시도", "연결되어라@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&");
@@ -160,7 +159,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         show_group_btn=(Button)findViewById(R.id.show_group);
         bustime_table_btn=(Button)findViewById(R.id.bustime_table_btn);
         report_btn=(Button)findViewById(R.id.error_report_btn);
-         history_btn=(Button)findViewById(R.id.ourstory_btn);
+        history_btn=(Button)findViewById(R.id.ourstory_btn);
         next_menu_btn=(Button)findViewById(R.id.next_menu_btn);
         logout_btn=(Button)findViewById(R.id.logout_btn);
         write_btn=(Button)findViewById(R.id.write_btn);
@@ -212,6 +211,19 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         history_btn.setOnTouchListener(this);
         login_menu_btn.setOnTouchListener(this);
         logout_btn.setOnTouchListener(this);
+
+        write_btn.setOnClickListener(this);
+        write_btn_in_menu.setOnClickListener(this);
+        scrap_menu.setOnClickListener(this);
+        my_posting_btn.setOnClickListener(this);
+        push_set_btn.setOnClickListener(this);
+        show_group_btn.setOnClickListener(this);
+        bustime_table_btn.setOnClickListener(this);
+        report_btn.setOnClickListener(this);
+        history_btn.setOnClickListener(this);
+        login_menu_btn.setOnClickListener(this);
+        logout_btn.setOnClickListener(this);
+
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         post_search=(EditText)findViewById(R.id.post_search);
@@ -314,6 +326,148 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
            }
            case R.id.next_menu_btn:{
                menu_toggle();
+           }
+
+           case R.id.write_btn : {
+               carrier.setEdit_count(0);
+               Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
+               intent.putExtra("carrier", carrier);
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0, 0);
+               finish();
+               break;
+           }
+           case R.id.write_btn_in_menu : {
+               carrier.setEdit_count(0);
+               Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
+               intent.putExtra("carrier", carrier);
+
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0, 0);
+               finish();
+               break;
+           }
+           case R.id.my_posting_btn: {
+               Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+               intent.putExtra("carrier", carrier);
+               intent.putExtra("post_list", post_list);
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0, 0);
+               break;
+
+           }
+
+           case R.id.scrap_btn: {
+               Intent intent = new Intent(yj_activity.this, My_scrap.class);
+               intent.putExtra("carrier", carrier);
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0, 0);
+               finish();
+               break;
+           }
+
+           case R.id.push_set_btn: {
+               Intent intent = new Intent(yj_activity.this, PushSetup.class);
+               intent.putExtra("carrier", carrier);
+
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0, 0);
+               break;
+           }
+
+           case R.id.show_group: {
+               Intent intent = new Intent(yj_activity.this, group_infoList.class);
+               intent.putExtra("carrier", carrier);
+
+
+
+               startActivity(intent);
+               finish();
+
+               overridePendingTransition(0,0);
+               break;
+           }
+           case R.id.bustime_table_btn: {
+               Intent intent = new Intent(yj_activity.this, Bus_Schedule.class);
+               intent.putExtra("carrier", carrier);
+
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0,0);
+               break;
+           }
+           case R.id.error_report_btn: {
+               Intent intent = new Intent(yj_activity.this, BugReport.class);
+               intent.putExtra("carrier", carrier);
+
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0,0);
+               break;
+           }
+           case R.id.ourstory_btn: {
+               Intent intent = new Intent(yj_activity.this, ProductionNote.class);
+               intent.putExtra("carrier", carrier);
+
+               startActivityForResult(intent, 0);
+               overridePendingTransition(0,0);
+               break;
+           }
+           case R.id.logout_btn: {
+               dialog_logout = new Dialog(context);
+               dialog_logout.requestWindowFeature(Window.FEATURE_NO_TITLE);
+               dialog_logout.setContentView(R.layout.dialog_cancel);
+               dialog_logout.show();
+
+               dialog_logout_background = (LinearLayout)dialog_logout.findViewById(R.id.dialog_writing_background);
+               dialog_logout_background.setBackgroundResource(R.drawable.dialog_logout);
+               dialog_logout_okay = (Button)dialog_logout.findViewById(R.id.dialog_writing_confirm);
+               dialog_logout_okay.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       dialog_logout.dismiss();
+                       if (carrier.isLogged_in()) {
+
+                           UserManagement.requestLogout(new LogoutResponseCallback() {
+                               @Override
+                               protected void onSuccess(long l) {
+                                   carrier.setLogged_in(false);
+                                   carrier.setNickname("not_logged_in");
+                                   carrier.setId("000000");
+                                   // 수영추가
+                                   // carrier.setIsLogout_regid(2);
+                                   RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
+                                   regIDDeleteTask.execute(regid);
+                                   // 수영 추가 끝
+                                   Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
+                                   startActivity(intent);
+                                   finish();
+                               }
+
+                               @Override
+                               protected void onFailure(APIErrorResult apiErrorResult) {
+
+                               }
+                           });
+                           login_toggle();
+                       }
+                   }
+               });
+
+               dialog_logout_no = (Button)dialog_logout.findViewById(R.id.dialog_writing_cancel);
+               dialog_logout_no.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       dialog_logout.dismiss();
+                   }
+               });
+
+               break;
+           }
+           case R.id.login_btn: {
+               Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
+               startActivity(intent);
+               login_toggle();
+               finish();
+               break;
            }
 
        }
@@ -655,16 +809,12 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                         write_img.setImageResource(R.drawable.write_btn_on);
                     } else if (event.getAction() == 1) {
                         write_img.setImageResource(R.drawable.write_btn);
-                        carrier.setEdit_count(0);
-                        Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
-                        intent.putExtra("carrier", carrier);
-                        startActivityForResult(intent, 0);
-                        overridePendingTransition(0, 0);
-                        finish();
+
                     }
                 }
                 break;
             }
+
             case R.id.write_btn_in_menu: {
                 //돌아올곳
                 if(!carrier.isLogged_in())
@@ -684,12 +834,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     } else if (event.getAction() == 1) {
                         write_btn_in_menu_img.setImageResource(R.drawable.write_btn_menu);
                         carrier.setEdit_count(0);
-                        Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
-                        intent.putExtra("carrier", carrier);
 
-                        startActivityForResult(intent, 0);
-                        overridePendingTransition(0, 0);
-                        finish();
                     }
                 }
                 break;
@@ -715,11 +860,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                         my_posting_btn_img.setImageResource(R.drawable.my_post_on);
                     } else if (event.getAction() == 1) {
                         my_posting_btn_img.setImageResource(R.drawable.my_post);
-                        Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
-                        intent.putExtra("carrier", carrier);
-                        intent.putExtra("post_list", post_list);
-                        startActivityForResult(intent, 0);
-                        overridePendingTransition(0, 0);
+
 
                     }
                 }
@@ -745,11 +886,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                         scrap_menu_img.setImageResource(R.drawable.scrap_menu_on);
                     } else if (event.getAction() == 1) {
                         scrap_menu_img.setImageResource(R.drawable.scrap_menu);
-                        Intent intent = new Intent(yj_activity.this, My_scrap.class);
-                        intent.putExtra("carrier", carrier);
-                        startActivityForResult(intent, 0);
-                        overridePendingTransition(0, 0);
-                        finish();
                     }
                 }
                 break;
@@ -773,11 +909,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                         push_set_btn_img.setImageResource(R.drawable.alarm_menu_on);
                     } else if (event.getAction() == 1) {
                         push_set_btn_img.setImageResource(R.drawable.alarm_menu);
-                        Intent intent = new Intent(yj_activity.this, PushSetup.class);
-                        intent.putExtra("carrier", carrier);
 
-                        startActivityForResult(intent, 0);
-                        overridePendingTransition(0, 0);
 
                     }
                 }
@@ -791,15 +923,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     show_group_btn_img.setImageResource(R.drawable.group_menu_on);
                 } else if (event.getAction() == 1) {
                     show_group_btn_img.setImageResource(R.drawable.group_menu);
-                    Intent intent = new Intent(yj_activity.this, group_infoList.class);
-                    intent.putExtra("carrier", carrier);
 
-
-
-                    startActivity(intent);
-                    finish();
-
-                    overridePendingTransition(0,0);
 
                 }
                 break;
@@ -810,12 +934,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     bustime_table_btn_img.setImageResource(R.drawable.bustime_table_on);
                 } else if (event.getAction() == 1) {
                     bustime_table_btn_img.setImageResource(R.drawable.bustime_table_menu);
-                    Intent intent = new Intent(yj_activity.this, Bus_Schedule.class);
-                    intent.putExtra("carrier", carrier);
-
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
-
                 }
                 break;
             }
@@ -825,11 +943,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     report_btn_img.setImageResource(R.drawable.error_report_on);
                 } else if (event.getAction() == 1) {
                     report_btn_img.setImageResource(R.drawable.error_report);
-                    Intent intent = new Intent(yj_activity.this, BugReport.class);
-                    intent.putExtra("carrier", carrier);
 
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
 
                 }
                 break;
@@ -840,11 +954,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                     history_btn_img.setImageResource(R.drawable.our_history_on);
                 } else if (event.getAction() == 1) {
                     history_btn_img.setImageResource(R.drawable.our_history);
-                    Intent intent = new Intent(yj_activity.this, ProductionNote.class);
-                    intent.putExtra("carrier", carrier);
 
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(0,0);
 
                 }
                 break;
@@ -857,53 +967,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 else if (event.getAction() == 1) {
                     logout_btn_img.setImageResource(R.drawable.logout_menu);
 
-                    dialog_logout = new Dialog(context);
-                    dialog_logout.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog_logout.setContentView(R.layout.dialog_cancel);
-                    dialog_logout.show();
-
-                    dialog_logout_background = (LinearLayout)dialog_logout.findViewById(R.id.dialog_writing_background);
-                    dialog_logout_background.setBackgroundResource(R.drawable.dialog_logout);
-                    dialog_logout_okay = (Button)dialog_logout.findViewById(R.id.dialog_writing_confirm);
-                    dialog_logout_okay.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_logout.dismiss();
-                            if (carrier.isLogged_in()) {
-
-                                UserManagement.requestLogout(new LogoutResponseCallback() {
-                                    @Override
-                                    protected void onSuccess(long l) {
-                                        carrier.setLogged_in(false);
-                                        carrier.setNickname("not_logged_in");
-                                        carrier.setId("000000");
-                                        // 수영추가
-                                        // carrier.setIsLogout_regid(2);
-                                        RegIDDeleteTask regIDDeleteTask = new RegIDDeleteTask();
-                                        regIDDeleteTask.execute(regid);
-                                        // 수영 추가 끝
-                                        Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-
-                                    @Override
-                                    protected void onFailure(APIErrorResult apiErrorResult) {
-
-                                    }
-                                });
-                                login_toggle();
-                            }
-                        }
-                    });
-
-                    dialog_logout_no = (Button)dialog_logout.findViewById(R.id.dialog_writing_cancel);
-                    dialog_logout_no.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog_logout.dismiss();
-                        }
-                    });
                 }
                 break;
             }
@@ -914,10 +977,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 } else if (event.getAction() == 1) {
                     login_menu_low_img.setImageResource(R.drawable.login_img);
 
-                        Intent intent = new Intent(yj_activity.this, KakaoTalkLoginActivity.class).putExtra("carrier", carrier);
-                        startActivity(intent);
-                    login_toggle();
-                        finish();
                     }
 
 
@@ -971,7 +1030,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     {
         if(carrier.isLogged_in()) {
             login_menu_txt.setText(carrier.getNickname());
-            login_menu_txt.setTypeface(typeface_medium);
+            login_menu_txt.setTypeface(typeface);
             login_menu_img.setImageResource(R.drawable.login_bg_img);
             login_menu_btn.setVisibility(View.GONE);
             login_menu_low_img.setVisibility(View.GONE);

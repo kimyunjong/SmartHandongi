@@ -66,7 +66,7 @@ public class My_scrap extends Activity implements  View.OnTouchListener,AbsListV
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         carrier = (Carrier) intent.getSerializableExtra("carrier");
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         setContentView(R.layout.my_scrap);
         scrapNum=(TextView)findViewById(R.id.scrap_num);
         scrapNum.setTypeface(typeface);

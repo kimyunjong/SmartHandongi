@@ -43,7 +43,7 @@ public class GroupPassword extends Activity {
         carrier = (Carrier) getIntent().getSerializableExtra("carrier");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_password);
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
         popup_1 = (RelativeLayout)findViewById(R.id.popup_1);
         popup_2 = (RelativeLayout)findViewById(R.id.popup_2);

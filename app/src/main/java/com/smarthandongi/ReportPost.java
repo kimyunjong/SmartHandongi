@@ -43,7 +43,7 @@ public class ReportPost extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_post);
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
         report_post_confirm_btn = (Button)findViewById(R.id.report_post_confirm_btn);
         report_post_cancel_btn = (Button)findViewById(R.id.report_post_cancel_btn);

@@ -77,7 +77,7 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review);
         Intent intent=getIntent();
-        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
         posting_id =(int)intent.getSerializableExtra("posting_id");
