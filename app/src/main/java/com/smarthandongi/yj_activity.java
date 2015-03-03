@@ -322,10 +322,11 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                default_on=true;
                search_on=false;
                search_toggle();
-
+               break;
            }
            case R.id.next_menu_btn:{
                menu_toggle();
+               break;
            }
 
            case R.id.write_btn : {

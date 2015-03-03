@@ -97,7 +97,7 @@ public class PostAdapter extends BaseAdapter{
             holder.like = (ImageButton) v.findViewById(R.id.like_button);
 
             //폰트작업
-            holder.post_title.setTypeface(typeface_bold);
+            holder.post_title.setTypeface(typeface);
             holder.post_id.setTypeface(typeface);
             holder.post_dday.setTypeface(typeface);
             holder.post_group.setTypeface(typeface);
