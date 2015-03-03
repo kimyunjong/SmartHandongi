@@ -104,7 +104,8 @@ public class PostAdapter extends BaseAdapter{
 
 
             v.setTag(holder);
-        } else {
+        }
+        else {
 
             holder = (ViewHolder) v.getTag();
         }

@@ -159,9 +159,16 @@ public class Review extends Activity implements View.OnClickListener, AbsListVie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reg_btn: {
+                if(carrier.isLogged_in())
+                {
+                    php_uploadCreate();
+                }
+                else
+                {
+                    Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                }
 
-                php_uploadCreate();
-                break;
+                    break;
             }
             case R.id.back_btn: {
                 if(carrier.getFromSMP()==1) {

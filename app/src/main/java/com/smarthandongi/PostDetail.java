@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smarthandongi.database.Picture;
 import com.smarthandongi.database.PostDatabase;
@@ -471,9 +472,18 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
             case R.id.pos_scrap_btn : {
                 //스크랩 동작
-                LikeTask like_task = new LikeTask(v, post);
-                like_task.execute("http://hungry.portfolio1000.com/smarthandongi/scrap.php?post_id=" + post.getId() + "&kakao_id=" + String.valueOf(carrier.getId()));
-                break;
+                if(carrier.isLogged_in())
+                {
+                    LikeTask like_task = new LikeTask(v, post);
+                    like_task.execute("http://hungry.portfolio1000.com/smarthandongi/scrap.php?post_id=" + post.getId() + "&kakao_id=" + String.valueOf(carrier.getId()));
+                }
+                else
+                {
+                    Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
+                }
+
+
+                    break;
             }
 
             case R.id.pos_del_btn : {
