@@ -242,8 +242,6 @@ public class Writing extends Activity implements OnClickListener {
         writing_image_btn   = (Button)findViewById(R.id.writing_image_btn);
         writing_confirm_btn = (Button)findViewById(R.id.writing_confirm_btn);
         writing_back_btn    = (Button)findViewById(R.id.writing_back_btn);
-        writing_additional_btn = (ImageButton)findViewById(R.id.writing_additional_btn);
-        writing_additional_hide_btn = (ImageButton)findViewById(R.id.writing_additional_hide_btn);
         writing_cancel_btn  = (Button)findViewById(R.id.writing_cancel_btn);
 
         writing_image_btn.setOnClickListener(this);
@@ -411,25 +409,25 @@ public class Writing extends Activity implements OnClickListener {
                 break;
             }
 
-            case R.id.writing_additional_btn : {                                                                                             //+추가옵션btn
-                writing_additional_btn.setVisibility(GONE);
-                writing_additional_hide_btn.setVisibility(VISIBLE);
-                writing_additional.setVisibility(VISIBLE);
-                scroll.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scroll.scrollTo(0, scroll.getBottom());
-                    }
-                });
-                break;
-            }
-
-            case R.id.writing_additional_hide_btn : {                                                                                        //-추가옵션btn
-                writing_additional_hide_btn.setVisibility(GONE);
-                writing_additional_btn.setVisibility(VISIBLE);
-                writing_additional.setVisibility(GONE);
-                break;
-            }
+//            case R.id.writing_additional_btn : {                                                                                             //+추가옵션btn
+//                writing_additional_btn.setVisibility(GONE);
+//                writing_additional_hide_btn.setVisibility(VISIBLE);
+//                writing_additional.setVisibility(VISIBLE);
+//                scroll.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        scroll.scrollTo(0, scroll.getBottom());
+//                    }
+//                });
+//                break;
+//            }
+//
+//            case R.id.writing_additional_hide_btn : {                                                                                        //-추가옵션btn
+//                writing_additional_hide_btn.setVisibility(GONE);
+//                writing_additional_btn.setVisibility(VISIBLE);
+//                writing_additional.setVisibility(GONE);
+//                break;
+//            }
 
             case R.id.writing_back_btn :{               //TODO 뒤로 가기를 눌렀을 때 이미 작성된 내용은 저장되지 않는다는 경고팝업 띄우기               //뒤로가기btn
                 String title_temp, content_temp;

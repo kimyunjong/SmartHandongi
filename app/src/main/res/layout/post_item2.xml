@@ -63,6 +63,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
         android:layout_toRightOf="@id/left_bar_layout"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="6.5dp">
@@ -73,7 +74,7 @@
             android:textSize="13.5sp"
 
             />
-        <TextView
+        <com.smarthandongi.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -84,6 +85,9 @@
             android:layout_below="@id/group"
             android:singleLine="true"
             android:ellipsize="end"
+            tj:textStroke="true"
+            tj:textStrokeWidth="0.5"
+            tj:textStrokeColor="#5a5a5a"
             />
     </RelativeLayout>
 
