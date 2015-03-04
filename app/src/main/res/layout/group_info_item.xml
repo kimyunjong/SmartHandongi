@@ -5,6 +5,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
         >
         <LinearLayout
             android:layout_marginLeft="2.5dp"
@@ -32,7 +33,7 @@
          />
             </LinearLayout>
 
-                <TextView
+                <com.smarthandongi.CustomTextView
                     android:id="@+id/group_name"
                     android:layout_below="@id/group_category"
                     android:layout_width="match_parent"
@@ -40,6 +41,9 @@
 
                     android:textSize="14.5dp"
                     android:text="AKADEV"
+                    tj:textStroke="true"
+                    tj:textStrokeWidth="0.5"
+                    tj:textStrokeColor="#5a5a5a"
 
          />
 

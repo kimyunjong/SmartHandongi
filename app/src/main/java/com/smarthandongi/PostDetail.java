@@ -136,9 +136,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         edit_btn=(Button)findViewById(R.id.pos_edit_btn);
         del_btn=(Button)findViewById(R.id.pos_del_btn);
         review_show_btn=(Button)findViewById(R.id.pos_review_show_btn);
-        forward_btn=(Button)findViewById(R.id.post_forward_btn);
-        backward_btn=(Button)findViewById(R.id.post_backward_btn);
-        home_btn=(Button)findViewById(R.id.post_detail_home);
+//        forward_btn=(Button)findViewById(R.id.post_forward_btn);
+//        backward_btn=(Button)findViewById(R.id.post_backward_btn);
+//        home_btn=(Button)findViewById(R.id.post_detail_home);
         pos_push = (ImageButton)findViewById(R.id.pos_push);
         enlarge_image = (Button)findViewById(R.id.enlarge_image);
         close_image = (Button)findViewById(R.id.close_image);
@@ -149,9 +149,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
         del_btn.setOnClickListener(this);
         scrap_btn.setOnClickListener(this);
         report_btn.setOnClickListener(this);
-        forward_btn.setOnClickListener(this);
-        backward_btn.setOnClickListener(this);
-        home_btn.setOnClickListener(this);
+//        forward_btn.setOnClickListener(this);
+//        backward_btn.setOnClickListener(this);
+//        home_btn.setOnClickListener(this);
         pos_push.setOnClickListener(this);
         close_image.setOnClickListener(this);
         enlarge_image.setOnClickListener(this);
@@ -553,66 +553,66 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 });
                 break;
             }
-            case R.id.post_detail_home : {
-
-                carrier.setFromPostDetail(0);
-                carrier.setEdit_count(0);
-                carrier.setGroup_name("");
-                carrier.setGroup_code("");
-                carrier.setBig_category("0");
-                carrier.setCategory("");
-                carrier.setTitle(null);
-                carrier.setContent(null);
-                carrier.setPosting_date(null);
-                carrier.setStart_date(null);
-                carrier.setEnd_date(null);
-                carrier.setLink(null);
-                Intent intent = new Intent(PostDetail.this,yj_activity.class).putExtra("carrier",carrier);
-                startActivity(intent);
-                finish();
-                break;
-            }
-            case R.id.post_forward_btn : {
-                System.out.println(position);
-                System.out.println(posting_list.size());
-                if(position==posting_list.size()-1) {
-                    break;
-                }
-                else {
-                    Log.d("니가실행해야지?","니가되야하는거아니니?");
-                    Intent toPD=new Intent(PostDetail.this,ReportPost.class);
-                    toPD.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    toPD.putExtra("carrier", carrier);
-                    toPD.putExtra("post_list",posting_list);
-                    toPD.putExtra("position",position+1);
-                    toPD.putExtra("post", posting_list.get(position+1));
-                    Log.d("니가될거지?","니가된다고해쎵");
-                    startActivity(toPD);
-                    Log.d("dkjhkj","djkj;kj;a");
-                    finish();
-                    break;
-                }
-            }
-
-            case R.id.post_backward_btn : {
-                System.out.println(position);
-                if(position==0)
-                    break;
-                else {
-                    Intent intent=new Intent(this,PostDetail.class);
-                    carrier.setVisited(true);
-                    intent.putExtra("carrier", carrier);
-                    intent.putExtra("post_list",posting_list);
-                    intent.putExtra("position",position-1);
-                    System.out.println(position - 1);
-                    intent.putExtra("post", posting_list.get(position - 1));
-                    System.out.println(posting_list.get(position - 1).getId());
-                    startActivity(intent);
-                    finish();
-
-                    break;
-                }
-            }
+//            case R.id.post_detail_home : {
+//
+//                carrier.setFromPostDetail(0);
+//                carrier.setEdit_count(0);
+//                carrier.setGroup_name("");
+//                carrier.setGroup_code("");
+//                carrier.setBig_category("0");
+//                carrier.setCategory("");
+//                carrier.setTitle(null);
+//                carrier.setContent(null);
+//                carrier.setPosting_date(null);
+//                carrier.setStart_date(null);
+//                carrier.setEnd_date(null);
+//                carrier.setLink(null);
+//                Intent intent = new Intent(PostDetail.this,yj_activity.class).putExtra("carrier",carrier);
+//                startActivity(intent);
+//                finish();
+//                break;
+//            }
+//            case R.id.post_forward_btn : {
+//                System.out.println(position);
+//                System.out.println(posting_list.size());
+//                if(position==posting_list.size()-1) {
+//                    break;
+//                }
+//                else {
+//                    Log.d("니가실행해야지?","니가되야하는거아니니?");
+//                    Intent toPD=new Intent(PostDetail.this,ReportPost.class);
+//                    toPD.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    toPD.putExtra("carrier", carrier);
+//                    toPD.putExtra("post_list",posting_list);
+//                    toPD.putExtra("position",position+1);
+//                    toPD.putExtra("post", posting_list.get(position+1));
+//                    Log.d("니가될거지?","니가된다고해쎵");
+//                    startActivity(toPD);
+//                    Log.d("dkjhkj","djkj;kj;a");
+//                    finish();
+//                    break;
+//                }
+//            }
+//
+//            case R.id.post_backward_btn : {
+//                System.out.println(position);
+//                if(position==0)
+//                    break;
+//                else {
+//                    Intent intent=new Intent(this,PostDetail.class);
+//                    carrier.setVisited(true);
+//                    intent.putExtra("carrier", carrier);
+//                    intent.putExtra("post_list",posting_list);
+//                    intent.putExtra("position",position-1);
+//                    System.out.println(position - 1);
+//                    intent.putExtra("post", posting_list.get(position - 1));
+//                    System.out.println(posting_list.get(position - 1).getId());
+//                    startActivity(intent);
+//                    finish();
+//
+//                    break;
+//                }
+//            }
             case R.id.pos_push : {
                 String popup_message;
                 popup_message = "항목을 설정한 사람들에게만 보내집니다. 알람은 1회만 가능합니다.";

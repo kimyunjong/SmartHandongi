@@ -26,8 +26,8 @@
                 android:visibility="gone"
                 >
                 <ImageView
-                    android:layout_width="28.5dp"
-                    android:layout_height="27.5dp"
+                    android:layout_width="24dp"
+                    android:layout_height="23.5dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/search_btn_on"
@@ -35,8 +35,8 @@
                     android:layout_marginBottom="13dp"/>
 
                 <ImageButton
-                    android:layout_width="28.5dp"
-                    android:layout_height="27.5dp"
+                    android:layout_width="24dp"
+                    android:layout_height="23.5dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:id="@+id/delete_search"
@@ -59,10 +59,10 @@
                     android:layout_marginBottom="13dp"/>
                  <RelativeLayout
                      android:layout_width="match_parent"
-                     android:layout_height="0.5dp"
+                     android:layout_height="1dp"
                      android:layout_alignParentBottom="true"
                      android:layout_marginBottom="7dp"
-                     android:background="#000000"
+                     android:background="#5b5d5e"
                      android:layout_marginLeft="12dp"
                      android:layout_marginRight="10dp"
                    >

@@ -215,25 +215,25 @@ public class Writing extends Activity implements OnClickListener {
         writing_content  =  (EditText)findViewById(R.id.writing_content);
         writing_link = (EditText)findViewById(R.id.writing_link);
 
-        writing_content.setOnTouchListener(new View.OnTouchListener() {
+//        writing_content.setOnTouchListener(new View.OnTouchListener() {
+//
+//            public boolean onTouch(View view, MotionEvent event) {
+//                // TODO Auto-generated method stub
+//                if (view.getId() ==R.id.writing_content) {
+//                    view.getParent().requestDisallowInterceptTouchEvent(true);
+//                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+//                        case MotionEvent.ACTION_UP:
+//                            view.getParent().requestDisallowInterceptTouchEvent(false);
+//                            break;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
 
-            public boolean onTouch(View view, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (view.getId() ==R.id.writing_content) {
-                    view.getParent().requestDisallowInterceptTouchEvent(true);
-                    switch (event.getAction()&MotionEvent.ACTION_MASK){
-                        case MotionEvent.ACTION_UP:
-                            view.getParent().requestDisallowInterceptTouchEvent(false);
-                            break;
-                    }
-                }
-                return false;
-            }
-        });
 
 
-
-        writing_content.setHeight((int)(screen_height*0.4));
+        //writing_content.setHeight((int)(screen_height*0.4));
         scroll = (ScrollView)findViewById(R.id.scroll);
 
         linear = (LinearLayout)findViewById(R.id.linear);

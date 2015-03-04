@@ -11,62 +11,64 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#66000000">
+        android:background="#66000000"
+        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi">
         <LinearLayout
             android:id="@+id/writing_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="66dp">
-            <RelativeLayout
-                android:layout_width="50.5dp"
-                android:layout_height="match_parent">
-                <Button
-                    android:visibility="gone"
-                    android:id="@+id/post_backward_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"/>
-                <ImageView
-                    android:visibility="gone"
-                    android:layout_width="16.5dp"
-                    android:layout_height="43.5dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/leftarrow"/>
-            </RelativeLayout>
+            android:layout_height="15dp"
+            android:orientation="horizontal">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="50.5dp"-->
+                <!--android:layout_height="match_parent">-->
+                <!--<Button-->
+                    <!--android:visibility="gone"-->
+                    <!--android:id="@+id/post_backward_btn"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@android:color/transparent"/>-->
+                <!--<ImageView-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_width="16.5dp"-->
+                    <!--android:layout_height="43.5dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:background="@drawable/leftarrow"/>-->
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-                <Button
-                    android:id="@+id/post_detail_home"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@android:color/transparent"/>
-                <ImageView
-                    android:visibility="gone"
-                    android:layout_width="37.5dp"
-                    android:layout_height="43.5dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/post_detail_home"/>
-            </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1">-->
+                <!--<Button-->
+                    <!--android:id="@+id/post_detail_home"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:background="@android:color/transparent"/>-->
+                <!--<ImageView-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_width="37.5dp"-->
+                    <!--android:layout_height="43.5dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:background="@drawable/post_detail_home"/>-->
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:layout_width="50.5dp"
-                android:layout_height="match_parent">
-                <Button
-                    android:visibility="gone"
-                    android:id="@+id/post_forward_btn"
-                    android:layout_width="50.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"/>
-                <ImageView
-                    android:visibility="gone"
-                    android:layout_width="16.5dp"
-                    android:layout_height="43.5dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/rightarrow"/>
-            </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="50.5dp"-->
+                <!--android:layout_height="match_parent">-->
+                <!--<Button-->
+                    <!--android:visibility="gone"-->
+                    <!--android:id="@+id/post_forward_btn"-->
+                    <!--android:layout_width="50.5dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@android:color/transparent"/>-->
+                <!--<ImageView-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_width="16.5dp"-->
+                    <!--android:layout_height="43.5dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:background="@drawable/rightarrow"/>-->
+            <!--</RelativeLayout>-->
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +104,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginBottom="5dp"
                             />
                     </RelativeLayout>
                     <LinearLayout
@@ -157,8 +158,8 @@
                             android:layout_height="8dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
                             android:layerType="software"
                             android:background="@drawable/dashed"/>
                         <ImageButton
@@ -176,11 +177,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginRight="10dp"
+                        >
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <TextView
+                            android:layout_height="wrap_content"
+                            xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+                            >
+                            <com.smarthandongi.CustomTextView
                                 android:id="@+id/writer_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -190,8 +194,11 @@
                                 android:singleLine="true"
                                 android:textColor="#f1f2f2"
                                 android:textSize="14.5dp"
-                                android:background="@android:color/transparent"/>
-                            <TextView
+                                android:background="@android:color/transparent"
+                                tj:textStroke="true"
+                                tj:textStrokeWidth="0.5"
+                                tj:textStrokeColor="#f1f2f2"/>
+                            <com.smarthandongi.CustomTextView
                                 android:id="@+id/writer_group_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -201,7 +208,10 @@
                                 android:textSize="14.5dp"
                                 android:visibility="gone"
                                 android:clickable="true"
-                                android:background="@android:color/transparent"/>
+                                android:background="@android:color/transparent"
+                                tj:textStroke="true"
+                                tj:textStrokeWidth="0.5"
+                                tj:textStrokeColor="#f1f2f2"/>
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -209,32 +219,50 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginRight="10dp">
-                        <ImageView
-                            android:layout_width="70.5dp"
-                            android:layout_height="17.5dp"
-                            android:background="@drawable/post_schedule"/>
-                        <TextView
+                        android:layout_marginRight="10dp"
+                        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+                        >
+                        <com.smarthandongi.CustomTextView
+                            android:id="@+id/pos_dates_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#f1f2f2"
+                            android:layout_gravity="bottom"
+                            android:text="일정 기간 : "
+                            tj:textStroke="true"
+                            tj:textStrokeWidth="0.5"
+                            tj:textStrokeColor="#f1f2f2"/>
+                        <com.smarthandongi.CustomTextView
                             android:id="@+id/pos_start_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#f1f2f2"
                             android:layout_gravity="bottom"
-                            android:text="2015-01-07"/>
-                        <TextView
+                            android:text="2015-01-07"
+                            tj:textStroke="true"
+                            tj:textStrokeWidth="0.5"
+                            tj:textStrokeColor="#f1f2f2"/>
+                        <com.smarthandongi.CustomTextView
                             android:id="@+id/pos_between_days"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#f1f2f2"
                             android:layout_gravity="bottom"
-                            android:text=" ~ "/>
-                        <TextView
+                            android:text=" ~ "
+                            tj:textStroke="true"
+                            tj:textStrokeWidth="0.5"
+                            tj:textStrokeColor="#f1f2f2"/>
+
+                        <com.smarthandongi.CustomTextView
                             android:id="@+id/pos_end_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#f1f2f2"
                             android:layout_gravity="bottom"
                             android:text="2015-01-30"
+                            tj:textStroke="true"
+                            tj:textStrokeWidth="0.5"
+                            tj:textStrokeColor="#f1f2f2"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -248,14 +276,17 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/post_link"
                             />
-                        <TextView
+                        <com.smarthandongi.CustomTextView
                             android:id="@+id/pos_link"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:linksClickable="true"
                             android:textColor="#f1f2f2"
                             android:clickable="true"
-                            android:text="hisnet.handong.edu"/>
+                            android:text="hisnet.handong.edu"
+                            tj:textStroke="true"
+                            tj:textStrokeWidth="0.5"
+                            tj:textStrokeColor="#f1f2f2"/>
                     </LinearLayout>
 
                     <View
@@ -263,11 +294,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
                         android:layerType="software"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/dashed"/>
 
-                    <TextView
+                    <com.smarthandongi.CustomTextView
                         android:id="@+id/pos_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="30dp"
@@ -276,7 +308,10 @@
                         android:textColor="#f1f2f2"
                         android:textSize="14.5dp"
                         android:layout_height="wrap_content"
-                        android:text="이게내글이다아"/>
+                        android:text="이게내글이다아"
+                        tj:textStroke="true"
+                        tj:textStrokeWidth="0.5"
+                        tj:textStrokeColor="#f1f2f2"/>
                 </LinearLayout>
 
             </ScrollView>
