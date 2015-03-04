@@ -28,6 +28,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.json.UTF8StreamJsonParser;
+import com.ning.http.util.UTF8Codec;
+import com.ning.http.util.UTF8UrlEncoder;
 import com.smarthandongi.database.Picture;
 import com.smarthandongi.database.PostDatabase;
 
@@ -40,9 +43,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import static android.view.View.GONE;
@@ -339,8 +344,18 @@ public class PostDetail extends Activity implements View.OnClickListener{
             pos_scrap_img.setBackgroundResource(R.drawable.pos_scrap_on_img);
         }
 
+        String group_name= post.getGroup_name() ;
+        try {
+            group_name = URLEncoder.encode(group_name, "UTF-8");
+
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+       // Log.d("그룹이름 한글", group_name);
         GroupListPhp groupListPhp = new GroupListPhp(group_list, this);
-        groupListPhp.execute("http://hungry.portfolio1000.com/smarthandongi/group_intent.php?group_name="+post.getGroup_name());
+        groupListPhp.execute("http://hungry.portfolio1000.com/smarthandongi/group_intent.php?group_name="+group_name);
+        Log.d("그룹이름", post.getGroup_name());
 
     }
 
