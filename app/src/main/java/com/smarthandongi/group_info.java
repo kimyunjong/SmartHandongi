@@ -36,6 +36,7 @@ public class group_info extends Activity {
     Typeface typeface, typeface_bold;
     Context context = this;
     RelativeLayout test;
+    static int from;
 
     public void construction(int group_id){
 
@@ -63,17 +64,24 @@ public class group_info extends Activity {
         String group_name1 =intent.getStringExtra("group_name");
         String group_category1 = intent.getStringExtra("group_category");
         String introduce1 = intent.getStringExtra("introduce");
+        from = intent.getIntExtra("from",0);
         String regid=null;
         carrier = (Carrier)getIntent().getSerializableExtra("carrier");
+
         regid=carrier.getRegid();
         Log.d("regid g infolist", carrier.getRegid());
         carrier.setRegid(regid);
         back_btn=(Button)findViewById(R.id.back);// 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
-                startActivity(intent);
-                finish();
+                if (from ==0 ) {
+                    Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier", carrier);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(from==1){
+                    finish();
+                }
             }
         });
 
@@ -128,10 +136,15 @@ public class group_info extends Activity {
 
     public void onBackPressed()
     {
+        if (from ==0 ) {
+            Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier", carrier);
+            startActivity(intent);
+            finish();
+        }
+        else if(from==1){
 
-        Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier",carrier);
-        startActivity(intent);
-        finish();
+            finish();
+        }
 
 
     }

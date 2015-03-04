@@ -107,7 +107,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/bug_picture"
+                android:background="@drawable/writing_picture1"
                 android:layout_alignParentTop="true"/>
             <Button
                 android:id="@+id/bug_image_btn"

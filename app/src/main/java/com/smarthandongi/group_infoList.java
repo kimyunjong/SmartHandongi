@@ -245,6 +245,7 @@ public class group_infoList extends Activity {
                     Log.d("선택된거", str);
                     group.setGroup_name(str);// carrier to group
                     Intent intent = new Intent(group_infoList.this, group_info.class).putExtra("group", group);
+                    intent.putExtra("from", 0);
                     startActivity(intent);
 
                 }
@@ -279,6 +280,7 @@ public class group_infoList extends Activity {
                 intent.putExtra("group_name", filtered_list.get(pos).getGroup_name());
                 intent.putExtra("group_category", filtered_list.get(pos).getGroup_category());
                 intent.putExtra("introduce", filtered_list.get(pos).getIntroduce());
+                intent.putExtra("from", 0);
                 intent.putExtra("carrier", carrier);
 
                 startActivity(intent);
@@ -292,6 +294,7 @@ public class group_infoList extends Activity {
                 intent.putExtra("group_name", group_list.get(pos).getGroup_name());
                 intent.putExtra("group_category", group_list.get(pos).getGroup_category());
                 intent.putExtra("introduce", group_list.get(pos).getIntroduce());
+                intent.putExtra("from", 0);
                 intent.putExtra("carrier", carrier);
                 startActivity(intent);
                 finish();

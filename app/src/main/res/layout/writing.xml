@@ -194,9 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:alpha="0.5"
-                    android:layout_alignParentBottom="true"
-                    android:background="#f1f2f2"/>
-
+                    />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -217,7 +215,7 @@
                 </RelativeLayout>
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -238,7 +236,6 @@
                         android:background="#00000000"
                         android:textSize="14.5dp"
                         android:textColor="#f1f2f2"
-                        android:overScrollMode="always"
                         android:hint="내용"
                         android:textColorHint="#f1f2f2"
                         android:gravity="top|left"/>
@@ -403,7 +400,7 @@
                             android:layout_marginTop="2dp"
                             android:layout_marginRight="15dp"
                             android:layout_alignParentEnd="true"
-                            android:background="@drawable/writing_picture"
+                            android:background="@drawable/writing_picture1"
                             android:layout_alignParentTop="true"/>
                         <Button
                             android:id="@+id/writing_image_btn"

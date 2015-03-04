@@ -247,8 +247,8 @@ public class Writing extends Activity implements OnClickListener {
         writing_image_btn.setOnClickListener(this);
         writing_confirm_btn.setOnClickListener(this);
         writing_back_btn.setOnClickListener(this);
-        writing_additional_btn.setOnClickListener(this);
-        writing_additional_hide_btn.setOnClickListener(this);
+//        writing_additional_btn.setOnClickListener(this);
+//        writing_additional_hide_btn.setOnClickListener(this);
         writing_cancel_btn.setOnClickListener(this);
 
         //writing_title_img = (ImageView)findViewById(R.id.writing_title_img);

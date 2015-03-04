@@ -70,6 +70,10 @@ public class PostDetail extends Activity implements View.OnClickListener{
 
     ArrayList<PostDatabase> post_list = new ArrayList<PostDatabase>();
     ArrayList<PostDatabase> posting_list;
+    //수영 추가
+    ArrayList<GroupDatabase1> group_list = new ArrayList<GroupDatabase1>();
+    GroupDatabase1 group;
+
 
     private int posting_id,position;
     int screen_width;
@@ -335,6 +339,9 @@ public class PostDetail extends Activity implements View.OnClickListener{
             pos_scrap_img.setBackgroundResource(R.drawable.pos_scrap_on_img);
         }
 
+        GroupListPhp groupListPhp = new GroupListPhp(group_list, this);
+        groupListPhp.execute("http://hungry.portfolio1000.com/smarthandongi/group_intent.php?group_name="+post.getGroup_name());
+
     }
 
     public void construction(ImageView iv) {
@@ -345,6 +352,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
         PostImageTask postImageTask;
         postImageTask = new PostImageTask(poster, post.getId(), iv, screen_width, temp);//수영 수정, temp 추가
         postImageTask.execute(0);
+
     }
 
     private static void recycleBitmap(ImageView iv) {
@@ -651,9 +659,26 @@ public class PostDetail extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.writer_group_name : {
-                Intent intent = new Intent(PostDetail.this,yj_activity.class).putExtra("carrier",carrier);          //TODO 단체정보 페이지로 넘어가도록 해야함
+                Intent intent = new Intent(PostDetail.this, group_info.class);
+                intent.putExtra("group_id", group_list.get(0).getGroup_id());
+                intent.putExtra("group_name", post.getGroup_name());
+                intent.putExtra("group_category", group_list.get(0).getGroup_category());
+                intent.putExtra("introduce", group_list.get(0).getIntroduce());
+                intent.putExtra("from", 1);
+
+              //  intent.putExtra("group_category", group.getGroup_category());
+              //  intent.putExtra("introduce", group.getIntroduce());
+                    /*intent.putExtra("group_id", group_list.get(pos).getGroup_id());
+                    intent.putExtra("group_name", group_list.get(pos).getGroup_name());
+                    intent.putExtra("group_category", group_list.get(pos).getGroup_category());
+                    intent.putExtra("introduce", group_list.get(pos).getIntroduce());*/
+                intent.putExtra("carrier", carrier);
                 startActivity(intent);
-                finish();
+
+
+                //Intent intent = new Intent(PostDetail.this,yj_activity.class).putExtra("carrier",carrier);          //TODO 단체정보 페이지로 넘어가도록 해야함
+                //startActivity(intent);
+                //finish();
                 break;
 
             }
@@ -1042,7 +1067,81 @@ public class PostDetail extends Activity implements View.OnClickListener{
             }
         }
     }
+    public class GroupListPhp extends AsyncTask<String, Integer, String> {// group_list에 받아오는 php
 
+        private ArrayList<GroupDatabase1> group_list;
+        private PostDetail context;
+
+        public GroupListPhp(ArrayList<GroupDatabase1> group_list, PostDetail context) {
+            super();
+            this.group_list = group_list;
+            this.context = context;
+
+        }
+
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str = "";
+
+            try {
+                URL data_url = new URL(urls[0]);
+                HttpURLConnection conn = (HttpURLConnection) data_url.openConnection();
+                if (conn != null) {
+                    conn.setConnectTimeout(10000);
+                    conn.setUseCaches(false);
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        for (; ; ) {
+                            String line = br.readLine();
+                            if (line == null) break;
+                            jsonHtml.append(line + "\n");
+                        }
+                        br.close();
+                    }
+                    conn.disconnect();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return_str = jsonHtml.toString();
+
+            Log.d("그룹으로!",jsonHtml.toString());
+            return jsonHtml.toString();
+        }
+
+        protected void onPostExecute(String str) {
+            try {
+                JSONObject root = new JSONObject(str);
+                JSONArray ja = root.getJSONArray("results");
+
+
+
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject jo = ja.getJSONObject(i);
+
+                   /* String introduce= jo.getString("introduce");
+                    try {
+                        introduce = URLEncoder.encode(introduce, "UTF-8");
+
+                    } catch (UnsupportedEncodingException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }*/
+                    ;
+                    //group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"), jo.getString("introduce")));
+                    group_list.add(new GroupDatabase1(jo.getInt("group_id"), jo.getString("group_name"), jo.getString("nickname"), jo.getString("group_category"),
+                            jo.getString("introduce"),jo.getString("password"),jo.getString("group_code")));
+
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
 }
 
