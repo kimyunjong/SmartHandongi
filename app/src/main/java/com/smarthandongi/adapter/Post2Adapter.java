@@ -69,11 +69,14 @@ public class Post2Adapter extends BaseAdapter{
             holder.left_bar=(ImageView)v.findViewById(R.id.left_bar);
             holder.first_weekday=(TextView)v.findViewById(R.id.first_weekday);
             holder.upperLine=(LinearLayout)v.findViewById(R.id.item_upperline);
+            holder.first_empty_layout=(LinearLayout)v.findViewById(R.id.first_empty_layout);
+            holder.first_empty_img=(ImageView)v.findViewById(R.id.left_bar_first);
+
             v.setTag(holder);
 
 
             //폰트
-            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_LIGHT.OTF");
             holder.post_title.setTypeface(typeface);
             holder.first_date.setTypeface(typeface);
             holder.post_group.setTypeface(typeface);
@@ -85,6 +88,7 @@ public class Post2Adapter extends BaseAdapter{
         }
 
         holder.post_title.setText(getItem(position).getTitle()+ " ");
+        holder.first_empty_img.setImageResource(R.drawable.timeline_non_first_img);
         if(getItem(position).getGroup_name().compareTo("")==0)
         {
             holder.post_group.setText("["+getItem(position).getKakao_nic()+"]"+" ");
@@ -102,37 +106,40 @@ public class Post2Adapter extends BaseAdapter{
         if(getItem(position).getFirst_day())
         {   holder.left_bar.setImageResource(R.drawable.timeline_first_img);
 
+
             if(getItem(position).getLastDay())
             {
                 holder.upperLine.setAlpha(0f);
+                holder.first_empty_layout.setVisibility(View.GONE);
             }
             else
             {
-             holder.upperLine.setAlpha(1f);
+                holder.upperLine.setAlpha(1f);
+                holder.first_empty_layout.setVisibility(View.VISIBLE);
             }
             if(getItem(position).getDday()==0)
-                {holder.first_date.setText("오늘");
-                    holder.first_weekday.setText("");}
+            {holder.first_date.setText("오늘");
+                holder.first_weekday.setText("");}
             else if(getItem(position).getDday()==-1)
-                {
-                    holder.first_date.setText("내일");
-                    holder.first_weekday.setText("");
-                 }
+            {
+                holder.first_date.setText("내일");
+                holder.first_weekday.setText("");
+            }
             else if(getItem(position).getDday()==-2)
             {
                 holder.first_date.setText("모레");
                 holder.first_weekday.setText("");
             }
-        else{
-                 int temp=Integer.parseInt(getItem(position).getStart_date());
-                 int s_year;
-                 int s_month;
-                 int s_day;
-                 s_year=temp/10000;
-                 temp=temp-(s_year*10000);
-                 s_month=temp/100;
-                 temp=temp-s_month*100;
-                 s_day=temp;
+            else{
+                int temp=Integer.parseInt(getItem(position).getStart_date());
+                int s_year;
+                int s_month;
+                int s_day;
+                s_year=temp/10000;
+                temp=temp-(s_year*10000);
+                s_month=temp/100;
+                temp=temp-s_month*100;
+                s_day=temp;
                 holder.first_date.setText(String.valueOf(s_month)+"."+String.valueOf(s_day)+"");
 
                 Calendar calendar=Calendar.getInstance();
@@ -172,7 +179,7 @@ public class Post2Adapter extends BaseAdapter{
         else{
             holder.left_bar.setImageResource(R.drawable.timeline_non_first_img);
 
-
+            holder.first_empty_layout.setVisibility(View.GONE);
             holder.first_date.setText("  ");
             holder.first_weekday.setText("");
             holder.upperLine.setAlpha(0f);
@@ -184,8 +191,8 @@ public class Post2Adapter extends BaseAdapter{
 
     static class ViewHolder{
         TextView post_title, post_group,first_date,first_weekday;
-        ImageView left_bar,firstday_check_img;
-        LinearLayout upperLine;
+        ImageView left_bar,firstday_check_img,first_empty_img;
+        LinearLayout upperLine,first_empty_layout;
     }
 }
 

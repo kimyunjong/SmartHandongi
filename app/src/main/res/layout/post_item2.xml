@@ -6,21 +6,38 @@
     >
 
     <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:visibility="gone"
+        android:id="@+id/first_empty_layout">
+        <ImageView
+            android:layout_marginLeft="53dp"
+            android:layout_width="7dp"
+            android:layout_height="40dp"
+
+            android:id="@+id/left_bar_first"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0.25dp"
         android:background="#ffff6868"
-        android:layout_alignParentTop="true"
+
         android:id="@+id/item_upperline"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/first_empty_layout">
 
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="60dp"
         android:layout_height="match_parent"
         android:id="@+id/date_layout"
-        android:layout_alignParentLeft="true">
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/first_empty_layout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,9 +61,10 @@
 
   <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="66dp"
+        android:layout_height="50dp"
        android:layout_alignRight="@+id/date_layout"
-        android:id="@+id/left_bar_layout">
+        android:id="@+id/left_bar_layout"
+      android:layout_below="@+id/first_empty_layout">
         <ImageView
             android:layout_width="7dp"
             android:layout_height="66dp"
@@ -66,7 +84,8 @@
         xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
         android:layout_toRightOf="@id/left_bar_layout"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="6.5dp">
+        android:layout_marginTop="6.5dp"
+        android:layout_below="@+id/first_empty_layout">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
