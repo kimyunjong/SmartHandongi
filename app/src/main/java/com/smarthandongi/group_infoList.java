@@ -138,7 +138,7 @@ public class group_infoList extends Activity {
             }
         });
 
-        groupinfoAdapter = new GroupinfoAdapter(this, group_list, R.layout.group_lifo_list);
+        groupinfoAdapter = new GroupinfoAdapter(this, group_list);
 
         layoutView = (RelativeLayout) findViewById(R.id.group_info_list);
         layoutView.setOnTouchListener(new View.OnTouchListener() {
@@ -153,7 +153,7 @@ public class group_infoList extends Activity {
         });
 
 
-        groupinfoAdapter = new GroupinfoAdapter(this, group_list, R.layout.group_lifo_list);
+        groupinfoAdapter = new GroupinfoAdapter(this, group_list);
         group_list_view.setAdapter(groupinfoAdapter);
         group_list_view.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         group_list_view.setOnItemClickListener(groupListClickListener);
@@ -209,7 +209,7 @@ public class group_infoList extends Activity {
                 for(int i=0; i<filtered_list.size();i++){
                     Log.d("이거되야해",filtered_list.get(i).getGroup_name());
                 }
-                groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list);
+                groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list);
                 group_list_view.setAdapter(groupinfoAdapter);
                 group_list_view.setOnItemClickListener(groupListClickListener);
 

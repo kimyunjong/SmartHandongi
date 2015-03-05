@@ -18,14 +18,14 @@ public class GroupListAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private ArrayList<GroupDatabase1> group_list;
     private Context context;
-    private int layout;
+    //private int layout;
     Typeface typeface;
 
-    public  GroupListAdapter(Context context, int alayout, ArrayList<GroupDatabase1> group_list) {
+    public  GroupListAdapter(Context context, ArrayList<GroupDatabase1> group_list) {
         this.context=context;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.group_list=group_list;
-        layout=alayout;
+
     }
 
     public int getCount(){return group_list.size();}
@@ -34,18 +34,39 @@ public class GroupListAdapter extends BaseAdapter{
     public long getItemId(int position) {return position;}
 
     public View getView(int position, View convert_view, ViewGroup parent) {
-        typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
+        ViewHolder holder;
+        View v = convert_view;
 
-        if(convert_view==null) {
-            convert_view=inflater.inflate(layout,parent,false);
+        //typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
+
+        if(v==null) {
+            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            typeface = Typeface.createFromAsset(context.getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
+
+            v=inflater.inflate(R.layout.group_listview,null);
+            holder = new ViewHolder();
+
+            holder.group_name=(TextView)v.findViewById(R.id.group_name);
+            holder.group_name.setTypeface(typeface);
+
+            v.setTag(holder);
+
+        }
+        else {
+            holder = (ViewHolder)v.getTag();
         }
 
-        TextView group_name = (TextView)convert_view.findViewById(R.id.group_name);
-        group_name.setTypeface(typeface);
-        group_name.setText(group_list.get(position).getGroup_name());
+       // TextView group_name = (TextView)convert_view.findViewById(R.id.group_name);
+        holder.group_name.setText(group_list.get(position).getGroup_name());
+        holder.group_name.setTypeface(typeface);
 
 
-        return convert_view;
+
+        return v;
+    }
+
+    static class ViewHolder {
+        TextView group_name;
     }
 
 }

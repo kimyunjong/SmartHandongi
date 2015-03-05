@@ -122,7 +122,7 @@ public class GroupSearch extends Activity {
             }
         });
 
-        adapter = new GroupListAdapter(this,R.layout.group_listview,group_list);
+        adapter = new GroupListAdapter(this,group_list);
         //adapter = new GroupListAdapter(this,group_list);
 
         listview.setAdapter(adapter);
@@ -215,7 +215,7 @@ public class GroupSearch extends Activity {
                 for(int i=0; i<filtered_list.size();i++){
                     Log.d("이거되야해",filtered_list.get(i).getGroup_name());
                 }
-               adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,filtered_list);
+               adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
                 //adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
                 listview.setAdapter(adapter);
                 listview.setOnItemClickListener(groupListClickListener);
@@ -384,7 +384,7 @@ public class GroupSearch extends Activity {
                     group_list.add(temp_list.remove(j));
                 }
 
-                adapter = new GroupListAdapter(GroupSearch.this,R.layout.group_listview,group_list);
+                adapter = new GroupListAdapter(GroupSearch.this,group_list);
                // adapter = new GroupListAdapter(GroupSearch.this,group_list);
                 listview.setAdapter(adapter);
                 listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
