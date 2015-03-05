@@ -199,7 +199,9 @@ public class group_infoList extends Activity {
                         //      groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list, R.layout.group_lifo_list);
                         //     group_list_view.setAdapter(groupinfoAdapter);
                         //     Log.d("filtered_list", Integer.toString(filtered_list.size()));
-
+                        groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list);
+                        group_list_view.setAdapter(groupinfoAdapter);
+                        group_list_view.setOnItemClickListener(groupListClickListener);
                     }
                 }
 
@@ -209,9 +211,7 @@ public class group_infoList extends Activity {
                 for(int i=0; i<filtered_list.size();i++){
                     Log.d("이거되야해",filtered_list.get(i).getGroup_name());
                 }
-                groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, filtered_list);
-                group_list_view.setAdapter(groupinfoAdapter);
-                group_list_view.setOnItemClickListener(groupListClickListener);
+
 
                 if(str.length()>1&&filtered_list.size()==0) {
                     group_list_view.setVisibility(View.GONE);
@@ -219,6 +219,15 @@ public class group_infoList extends Activity {
                     unresistered_background.setVisibility(View.VISIBLE);
                     unresistered_screen.setVisibility(View.VISIBLE);
 //                    unresistered.setText("\""+str+"\"");
+
+                }
+                else if(str.length()==0) {
+                    group_list_view.setVisibility(View.VISIBLE);
+                    unresistered_background.setVisibility(View.GONE);
+                    unresistered_screen.setVisibility(View.GONE);
+                    groupinfoAdapter = new GroupinfoAdapter(group_infoList.this, group_list);
+                    group_list_view.setAdapter(groupinfoAdapter);
+                    group_list_view.setOnItemClickListener(groupListClickListener);
 
                 }
                 else

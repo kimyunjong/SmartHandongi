@@ -207,6 +207,11 @@ public class GroupSearch extends Activity {
                         filtered_list.add(new GroupDatabase1(group_list.get(i).getGroup_id(), group_list.get(i).getGroup_name(), group_list.get(i).getNickname_list(),
                                 group_list.get(i).getGroup_category(), group_list.get(i).getIntroduce(),group_list.get(i).getPassword(),group_list.get(i).getGroup_code()
                         ));
+                        adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
+                        //adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
+                        listview.setAdapter(adapter);
+                        listview.setOnItemClickListener(groupListClickListener);
+
                     }
 
                 }
@@ -215,10 +220,6 @@ public class GroupSearch extends Activity {
                 for(int i=0; i<filtered_list.size();i++){
                     Log.d("이거되야해",filtered_list.get(i).getGroup_name());
                 }
-               adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
-                //adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
-                listview.setAdapter(adapter);
-                listview.setOnItemClickListener(groupListClickListener);
 
                 if(str.length()>1&&filtered_list.size()==0) {
                     listview.setVisibility(View.GONE);
@@ -227,6 +228,15 @@ public class GroupSearch extends Activity {
                     unresistered_screen.setVisibility(View.VISIBLE);
                     unresistered.setText("\""+str+"\"");
 
+                }
+                else if(str.length()==0) {
+                    listview.setVisibility(View.VISIBLE);
+                    unresistered_background.setVisibility(View.GONE);
+                    unresistered_screen.setVisibility(View.GONE);
+                    adapter = new GroupListAdapter(GroupSearch.this,group_list);
+                    //adapter = new GroupListAdapter(GroupSearch.this,filtered_list);
+                    listview.setAdapter(adapter);
+                    listview.setOnItemClickListener(groupListClickListener);
                 }
                 else
                 {
