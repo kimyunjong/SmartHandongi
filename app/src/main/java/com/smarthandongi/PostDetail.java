@@ -64,7 +64,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
     private DeletePhp del_php;
     PhpReviewNum phpReviewNum;
     private TextView title, post_day, start_day, end_day, content, view_num,review_num,img,link, writer_group_name, writer_name,
-            type, pos_between_days, dialog_push_title, dialog_push_text, dialog_link;
+            type, pos_between_days, dialog_push_title, dialog_push_text, dialog_link, post_dates_title, post_link;
     final Context context = this;
     Dialog dialog_del, dialog_report, dialog_push, dialog_link_message, dialog_image;
     Button dialog_report_cancel, dialog_report_confirm, dialog_delete_cancel, dialog_delete_confirm, dialog_push_cancel, dialog_push_confirm, enlarge_image;
@@ -169,6 +169,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         view_num=(TextView)findViewById(R.id.pos_view_num);
         review_num=(TextView)findViewById(R.id.pos_review_num);
         dialog_link = (TextView)findViewById(R.id.pos_link);
+        post_link = (TextView)findViewById(R.id.post_link);
+        post_dates_title = (TextView)findViewById(R.id.pos_dates_title);
 
         dialog_link.setOnClickListener(this);
 
@@ -188,6 +190,8 @@ public class PostDetail extends Activity implements View.OnClickListener{
         writer_name.setTypeface(typeface);
         writer_group_name.setTypeface(typeface);
         pos_between_days.setTypeface(typeface);
+        post_dates_title.setTypeface(typeface);
+        post_link.setTypeface(typeface);
 
         //이미지뷰
         post_img=(ImageView)findViewById(R.id.poster);

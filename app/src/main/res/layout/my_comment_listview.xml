@@ -36,9 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
             >
 
-        <TextView
+        <com.smarthandongi.CustomTextView
                 android:id="@+id/smp_comment_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,8 +49,11 @@
                 android:text="2015-01-20"
 
                android:layout_marginLeft="8dp"
+                tj:textStroke="true"
+                tj:textStrokeWidth="0.5"
+                tj:textStrokeColor="#5a5a5a"
                 />
-            <TextView
+            <com.smarthandongi.CustomTextView
                 android:id="@+id/smp_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,6 +64,9 @@
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#4d4d4d"
                 android:text="dhdjklaf;dasf"
+                tj:textStroke="true"
+                tj:textStrokeWidth="0.5"
+                tj:textStrokeColor="#5a5a5a"
                 />
         </LinearLayout>
 

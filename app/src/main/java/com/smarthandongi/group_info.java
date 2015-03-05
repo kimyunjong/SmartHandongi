@@ -137,8 +137,8 @@ public class group_info extends Activity {
     public void onBackPressed()
     {
         if (from ==0 ) {
-            Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier", carrier);
-            startActivity(intent);
+//            Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier", carrier);
+//            startActivity(intent);
             finish();
         }
         else if(from==1){

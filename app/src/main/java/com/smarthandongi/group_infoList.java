@@ -84,6 +84,7 @@ public class group_infoList extends Activity {
         setContentView(R.layout.group_lifo_list);
         group_list_view = (ListView) findViewById(R.id.group_list);
         carrier = (Carrier) getIntent().getSerializableExtra("carrier");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         regid = carrier.getRegid();
         typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
         //Log.d("regid g infolist",carrier.getRegid());
@@ -293,7 +294,7 @@ public class group_infoList extends Activity {
                 intent.putExtra("carrier", carrier);
 
                 startActivity(intent);
-                finish();
+//                finish();
             } else {
                 Log.d("선택된거", group_list.get(pos).getGroup_category());
                 Log.d("index", String.valueOf(pos));
@@ -306,7 +307,7 @@ public class group_infoList extends Activity {
                 intent.putExtra("from", 0);
                 intent.putExtra("carrier", carrier);
                 startActivity(intent);
-                finish();
+//                finish();
             }
             //group search
         }

@@ -218,7 +218,7 @@
                         android:id="@+id/pos_dates"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
                         >
@@ -269,12 +269,17 @@
                         android:id="@+id/pos_linkbar"
                         android:layout_width="match_parent"
                         android:layout_height="14.5dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="11dp"
                         android:layout_marginRight="10dp">
-                        <ImageView
+                        <com.smarthandongi.CustomTextView
+                            android:id="@+id/post_link"
                             android:layout_width="47.5dp"
                             android:layout_height="match_parent"
-                            android:background="@drawable/post_link"
+                            android:textColor="#f1f2f2"
+                            android:text="LINK : "
+                            tj:textStroke="true"
+                            tj:textStrokeWidth="0.5"
+                            tj:textStrokeColor="#f1f2f2"
                             />
                         <com.smarthandongi.CustomTextView
                             android:id="@+id/pos_link"
