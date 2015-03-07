@@ -198,14 +198,28 @@
                     />
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/box_middle"
+                    android:layout_marginRight="15dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/box"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/box"/>
                     <EditText
                         android:id="@+id/writing_title"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
                         android:textSize="14.5dp"
+                        android:singleLine="true"
                         android:gravity="left"
                         android:layout_marginRight="15dp"
                         android:hint="제목"
@@ -215,70 +229,35 @@
 
                 </RelativeLayout>
 
-                <ImageView
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:alpha="0.5"
-                    android:layout_alignParentBottom="true"
-                    android:background="#f1f2f2"/>
-
-                <ImageView
-                    android:id="@+id/topLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#ffffff"/>
-
                 <RelativeLayout
                     android:id="@+id/body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="7dp"
                     android:layout_marginLeft="15dp"
+                    android:background="@drawable/box_middle"
                     android:layout_marginRight="15dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/box"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/box"/>
                     <EditText
-                        android:layout_marginLeft="5dp"
                         android:id="@+id/writing_content"
+                        android:layout_marginLeft="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#00000000"
                         android:layout_marginTop="5dp"
                         android:textSize="14.5dp"
                         android:textColor="#f1f2f2"
-                        android:hint="내용\n\n\n\n\n\n\n\n"
+                        android:hint="내용\n\n\n\n\n\n\n\n\n\n"
                         android:textColorHint="#f1f2f2"
                         android:gravity="top|left"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <!--<ImageView-->
-                            <!--android:layout_width="1dp"-->
-                            <!--android:layout_height="50dp"-->
-                            <!--android:background="#ffffff"/>-->
-
-
-                    <LinearLayout
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <!--<ImageView-->
-                            <!--android:layout_width="1dp"-->
-                            <!--android:layout_height="50dp"-->
-                            <!--android:background="#ffffff"/>-->
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:background="#ffffff"/>
-                        <!--<ImageView-->
-                            <!--android:layout_width="1dp"-->
-                            <!--android:layout_height="50dp"-->
-                            <!--android:background="#ffffff"/>-->
-                    </LinearLayout>
-
-                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -288,14 +267,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:alpha="0.5"
-                        android:layout_alignParentBottom="true"
-                        android:background="#f1f2f2"/>
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -437,8 +409,8 @@
                         <ImageView
                             android:id="@+id/writing_preview_img"
                             android:layout_width="81dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="2dp"
+                            android:layout_height="89dp"
+                            android:layout_marginTop="4dp"
                             android:layout_marginRight="15dp"
                             android:layout_alignParentEnd="true"
                             android:background="@drawable/writing_picture1"
@@ -451,12 +423,11 @@
                             android:layout_alignParentEnd="true"
                             android:background="@android:color/transparent"/>
                         <ImageView
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:alpha="0.5"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="1dp"
                             android:background="#f1f2f2"/>
 
                     </RelativeLayout>
