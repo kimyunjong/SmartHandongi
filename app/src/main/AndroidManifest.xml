@@ -50,6 +50,7 @@
             android:name=".yj_activity"
             android:label="smart_handongi"
             android:screenOrientation="portrait">
+
         </activity>
 
 

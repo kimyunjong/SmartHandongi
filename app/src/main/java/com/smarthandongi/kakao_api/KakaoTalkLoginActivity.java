@@ -121,7 +121,7 @@ public class KakaoTalkLoginActivity extends SampleLoginActivity {
     @Override
     public void onBackPressed() {
         Intent intent;
-        carrier.setVisited(true);
+        carrier.setVisited(1);
         intent = new Intent(KakaoTalkLoginActivity.this, yj_activity.class);
         intent.putExtra("carrier", carrier);
         startActivity(intent);

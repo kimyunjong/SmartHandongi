@@ -1069,7 +1069,7 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     public void onBackPressed()
     {
         //수영 추가
-        carrier.setVisited(true);
+        carrier.setVisited(1);
         //수영 추가 끝
         if (menu_on) {
             menu_toggle();
@@ -1179,6 +1179,66 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 timeline_listview.setAdapter(adapter2);
                 timeline_listview.setOnScrollListener(context);
                 timeline_listview.setOnItemClickListener(timelineItemClickListener);
+                //수영추가 시작
+
+
+                int temp=0;
+                if(carrier.getVisited()==1) {
+                    if (carrier.isBy_GCM()) {
+                        int position = 0;
+
+                        int i = 1;
+                        while (i == 1) {
+/*
+                    if(carrier.getPost_id()>board_list.size()){
+                        temp=1;
+                        finish();
+                        break;
+                    }*/
+                            if (board_list.get(position).getId() != carrier.getPost_id()) {
+                                position++;
+
+                            } else i = 0;
+
+                        }
+
+
+               /*if(position==0) {
+                    if(temp==1){//해당 글이 삭제된 경우
+                        finish();
+
+                    }`
+                   else {
+                        Intent intent = new Intent(yj_activity.this, PostDetail.class);
+                        intent.putExtra("carrier", carrier);
+                        intent.putExtra("post_list", board_list);
+                        intent.putExtra("position", position);
+                        intent.putExtra("post", board_list.get(position));
+
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
+                        carrier.setVisited(0);
+                    }
+               }
+                else {
+                */
+                        Intent intent = new Intent(yj_activity.this, PostDetail.class);
+                        intent.putExtra("carrier", carrier);
+                        intent.putExtra("post_list", board_list);
+                        intent.putExtra("position", position);
+                        intent.putExtra("post", board_list.get(position));
+
+                        startActivityForResult(intent, 0);
+                        overridePendingTransition(0, 0);
+                        carrier.setVisited(0);
+
+                        Log.d("한번 왔었어요?", String.valueOf(carrier.getVisited()));
+
+
+                    }
+                }
+                //수영 추가 끝
+
 
             }
             catch (JSONException e)
@@ -1209,46 +1269,6 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         adapter = new PostAdapter(yj_activity.this, board_list,carrier);
         board_listview.setAdapter(adapter);
 
-        //수영추가 시작
-
-        carrier=(Carrier)getIntent().getSerializableExtra("carrier");
-
-        if(carrier.getVisited()==false) {
-            if (carrier.isBy_GCM()) {
-
-               // Log.d("yj_activity", "푸시로 들어왔어요");
-                //Log.d("yj_posting_id", String.valueOf(carrier.getPost_id()));
-                int position = 0;
-
-              //  Log.d("board_list1", String.valueOf(board_list.get(position).getId()));
-                //Log.d("getPost_id1", String.valueOf(carrier.getPost_id()));
-                int i = 1;
-                while (i == 1) {
-                    if (board_list.get(position).getId() != carrier.getPost_id()) {
-                        position++;
-                    //    Log.d("board_list", String.valueOf(board_list.get(position).getId()));
-                      //  Log.d("getPost_id", String.valueOf(carrier.getPost_id()));
-                    } else i = 0;
-
-                }
-               // Log.d("push_position1", String.valueOf(position));
-
-                ViewNumPhp viewNumPhp = new ViewNumPhp(board_list.get(position));
-                viewNumPhp.execute("http://hungry.portfolio1000.com/smarthandongi/view_num.php?posting_id=" + carrier.getPost_id());
-                Intent intent = new Intent(yj_activity.this, PostDetail.class);
-                intent.putExtra("carrier", carrier);
-                intent.putExtra("post_list", board_list);
-                intent.putExtra("position", position);
-                intent.putExtra("post", board_list.get(position));
-
-                startActivityForResult(intent, 0);
-                overridePendingTransition(0, 0);
-                carrier.setVisited(true);
-
-
-            }
-        }
-        //수영 추가 끝
     }
     public void filter_by_date()
     {

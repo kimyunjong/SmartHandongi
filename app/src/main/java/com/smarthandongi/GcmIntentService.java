@@ -36,7 +36,7 @@ public class GcmIntentService extends GCMBaseIntentService {
         carrier.setBy_GCM(true);
         carrier.setPost_id(Integer.valueOf(posting_id1));
         carrier.setWhereFrom(where);
-        //Log.e("getposting_id1", "carrier.getPost_id"+carrier.getPost_id() );
+
         Intent intent = new Intent(this, Intro.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

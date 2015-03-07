@@ -73,7 +73,7 @@ public class KakaoTalkSignupActivity extends SampleSignupActivity {
 
            if(carrier.getPost_id()==1)
            {
-               carrier.setVisited(true);
+               carrier.setVisited(1);
            }
             Log.d("Kakaotalk 로그인 사인업2",String.valueOf(carrier.getPost_id()));
             Log.d("Kakaotalk 사인업액티비티1", String.valueOf(carrier.getPost_id()));

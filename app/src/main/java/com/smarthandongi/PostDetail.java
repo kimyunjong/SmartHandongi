@@ -932,6 +932,12 @@ public class PostDetail extends Activity implements View.OnClickListener{
     }
     public void onBackPressed() {
 
+        if(carrier.isBy_GCM()){
+
+            moveTaskToBack(true);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
 
         if(post_image_large_count == 1 && post_img_large.getDrawable() != null) {
             recycleBitmap(post_img_large);
@@ -959,6 +965,7 @@ public class PostDetail extends Activity implements View.OnClickListener{
             setResult(RESULT_OK, return_intent);
             overridePendingTransition(0,0);
             finish();
+
         }
     }
 
