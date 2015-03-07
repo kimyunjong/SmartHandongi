@@ -401,7 +401,13 @@ public class Writing extends Activity implements OnClickListener {
 
             }//TODO 카테고리 번호가 0인지 체크하는 코드 필요
 
-            case R.id.writing_image_btn:{                                                                                                    //이미지업로드btn
+            case R.id.writing_image_btn:{
+                scroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll.scrollTo(0, scroll.getBottom());
+                    }
+                });//이미지업로드btn
                 Intent i = new Intent(Intent.ACTION_PICK);
                 i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 i.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -656,6 +662,12 @@ public class Writing extends Activity implements OnClickListener {
                     start_dateLabel.setVisibility(VISIBLE);
                     end_dateLabel.setVisibility(VISIBLE);}
                 writing_reset_dates.setVisibility(VISIBLE);
+                scroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll.scrollTo(0, scroll.getBottom());
+                    }
+                });
                 break;
             }
 
@@ -670,6 +682,12 @@ public class Writing extends Activity implements OnClickListener {
                     writing_enddate_img.setVisibility(GONE);
                 }
                 writing_reset_dates.setVisibility(VISIBLE);
+                scroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll.scrollTo(0, scroll.getBottom());
+                    }
+                });
                 break;
             }
 

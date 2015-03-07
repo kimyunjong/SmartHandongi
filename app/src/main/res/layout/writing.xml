@@ -272,7 +272,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="23.5dp"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="14dp">
                         <ImageView
                             android:layout_width="48.5dp"
                             android:layout_height="wrap_content"
@@ -293,7 +293,7 @@
                             android:id="@+id/writing_startdate_img"
                             android:layout_width="97dp"
                             android:layout_height="25.5dp"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="8dp"
                             android:layout_alignParentRight="true"
                             android:background="@drawable/writing_dates"/>
                         <TextView
@@ -313,6 +313,8 @@
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginLeft="17dp"
+                        android:layout_marginRight="15dp"
                         android:alpha="0.5"
                         android:layout_alignParentBottom="true"
                         android:background="#f1f2f2"/>
@@ -320,7 +322,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="23.5dp"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="14dp">
                         <ImageView
                             android:layout_width="48.5dp"
                             android:layout_height="wrap_content"
@@ -329,7 +331,7 @@
                             android:id="@+id/writing_enddate_img"
                             android:layout_width="97dp"
                             android:layout_height="25.5dp"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="8dp"
                             android:layout_alignParentRight="true"
                             android:background="@drawable/writing_dates"/>
                         <Button
@@ -354,6 +356,8 @@
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginLeft="17dp"
+                        android:layout_marginRight="15dp"
                         android:alpha="0.5"
                         android:layout_alignParentBottom="true"
                         android:background="#f1f2f2"/>
@@ -361,7 +365,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="14dp">
                         <ImageView
                             android:id="@+id/writing_link_pic"
                             android:layout_width="48.5dp"
@@ -387,6 +391,8 @@
                             android:layout_marginTop="4dp"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
+                            android:layout_marginLeft="17dp"
+                            android:layout_marginRight="15dp"
                             android:alpha="0.5"
                             android:layout_alignParentTop="true"
                             android:background="#f1f2f2"/>
@@ -395,7 +401,7 @@
                             android:layout_width="66.5dp"
                             android:layout_height="23.5dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginLeft="14dp"
                             android:background="@drawable/writing_picture_message"
                             android:layout_alignParentTop="true"/>
                         <ImageButton
@@ -426,6 +432,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
+                            android:layout_marginLeft="17dp"
+                            android:layout_marginRight="15dp"
                             android:alpha="0.5"
                             android:layout_alignParentBottom="true"
                             android:background="#f1f2f2"/>

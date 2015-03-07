@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_menu"
-    android:id="@+id/group_info_list">
+    android:id="@+id/group_info_list"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
         <LinearLayout
             android:id="@+id/writing_top_bar"
             android:layout_width="match_parent"
@@ -152,8 +148,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginBottom="59.5dp"
-            >
+            >//
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -243,7 +238,6 @@
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
 
 
 
@@ -274,4 +268,4 @@
         </RelativeLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

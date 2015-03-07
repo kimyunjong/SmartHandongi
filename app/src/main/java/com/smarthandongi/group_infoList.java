@@ -12,12 +12,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -52,7 +54,8 @@ public class group_infoList extends Activity {
     ImageView search_cancel_img, search_glass_img, search_please, unresistered_background, background_hidden;
     Button backward_btn, unresistered_btn, search_cancel_btn, register_group;
     TextView unresistered;
-    RelativeLayout layoutView, unresistered_screen;
+    RelativeLayout unresistered_screen;
+    LinearLayout layoutView, bottom_list;
     Typeface typeface;
 
     public void construction() {
@@ -126,11 +129,33 @@ public class group_infoList extends Activity {
         unresistered_screen = (RelativeLayout) findViewById(R.id.unresistered_screen);
         unresistered = (TextView) findViewById(R.id.unresistered);
 
+        bottom_list = (LinearLayout)findViewById(R.id.bottom_list);
+
+        final LinearLayout view = (LinearLayout)findViewById(R.id.group_info_list);
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if ((view.getRootView().getHeight() - view.getHeight()) >
+                        view.getRootView().getHeight()/3) {
+                    Log.d("keyboard", "open");
+                    // keyboard is open
+                    bottom_list.setVisibility(View.GONE);
+
+                } else {
+                    Log.d("keyboard", "close");
+                    bottom_list.setVisibility(View.VISIBLE);
+                    // keyboard is closed
+
+                }
+            }
+        });
+
 
         //search
         group_search = (EditText) findViewById(R.id.groupsearch);
         group_search.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
+//                bottom_list.setVisibility(View.GONE);
                 group_search.setCursorVisible(true);
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.showSoftInput(group_search, 0);
@@ -141,7 +166,7 @@ public class group_infoList extends Activity {
 
         groupinfoAdapter = new GroupinfoAdapter(this, group_list);
 
-        layoutView = (RelativeLayout) findViewById(R.id.group_info_list);
+        layoutView = (LinearLayout) findViewById(R.id.group_info_list);
         layoutView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
