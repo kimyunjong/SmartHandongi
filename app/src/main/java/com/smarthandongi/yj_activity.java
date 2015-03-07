@@ -1231,8 +1231,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                         startActivityForResult(intent, 0);
                         overridePendingTransition(0, 0);
                         carrier.setVisited(0);
+                        finish();
 
-                        Log.d("한번 왔었어요?", String.valueOf(carrier.getVisited()));
 
 
                     }
