@@ -31,6 +31,9 @@ public class SelectGroupOrNot extends Activity implements View.OnTouchListener, 
         individual_img  = (ImageView)findViewById(R.id.individual_img);
         group_img       = (ImageView)findViewById(R.id.group_img);
 
+        carrier.setBig_category("0");
+        carrier.setCategory("");
+
         individual_btn.setOnTouchListener(this);
         group_btn.setOnTouchListener(this);
 

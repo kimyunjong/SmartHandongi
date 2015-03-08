@@ -346,7 +346,7 @@ public class Writing extends Activity implements OnClickListener {
             }
         }
         if(carrier.getBig_category().compareTo("1") == 0){                                         //소분류 배경
-            small_category_img.setBackgroundResource(0);}
+            small_category_img.setBackgroundResource(R.drawable.writing_category_none);}
         else small_category_img.setBackgroundResource(R.drawable.writing_category_empty);
 
         writing_title.setText(carrier.getTitle());                                  //제목
@@ -1467,7 +1467,6 @@ public class Writing extends Activity implements OnClickListener {
             String temp;
             //TODO 확인 혹은 취소 하는 팝업 표시
             try {
-                Log.d("수정이면 들어오면 안 되지", "");
                 JSONObject root = new JSONObject(result);
                 JSONArray ja = root.getJSONArray("results");
                 JSONObject jo = ja.getJSONObject(0);
@@ -1529,6 +1528,9 @@ public class Writing extends Activity implements OnClickListener {
         carrier.setLink(link);
         carrier.setGroup_name(group_name);
         carrier.setGroup_code(group_code);
+
+        //필터링 부
+       carrier.setTitle(carrier.getTitle().replace("%27", "%60"));
         carrier.setContent(carrier.getContent().replace("%27", "%60"));
 
         if(carrier.getBig_category().compareTo("0") == 0){
@@ -1635,7 +1637,7 @@ public class Writing extends Activity implements OnClickListener {
             Log.d("kakao_id", carrier.getId());
             Log.d("kakao_nick", kakao_nick);
             Log.d("bigcategory", String.valueOf(carrier.getBig_category()));
-            Log.d("category", carrier.getCategory());
+            //Log.d("category", carrier.getCategory());
             Log.d("group_code", carrier.getGroup_code());
             Log.d("group_name", carrier.getGroup_name());
             Log.d("title", carrier.getTitle());
