@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smarthandongi"
-    android:versionCode="2"
-    android:versionName="1.1">
+    package="com.togetherhandongi" >
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         />
@@ -26,7 +24,7 @@
 
         >
         <activity
-            android:name=".FirstPage"
+            android:name="com.togetherhandongi.FirstPage"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,22 +33,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity2"
+            android:name="com.togetherhandongi.MainActivity2"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".kakao_api.KakaoTalkLoginActivity"
+            android:name="com.togetherhandongi.kakao_api.KakaoTalkLoginActivity"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".kakao_api.KakaoTalkSignupActivity"
+            android:name="com.togetherhandongi.kakao_api.KakaoTalkSignupActivity"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".yj_activity"
+            android:name="com.togetherhandongi.yj_activity"
             android:label="smart_handongi"
             android:screenOrientation="portrait">
 
@@ -60,63 +58,63 @@
 
         <!-- 영민 유진 엑티비티 관련-->
         <activity
-            android:name=".yy_activity"
+            android:name="com.togetherhandongi.yy_activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".SelectGroupOrNot"
+        <activity android:name="com.togetherhandongi.SelectGroupOrNot"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
-        <activity android:name=".Writing"
+        <activity android:name="com.togetherhandongi.Writing"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
-        <activity android:name=".BugReport"
+        <activity android:name="com.togetherhandongi.BugReport"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
-        <activity android:name=".PushSetup"
+        <activity android:name="com.togetherhandongi.PushSetup"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
-        <activity android:name=".ReportPost"
+        <activity android:name="com.togetherhandongi.ReportPost"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
-        <activity android:name=".GroupSearch"
+        <activity android:name="com.togetherhandongi.GroupSearch"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".GroupPassword"
+        <activity android:name="com.togetherhandongi.GroupPassword"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".Review"
+        <activity android:name="com.togetherhandongi.Review"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
         />
         <activity
             android:screenOrientation="portrait"
-            android:name=".SeeMyPost"/>
+            android:name="com.togetherhandongi.SeeMyPost"/>
 
 
         <!-- 영민 유진 엑티비티 끝-->
 
         <!--윤종이의 액티피티 시작-->
-        <activity android:name=".PostDetail"
+        <activity android:name="com.togetherhandongi.PostDetail"
             android:screenOrientation="portrait"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop" android:multiprocess="true"/>
-        <activity android:name=".Bus_Schedule"
+        <activity android:name="com.togetherhandongi.Bus_Schedule"
             android:screenOrientation="portrait"/>
-        <activity android:name=".My_scrap"
+        <activity android:name="com.togetherhandongi.My_scrap"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Intro"
+        <activity android:name="com.togetherhandongi.Intro"
             android:screenOrientation="portrait"/>
-        <activity android:name=".kakao_api.SampleSignupActivity"
+        <activity android:name="com.togetherhandongi.kakao_api.SampleSignupActivity"
             android:screenOrientation="portrait"/>
         <!--윤종이의 액티피티 끝-->
         <!-- 수영 다은 gcm -->
         <receiver
-            android:name=".GcmBroadcastReceiver"
+            android:name="com.togetherhandongi.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -124,11 +122,11 @@
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
-        <service android:name=".GcmIntentService" />
+        <service android:name="com.togetherhandongi.GcmIntentService" />
 
         <!-- 수영 다은 gcm 끝 -->
         <activity
-            android:name=".ds_activity"
+            android:name="com.togetherhandongi.ds_activity"
             android:label="smart_handongi">
         </activity>
         <activity
@@ -137,17 +135,17 @@
             android:configChanges="orientation|screenSize"/>
         <!-- 수영 동아리정보보기 activity-->
 
-        <activity android:name=".group_info"
+        <activity android:name="com.togetherhandongi.group_info"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:screenOrientation="portrait"
         android:label="smart_handongi"/>
 
-        <activity android:name=".group_infoList"
+        <activity android:name="com.togetherhandongi.group_infoList"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:screenOrientation="portrait"
             android:label="smart_handongi"/>
         <!-- 수영 동아리정보보기 activity-->
-        <activity android:name=".ProductionNote"
+        <activity android:name="com.togetherhandongi.ProductionNote"
             android:screenOrientation="portrait"
             android:label="smart_handongi"/>
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="ddeea2953497222f88542be190749e85"/>

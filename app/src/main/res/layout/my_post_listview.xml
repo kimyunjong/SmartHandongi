@@ -12,7 +12,7 @@
             android:orientation="vertical"
             android:gravity="center_vertical"
             android:layout_marginRight="24dp"
-            xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+            xmlns:tj="http://schemas.android.com/apk/res/com.togetherhandongi"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_marginLeft="8dp"
                     />
             </LinearLayout>
-            <com.smarthandongi.CustomTextView
+            <com.togetherhandongi.CustomTextView
                 android:id="@+id/smp_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

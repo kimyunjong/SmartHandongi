@@ -36,10 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+            xmlns:tj="http://schemas.android.com/apk/res/com.togetherhandongi"
             >
 
-        <com.smarthandongi.CustomTextView
+        <com.togetherhandongi.CustomTextView
                 android:id="@+id/smp_comment_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 tj:textStrokeWidth="0.5"
                 tj:textStrokeColor="#5a5a5a"
                 />
-            <com.smarthandongi.CustomTextView
+            <com.togetherhandongi.CustomTextView
                 android:id="@+id/smp_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -37,10 +37,10 @@
         android:layout_height="match_parent"
         android:id="@+id/date_layout"
         android:layout_alignParentLeft="true"
-        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+        xmlns:tj="http://schemas.android.com/apk/res/com.togetherhandongi"
         android:layout_below="@+id/first_empty_layout">
 
-        <com.smarthandongi.CustomTextView
+        <com.togetherhandongi.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="15dp"
@@ -52,7 +52,7 @@
             tj:textStrokeWidth="0.5"
             tj:textStrokeColor="#5a5a5a"
             />
-        <com.smarthandongi.CustomTextView
+        <com.togetherhandongi.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/first_weekday"
@@ -88,7 +88,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+        xmlns:tj="http://schemas.android.com/apk/res/com.togetherhandongi"
         android:layout_toRightOf="@id/left_bar_layout"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="7.5dp"
@@ -100,7 +100,7 @@
             android:textSize="13.5sp"
 
             />
-        <com.smarthandongi.CustomTextView
+        <com.togetherhandongi.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 

@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+        xmlns:tj="http://schemas.android.com/apk/res/com.togetherhandongi"
         >
         <LinearLayout
             android:layout_marginLeft="2.5dp"
@@ -33,7 +33,7 @@
          />
             </LinearLayout>
 
-                <com.smarthandongi.CustomTextView
+                <com.togetherhandongi.CustomTextView
                     android:id="@+id/group_name"
                     android:layout_below="@id/group_category"
                     android:layout_width="match_parent"

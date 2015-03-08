@@ -30,7 +30,7 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tj="http://schemas.android.com/apk/res/com.smarthandongi"
+    xmlns:tj="http://schemas.android.com/apk/res/com.togetherhandongi"
     android:layout_toRightOf="@+id/post_category_layout"
     android:layout_toLeftOf="@+id/like_button"
     android:layout_centerHorizontal="true"
@@ -59,7 +59,7 @@
         android:text="2222"
         android:layout_marginBottom="4.5dp"
         />
-    <com.smarthandongi.CustomTextView
+    <com.togetherhandongi.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="22.2dp"
         android:id="@+id/post_title"
