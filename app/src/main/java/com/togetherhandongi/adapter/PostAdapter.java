@@ -119,10 +119,13 @@ public class PostAdapter extends BaseAdapter{
 
         holder.post_title.setText(getItem(position).getTitle() + " ");
         holder.post_id.setText(getItem(position).getId() + "");
-        if (getItem(position).getGroup().compareTo("") == 0) {
-            holder.post_group.setText("[" + getItem(position).getKakao_nic() + "]" + " ");
-        } else if (getItem(position).getGroup().compareTo("") != 0) {
-            holder.post_group.setText("[" + getItem(position).getGroup_name() + "]" + " ");
+        if(getItem(position).getGroup_name().compareTo("")==0)
+        {
+            holder.post_group.setText("["+getItem(position).getKakao_nic()+"]"+" ");
+        }
+        else if(getItem(position).getGroup_name().compareTo("")!=0)
+        {
+            holder.post_group.setText("["+getItem(position).getGroup_name()+"]"+" ");
         }
 
         if(!getItem(position).getStart_date().equalsIgnoreCase("0")&&!getItem(position).getEnd_date().equalsIgnoreCase("0"))

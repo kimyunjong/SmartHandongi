@@ -330,49 +330,64 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
            }
 
            case R.id.write_btn : {
-               carrier.setEdit_count(0);
-               Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
-               intent.putExtra("carrier", carrier);
-               startActivityForResult(intent, 0);
-               overridePendingTransition(0, 0);
-               finish();
+               if(carrier.isLogged_in())
+               {
+                   carrier.setEdit_count(0);
+                   Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
+                   intent.putExtra("carrier", carrier);
+                   startActivityForResult(intent, 0);
+                   overridePendingTransition(0, 0);
+                   finish();
+               }
                break;
            }
            case R.id.write_btn_in_menu : {
-               carrier.setEdit_count(0);
-               Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
-               intent.putExtra("carrier", carrier);
 
-               startActivityForResult(intent, 0);
-               overridePendingTransition(0, 0);
-               finish();
+               if(carrier.isLogged_in())
+               {
+                   carrier.setEdit_count(0);
+
+                   Intent intent = new Intent(yj_activity.this, SelectGroupOrNot.class);
+                   intent.putExtra("carrier", carrier);
+
+                   startActivityForResult(intent, 0);
+                   overridePendingTransition(0, 0);
+                   finish();
+               }
                break;
            }
            case R.id.my_posting_btn: {
-               Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
-               intent.putExtra("carrier", carrier);
-               intent.putExtra("post_list", post_list);
-               startActivityForResult(intent, 0);
-               overridePendingTransition(0, 0);
-               break;
+                if(carrier.isLogged_in()) {
+                    Intent intent = new Intent(yj_activity.this, SeeMyPost.class);
+                    intent.putExtra("carrier", carrier);
+                    intent.putExtra("post_list", post_list);
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(0, 0);
+                }
+                    break;
 
            }
 
            case R.id.scrap_btn: {
+               if (carrier.isLogged_in()) {
+
+
                Intent intent = new Intent(yj_activity.this, My_scrap.class);
                intent.putExtra("carrier", carrier);
                startActivityForResult(intent, 0);
                overridePendingTransition(0, 0);
                finish();
+           }
                break;
            }
 
            case R.id.push_set_btn: {
+               if(carrier.isLogged_in()){
                Intent intent = new Intent(yj_activity.this, PushSetup.class);
                intent.putExtra("carrier", carrier);
 
                startActivityForResult(intent, 0);
-               overridePendingTransition(0, 0);
+               overridePendingTransition(0, 0);}
                break;
            }
 
