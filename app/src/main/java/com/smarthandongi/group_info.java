@@ -75,8 +75,6 @@ public class group_info extends Activity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (from ==0 ) {
-                    Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier", carrier);
-                    startActivity(intent);
                     finish();
                 }
                 else if(from==1){
@@ -102,12 +100,6 @@ public class group_info extends Activity {
         screen_height = metrics.heightPixels;
         screen_width = metrics.widthPixels;
         group_image.getLayoutParams().width = screen_width;
-//
-//        test = (RelativeLayout)findViewById(R.id.test);
-//
-//        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        relativeParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, R.id.test);
-
 
 
         group_image.requestLayout();
@@ -127,18 +119,11 @@ public class group_info extends Activity {
         construction(group_id1);
         StringBuffer buf = null;
         WindowManager wm = null;
-//        Display display = null;
-//        wm = getWindowManager();
-//        display = wm.getDefaultDisplay();
-//        buf = new StringBuffer();
-//        buf.append("Window height: " + display.getHeight() + "\n");
     }
 
     public void onBackPressed()
     {
         if (from ==0 ) {
-//            Intent intent = new Intent(group_info.this, group_infoList.class).putExtra("carrier", carrier);
-//            startActivity(intent);
             finish();
         }
         else if(from==1){

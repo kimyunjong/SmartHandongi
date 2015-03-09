@@ -1092,6 +1092,8 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         }
     }
 
+
+
     public class PostDatabasePhp extends AsyncTask<String, integer, String>
     {
 

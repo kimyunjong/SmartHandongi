@@ -98,9 +98,11 @@ public class group_infoList extends Activity {
         backward_btn = (Button) findViewById(R.id.back_btn);// 뒤로가기
         backward_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent intent = new Intent(group_infoList.this, yj_activity.class).putExtra("carrier", carrier);
                 startActivity(intent);
                 finish();
+
 
             }
         });
