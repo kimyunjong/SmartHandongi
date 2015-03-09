@@ -75,8 +75,8 @@ public class GroupSearch extends Activity {
         unresistered_screen=(RelativeLayout)findViewById(R.id.unresistered_screen);
 
         unresistered=(TextView)findViewById(R.id.unresistered);
-        group_nomatch_1 = (TextView)findViewById(R.id.group_nomatch_1);
-        group_nomatch_2 = (TextView)findViewById(R.id.group_nomatch_2);
+        //_1 = (TextView)findViewById(R.id.group_nomatch_1);
+        //group_nomatch_2 = (TextView)findViewById(R.id.group_nomatch_2);
         group_nomatch_3 = (TextView)findViewById(R.id.group_nomatch_3);
         group_nomatch_4 = (TextView)findViewById(R.id.group_nomatch_4);
 
@@ -91,8 +91,8 @@ public class GroupSearch extends Activity {
 
 
         unresistered.setTypeface(typeface);
-        group_nomatch_1.setTypeface(typeface);
-        group_nomatch_2.setTypeface(typeface);
+        //group_nomatch_1.setTypeface(typeface);
+        //group_nomatch_2.setTypeface(typeface);
         group_nomatch_3.setTypeface(typeface);
         group_nomatch_4.setTypeface(typeface);
 
@@ -226,7 +226,7 @@ public class GroupSearch extends Activity {
                     background_hidden.setVisibility(View.GONE);
                     unresistered_background.setVisibility(View.VISIBLE);
                     unresistered_screen.setVisibility(View.VISIBLE);
-                    unresistered.setText("\""+str+"\"");
+                    unresistered.setText("일치 항목 없음. "+"\""+str+"\""+"(으)로 선택");
 
                 }
                 else if(str.length()==0) {

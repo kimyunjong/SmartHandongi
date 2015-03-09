@@ -50,6 +50,16 @@ public class GroupPassword extends Activity {
         popup_5 = (RelativeLayout)findViewById(R.id.popup_5);
 
         group_name = (TextView) findViewById(R.id.pw_group_name);
+        group_name.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                carrier.setGroup_name("");
+                carrier.setGroup_code("");
+                carrier.setGroup_pw(null);
+                Intent intent = new Intent(GroupPassword.this, GroupSearch.class).putExtra("carrier", carrier);
+                startActivity(intent);
+                finish();
+            }
+        });
         group_name.setTypeface(typeface);
         group_name.setText(carrier.getGroup_name());
 

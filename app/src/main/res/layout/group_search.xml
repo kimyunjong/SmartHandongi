@@ -306,7 +306,7 @@
                                 <Button
                                     android:id="@+id/unresistered_btn"
                                     android:layout_width="match_parent"
-                                    android:layout_height="35dp"
+                                    android:layout_height="wrap_content"
                                     android:background="@android:color/transparent"
                                     />
                                 <LinearLayout
@@ -316,38 +316,25 @@
 
 
                                     <LinearLayout
+                                        android:layout_marginTop="10.25dp"
+                                        android:layout_marginBottom="10.25dp"
                                         android:layout_marginLeft="8dp"
                                         android:id="@+id/unresistered_btn_screen"
                                         android:layout_width="match_parent"
-                                        android:layout_height="34dp"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
                                         >
-                                        <TextView
-                                            android:id="@+id/group_nomatch_1"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="35dp"
-                                            android:text="일치 항목 없음."
-                                            android:textSize="14.5dp"
-                                            android:gravity="center_vertical"
-                                            />
+
                                         <TextView
                                             android:id="@+id/unresistered"
                                             android:gravity="center_vertical"
                                             android:layout_marginLeft="8dp"
                                             android:layout_width="wrap_content"
-                                            android:layout_height="35dp"
+                                            android:layout_height="wrap_content"
                                             android:textSize="14.5dp"
-                                            android:singleLine="true"
                                             android:text="아카데브"
                                             />
-                                        <TextView
-                                            android:id="@+id/group_nomatch_2"
-                                            android:gravity="center_vertical"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="35dp"
-                                            android:textSize="14.5dp"
-                                            android:text="(으)로 선택"
-                                            />
+
                                     </LinearLayout>
                                     <LinearLayout
                                         android:layout_width="match_parent"
