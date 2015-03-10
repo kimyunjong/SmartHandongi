@@ -396,7 +396,6 @@
     android:layout_alignParentRight="true"
     android:layout_below="@+id/upper_bar"
     android:background="@drawable/menu_bg"
-    android:visibility="gone"
     android:id="@+id/menu">
 
     <LinearLayout
