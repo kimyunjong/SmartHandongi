@@ -1038,12 +1038,17 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 
         }else{
 
-                if(str.isEmpty()) {
-                    search_layout.setVisibility(View.GONE);
-                    default_layout.setVisibility(View.VISIBLE);
-                }
+
+            if(str!=null&&str.isEmpty()) {
+                search_layout.setVisibility(View.GONE);
+                search_layout.setVisibility(View.GONE);
+                default_layout.setVisibility(View.VISIBLE);
+            }
+
             else
-                    post_search.setText("");
+                post_search.setText("");
+
+
 
         }
     }
