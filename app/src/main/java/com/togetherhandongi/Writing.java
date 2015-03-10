@@ -1493,18 +1493,6 @@ public class Writing extends Activity implements OnClickListener {
         kakao_nick = carrier.getNickname();
         link = writing_link.getText().toString();
 
-        if(startDay!=null) { //사용자가 날짜를 선택했을떄
-            possible = dayCal(startDay, endDay);
-            Log.d("함수실행", "true");
-            Log.d("possible 값", String.valueOf(possible));
-            if (possible == -1) {
-                Toast toastView = Toast.makeText(this, "날짜를 올바르게 입력하세요", Toast.LENGTH_SHORT);
-                toastView.setGravity(Gravity.CENTER, 0, 0);
-                toastView.show();
-                //Toast.makeText(this, "날짜입력을 다시하십시오",Toast.LENGTH_SHORT).show();
-            }
-        }
-
         if ((carrier.getGroup_code().compareTo("") == 0) && (carrier.getGroup_name().compareTo("") != 0)) {     //임의 입력 단체의 경우
             group_name = carrier.getGroup_name();
         }
@@ -1606,9 +1594,19 @@ public class Writing extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     dialog_check.dismiss();
-
                 }
             });
+        }
+        else if(startDay!=null) { //사용자가 날짜를 선택했을떄
+            possible = dayCal(startDay, endDay);
+            Log.d("함수실행", "true");
+            Log.d("possible 값", String.valueOf(possible));
+            if (possible == -1) {
+                Toast toastView = Toast.makeText(this, "날짜를 올바르게 입력하세요", Toast.LENGTH_SHORT);
+                toastView.setGravity(Gravity.CENTER, 0, 0);
+                toastView.show();
+                //Toast.makeText(this, "날짜입력을 다시하십시오",Toast.LENGTH_SHORT).show();
+            }
         }
         else {
             carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"

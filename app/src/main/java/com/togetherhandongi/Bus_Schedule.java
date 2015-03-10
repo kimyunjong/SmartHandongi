@@ -1,32 +1,34 @@
 package com.togetherhandongi;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.togetherhandongi.adapter.BusYgrAdapter;
+import com.togetherhandongi.database.BusYgrData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.View.OnTouchListener;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-
-import com.togetherhandongi.adapter.BusYgrAdapter;
-import com.togetherhandongi.database.BusYgrData;
 
 public class Bus_Schedule extends Activity{
 	Carrier passed;
@@ -46,9 +48,13 @@ public class Bus_Schedule extends Activity{
 	String phone_no;
 	Intent dial_intent;
 	
-	ImageButton bt1, bt2, bt3, bt4;
-	
-	protected void onStart() {
+	Button bt1, bt2, bt3, bt4;
+    Button exit;
+    Typeface typeface;
+    TextView bus_afternoon, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16;
+    ImageView bt1_img, bt2_img, bt3_img, bt4_img;
+
+    protected void onStart() {
 		super.onStart();
 
 	}
@@ -62,6 +68,7 @@ public class Bus_Schedule extends Activity{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //
 		get_intent = getIntent();
+        typeface = Typeface.createFromAsset(getAssets(), "KOPUBDOTUM_PRO_MEDIUM.OTF");
 		passed = (Carrier)get_intent.getSerializableExtra("passed");
 		setContentView(R.layout.bus_schedule);
 		weekday = (FrameLayout)findViewById(R.id.weekday_schedule);
@@ -69,21 +76,68 @@ public class Bus_Schedule extends Activity{
 		heunghae = (RelativeLayout)findViewById(R.id.heunghae_schedule);
 		top_ygr = (LinearLayout)findViewById(R.id.top_ygr);
 		top_hh = (LinearLayout)findViewById(R.id.top_hh);
+        bus_afternoon = (TextView)findViewById(R.id.bus_afternoon);
+        bus_afternoon.setTypeface(typeface);
+        bt1_img = (ImageView)findViewById(R.id.bt_1_img);
+        bt2_img = (ImageView)findViewById(R.id.bt_2_img);
+        bt3_img = (ImageView)findViewById(R.id.bt_3_img);
+        bt4_img = (ImageView)findViewById(R.id.bt_4_img);
+        t1 = (TextView)findViewById(R.id.t1);
+        t2 = (TextView)findViewById(R.id.t2);
+        t3 = (TextView)findViewById(R.id.t3);
+        t4 = (TextView)findViewById(R.id.t4);
+        t5 = (TextView)findViewById(R.id.t5);
+        t6 = (TextView)findViewById(R.id.t6);
+        t7 = (TextView)findViewById(R.id.t7);
+        t8 = (TextView)findViewById(R.id.t8);
+        t9 = (TextView)findViewById(R.id.t9);
+        t10 = (TextView)findViewById(R.id.t10);
+        t11 = (TextView)findViewById(R.id.t11);
+        t12 = (TextView)findViewById(R.id.t12);
+        t13 = (TextView)findViewById(R.id.t13);
+        t14 = (TextView)findViewById(R.id.t14);
+        t15 = (TextView)findViewById(R.id.t15);
+        t16 = (TextView)findViewById(R.id.t16);
+        t1.setTypeface(typeface);
+        t2.setTypeface(typeface);
+        t3.setTypeface(typeface);
+        t4.setTypeface(typeface);
+        t5.setTypeface(typeface);
+        t6.setTypeface(typeface);
+        t7.setTypeface(typeface);
+        t8.setTypeface(typeface);
+        t9.setTypeface(typeface);
+        t10.setTypeface(typeface);
+        t11.setTypeface(typeface);
+        t12.setTypeface(typeface);
+        t13.setTypeface(typeface);
+        t14.setTypeface(typeface);
+        t15.setTypeface(typeface);
+        t16.setTypeface(typeface);
+
+        exit = (Button)findViewById(R.id.bus_back_btn);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(0,0);
+            }
+        });
 		
 		Date today = new Date();
 		calendar = Calendar.getInstance();
 		calendar.setTime(today);
 		format = formatter.format(today);
 		
-		bt1 = (ImageButton)findViewById(R.id.bt_1);
+		bt1 = (Button)findViewById(R.id.bt_1);
 		bt1.setOnTouchListener(new OnTouchListener() {	//------------------------------- 리뷰로
 			@SuppressLint("NewApi") @Override
 			public boolean onTouch(View view, MotionEvent event) {
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
-					bt1.setBackgroundResource(R.drawable.bus_weekday_over);
+					bt1_img.setBackgroundResource(R.drawable.bus_weekday2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
-					bt2.setBackgroundResource(R.drawable.bus_weekend);
-					bt3.setBackgroundResource(R.drawable.bus_heunghae);
+					bt2_img.setBackgroundResource(R.drawable.bus_weekend2);
+					bt3_img.setBackgroundResource(R.drawable.bus_heonghae2);
 					weekday.setVisibility(View.VISIBLE);
 					weekend.setVisibility(View.GONE);
 					heunghae.setVisibility(View.GONE);
@@ -94,15 +148,15 @@ public class Bus_Schedule extends Activity{
 			}
 		});
 		
-		bt2 = (ImageButton)findViewById(R.id.bt_2);
+		bt2 = (Button)findViewById(R.id.bt_2);
 		bt2.setOnTouchListener(new OnTouchListener() {	//------------------------------- 리뷰로
 			@SuppressLint("NewApi") @Override
 			public boolean onTouch(View view, MotionEvent event) {
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
-					bt2.setBackgroundResource(R.drawable.bus_weekend_over);
+					bt2_img.setBackgroundResource(R.drawable.bus_weekend2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
-					bt1.setBackgroundResource(R.drawable.bus_weekday);
-					bt3.setBackgroundResource(R.drawable.bus_heunghae);
+					bt1_img.setBackgroundResource(R.drawable.bus_weekday2);
+					bt3_img.setBackgroundResource(R.drawable.bus_heonghae2);
 					weekday.setVisibility(View.GONE);
 					weekend.setVisibility(View.VISIBLE);
 					heunghae.setVisibility(View.GONE);
@@ -113,15 +167,15 @@ public class Bus_Schedule extends Activity{
 			}
 		});
 		
-		bt3 = (ImageButton)findViewById(R.id.bt_3);
+		bt3 = (Button)findViewById(R.id.bt_3);
 		bt3.setOnTouchListener(new OnTouchListener() {	//------------------------------- 리뷰로
 			@SuppressLint("NewApi") @Override
 			public boolean onTouch(View view, MotionEvent event) {
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
-					bt3.setBackgroundResource(R.drawable.bus_heunghae_over);
+					bt3_img.setBackgroundResource(R.drawable.bus_heonghae2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
-					bt2.setBackgroundResource(R.drawable.bus_weekend);
-					bt1.setBackgroundResource(R.drawable.bus_weekday);
+					bt2_img.setBackgroundResource(R.drawable.bus_weekend2);
+					bt1_img.setBackgroundResource(R.drawable.bus_weekday2);
 					weekday.setVisibility(View.GONE);
 					weekend.setVisibility(View.GONE);
 					heunghae.setVisibility(View.VISIBLE);
@@ -132,14 +186,14 @@ public class Bus_Schedule extends Activity{
 			}
 		});
 		
-		bt4 = (ImageButton)findViewById(R.id.bt_4);
+		bt4 = (Button)findViewById(R.id.bt_4);
 		bt4.setOnTouchListener(new OnTouchListener() {	//------------------------------- 리뷰로
 			@SuppressLint("NewApi") @Override
 			public boolean onTouch(View view, MotionEvent event) {
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
-					bt4.setBackgroundResource(R.drawable.bus_taxi_over);
+					bt4_img.setBackgroundResource(R.drawable.bus_taxi2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
-					bt4.setBackgroundResource(R.drawable.bus_taxi);
+					bt4_img.setBackgroundResource(R.drawable.bus_taxi2);
 					
 					new AlertDialog.Builder(Bus_Schedule.this).setItems(R.array.taxi, new DialogInterface.OnClickListener() {
 
@@ -311,15 +365,15 @@ public class Bus_Schedule extends Activity{
 			weekend.setVisibility(View.VISIBLE);
 			weekday.setVisibility(View.GONE);
 			heunghae.setVisibility(View.GONE);
-			bt1.setBackgroundResource(R.drawable.bus_weekday);
-			bt2.setBackgroundResource(R.drawable.bus_weekend_over);
+			bt1_img.setBackgroundResource(R.drawable.bus_weekday2);
+			bt2_img.setBackgroundResource(R.drawable.bus_weekend2_on);
 		}
 		else {
 			weekend.setVisibility(View.GONE);
 			weekday.setVisibility(View.VISIBLE);
 			heunghae.setVisibility(View.GONE);
-			bt1.setBackgroundResource(R.drawable.bus_weekday_over);
-			bt2.setBackgroundResource(R.drawable.bus_weekend);
+			bt1_img.setBackgroundResource(R.drawable.bus_weekday2_on);
+			bt2_img.setBackgroundResource(R.drawable.bus_weekend2);
 		}
 	}	
 	

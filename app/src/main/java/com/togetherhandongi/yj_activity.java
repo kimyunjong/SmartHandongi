@@ -813,10 +813,10 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
                 {
                     if (event.getAction()==0)
                     {
-                        write_btn_in_menu_img.setImageResource(R.drawable.write_btn_on);
+                        write_img.setImageResource(R.drawable.write_btn_on);
                     }
                     else if(event.getAction()==1)
-                    { write_btn_in_menu_img.setImageResource(R.drawable.write_btn);
+                    { write_img.setImageResource(R.drawable.write_btn);
                         Toast.makeText(this, "로그인 후 이용하실 수 있습니다.", 300).show();
                     }
                 }

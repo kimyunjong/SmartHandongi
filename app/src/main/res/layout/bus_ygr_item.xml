@@ -131,7 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerInParent="true"
-                android:background="#99d3ff"
+                android:background="#ffffff"
                 >
             </RelativeLayout>
         </RelativeLayout>
@@ -142,11 +142,12 @@
             android:layout_weight="0"
             >
             <TextView
+                android:id="@+id/afternoon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="11dp"
-                android:textColor="#33a7ff"
-                android:text=" 오후 ▼ "
+                android:textColor="#ffffff"
+                android:text=" 오후 "
                 android:layout_centerInParent="true"
                 />
         </RelativeLayout>
@@ -160,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerInParent="true"
-                android:background="#99d3ff"
+                android:background="#ffffff"
                 >
             </RelativeLayout>
         </RelativeLayout>
