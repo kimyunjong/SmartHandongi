@@ -128,10 +128,10 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_width="90dp"
+                android:layout_height="30.5dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/bus_hh_1"
+                android:background="@drawable/bus_t1"
                 />
         </RelativeLayout>
 
@@ -141,10 +141,10 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_width="90dp"
+                android:layout_height="30.5dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/bus_hh_2"
+                android:background="@drawable/bus_t2"
                 />
         </RelativeLayout>
 
@@ -154,10 +154,10 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_width="90dp"
+                android:layout_height="30.5dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/bus_hh_3"
+                android:background="@drawable/bus_t3"
                 />
         </RelativeLayout>
 
@@ -167,10 +167,10 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_width="90dp"
+                android:layout_height="30.5dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/bus_hh_4"
+                android:background="@drawable/bus_t4"
                 />
         </RelativeLayout>
 
@@ -233,7 +233,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_weight="0"
                 >
 
@@ -311,7 +311,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_weight="0"
                 >
 
@@ -381,32 +381,32 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_weight="0"
                 >
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     >
-                    <RelativeLayout
+                    <View
+                        android:layout_centerVertical="true"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_centerInParent="true"
-                        android:background="#ffffff"
-                        >
-                    </RelativeLayout>
+                        android:layout_height="8dp"
+                        android:layerType="software"
+                        android:background="@drawable/dashed"/>
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     >
                     <TextView
                         android:id="@+id/bus_afternoon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
+                        android:textSize="11dp"
                         android:textColor="#ffffff"
                         android:text=" 오후 "
                         android:layout_centerInParent="true"
@@ -416,22 +416,21 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     >
-                    <RelativeLayout
+                    <View
+                        android:layout_centerVertical="true"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_centerInParent="true"
-                        android:background="#ffffff"
-                        >
-                    </RelativeLayout>
+                        android:layout_height="8dp"
+                        android:layerType="software"
+                        android:background="@drawable/dashed"/>
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_weight="0"
                 >
 
@@ -509,10 +508,9 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_weight="0"
                 >
-
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -670,6 +668,7 @@
     </LinearLayout>
     
     <LinearLayout
+        android:id="@+id/layout_for_bus1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="96.5dp"
@@ -701,7 +700,37 @@
             android:layout_weight="1"
             android:alpha="0.1"
             android:background="#e6e7e8"/>
-
         </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_for_bus"
+        android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="66dp"
+    android:layout_marginBottom="40dp">
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:alpha="0.1"
+        android:background="#e6e7e8"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:alpha="0.1"
+        android:background="#e6e7e8"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+</LinearLayout>
     
    </RelativeLayout>

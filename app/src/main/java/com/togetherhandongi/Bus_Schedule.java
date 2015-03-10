@@ -53,6 +53,7 @@ public class Bus_Schedule extends Activity{
     Typeface typeface;
     TextView bus_afternoon, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16;
     ImageView bt1_img, bt2_img, bt3_img, bt4_img;
+    LinearLayout layout_for_bus, layout_for_bus1;
 
     protected void onStart() {
 		super.onStart();
@@ -78,6 +79,8 @@ public class Bus_Schedule extends Activity{
 		top_hh = (LinearLayout)findViewById(R.id.top_hh);
         bus_afternoon = (TextView)findViewById(R.id.bus_afternoon);
         bus_afternoon.setTypeface(typeface);
+        layout_for_bus = (LinearLayout)findViewById(R.id.layout_for_bus);
+        layout_for_bus1 = (LinearLayout)findViewById(R.id.layout_for_bus1);
         bt1_img = (ImageView)findViewById(R.id.bt_1_img);
         bt2_img = (ImageView)findViewById(R.id.bt_2_img);
         bt3_img = (ImageView)findViewById(R.id.bt_3_img);
@@ -136,6 +139,8 @@ public class Bus_Schedule extends Activity{
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
 					bt1_img.setBackgroundResource(R.drawable.bus_weekday2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    layout_for_bus1.setVisibility(View.VISIBLE);
+                    layout_for_bus.setVisibility(View.GONE);
 					bt2_img.setBackgroundResource(R.drawable.bus_weekend2);
 					bt3_img.setBackgroundResource(R.drawable.bus_heonghae2);
 					weekday.setVisibility(View.VISIBLE);
@@ -155,6 +160,8 @@ public class Bus_Schedule extends Activity{
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
 					bt2_img.setBackgroundResource(R.drawable.bus_weekend2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    layout_for_bus1.setVisibility(View.VISIBLE);
+                    layout_for_bus.setVisibility(View.GONE);
 					bt1_img.setBackgroundResource(R.drawable.bus_weekday2);
 					bt3_img.setBackgroundResource(R.drawable.bus_heonghae2);
 					weekday.setVisibility(View.GONE);
@@ -174,6 +181,8 @@ public class Bus_Schedule extends Activity{
 				if (event.getAction()==MotionEvent.ACTION_DOWN)
 					bt3_img.setBackgroundResource(R.drawable.bus_heonghae2_on);
 				else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    layout_for_bus.setVisibility(View.VISIBLE);
+                    layout_for_bus1.setVisibility(View.GONE);
 					bt2_img.setBackgroundResource(R.drawable.bus_weekend2);
 					bt1_img.setBackgroundResource(R.drawable.bus_weekday2);
 					weekday.setVisibility(View.GONE);
