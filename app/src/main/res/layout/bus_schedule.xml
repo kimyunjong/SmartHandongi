@@ -378,6 +378,14 @@
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_weight="0"
+                android:background="#f4f4f4"
+                >
+            </RelativeLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -426,6 +434,14 @@
                         android:background="@drawable/dashed"/>
                 </RelativeLayout>
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_weight="0"
+                android:background="#f4f4f4"
+                >
+            </RelativeLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
