@@ -186,7 +186,10 @@ public class GroupSearch extends Activity {
 
             }
         };*/
+
         TextWatcher watcher = new TextWatcher() {
+            int toggle=1;
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -199,7 +202,21 @@ public class GroupSearch extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
                 str = group_search.getText().toString();
+
+                if(str.length()==0) {
+                    search_glass_img.setVisibility(View.VISIBLE);
+                    search_cancel_img.setVisibility(View.INVISIBLE);
+                    search_cancel_btn.setVisibility(View.INVISIBLE);
+                }
+                else if(toggle==0){
+                    search_glass_img.setVisibility(View.INVISIBLE);
+                    search_cancel_img.setVisibility(View.VISIBLE);
+                    search_cancel_btn.setVisibility(View.VISIBLE);
+                    toggle=1;
+                }
+
                 filtered_list.removeAll(filtered_list);
                 Log.d("test", Integer.toString(filtered_list.size()));
                 for (int i = 0; i < group_list.size(); i++) {
@@ -215,7 +232,7 @@ public class GroupSearch extends Activity {
                     }
 
                 }
-                Log.d("sjsjijj",str);
+
 
                 for(int i=0; i<filtered_list.size();i++){
                     Log.d("이거되야해",filtered_list.get(i).getGroup_name());
