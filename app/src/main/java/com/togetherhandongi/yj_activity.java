@@ -71,6 +71,10 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
     Button dialog_logout_okay, dialog_logout_no;
     LinearLayout dialog_logout_background;
     private Intent intent;
+
+    int version = 7;
+    boolean right_version = false;
+
     int ca1=1,ca2=1,ca3=1, ca4=1, ca5=1;//켜진상태
     boolean board_on=true,timeline_on=false, search_on=false,default_on=true;
 
@@ -137,6 +141,9 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             Log.d("푸시체크 1번", "");
             phpCreatePushCheck();
         }
+
+        Php php = new Php();
+        php.execute("http://hungry.portfolio1000.com/smarthandongi/start_dash.php?");
 
         next_menu=(RelativeLayout)findViewById(R.id.next_menu_layout);
         login_menu_low_img=(ImageView)findViewById(R.id.login_img);
@@ -1273,52 +1280,52 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
         }
     }
 
-//    public class Php extends AsyncTask<String, integer, String> {
-//
-//        public Php(){
-//            super();
-//        }
-//
-//        protected String doInBackground(String... urls) {
-//            StringBuilder jsonHtml = new StringBuilder();
-//            String return_str="";
-//
-//            while (return_str.equalsIgnoreCase("")) {
-//                try{
-//                    URL data_url = new URL(urls[0]);
-//                    HttpURLConnection conn = (HttpURLConnection)data_url.openConnection();
-//                    if(conn != null){
-//                        conn.setConnectTimeout(10000);
-//                        conn.setUseCaches(false);
-//                        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-//                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-//                            for(;;){
-//                                String line = br.readLine();
-//                                if(line == null) break;
-//                                jsonHtml.append(line + "\n");
-//                            }
-//                            br.close();
-//                        }
-//                        conn.disconnect();
-//                    }
-//                }catch(Exception ex){
-//                    ex.printStackTrace();
-//                }
-//                return_str = jsonHtml.toString();
-//            }
-//
-//            return jsonHtml.toString();
-//        }
-//        protected void onPostExecute(String str){
-//            try{
-//                JSONObject root = new JSONObject(str);
-//                JSONArray ja = root.getJSONArray("results");
-//                JSONObject jo = ja.getJSONObject(0);
-//
-//                if (jo.getInt("version") <= version) {
-//
+    public class Php extends AsyncTask<String, integer, String> {
+
+        public Php(){
+            super();
+        }
+
+        protected String doInBackground(String... urls) {
+            StringBuilder jsonHtml = new StringBuilder();
+            String return_str="";
+
+            while (return_str.equalsIgnoreCase("")) {
+                try{
+                    URL data_url = new URL(urls[0]);
+                    HttpURLConnection conn = (HttpURLConnection)data_url.openConnection();
+                    if(conn != null){
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                            for(;;){
+                                String line = br.readLine();
+                                if(line == null) break;
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                return_str = jsonHtml.toString();
+            }
+
+            return jsonHtml.toString();
+        }
+        protected void onPostExecute(String str){
+            try{
+                JSONObject root = new JSONObject(str);
+                JSONArray ja = root.getJSONArray("results");
+                JSONObject jo = ja.getJSONObject(0);
+
+                if (jo.getInt("version") <= version) {
+
 //                    right_version = true;
-//
+
 //                    if (jo.getString("notice").equalsIgnoreCase("0") && carrier.isFirst_to_dashboard() == true) {
 //                        passed.setFirst_to_dashboard(false);
 //                        new AlertDialog.Builder(yj_activity.this)
@@ -1334,31 +1341,31 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
 //                                    }
 //                                }).show();
 //                    }
-//                }
-//                else {
-//                    right_version = false;
-//                    new AlertDialog.Builder(yj_activity.this)
-//                            .setCancelable(false)
-//                            .setTitle("새 한동이를 받으세요!")
-//                            .setMessage("한동이가 업데이드 되었습니다. 더 새로워진 한동이와 함께하세요!")
-//                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    // TODO Auto-generated method stub
-//                                    Intent intent = new Intent(Intent.ACTION_VIEW);
-//                                    intent.setData(Uri.parse("market://details?id=com.hungry_handongi"));
-//                                    startActivity(intent);
-//                                }
-//                            }).show();
-//                }
-//
-//            }catch(JSONException e){
-//                e.printStackTrace();
-//            }
-//
-//        }
-//    }
+                }
+                else {
+                    right_version = false;
+                    new AlertDialog.Builder(yj_activity.this)
+                            .setCancelable(false)
+                            .setTitle("새 한동이를 받으세요!")
+                            .setMessage("한동이가 업데이드 되었습니다. 더 새로워진 한동이와 함께하세요!")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // TODO Auto-generated method stub
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse("market://details?id=com.togetherhandongi"));
+                                    startActivity(intent);
+                                }
+                            }).show();
+                }
+
+            }catch(JSONException e){
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     public void filter_by_category() {
 
