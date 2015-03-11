@@ -2,10 +2,13 @@ package com.togetherhandongi;
 
 import android.R.integer;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -1269,6 +1272,93 @@ public class yj_activity extends Activity implements View.OnTouchListener,AbsLis
             }
         }
     }
+
+//    public class Php extends AsyncTask<String, integer, String> {
+//
+//        public Php(){
+//            super();
+//        }
+//
+//        protected String doInBackground(String... urls) {
+//            StringBuilder jsonHtml = new StringBuilder();
+//            String return_str="";
+//
+//            while (return_str.equalsIgnoreCase("")) {
+//                try{
+//                    URL data_url = new URL(urls[0]);
+//                    HttpURLConnection conn = (HttpURLConnection)data_url.openConnection();
+//                    if(conn != null){
+//                        conn.setConnectTimeout(10000);
+//                        conn.setUseCaches(false);
+//                        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+//                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+//                            for(;;){
+//                                String line = br.readLine();
+//                                if(line == null) break;
+//                                jsonHtml.append(line + "\n");
+//                            }
+//                            br.close();
+//                        }
+//                        conn.disconnect();
+//                    }
+//                }catch(Exception ex){
+//                    ex.printStackTrace();
+//                }
+//                return_str = jsonHtml.toString();
+//            }
+//
+//            return jsonHtml.toString();
+//        }
+//        protected void onPostExecute(String str){
+//            try{
+//                JSONObject root = new JSONObject(str);
+//                JSONArray ja = root.getJSONArray("results");
+//                JSONObject jo = ja.getJSONObject(0);
+//
+//                if (jo.getInt("version") <= version) {
+//
+//                    right_version = true;
+//
+//                    if (jo.getString("notice").equalsIgnoreCase("0") && carrier.isFirst_to_dashboard() == true) {
+//                        passed.setFirst_to_dashboard(false);
+//                        new AlertDialog.Builder(yj_activity.this)
+//                                .setTitle(jo.getString("notice_title"))
+//                                .setMessage(jo.getString("notice_content"))
+//                                .setPositiveButton(passed.isLogged_in() == true ? "다시 보지 않기" : "확인", new DialogInterface.OnClickListener() {
+//
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        // TODO Auto-generated method stub
+//                                        if (carrier.isLogged_in())
+//                                            phpCreate();
+//                                    }
+//                                }).show();
+//                    }
+//                }
+//                else {
+//                    right_version = false;
+//                    new AlertDialog.Builder(yj_activity.this)
+//                            .setCancelable(false)
+//                            .setTitle("새 한동이를 받으세요!")
+//                            .setMessage("한동이가 업데이드 되었습니다. 더 새로워진 한동이와 함께하세요!")
+//                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // TODO Auto-generated method stub
+//                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+//                                    intent.setData(Uri.parse("market://details?id=com.hungry_handongi"));
+//                                    startActivity(intent);
+//                                }
+//                            }).show();
+//                }
+//
+//            }catch(JSONException e){
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
     public void filter_by_category() {
 

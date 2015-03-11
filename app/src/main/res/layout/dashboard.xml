@@ -394,6 +394,7 @@
     android:layout_width="152dp"
     android:layout_height="match_parent"
     android:layout_alignParentRight="true"
+    android:visibility="gone"
     android:layout_below="@+id/upper_bar"
     android:background="@drawable/menu_bg"
     android:id="@+id/menu">

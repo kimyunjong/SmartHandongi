@@ -23,7 +23,6 @@ import android.os.Environment;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -38,7 +37,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.togetherhandongi.database.Picture;
 
@@ -1598,17 +1596,17 @@ public class Writing extends Activity implements OnClickListener {
                 }
             });
         }
-        else if(carrier.getStart_date().compareTo("0")!=0 && dayCal(startDay,endDay)==-1) { //사용자가 날짜를 선택했을떄
-            //possible = dayCal(startDay, endDay);
-            //Log.d("함수실행", "true");
-            //Log.d("possible 값", String.valueOf(possible));
-            //if (possible == -1) {
-                Toast toastView = Toast.makeText(this, "날짜를 올바르게 입력하세요", Toast.LENGTH_SHORT);
-                toastView.setGravity(Gravity.CENTER, 0, 0);
-                toastView.show();
-                //Toast.makeText(this, "날짜입력을 다시하십시오",Toast.LENGTH_SHORT).show();
-            //}
-        }
+//        else if(carrier.getStart_date().compareTo("0")!=0 && dayCal(startDay,endDay)==-1) { //사용자가 날짜를 선택했을떄
+//            //possible = dayCal(startDay, endDay);
+//            //Log.d("함수실행", "true");
+//            //Log.d("possible 값", String.valueOf(possible));
+//            //if (possible == -1) {
+//                Toast toastView = Toast.makeText(this, "날짜를 올바르게 입력하세요", Toast.LENGTH_SHORT);
+//                toastView.setGravity(Gravity.CENTER, 0, 0);
+//                toastView.show();
+//                //Toast.makeText(this, "날짜입력을 다시하십시오",Toast.LENGTH_SHORT).show();
+//            //}
+//        }
         else {
             carrier.setUpload_url("http://hungry.portfolio1000.com/smarthandongi/posting_upload.php?"
                     + "posting_id=" + carrier.getPost_id()
